@@ -83,6 +83,7 @@ namespace Moo.DB
         static Function DeleteFile = new Function() { Name = "file.delete" };
 
         static Function SkipCaptcha = new Function { Name = "captcha.skip" };
+        static Function ReadHelp = new Function() { Name = "help.read" };
 
         public static void InitDatabase()
         {
@@ -344,6 +345,12 @@ namespace Moo.DB
             //Captcha
             Organizer.AllowedFunction.Add(SkipCaptcha);
             Worker.AllowedFunction.Add(SkipCaptcha);
+
+            //Help
+            Organizer.AllowedFunction.Add(ReadHelp);
+            Worker.AllowedFunction.Add(ReadHelp);
+            NormalUser.AllowedFunction.Add(ReadHelp);
+            Malefactor.AllowedFunction.Add(ReadHelp);
 
             db.Roles.AddObject(Organizer);
             db.Roles.AddObject(Worker);
