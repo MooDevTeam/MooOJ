@@ -24,7 +24,7 @@
             Text="记录" />
     </Moo:LinkBar>
     <Moo:InfoBlock runat="server" Type="Alert" Visible='<%#!canUpdate %>'>
-        您可能不具备完成此操作所必须的权限。
+        <asp:Literal runat="server" Text="<%$Resources:Moo,NoEnoughPermission%>" />
     </Moo:InfoBlock>
     <Moo:InfoBlock runat="server" Type="Alert" Visible='<%#revision.ID!=problem.LatestSolution.ID %>'>
         您现在的编辑基于

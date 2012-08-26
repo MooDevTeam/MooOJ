@@ -26,14 +26,14 @@ public partial class Help_Default : System.Web.UI.Page
                 }
                 else
                 {
-                    PageUtil.Redirect("找不到相关内容", "~/");
+                    PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
                     return;
                 }
             }
 
             if (content == null)
             {
-                PageUtil.Redirect("找不到相关内容", "~/");
+                PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
                 return;
             }
             Page.DataBind();

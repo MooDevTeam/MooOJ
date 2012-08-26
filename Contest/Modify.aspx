@@ -15,7 +15,7 @@
         <Moo:LinkBarItem URL='<%#"~/Contest/Result.aspx?id="+contest.ID%>' Text="结果" />
     </Moo:LinkBar>
     <Moo:InfoBlock runat="server" Type="Alert" Visible='<%#!Permission.Check("contest.modify",false,false) %>'>
-        您可能不具备完成此操作所必须的权限。
+        <asp:Literal runat="server" Text="<%$Resources:Moo,NoEnoughPermission%>" />
     </Moo:InfoBlock>
     
     <table class="detailTable">

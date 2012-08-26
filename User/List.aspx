@@ -15,7 +15,7 @@
         Include="Role">
     </asp:EntityDataSource>
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False"
-        CssClass="listTable" DataKeyNames="ID" DataSourceID="dataSource" CellSpacing="-1">
+        CssClass="listTable" DataKeyNames="ID" DataSourceID="dataSource" CellSpacing="-1" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>
             <asp:TemplateField>

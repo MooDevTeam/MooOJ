@@ -16,10 +16,11 @@
     </asp:EntityDataSource>
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False"
         CssClass="listTable" DataKeyNames="ID" DataSourceID="dataSource" CellSpacing="-1"
-        OnRowDeleting="grid_RowDeleting">
+        OnRowDeleting="grid_RowDeleting" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>
             <asp:BoundField DataField="ID" HeaderText="比赛编号" ReadOnly="True" SortExpression="ID" />
+            <asp:BoundField DataField="Status" HeaderText="状态" SortExpression="Status" />
             <asp:TemplateField HeaderText="名称">
                 <ItemTemplate>
                     <a runat="server" href='<%#"~/Contest/?id="+Eval("ID") %>'>

@@ -25,7 +25,7 @@ public partial class User_Default : System.Web.UI.Page
             }
             if (user == null)
             {
-                PageUtil.Redirect("找不到相关内容", "~/");
+                PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
                 return;
             }
 
@@ -43,7 +43,7 @@ public partial class User_Default : System.Web.UI.Page
                              where r.User.ID == user.ID && r.Problem.ID == p.ID
                                    && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
                              select r
-               where records.FirstOrDefault<Record>() != null
+               where records.Any()
                let score = records.Max(r => r.JudgeInfo.Score)
                select new
                {

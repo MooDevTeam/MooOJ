@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="EmptyDataText" xml:space="preserve">
+    <value>原先这里是有个列表的，但后来发现列表里面东西没了，于是列表也没了。</value>
+  </data>
   <data name="File_UploadPath" xml:space="preserve">
     <value>D:\UploadedFiles\</value>
+  </data>
+  <data name="FoundNothing" xml:space="preserve">
+    <value>您在找啥？我怎么找不到？</value>
   </data>
   <data name="MooTester_CompileMemory" xml:space="preserve">
     <value>104857600</value>
@@ -136,5 +142,8 @@
   </data>
   <data name="MooTester_TranditionalJudger" xml:space="preserve">
     <value>D:\Special_Judge.exe</value>
+  </data>
+  <data name="NoEnoughPermission" xml:space="preserve">
+    <value>您可能不具备完成此操作所必须的权限。</value>
   </data>
 </root>

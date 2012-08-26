@@ -31,7 +31,7 @@
     </asp:EntityDataSource>
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False"
         CssClass="listTable" DataSourceID="dataSource" OnRowDeleting="grid_RowDeleting"
-        DataKeyNames="ID" CellSpacing="-1">
+        DataKeyNames="ID" CellSpacing="-1" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>
             <asp:BoundField DataField="ID" HeaderText="测试数据编号" SortExpression="ID" />

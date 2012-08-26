@@ -29,7 +29,7 @@ public partial class Contest_Modify : System.Web.UI.Page
 
                 if (contest == null)
                 {
-                    PageUtil.Redirect("找不到相关内容", "~/");
+                    PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
                     return;
                 }
 

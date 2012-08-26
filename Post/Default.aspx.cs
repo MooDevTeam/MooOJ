@@ -45,7 +45,7 @@ public partial class Post_Default : System.Web.UI.Page
                     }
                     if (post == null)
                     {
-                        PageUtil.Redirect("找不到相关内容", "~/");
+                        PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
                         return;
                     }
                     Page.DataBind();

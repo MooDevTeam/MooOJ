@@ -26,7 +26,7 @@ public partial class Problem_Modify : System.Web.UI.Page
 
                 if (problem == null)
                 {
-                    PageUtil.Redirect("找不到相关内容", "~/");
+                    PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
                     return;
                 }
 

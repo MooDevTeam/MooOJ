@@ -28,7 +28,7 @@ public partial class User_Compare : System.Web.UI.Page
                          select u).SingleOrDefault<User>();
                 if (userA == null || userB == null)
                 {
-                    PageUtil.Redirect("找不到相关内容", "~/");
+                    PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
                     return;
                 }
 
@@ -46,12 +46,12 @@ public partial class User_Compare : System.Web.UI.Page
                                   where r.User.ID == userA.ID && r.Problem.ID == p.ID
                                         && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
                                   select r
-                    where recordA.FirstOrDefault<Record>() != null
+                    where recordA.Any()
                     let recordB = from r in db.Records
                                   where r.User.ID == userB.ID && r.Problem.ID == p.ID
                                         && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
                                   select r
-                    where recordB.FirstOrDefault<Record>() == null
+                    where !recordB.Any()
                     select p;
 
         var onlyB = from p in db.Problems
@@ -59,12 +59,12 @@ public partial class User_Compare : System.Web.UI.Page
                                   where r.User.ID == userB.ID && r.Problem.ID == p.ID
                                         && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
                                   select r
-                    where recordB.FirstOrDefault<Record>() != null
+                    where recordB.Any()
                     let recordA = from r in db.Records
                                   where r.User.ID == userA.ID && r.Problem.ID == p.ID
                                         && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
                                   select r
-                    where recordA.FirstOrDefault<Record>() == null
+                    where !recordA.Any()
                     select p;
 
         var AGreaterThanB = from p in db.Problems
@@ -72,12 +72,12 @@ public partial class User_Compare : System.Web.UI.Page
                                           where r.User.ID == userA.ID && r.Problem.ID == p.ID
                                                 && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
                                           select r
-                            where recordA.FirstOrDefault<Record>() != null
+                            where recordA.Any()
                             let recordB = from r in db.Records
                                           where r.User.ID == userB.ID && r.Problem.ID == p.ID
                                                 && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
                                           select r
-                            where recordB.FirstOrDefault<Record>() != null
+                            where recordB.Any()
                             let scoreA = recordA.Max(r => r.JudgeInfo.Score)
                             let scoreB = recordB.Max(r => r.JudgeInfo.Score)
                             where scoreA > scoreB
@@ -88,12 +88,12 @@ public partial class User_Compare : System.Web.UI.Page
                                           where r.User.ID == userA.ID && r.Problem.ID == p.ID
                                                 && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
                                           select r
-                            where recordA.FirstOrDefault<Record>() != null
+                            where recordA.Any()
                             let recordB = from r in db.Records
                                           where r.User.ID == userB.ID && r.Problem.ID == p.ID
                                                 && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
                                           select r
-                            where recordB.FirstOrDefault<Record>() != null
+                            where recordB.Any()
                             let scoreA = recordA.Max(r => r.JudgeInfo.Score)
                             let scoreB = recordB.Max(r => r.JudgeInfo.Score)
                             where scoreB > scoreA
@@ -104,12 +104,12 @@ public partial class User_Compare : System.Web.UI.Page
                                  where r.User.ID == userA.ID && r.Problem.ID == p.ID
                                        && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
                                  select r
-                   where recordA.FirstOrDefault<Record>() != null
+                   where recordA.Any()
                    let recordB = from r in db.Records
                                  where r.User.ID == userB.ID && r.Problem.ID == p.ID
                                        && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
                                  select r
-                   where recordB.FirstOrDefault<Record>() != null
+                   where recordB.Any()
                    let scoreA = recordA.Max(r => r.JudgeInfo.Score)
                    let scoreB = recordB.Max(r => r.JudgeInfo.Score)
                    where scoreA == scoreB

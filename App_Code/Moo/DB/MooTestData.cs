@@ -166,7 +166,7 @@ namespace Moo.DB
             NormalUser.AllowedFunction.Add(CreateProblem);
 
             Organizer.AllowedFunction.Add(DeleteProblem);
-            Worker.AllowedFunction.Add(DeleteProblemHistory);
+            Worker.AllowedFunction.Add(DeleteProblem);
 
             Organizer.AllowedFunction.Add(DeleteProblemHistory);
             Worker.AllowedFunction.Add(DeleteProblemHistory);

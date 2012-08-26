@@ -101,7 +101,7 @@
                     <asp:Button ID="btnAdd" runat="server" ValidationGroup="grpAdd" Text="添加" OnClick="btnAdd_Click" />
                 </fieldset>
                 <asp:GridView ID="grid" runat="server" AutoGenerateColumns="False" CssClass="listTable"
-                    CellSpacing="-1" OnRowDeleting="grid_RowDeleting" DataKeyNames="ID">
+                    CellSpacing="-1" OnRowDeleting="grid_RowDeleting" DataKeyNames="ID" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
                     <AlternatingRowStyle BackColor="LightBlue" />
                     <Columns>
                         <asp:BoundField DataField="ID" HeaderText="题目编号" SortExpression="ID" />

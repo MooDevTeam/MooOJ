@@ -23,7 +23,7 @@
     </asp:EntityDataSource>
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False"
         CssClass="listTable" DataSourceID="dataSource" CellSpacing="-1" DataKeyNames="ID"
-        OnRowDeleting="grid_RowDeleting">
+        OnRowDeleting="grid_RowDeleting" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>
             <asp:BoundField DataField="ID" HeaderText="邮件编号" SortExpression="ID" />

@@ -31,7 +31,7 @@ public partial class Post_Reply : System.Web.UI.Page
 
                 if (post == null)
                 {
-                    PageUtil.Redirect("找不到相关内容", "~/");
+                    PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
                     return;
                 }
 

@@ -24,7 +24,6 @@
         <Moo:LinkBarItem URL='<%#"~/User/?id="+problemID %>' Special="true" Hidden='<%#problemID==null %>'
             Text="用户" />
     </Moo:LinkBar>
-    
     <div>
         题目编号
         <asp:TextBox ID="txtProblemID" runat="server" Text='<%#problemID %>'></asp:TextBox>
@@ -40,9 +39,9 @@
             Type="Integer" Display="Dynamic" CssClass="validator">不是整数</asp:CompareValidator>
         <asp:Button ID="btnQuery" runat="server" Text="查询" OnClick="btnQuery_Click" />
     </div>
-    <asp:GridView ID="grid" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False"
-        DataKeyNames="ID" CssClass="listTable" PageSize="100" CellSpacing="-1" 
-        OnPageIndexChanging="grid_PageIndexChanging" onrowdeleting="grid_RowDeleting">
+    <asp:GridView ID="grid" runat="server" AllowPaging="True" AutoGenerateColumns="False"
+        DataKeyNames="ID" CssClass="listTable" PageSize="100" CellSpacing="-1" OnPageIndexChanging="grid_PageIndexChanging"
+        OnRowDeleting="grid_RowDeleting" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>
             <asp:BoundField DataField="ID" HeaderText="记录编号" ReadOnly="True" SortExpression="ID" />
@@ -61,6 +60,7 @@
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:BoundField HeaderText="语言" DataField="Language" SortExpression="Language" />
+            <asp:BoundField HeaderText="创建时间" DataField="CreateTime" SortExpression="CreateTime" />
             <asp:TemplateField HeaderText="分数">
                 <ItemTemplate>
                     <a runat="server" href='<%#"~/Record/?id="+Eval("ID") %>'>
@@ -73,8 +73,7 @@
                     </a>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:CommandField HeaderText="操作" ShowDeleteButton="True"/>
+            <asp:CommandField HeaderText="操作" ShowDeleteButton="True" />
         </Columns>
     </asp:GridView>
-    
 </asp:Content>

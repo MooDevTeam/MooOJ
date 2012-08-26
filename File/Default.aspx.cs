@@ -28,7 +28,7 @@ public partial class File_Default : System.Web.UI.Page
 
                 if (file == null)
                 {
-                    PageUtil.Redirect("找不到相关内容", "~/");
+                    PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
                     return;
                 }
 

@@ -27,7 +27,7 @@ public partial class Record_Default : System.Web.UI.Page
 
                 if (record == null)
                 {
-                    PageUtil.Redirect("找不到相关内容", "~/");
+                    PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
                     return;
                 }
 

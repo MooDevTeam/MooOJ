@@ -27,7 +27,7 @@ public partial class TestCase_Default : System.Web.UI.Page
 
             if (testCase == null)
             {
-                PageUtil.Redirect("找不到相关内容", "~/");
+                PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
                 return;
             }
 

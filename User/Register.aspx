@@ -11,7 +11,7 @@
         <Moo:LinkBarItem URL="~/User/Register.aspx" Selected="true" Text="注册" />
     </Moo:LinkBar>
     <Moo:InfoBlock runat="server" Type="Alert" Visible='<%#!Permission.Check("user.create",true,false) %>'>
-        您可能不具备完成此操作所必须的权限。
+        <asp:Literal runat="server" Text="<%$Resources:Moo,NoEnoughPermission%>" />
     </Moo:InfoBlock>
     <table class="detailTable">
         <tr>

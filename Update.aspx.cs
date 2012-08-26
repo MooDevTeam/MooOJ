@@ -42,7 +42,7 @@ public partial class Update : System.Web.UI.Page
 
                 if (revision == null)
                 {
-                    PageUtil.Redirect("找不到相关内容", "~/");
+                    PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
                     return;
                 }
 

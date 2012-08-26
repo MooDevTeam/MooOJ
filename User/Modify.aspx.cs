@@ -31,7 +31,7 @@ public partial class User_Modify : System.Web.UI.Page
 
                 if (user == null)
                 {
-                    PageUtil.Redirect("找不到相关内容", "~/");
+                    PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
                     return;
                 }
 

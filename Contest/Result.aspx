@@ -37,7 +37,7 @@
             </th>
             <td>
                 <asp:GridView ID="grid" runat="server" AllowPaging="true" CssClass="listTable" AutoGenerateColumns="False"
-                    CellSpacing="-1" OnPageIndexChanging="grid_PageIndexChanging">
+                    CellSpacing="-1" OnPageIndexChanging="grid_PageIndexChanging" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
                     <AlternatingRowStyle BackColor="LightBlue" />
                     <Columns>
                         <asp:BoundField DataField="ID" HeaderText="用户编号" SortExpression="ID" />

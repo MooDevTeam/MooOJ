@@ -13,7 +13,7 @@
         <Moo:LinkBarItem URL="~/History.aspx" Text="历史" />
     </Moo:LinkBar>
     <Moo:InfoBlock runat="server" Type="Alert" Visible='<%#!Permission.Check("homepage.update",false,false) %>'>
-        您可能不具备完成此操作所必须的权限。
+        <asp:Literal runat="server" Text="<%$Resources:Moo,NoEnoughPermission%>" />
     </Moo:InfoBlock>
     <Moo:InfoBlock runat="server" Type="Alert" Visible='<%#!isLatest %>'>
         您的更新基于主页的历史版本，如想基于最新版本，请<a runat="server" href="~/Update.aspx">点击这里</a>。

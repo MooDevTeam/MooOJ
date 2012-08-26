@@ -15,7 +15,7 @@
     </asp:EntityDataSource>
     <asp:GridView ID="grid" runat="server" DataSourceID="dataSource" AutoGenerateColumns="False"
         CssClass="listTable" CellSpacing="-1" AllowPaging="True" AllowSorting="True"
-        DataKeyNames="ID" OnRowDeleting="grid_RowDeleting">
+        DataKeyNames="ID" OnRowDeleting="grid_RowDeleting" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>
             <asp:BoundField DataField="ID" HeaderText="文件编号" SortExpression="ID" />

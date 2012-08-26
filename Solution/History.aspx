@@ -37,7 +37,7 @@
     </asp:EntityDataSource>
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AutoGenerateColumns="False"
         CssClass="listTable" DataSourceID="dataSource" DataKeyNames="ID" AllowSorting="True"
-        CellSpacing="-1" onrowdeleting="grid_RowDeleting">
+        CellSpacing="-1" onrowdeleting="grid_RowDeleting" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>
             <asp:TemplateField HeaderText="比较">

@@ -28,7 +28,7 @@ it.[ID] DESC" Where="1=1"
     </asp:EntityDataSource>
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False"
         CssClass="listTable" DataKeyNames="ID" DataSourceID="dataSource" 
-        CellSpacing="-1" onrowdeleting="grid_RowDeleting">
+        CellSpacing="-1" onrowdeleting="grid_RowDeleting" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>
             <asp:BoundField DataField="ID" HeaderText="帖子编号" ReadOnly="True" SortExpression="ID" />

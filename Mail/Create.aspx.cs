@@ -49,7 +49,7 @@ public partial class Mail_Create : System.Web.UI.Page
 
                 if (theSender == null || receiver == null)
                 {
-                    PageUtil.Redirect("找不到相关内容", "~/");
+                    PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
                     return;
                 }
 

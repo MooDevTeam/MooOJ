@@ -30,7 +30,7 @@ public class File_Download : IHttpHandler {
 
             if (file == null)
             {
-                PageUtil.Redirect("找不到相关内容", "~/");
+                PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
                 return;
             }
 

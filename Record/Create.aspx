@@ -20,7 +20,7 @@
             Text="帖子" />
     </Moo:LinkBar>
     <Moo:InfoBlock runat="server" Type="Alert" Visible='<%#!canCreate %>'>
-        您可能不具备完成此操作所必须的权限。
+        <asp:Literal runat="server" Text="<%$Resources:Moo,NoEnoughPermission%>" />
     </Moo:InfoBlock>
     <table class="detailTable">
         <tr>

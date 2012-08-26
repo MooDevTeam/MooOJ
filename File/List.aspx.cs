@@ -32,7 +32,7 @@ public partial class File_List : System.Web.UI.Page
             var spjTestCases = from t in db.TestCases.OfType<SpecialJudgedTestCase>()
                                where t.Judger.ID == file.ID
                                select t;
-            if (spjTestCases.FirstOrDefault<SpecialJudgedTestCase>() != null)
+            if (spjTestCases.Any())
             {
                 PageUtil.Redirect("尚有测试点使用此文件，无法删除。", "~/File/List.aspx");
                 return;

@@ -25,7 +25,7 @@ public partial class Solution_Compare : System.Web.UI.Page
             }
             
             if(revisionOld==null || revisionNew==null){
-                PageUtil.Redirect("找不到相关内容", "~/");
+                PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
                 return;
             }
 

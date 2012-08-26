@@ -33,7 +33,7 @@ public partial class Solution_History : System.Web.UI.Page
 
             if (problem == null)
             {
-                PageUtil.Redirect("找不到相关内容", "~/");
+                PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
                 return;
             }
             Page.DataBind();
