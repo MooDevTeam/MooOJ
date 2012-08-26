@@ -1,0 +1,25 @@
+﻿.diffDeleted
+{
+    background:pink;
+    text-decoration:line-through;
+}
+.diffModified
+{
+    background:yellow;
+    font-weight:bold;
+}
+.diffInserted
+{
+    background:lightblue;
+    font-weight:bold;
+}
+.diffImaginary
+{
+    background:lightgreen;
+    margin:0px;
+    padding:0px;
+}
+.diffDeletedLine
+{
+    background:pink;
+}

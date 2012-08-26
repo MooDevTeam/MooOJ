@@ -1,0 +1,75 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<%@ Import Namespace="Moo.Authorization" %>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="~/css/MasterPage.css" rel="Stylesheet" type="text/css" />
+    <link href="~/css/Generic.css" rel="Stylesheet" type="text/css" />
+    <link href="~/css/UserSign.css" rel="Stylesheet" type="text/css" />
+    <link href="~/css/InfoBlock.css" rel="Stylesheet" type="text/css" />
+    <link href="~/css/LinkBar.css" rel="Stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form runat="server">
+    <asp:ScriptManager runat="server"></asp:ScriptManager>
+    <div id="page">
+        <div id="header">
+            <h1>
+                Moo
+            </h1>
+            Moo is Only an Onlinejudge
+        </div>
+        <div id="leftPanelWrap">
+            <div id="leftPanel">
+                <ul id="navigation">
+                    <li><a runat="server" href="~/">主页</a></li>
+                    <li><a runat="server" href="~/Problem/List.aspx">题目</a></li>
+                    <li><a runat="server" href="~/Post/List.aspx">帖子</a></li>
+                    <li><a runat="server" href="~/Record/List.aspx">记录</a></li>
+                    <li><a runat="server" href="~/User/List.aspx">用户</a></li>
+                    <li><a runat="server" href="~/Contest/List.aspx">比赛</a></li>
+                    <li><a runat="server" href="~/File/List.aspx">文件</a></li>
+                    <asp:LoginView ID="viewMail" runat="server">
+                        <LoggedInTemplate>
+                            <li><a runat="server" href="~/Mail/List.aspx">邮件<span runat="server" id="haveNotRead"
+                                style="color: red;"></span></a></li>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                    <li><a href="http://catarsa.com/Articles/GettingStarted/WikiParser/Any/Wiki">学习Wiki用法</a></li>
+                    <li><a runat="server" href="~/Special/TryWiki.aspx">练习Wiki语法</a></li>
+                </ul>
+                <asp:LoginView ID="viewUserInfo" runat="server">
+                    <AnonymousTemplate>
+                        您尚未登录。<br />
+                        请选择<a runat="server" href="~/Special/Login.aspx">登录</a>或<a id="A2" runat="server"
+                            href="~/User/Register.aspx">注册</a>。
+                    </AnonymousTemplate>
+                    <LoggedInTemplate>
+                        <Moo:UserSign ID="userSign" runat="server" Vertical="true" UserID='<%#((SiteUser)HttpContext.Current.User.Identity).ID %>' />
+                    </LoggedInTemplate>
+                </asp:LoginView>
+            </div>
+        </div>
+        <div id="mainPageWrap">
+            <div id="mainPage">
+                <asp:ContentPlaceHolder ID="main" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+        <div id="footer">
+            丰没备字1111号，此网站没有备案，纠结了！
+            <div style="float: right;">
+                ServerTime:
+                <%=DateTimeOffset.Now %>
+            </div>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

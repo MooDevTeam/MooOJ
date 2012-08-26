@@ -1,0 +1,20 @@
+﻿.infoBlockWrap
+{
+    border: 2px solid;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 14pt;
+    display: table;
+    margin:10px;
+}
+.infoBlockImage
+{
+    height: 50px;
+    width: 50px;
+}
+.infoBlockContent
+{
+    text-indent: 10px;
+    display: table-cell;
+    vertical-align: middle;
+}

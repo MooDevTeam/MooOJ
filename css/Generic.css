@@ -1,0 +1,112 @@
+﻿*
+{
+    word-break: break-all;
+}
+textarea
+{
+    font-size: 12pt;
+}
+input
+{
+    font-size: 12pt;
+}
+a
+{
+    text-decoration: none;
+    color: blue;
+    border-bottom: 1px dashed;
+}
+a:hover
+{
+    color: Orange;
+}
+h1
+{
+    border-bottom: 1px gray solid;
+}
+h2
+{
+    border-bottom: 1px gray solid;
+}
+
+table
+{
+    border: 1px solid;
+    border-collapse: collapse;
+}
+td
+{
+    border: 1px solid;
+}
+th
+{
+    background: lightgray;
+    border: 1px solid;
+}
+
+/* detailTable */
+.detailTable
+{
+    border: none;
+    width: 100%;
+    margin: 10px 0px 10px 0px;
+}
+.detailTable > tbody > tr > td
+{
+    border: none;
+    background: none;
+    width: 100%;
+    padding-left: 5px;
+}
+.detailTable > tbody > tr > th
+{
+    border: none;
+    background: none;
+    text-align: right;
+    white-space: nowrap;
+    padding-right: 5px;
+}
+
+/* listTable */
+.listTable
+{
+    width: 100%;
+    margin: 10px 0px 10px 0px;
+    border-collapse: separate;
+    border:none;
+}
+.listTable th
+{
+    background: rgb(26,92,200);
+    color:White;
+    padding:5px;
+    border-radius:5px;
+}
+.listTable th a
+{
+    color:White;
+}
+.listTable th a:hover
+{
+    color:Orange;
+}
+.listTable td
+{
+    text-align: center;
+    border:none;
+    border-radius:5px;
+}
+.listTable table
+{
+    border: none;
+    margin: auto;
+}
+.listTable table td
+{
+    border: none;
+}
+.validator
+{
+    font-weight:bold;
+    color:Red;
+}

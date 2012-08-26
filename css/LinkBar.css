@@ -1,0 +1,96 @@
+﻿.linkbarWrap
+{
+    background: black;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.linkbarTitle
+{
+    display: inline-block;
+    background: black;
+    color: White;
+    font-weight:bold;
+    padding:5px 40px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position:relative;
+    left:20%;
+}
+.linkbarItemWrap
+{
+    display: inline-block;
+    border-top: 4px black solid;
+    float: left;
+}
+
+.linkbarItemWrap:hover
+{
+    background: #202020;
+    border-top: 4px #202020 solid;
+}
+
+.linkbarItemWrap:hover a
+{
+    color: Orange;
+}
+
+.linkbarItemWrapSelected
+{
+    display: inline-block;
+    border-top: 4px red solid;
+    float: left;
+    font-weight: bold;
+}
+
+.linkbarItemWrapSelected:hover
+{
+    background: #202020;
+}
+
+.linkbarItemWrapSelected:hover a
+{
+    color: Orange;
+}
+
+.linkbarItemWrapSpecial
+{
+    display: inline-block;
+    border-top: 4px blue solid;
+    float: right;
+}
+
+.linkbarItemWrapSpecial:hover
+{
+    background: #202020;
+}
+
+.linkbarItemWrapSpecial:hover a
+{
+    color: Orange;
+}
+
+.linkbarItemWrapShortcut
+{
+    display: inline-block;
+    border-top: 4px green solid;
+    float:left;
+}
+
+.linkbarItemWrapShortcut:hover
+{
+    background: #202020;
+}
+
+.linkbarItemWrapShortcut:hover a
+{
+    color: Orange;
+}
+
+.linkbarLink
+{
+    border: none;
+    color: lightgray;
+    padding: 5px;
+    display: block;
+}

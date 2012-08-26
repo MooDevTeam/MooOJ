@@ -1,0 +1,92 @@
+﻿body
+{
+    font-family: 微软雅黑,wqy-zenhei, sans-serif;
+    text-align: center;
+    background: lightgray;
+    margin: 0px;
+}
+#page
+{
+    background: whitesmoke;
+    padding: 10px;
+    width: 80%;
+    text-align: left;
+    margin: auto;
+}
+#header
+{
+    border: 2px solid lightblue;
+    background: white;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+#leftPanelWrap
+{
+    float: left;
+    width: 20%;
+}
+#leftPanel
+{
+    border: 2px solid lightblue;
+    margin: 5px;
+    margin-left: 10px;
+    border-radius: 10px;
+    padding:10px;
+    overflow: auto;
+}
+#navigation
+{
+    list-style:none;
+    border-radius:10px;
+    padding: 10px;
+    margin-top:0px;
+    background:black;
+}
+#navigation li
+{
+}
+#navigation li:hover
+{
+    background:#303030;
+}
+#navigation li a
+{
+    display:block;
+    text-align:center;
+    border:none;
+    color:lightgray;
+    padding:5px;
+}
+#navigation li:hover a
+{
+    color:orange;
+}
+PageWrap
+{
+    float: left;
+    width: 80%;
+}
+#mainPage
+{
+    border: 2px solid lightblue;
+    background: azure;
+    margin: 5px;
+    margin-right: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    overflow: auto;
+}
+#footer
+{
+    margin: 10px;
+    padding: 10px;
+    color: Gray;
+    font-size: 10pt;
+}
+.clear
+{
+    clear: both;
+    visibility: hidden;
+}

@@ -1,0 +1,26 @@
+﻿.postTable
+{
+    width:100%;
+    border:none;
+}
+.postTable table
+{
+    border:none;
+    margin:auto;
+}
+.postTable table td
+{
+    border:none;
+}
+.postCell
+{
+    border:none;
+    padding:10px;
+}
+.postContent
+{
+    border:2px orange solid;
+    border-radius:10px;
+    padding:10px;
+    background:lightyellow;
+}

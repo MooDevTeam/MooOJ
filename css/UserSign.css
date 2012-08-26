@@ -1,0 +1,89 @@
+﻿/* Normal */
+.signWrap
+{
+    display: inline-block;
+    border-radius: 10px;
+    border: 2px solid;
+    text-align: left;
+    font-weight: normal;
+    width: 260px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+}
+.signWrap .signImage
+{
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    position: relative;
+    left: 10px;
+    top: 10px;
+}
+.signWrap .signRight
+{
+    position: absolute;
+    left: 100px;
+    top: 10px;
+}
+.signWrap .signName
+{    
+    white-space: nowrap;
+    height: 24px;
+    width: 145px;
+    overflow: hidden;
+}
+.signNameLink
+{
+    font-size: 14pt;
+    font-weight: bold;
+    color: darkblue;
+    text-decoration: none;
+    border: none;
+}
+.signWrap .signDescription
+{
+    font-size: 10pt;
+    width: 150px;
+    height: 40px;
+    overflow: hidden;
+}
+.signScore
+{
+    font-size: 12pt;
+    text-align: right;
+    font-weight: bold;
+    float:right;
+    color:Red;
+    display:inline-block;
+}
+.signControl
+{
+    display: inline-block;
+    font-size: 12pt;
+}
+
+/* Vertical */
+.signWrapVertical
+{
+    padding: 10px;
+    text-align: center;
+    margin-left:-10px;
+    margin-right:-10px;
+    margin-bottom:-10px;
+}
+.signWrapVertical .signImage
+{
+    width: 120px;
+    height: 120px;
+    margin: auto;
+    border-radius: 10px;
+}
+.signWrapVertical .signRight
+{
+    text-align:left;
+}
+.signWrapVertical .signName
+{
+    text-align:center;
+}
