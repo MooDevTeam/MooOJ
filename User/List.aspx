@@ -10,7 +10,6 @@
         <Moo:LinkBarItem URL="~/User/List.aspx" Selected="true" Text="列表" />
         <Moo:LinkBarItem URL="~/User/Register.aspx" Text="注册" />
     </Moo:LinkBar>
-    
     <asp:EntityDataSource ID="dataSource" runat="server" ConnectionString="name=MooDB"
         DefaultContainerName="MooDB" EntitySetName="Users" OrderBy="it.[Score] DESC"
         Include="Role">
@@ -24,6 +23,11 @@
                     <%#grid.PageIndex*grid.PageSize+Container.DataItemIndex+1%>
                 </ItemTemplate>
             </asp:TemplateField>
+            <asp:TemplateField HeaderText="比较">
+                <ItemTemplate>
+                    <asp:CheckBox ID="chkCompare" runat="server" AutoPostBack="true" OnCheckedChanged="chkCompare_CheckedChanged" />
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:BoundField DataField="ID" HeaderText="用户编号" SortExpression="ID" />
             <asp:TemplateField HeaderText="名称">
                 <ItemTemplate>
@@ -32,7 +36,7 @@
                     </a>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="分数" SortExpression="Score">
+            <asp:TemplateField HeaderText="积分" SortExpression="Score">
                 <ItemTemplate>
                     <span style="color: Red;">
                         <%#Eval("Score") %>
@@ -47,5 +51,6 @@
             <asp:BoundField DataField="BriefDescription" HeaderText="简述" />
         </Columns>
     </asp:GridView>
-    
+    <asp:Button ID="btnCompare" runat="server" Enabled="false" Text="比较选定的用户" 
+        onclick="btnCompare_Click" />
 </asp:Content>

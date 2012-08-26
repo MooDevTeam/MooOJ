@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
     CodeFile="Register.aspx.cs" Inherits="User_Register" %>
 
+<%@ Import Namespace="Moo.Authorization" %>
 <asp:Content ContentPlaceHolderID="head" runat="Server">
     <title>注册用户</title>
 </asp:Content>
@@ -9,7 +10,9 @@
         <Moo:LinkBarItem URL="~/User/List.aspx" Text="列表" />
         <Moo:LinkBarItem URL="~/User/Register.aspx" Selected="true" Text="注册" />
     </Moo:LinkBar>
-    
+    <Moo:InfoBlock runat="server" Type="Alert" Visible='<%#!Permission.Check("user.create",true,false) %>'>
+        您可能不具备完成此操作所必须的权限。
+    </Moo:InfoBlock>
     <table class="detailTable">
         <tr>
             <th>
@@ -17,7 +20,8 @@
             </th>
             <td>
                 <asp:TextBox ID="txtUserName" runat="server" Width="100%"></asp:TextBox>
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtUserName" Display="Dynamic" CssClass="validator">不能为空</asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtUserName" Display="Dynamic"
+                    CssClass="validator">不能为空</asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator runat="server" ControlToValidate="txtUserName" ValidationExpression=".{1,12}"
                     Display="Dynamic" CssClass="validator">长度需在1~12位之间</asp:RegularExpressionValidator>
                 <asp:CustomValidator runat="server" ControlToValidate="txtUserName" OnServerValidate="ValidateUserName"
@@ -30,7 +34,8 @@
             </th>
             <td>
                 <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" Width="100%"></asp:TextBox>
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPassword" Display="Dynamic" CssClass="validator">不能为空</asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPassword" Display="Dynamic"
+                    CssClass="validator">不能为空</asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPassword" ValidationExpression=".{6,20}"
                     Display="Dynamic" CssClass="validator">长度需在6~20位之间</asp:RegularExpressionValidator>
             </td>
@@ -59,5 +64,4 @@
             </td>
         </tr>
     </table>
-    
 </asp:Content>

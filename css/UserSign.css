@@ -27,10 +27,11 @@
     top: 10px;
 }
 .signWrap .signName
-{    
+{
     white-space: nowrap;
     height: 24px;
     width: 145px;
+    font-size: 14pt;
     overflow: hidden;
 }
 .signNameLink
@@ -48,14 +49,18 @@
     height: 40px;
     overflow: hidden;
 }
+.signBottomWrap
+{
+    font-size: 12pt;
+}
 .signScore
 {
     font-size: 12pt;
     text-align: right;
     font-weight: bold;
-    float:right;
-    color:Red;
-    display:inline-block;
+    float: right;
+    color: Red;
+    display: inline-block;
 }
 .signControl
 {
@@ -68,9 +73,9 @@
 {
     padding: 10px;
     text-align: center;
-    margin-left:-10px;
-    margin-right:-10px;
-    margin-bottom:-10px;
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-bottom: -10px;
 }
 .signWrapVertical .signImage
 {
@@ -81,9 +86,9 @@
 }
 .signWrapVertical .signRight
 {
-    text-align:left;
+    text-align: left;
 }
 .signWrapVertical .signName
 {
-    text-align:center;
+    text-align: center;
 }

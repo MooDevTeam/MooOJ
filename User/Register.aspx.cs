@@ -12,7 +12,10 @@ public partial class User_Register : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (!Page.IsPostBack)
+        {
+            Page.DataBind();
+        }
     }
     protected void ValidateUserName(object sender, ServerValidateEventArgs e)
     {

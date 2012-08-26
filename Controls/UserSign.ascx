@@ -11,7 +11,7 @@
         <div class="signDescription">
             <%#HttpUtility.HtmlEncode(user.BriefDescription) %>
         </div>
-        <div>
+        <div class="signBottomWrap">
             <div runat="server" class="signControl" id="signControlSelf">
                 <a runat="server" href="~/Special/Logout.ashx">登出</a>
             </div>
