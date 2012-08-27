@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 08/25/2012 19:55:05
+-- Date Created: 08/27/2012 09:18:21
 -- Generated from EDMX file: D:\WebSites\MooOJ\App_Code\Moo\DB\MooDB.edmx
 -- --------------------------------------------------
 
@@ -205,7 +205,11 @@ CREATE TABLE [dbo].[Problems] (
     [LockRecord] bit  NOT NULL,
     [AllowTesting] bit  NOT NULL,
     [Hidden] bit  NOT NULL,
-    [TestCaseHidden] bit  NOT NULL
+    [TestCaseHidden] bit  NOT NULL,
+    [SubmissionCount] int  NOT NULL,
+    [ScoreSum] bigint  NOT NULL,
+    [SubmissionUser] int  NOT NULL,
+    [MaximumScore] int  NULL
 );
 GO
 

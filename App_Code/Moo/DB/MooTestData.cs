@@ -434,6 +434,10 @@ namespace Moo.DB
                 LockRecord = false,
                 LockSolution = false,
                 LockTestCase = false,
+                SubmissionCount = 10,
+                ScoreSum = 100,
+                SubmissionUser = 1,
+                MaximumScore = 30
             };
 
             Problem CPlusD = new Problem()
@@ -448,6 +452,10 @@ namespace Moo.DB
                 LockSolution = true,
                 LockRecord = true,
                 AllowTesting = true,
+                SubmissionCount = 20,
+                ScoreSum = 5,
+                SubmissionUser = 2,
+                MaximumScore = 120
             };
             db.Problems.AddObject(CPlusD);
 
@@ -463,6 +471,10 @@ namespace Moo.DB
                 AllowTesting = true,
                 Hidden = true,
                 TestCaseHidden = true,
+                SubmissionCount = 40,
+                ScoreSum = 300,
+                SubmissionUser = 4,
+                MaximumScore = 110
             };
             db.Problems.AddObject(EPlusF);
 

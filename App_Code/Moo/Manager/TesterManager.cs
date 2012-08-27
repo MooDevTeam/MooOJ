@@ -124,13 +124,25 @@ namespace Moo.Manager
                                where r.JudgeInfo != null && r.User.ID == record.User.ID && r.Problem.ID == record.Problem.ID && r.JudgeInfo.Score >= 0
                                orderby r.JudgeInfo.Score descending
                                select r).FirstOrDefault<Record>();
-            if (maxScore == null)
+            if (maxScore == null)//This is the first time
             {
                 record.User.Score += result.Score;
+                record.Problem.SubmissionUser++;
+                record.Problem.ScoreSum += result.Score;
             }
             else if (result.Score > maxScore.JudgeInfo.Score)
             {
                 record.User.Score += result.Score - maxScore.JudgeInfo.Score;
+                record.Problem.ScoreSum += result.Score - maxScore.JudgeInfo.Score;
+            }
+
+            if (record.Problem.MaximumScore == null)
+            {
+                record.Problem.MaximumScore = result.Score;
+            }
+            else
+            {
+                record.Problem.MaximumScore = Math.Max(result.Score, (int)record.Problem.MaximumScore);
             }
 
             record.JudgeInfo.Score = result.Score;
@@ -143,7 +155,7 @@ namespace Moo.Manager
             IEnumerable<TranditionalTestCase> cases = from t in db.TestCases.OfType<TranditionalTestCase>()
                                                       where t.Problem.ID == record.Problem.ID
                                                       select t;
-            return tester.TestTranditional(record.Code,record.Language, cases);
+            return tester.TestTranditional(record.Code, record.Language, cases);
         }
 
         static TestResult TestSpecialJudged(MooDB db, Record record)
@@ -152,7 +164,7 @@ namespace Moo.Manager
             IEnumerable<SpecialJudgedTestCase> cases = from t in db.TestCases.OfType<SpecialJudgedTestCase>()
                                                        where t.Problem.ID == record.Problem.ID
                                                        select t;
-            return tester.TestSpecialJudged(record.Code,record.Language, cases);
+            return tester.TestSpecialJudged(record.Code, record.Language, cases);
         }
     }
 }

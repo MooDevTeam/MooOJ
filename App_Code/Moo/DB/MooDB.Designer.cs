@@ -2082,7 +2082,10 @@ namespace Moo.DB
         /// <param name="allowTesting">AllowTesting 属性的初始值。</param>
         /// <param name="hidden">Hidden 属性的初始值。</param>
         /// <param name="testCaseHidden">TestCaseHidden 属性的初始值。</param>
-        public static Problem CreateProblem(global::System.Int32 id, global::System.String name, global::System.String type, global::System.Boolean @lock, global::System.Boolean lockSolution, global::System.Boolean lockTestCase, global::System.Boolean lockPost, global::System.Boolean lockRecord, global::System.Boolean allowTesting, global::System.Boolean hidden, global::System.Boolean testCaseHidden)
+        /// <param name="submissionCount">SubmissionCount 属性的初始值。</param>
+        /// <param name="scoreSum">ScoreSum 属性的初始值。</param>
+        /// <param name="submissionUser">SubmissionUser 属性的初始值。</param>
+        public static Problem CreateProblem(global::System.Int32 id, global::System.String name, global::System.String type, global::System.Boolean @lock, global::System.Boolean lockSolution, global::System.Boolean lockTestCase, global::System.Boolean lockPost, global::System.Boolean lockRecord, global::System.Boolean allowTesting, global::System.Boolean hidden, global::System.Boolean testCaseHidden, global::System.Int32 submissionCount, global::System.Int64 scoreSum, global::System.Int32 submissionUser)
         {
             Problem problem = new Problem();
             problem.ID = id;
@@ -2096,6 +2099,9 @@ namespace Moo.DB
             problem.AllowTesting = allowTesting;
             problem.Hidden = hidden;
             problem.TestCaseHidden = testCaseHidden;
+            problem.SubmissionCount = submissionCount;
+            problem.ScoreSum = scoreSum;
+            problem.SubmissionUser = submissionUser;
             return problem;
         }
 
@@ -2368,6 +2374,102 @@ namespace Moo.DB
         private global::System.Boolean _TestCaseHidden;
         partial void OnTestCaseHiddenChanging(global::System.Boolean value);
         partial void OnTestCaseHiddenChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SubmissionCount
+        {
+            get
+            {
+                return _SubmissionCount;
+            }
+            set
+            {
+                OnSubmissionCountChanging(value);
+                ReportPropertyChanging("SubmissionCount");
+                _SubmissionCount = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SubmissionCount");
+                OnSubmissionCountChanged();
+            }
+        }
+        private global::System.Int32 _SubmissionCount;
+        partial void OnSubmissionCountChanging(global::System.Int32 value);
+        partial void OnSubmissionCountChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 ScoreSum
+        {
+            get
+            {
+                return _ScoreSum;
+            }
+            set
+            {
+                OnScoreSumChanging(value);
+                ReportPropertyChanging("ScoreSum");
+                _ScoreSum = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ScoreSum");
+                OnScoreSumChanged();
+            }
+        }
+        private global::System.Int64 _ScoreSum;
+        partial void OnScoreSumChanging(global::System.Int64 value);
+        partial void OnScoreSumChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SubmissionUser
+        {
+            get
+            {
+                return _SubmissionUser;
+            }
+            set
+            {
+                OnSubmissionUserChanging(value);
+                ReportPropertyChanging("SubmissionUser");
+                _SubmissionUser = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SubmissionUser");
+                OnSubmissionUserChanged();
+            }
+        }
+        private global::System.Int32 _SubmissionUser;
+        partial void OnSubmissionUserChanging(global::System.Int32 value);
+        partial void OnSubmissionUserChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> MaximumScore
+        {
+            get
+            {
+                return _MaximumScore;
+            }
+            set
+            {
+                OnMaximumScoreChanging(value);
+                ReportPropertyChanging("MaximumScore");
+                _MaximumScore = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MaximumScore");
+                OnMaximumScoreChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _MaximumScore;
+        partial void OnMaximumScoreChanging(Nullable<global::System.Int32> value);
+        partial void OnMaximumScoreChanged();
 
         #endregion
     

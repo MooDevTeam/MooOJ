@@ -60,16 +60,17 @@ public partial class Problem_List : System.Web.UI.Page
                                    && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
                              select r
                let score = records.Any() ? (int?)records.Max(r => r.JudgeInfo.Score) : null
-               let submissionCount=(from r in db.Records
-                                   where r.Problem.ID==p.ID
-                                   select r).Count()
+               let averageScore = p.SubmissionUser > 0 ? p.ScoreSum / (double?)p.SubmissionUser : null
                select new
                {
                    ID = p.ID,
                    Name = p.Name,
                    Type = p.Type,
                    Score = score,
-                   SubmissionCount=submissionCount
+                   SubmissionCount = p.SubmissionCount,
+                   SubmissionUser = p.SubmissionUser,
+                   AverageScore = averageScore,
+                   MaximumScore = p.MaximumScore
                };
     }
     protected void grid_PageIndexChanging(object sender, GridViewPageEventArgs e)

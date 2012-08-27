@@ -72,6 +72,8 @@ public partial class Record_Create : System.Web.UI.Page
                 CreateTime=DateTimeOffset.Now
             });
 
+            problem.SubmissionCount++;
+
             db.SaveChanges();
         }
 

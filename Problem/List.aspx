@@ -23,6 +23,8 @@
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>
             <asp:BoundField DataField="ID" HeaderText="题目编号" SortExpression="ID" />
+            <asp:BoundField DataField="AverageScore" HeaderText="平均分" DataFormatString="{0:0.00}" SortExpression="AverageScore" />
+            <asp:BoundField DataField="MaximumScore" HeaderText="最高分" SortExpression="MaximumScore" />
             <asp:BoundField DataField="Score" HeaderText="我的得分" SortExpression="Score" />
             <asp:TemplateField HeaderText="名称">
                 <ItemTemplate>
@@ -32,7 +34,7 @@
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:BoundField DataField="SubmissionCount" HeaderText="提交次数" SortExpression="SubmissionCount" />
-            <asp:BoundField DataField="Type" HeaderText="类型" />
+            <asp:BoundField DataField="SubmissionUser" HeaderText="提交人数" SortExpression="SubmissionUser" />
             <asp:CommandField ShowDeleteButton="True" HeaderText="操作"></asp:CommandField>
         </Columns>
     </asp:GridView>
