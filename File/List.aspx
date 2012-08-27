@@ -14,7 +14,7 @@
         EntityTypeFilter="" OrderBy="it.[ID] DESC" Select="">
     </asp:EntityDataSource>
     <asp:GridView ID="grid" runat="server" DataSourceID="dataSource" AutoGenerateColumns="False"
-        CssClass="listTable" CellSpacing="-1" AllowPaging="True" AllowSorting="True"
+        CssClass="listTable" CellSpacing="-1" AllowPaging="True" AllowSorting="True" PageSize='<%$Resources:Moo,GridViewPageSize %>'
         DataKeyNames="ID" OnRowDeleting="grid_RowDeleting" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>

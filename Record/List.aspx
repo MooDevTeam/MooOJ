@@ -40,7 +40,7 @@
         <asp:Button ID="btnQuery" runat="server" Text="查询" OnClick="btnQuery_Click" />
     </div>
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AutoGenerateColumns="False"
-        DataKeyNames="ID" CssClass="listTable" PageSize="100" CellSpacing="-1" OnPageIndexChanging="grid_PageIndexChanging"
+        DataKeyNames="ID" CssClass="listTable" CellSpacing="-1" OnPageIndexChanging="grid_PageIndexChanging" PageSize='<%$Resources:Moo,GridViewPageSize %>'
         OnRowDeleting="grid_RowDeleting" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>

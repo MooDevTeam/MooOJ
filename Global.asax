@@ -1,4 +1,5 @@
 ﻿<%@ Application Language="C#" %>
+<%@ Import Namespace="System.Web.Configuration" %>
 <%@ Import Namespace="System.Threading" %>
 <%@ Import Namespace="System.Security.Principal" %>
 <%@ Import Namespace="Moo.Authorization" %>
@@ -10,8 +11,16 @@
     void Application_Start(object sender, EventArgs e)
     {
         //在应用程序启动时运行的代码
-        MooTestData.InitDatabase();
+        using (MooDB db = new MooDB())
+        {
+            if (!db.DatabaseExists())
+            {
+                DatabaseInstaller.Install(db);
+            }
+        }
         SiteRoles.Initialize();
+
+        //MooTestData.AddTestData();
 
         TesterManager.Testers.Add(new Moo.Tester.MooTester.Tester());
         TesterManager.Start();
@@ -28,7 +37,6 @@
     void Application_Error(object sender, EventArgs e)
     {
         //在出现未处理的错误时运行的代码
-
     }
 
     void Session_Start(object sender, EventArgs e)

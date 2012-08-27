@@ -18,7 +18,7 @@
         <asp:Button ID="btnQuery" runat="server" ValidationGroup="grpQuery" Text="查询" OnClick="btnQuery_Click" />
     </fieldset>
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AutoGenerateColumns="False"
-        CssClass="listTable" CellSpacing="-1" OnRowDeleting="grid_RowDeleting" DataKeyNames="ID"
+        CssClass="listTable" CellSpacing="-1" OnRowDeleting="grid_RowDeleting" DataKeyNames="ID" PageSize='<%$Resources:Moo,GridViewPageSize %>'
         OnPageIndexChanging="grid_PageIndexChanging" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>

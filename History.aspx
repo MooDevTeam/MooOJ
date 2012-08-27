@@ -21,7 +21,7 @@
         Include="CreatedBy" EnableDelete="True">
     </asp:EntityDataSource>
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AutoGenerateColumns="False"
-        DataKeyNames="ID" CssClass="listTable" DataSourceID="dataSource" AllowSorting="True"
+        DataKeyNames="ID" CssClass="listTable" DataSourceID="dataSource" AllowSorting="True" PageSize='<%$Resources:Moo,GridViewPageSize %>'
         CellSpacing="-1" OnRowDeleting="grid_RowDeleting" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>

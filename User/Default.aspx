@@ -24,8 +24,8 @@
     <fieldset>
         <legend>得分情况</legend>
         <asp:GridView ID="grid" runat="server" AllowPaging="true" AllowSorting="true" AutoGenerateColumns="false"
-            CssClass="listTable" CellSpacing="-1" EmptyDataText="此人甚懒，啥题没做。" OnPageIndexChanging="grid_PageIndexChanging">
-            <AlternatingRowStyle BackColor="LightBlue" />
+            CssClass="listTable" CellSpacing="-1" EmptyDataText="此人甚懒，啥题没做。" OnPageIndexChanging="grid_PageIndexChanging" PageSize='<%$Resources:Moo,GridViewPageSize %>'>
+            <AlternatingRowStyle BackColor="LightBlue"/>
             <Columns>
                 <asp:BoundField HeaderText="题目编号" DataField="ID" SortExpression="ID" />
                 <asp:TemplateField HeaderText="名称">

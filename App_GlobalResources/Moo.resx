@@ -126,6 +126,10 @@
   <data name="FoundNothing" xml:space="preserve">
     <value>您在找啥？我怎么找不到？</value>
   </data>
+  <data name="GridViewPageSize" xml:space="preserve">
+    <value>100</value>
+    <comment>普通列表的每页条目数量</comment>
+  </data>
   <data name="MooTester_CompileMemory" xml:space="preserve">
     <value>104857600</value>
     <comment>100MB</comment>

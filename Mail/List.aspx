@@ -22,7 +22,7 @@
         EnableDelete="True">
     </asp:EntityDataSource>
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False"
-        CssClass="listTable" DataSourceID="dataSource" CellSpacing="-1" DataKeyNames="ID"
+        CssClass="listTable" DataSourceID="dataSource" CellSpacing="-1" DataKeyNames="ID" PageSize='<%$Resources:Moo,GridViewPageSize %>'
         OnRowDeleting="grid_RowDeleting" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>

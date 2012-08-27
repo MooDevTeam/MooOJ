@@ -36,7 +36,7 @@
         </WhereParameters>
     </asp:EntityDataSource>
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AutoGenerateColumns="False"
-        CssClass="listTable" DataSourceID="dataSource" DataKeyNames="ID" AllowSorting="True"
+        CssClass="listTable" DataSourceID="dataSource" DataKeyNames="ID" AllowSorting="True" PageSize='<%$Resources:Moo,GridViewPageSize %>'
         CellSpacing="-1" onrowdeleting="grid_RowDeleting" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>

@@ -14,7 +14,7 @@
         DefaultContainerName="MooDB" EntitySetName="Users" OrderBy="it.[Score] DESC"
         Include="Role">
     </asp:EntityDataSource>
-    <asp:GridView ID="grid" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False"
+    <asp:GridView ID="grid" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" PageSize='<%$Resources:Moo,GridViewPageSize %>'
         CssClass="listTable" DataKeyNames="ID" DataSourceID="dataSource" CellSpacing="-1" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>

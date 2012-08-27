@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using Moo.Utility;
 using Moo.DB;
 using Moo.Authorization;
 public partial class Problem_List : System.Web.UI.Page
@@ -32,9 +32,15 @@ public partial class Problem_List : System.Web.UI.Page
         int problemID = (int)e.Keys[0];
         using (MooDB db = new MooDB())
         {
-            db.Problems.DeleteObject((from p in db.Problems
-                                      where p.ID == problemID
-                                      select p).Single<Problem>());
+            Problem problem = (from p in db.Problems
+                               where p.ID == problemID
+                               select p).Single<Problem>();
+            if (problem.Contest.Any())
+            {
+                PageUtil.Redirect("请先删除相关比赛。", "~/Problem/List.aspx");
+                return;
+            }
+            db.Problems.DeleteObject(problem);
             db.SaveChanges();
         }
 
