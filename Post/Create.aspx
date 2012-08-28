@@ -23,7 +23,6 @@
     <Moo:InfoBlock runat="server" Type="Alert" Visible='<%#!canCreate %>'>
         <asp:Literal runat="server" Text="<%$Resources:Moo,NoEnoughPermission%>" />
     </Moo:InfoBlock>
-    
     <table class="detailTable">
         <tr>
             <th>
@@ -33,6 +32,8 @@
                 <asp:TextBox ID="txtName" runat="server" Width="100%"></asp:TextBox>
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtName" Display="Dynamic"
                     CssClass="validator">不能为空</asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtName" ValidationExpression=".{1,40}"
+                    Display="Dynamic" CssClass="validator">长度需在1~40位之间</asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr id="trPreview" runat="server" visible="false">
@@ -68,5 +69,4 @@
             </td>
         </tr>
     </table>
-    
 </asp:Content>

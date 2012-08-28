@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 08/27/2012 09:18:21
+-- Date Created: 08/28/2012 18:56:22
 -- Generated from EDMX file: D:\WebSites\MooOJ\App_Code\Moo\DB\MooDB.edmx
 -- --------------------------------------------------
 
@@ -168,9 +168,9 @@ GO
 -- Creating table 'Users'
 CREATE TABLE [dbo].[Users] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(max)  NOT NULL,
-    [Password] nchar(64)  NOT NULL,
-    [BriefDescription] nvarchar(max)  NOT NULL,
+    [Name] nvarchar(20)  NOT NULL,
+    [Password] char(64)  NOT NULL,
+    [BriefDescription] nvarchar(40)  NOT NULL,
     [ImageURL] nvarchar(max)  NOT NULL,
     [Description] nvarchar(max)  NOT NULL,
     [Score] int  NOT NULL,
@@ -181,23 +181,23 @@ GO
 -- Creating table 'Roles'
 CREATE TABLE [dbo].[Roles] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(max)  NOT NULL,
-    [DisplayName] nvarchar(max)  NOT NULL
+    [Name] varchar(12)  NOT NULL,
+    [DisplayName] nvarchar(12)  NOT NULL
 );
 GO
 
 -- Creating table 'Functions'
 CREATE TABLE [dbo].[Functions] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(max)  NOT NULL
+    [Name] varchar(40)  NOT NULL
 );
 GO
 
 -- Creating table 'Problems'
 CREATE TABLE [dbo].[Problems] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(max)  NOT NULL,
-    [Type] nvarchar(max)  NOT NULL,
+    [Name] nvarchar(40)  NOT NULL,
+    [Type] varchar(20)  NOT NULL,
     [Lock] bit  NOT NULL,
     [LockSolution] bit  NOT NULL,
     [LockTestCase] bit  NOT NULL,
@@ -219,7 +219,7 @@ CREATE TABLE [dbo].[Records] (
     [Code] nvarchar(max)  NOT NULL,
     [PublicCode] bit  NOT NULL,
     [CreateTime] datetimeoffset  NOT NULL,
-    [Language] nvarchar(max)  NOT NULL,
+    [Language] varchar(12)  NOT NULL,
     [Problem_ID] int  NOT NULL,
     [User_ID] int  NOT NULL
 );
@@ -236,7 +236,7 @@ GO
 CREATE TABLE [dbo].[ProblemRevisions] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [Content] nvarchar(max)  NOT NULL,
-    [Reason] nvarchar(max)  NOT NULL,
+    [Reason] nvarchar(40)  NOT NULL,
     [Problem_ID] int  NOT NULL,
     [CreatedBy_ID] int  NOT NULL,
     [LatestRevisionOf_ID] int  NULL
@@ -247,7 +247,7 @@ GO
 CREATE TABLE [dbo].[SolutionRevisions] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [Content] nvarchar(max)  NOT NULL,
-    [Reason] nvarchar(max)  NOT NULL,
+    [Reason] nvarchar(40)  NOT NULL,
     [Problem_ID] int  NOT NULL,
     [CreatedBy_ID] int  NOT NULL,
     [LatestSolutionOf_ID] int  NULL
@@ -257,7 +257,7 @@ GO
 -- Creating table 'Posts'
 CREATE TABLE [dbo].[Posts] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(max)  NOT NULL,
+    [Name] nvarchar(40)  NOT NULL,
     [Lock] bit  NOT NULL,
     [OnTop] bit  NOT NULL,
     [Problem_ID] int  NULL
@@ -285,7 +285,7 @@ GO
 -- Creating table 'Mails'
 CREATE TABLE [dbo].[Mails] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [Title] nvarchar(max)  NOT NULL,
+    [Title] nvarchar(40)  NOT NULL,
     [Content] nvarchar(max)  NOT NULL,
     [IsRead] bit  NOT NULL,
     [From_ID] int  NOT NULL,
@@ -298,7 +298,7 @@ CREATE TABLE [dbo].[Contests] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [StartTime] datetimeoffset  NOT NULL,
     [EndTime] datetimeoffset  NOT NULL,
-    [Title] nvarchar(max)  NOT NULL,
+    [Title] nvarchar(40)  NOT NULL,
     [LockProblemOnStart] bit  NOT NULL,
     [LockTestCaseOnStart] bit  NOT NULL,
     [LockSolutionOnStart] bit  NOT NULL,
@@ -306,7 +306,7 @@ CREATE TABLE [dbo].[Contests] (
     [HideTestCaseOnStart] bit  NOT NULL,
     [AllowTestingOnStart] bit  NOT NULL,
     [Description] nvarchar(max)  NOT NULL,
-    [Status] nvarchar(max)  NOT NULL,
+    [Status] varchar(12)  NOT NULL,
     [HideProblemOnStart] bit  NOT NULL,
     [LockRecordOnStart] bit  NOT NULL,
     [LockProblemOnEnd] bit  NOT NULL,
@@ -323,7 +323,7 @@ GO
 -- Creating table 'UploadedFiles'
 CREATE TABLE [dbo].[UploadedFiles] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(max)  NOT NULL,
+    [Name] nvarchar(40)  NOT NULL,
     [Path] nvarchar(max)  NOT NULL
 );
 GO
@@ -331,9 +331,9 @@ GO
 -- Creating table 'HomepageRevisions'
 CREATE TABLE [dbo].[HomepageRevisions] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [Title] nvarchar(max)  NOT NULL,
+    [Title] nvarchar(40)  NOT NULL,
     [Content] nvarchar(max)  NOT NULL,
-    [Reason] nvarchar(max)  NOT NULL,
+    [Reason] nvarchar(40)  NOT NULL,
     [CreatedBy_ID] int  NOT NULL
 );
 GO

@@ -80,6 +80,11 @@ public partial class User_Modify : System.Web.UI.Page
                 return;
             }
 
+            if (Permission.Check("user.name.modify", false, false))
+            {
+                user.Name = txtName.Text;
+            }
+
             if (txtPassword.Text.Length > 0)
             {
                 user.Password = Converter.ToSHA256Hash(txtPassword.Text);
@@ -126,6 +131,16 @@ public partial class User_Modify : System.Web.UI.Page
                         select u).Single<User>();
                 args.IsValid = SiteRoles.ByID[int.Parse(ddlRole.SelectedValue)].Type >= SiteRoles.ByID[user.Role.ID].Type;
             }
+        }
+    }
+    protected void validateName_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        int userID = (int)ViewState["userID"];
+        using (MooDB db = new MooDB())
+        {
+            args.IsValid = !(from u in db.Users
+                            where u.ID != userID && u.Name == txtName.Text
+                            select u).Any();
         }
     }
 }

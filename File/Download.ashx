@@ -14,6 +14,7 @@ public class File_Download : IHttpHandler {
         HttpRequest Request = context.Request;
         HttpResponse Response = context.Response;
         string path;
+        string fileName;
         int fileID;
         
         if (!Permission.Check("file.read", true)) return;
@@ -36,12 +37,13 @@ public class File_Download : IHttpHandler {
 
             path = file.Path;
             fileID = file.ID;
+            fileName = file.Name;
         }
 
-        Download(Request, Response, path,fileID);
+        Download(Request, Response, path,fileID,fileName);
     }
 
-    void Download(HttpRequest Request, HttpResponse Response,string path,int fileID)
+    void Download(HttpRequest Request, HttpResponse Response,string path,int fileID,string fileName)
     {
         FileInfo fileInfo = new FileInfo(path);
         long start = 0;
@@ -58,7 +60,7 @@ public class File_Download : IHttpHandler {
 
         Response.AddHeader("Content-Length", length.ToString());
         Response.ContentType = "application/octet-stream";
-        Response.AddHeader("Content-Disposition", "attachment; filename="+fileInfo.Name);
+        Response.AddHeader("Content-Disposition", "attachment; filename="+fileName+'.'+fileInfo.Name.Split('.').Last());
 
         using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
         {

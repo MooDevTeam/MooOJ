@@ -36,7 +36,7 @@ namespace Moo.DB
                 Name = "ShaBi",
                 Password = Converter.ToSHA256Hash("ShaBi"),
                 Role = SiteRoles.ByType[RoleType.Worker].GetDBRole(db),
-                BriefDescription = "我觉得我写这么多应该够两行了可能再写点就三行了啊TandT，对吧",
+                BriefDescription = "我觉得我写这么多应该够两行了",
                 Description = "Moo[B:真]他妈的好！",
                 ImageURL = "http://www.baidu.com/img/baidu_sylogo1.gif",
                 Score = 128,

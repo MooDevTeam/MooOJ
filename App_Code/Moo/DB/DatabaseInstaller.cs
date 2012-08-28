@@ -67,6 +67,7 @@ namespace Moo.DB
         static Function ModifyUser = new Function() { Name = "user.modify" };
         static Function ForceUserLogout = new Function() { Name = "user.forcelogout" };
         static Function ModifyUserRole = new Function() { Name = "user.role.modify" };
+        static Function ModifyUserName = new Function() { Name = "user.name.modify" };
 
         static Function ReadMail = new Function() { Name = "mail.read" };
         static Function ListMail = new Function() { Name = "mail.list" };
@@ -107,8 +108,7 @@ namespace Moo.DB
 
         static void FixDatabase(MooDB db)
         {
-            //TODO:FIXME !!!!!
-            //db.ExecuteStoreCommand("ALTER TABLE [dbo].[Users] ADD UNIQUE ([Name])");
+            db.ExecuteStoreCommand("CREATE UNIQUE INDEX IX_Users_Name ON [dbo].[Users] ([Name])");
 
             db.ExecuteStoreCommand("ALTER TABLE [dbo].[TestCases_TranditionalTestCase] DROP CONSTRAINT [FK_TranditionalTestCase_inherits_TestCase];");
             db.ExecuteStoreCommand("ALTER TABLE [dbo].[TestCases_TranditionalTestCase] ADD CONSTRAINT [FK_TranditionalTestCase_inherits_TestCase] FOREIGN KEY ([ID]) REFERENCES [dbo].[TestCases]([ID]) ON DELETE CASCADE;");
@@ -292,6 +292,8 @@ namespace Moo.DB
             Worker.AllowedFunction.Add(ForceUserLogout);
 
             Organizer.AllowedFunction.Add(ModifyUserRole);
+
+            Organizer.AllowedFunction.Add(ModifyUserName);
 
             //Mail
             Organizer.AllowedFunction.Add(ReadMail);

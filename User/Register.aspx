@@ -22,8 +22,8 @@
                 <asp:TextBox ID="txtUserName" runat="server" Width="100%"></asp:TextBox>
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtUserName" Display="Dynamic"
                     CssClass="validator">不能为空</asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtUserName" ValidationExpression=".{1,12}"
-                    Display="Dynamic" CssClass="validator">长度需在1~12位之间</asp:RegularExpressionValidator>
+                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtUserName" ValidationExpression=".{1,20}"
+                    Display="Dynamic" CssClass="validator">长度需在1~20位之间</asp:RegularExpressionValidator>
                 <asp:CustomValidator runat="server" ControlToValidate="txtUserName" OnServerValidate="ValidateUserName"
                     Display="Dynamic" CssClass="validator">用户名已被抢注</asp:CustomValidator>
             </td>
@@ -36,8 +36,8 @@
                 <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" Width="100%"></asp:TextBox>
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPassword" Display="Dynamic"
                     CssClass="validator">不能为空</asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPassword" ValidationExpression=".{6,20}"
-                    Display="Dynamic" CssClass="validator">长度需在6~20位之间</asp:RegularExpressionValidator>
+                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPassword" ValidationExpression=".{6,}"
+                    Display="Dynamic" CssClass="validator">长度需在6位以上</asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr>

@@ -61,7 +61,7 @@
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtReason" Display="Dynamic"
                     CssClass="validator">不能为空</asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator runat="server" ControlToValidate="txtReason" Display="Dynamic"
-                    ValidationExpression=".{1,100}" CssClass="validator">长度需在1~100之间</asp:RegularExpressionValidator>
+                    ValidationExpression=".{1,40}" CssClass="validator">长度需在1~40之间</asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr>

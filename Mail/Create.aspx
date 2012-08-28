@@ -30,8 +30,8 @@
                 <asp:TextBox ID="txtTitle" runat="server" Width="100%" Text='<%#initialTitle %>'></asp:TextBox>
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtTitle" Display="Dynamic"
                     CssClass="validator">不能为空</asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtTitle" ValidationExpression=".{1,20}"
-                    Display="Dynamic" CssClass="validator"></asp:RegularExpressionValidator>
+                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtTitle" ValidationExpression=".{1,40}"
+                    Display="Dynamic" CssClass="validator">长度需在1~40位之间</asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr runat="server" id="trPreview" visible="false">

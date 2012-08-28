@@ -27,8 +27,8 @@
                 <asp:TextBox ID="txtTitle" runat="server" Width="100%" Text='<%#contest.Title %>'></asp:TextBox>
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtTitle" CssClass="validator"
                     Display="Dynamic">不能为空</asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtTitle" ValidationExpression=".{1,20}"
-                    Display="Dynamic" CssClass="validator">长度需在1~20位</asp:RegularExpressionValidator>
+                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtTitle" ValidationExpression=".{1,40}"
+                    Display="Dynamic" CssClass="validator">长度需在1~40位</asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr runat="server" id="trPreview" visible="false">

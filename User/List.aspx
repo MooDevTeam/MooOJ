@@ -2,6 +2,7 @@
     CodeFile="List.aspx.cs" Inherits="User_List" %>
 
 <%@ Import Namespace="Moo.DB" %>
+<%@ Import Namespace="Moo.Utility" %>
 <asp:Content ContentPlaceHolderID="head" runat="Server">
     <title>用户列表</title>
 </asp:Content>
@@ -14,8 +15,10 @@
         DefaultContainerName="MooDB" EntitySetName="Users" OrderBy="it.[Score] DESC"
         Include="Role">
     </asp:EntityDataSource>
-    <asp:GridView ID="grid" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" PageSize='<%$Resources:Moo,GridViewPageSize %>'
-        CssClass="listTable" DataKeyNames="ID" DataSourceID="dataSource" CellSpacing="-1" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
+    <asp:GridView ID="grid" runat="server" AllowPaging="True" AllowSorting="True" 
+        AutoGenerateColumns="False" PageSize='<%$ Resources:Moo,GridViewPageSize %>'
+        CssClass="listTable" DataKeyNames="ID" DataSourceID="dataSource" 
+        CellSpacing="-1" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>
             <asp:TemplateField>
@@ -48,7 +51,11 @@
                     <%#((Role)Eval("Role")).DisplayName %>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField DataField="BriefDescription" HeaderText="简述" />
+            <asp:TemplateField HeaderText="简述">
+                <ItemTemplate>
+                    <%# HttpUtility.HtmlEncode(PageUtil.Truncate((string)Eval("BriefDescription"),20)) %>
+                </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
     </asp:GridView>
     <asp:Button ID="btnCompare" runat="server" Enabled="false" Text="比较选定的用户" 

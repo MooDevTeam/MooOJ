@@ -22,7 +22,14 @@
                 名称
             </th>
             <td>
-                <%#HttpUtility.HtmlEncode(user.Name) %>
+                <asp:TextBox ID="txtName" runat="server" Width="100%" Text='<%#user.Name %>' Enabled='<%#Permission.Check("user.name.modify",false,false) %>'></asp:TextBox>
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtName" Display="Dynamic"
+                    CssClass="validator">不能为空</asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtName"
+                    ValidationExpression=".{1,20}" Display="Dynamic" CssClass="validator">长度需在1~20位之间</asp:RegularExpressionValidator>
+                <asp:CustomValidator ID="validateName" runat="server" 
+                    ControlToValidate="txtName" Display="Dynamic"
+                    CssClass="validator" onservervalidate="validateName_ServerValidate">用户名已被抢注</asp:CustomValidator>
                 <asp:Button ID="btnForceLogout" runat="server" CausesValidation="false" Text="强制登出"
                     OnClick="btnForceLogout_Click" />
             </td>
@@ -33,8 +40,8 @@
             </th>
             <td>
                 <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" Width="100%"></asp:TextBox>
-                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPassword" ValidationExpression=".{6,20}"
-                    Display="Dynamic" CssClass="validator">长度需在6~20位</asp:RegularExpressionValidator>
+                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPassword" ValidationExpression=".{6,}"
+                    Display="Dynamic" CssClass="validator">长度需大于6位</asp:RegularExpressionValidator>
                 不想修改请留空
             </td>
         </tr>
@@ -79,7 +86,7 @@
             <td>
                 <asp:TextBox ID="txtBriefDescription" runat="server" Width="100%" Text='<%#user.BriefDescription%>'></asp:TextBox>
                 <asp:RegularExpressionValidator runat="server" ControlToValidate="txtBriefDescription"
-                    ValidationExpression=".{0,20}" Display="Dynamic" CssClass="validator">长度需在0~20位</asp:RegularExpressionValidator>
+                    ValidationExpression=".{0,40}" Display="Dynamic" CssClass="validator">长度需在0~40位</asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr runat="server" id="trPreview" visible="false">
