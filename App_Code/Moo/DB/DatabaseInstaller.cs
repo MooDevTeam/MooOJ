@@ -59,6 +59,7 @@ namespace Moo.DB
         static Function CreateRecord = new Function() { Name = "record.create" };
         static Function CreateLockedRecord = new Function() { Name = "record.locked.create" };
         static Function DeleteRecord = new Function() { Name = "record.delete" };
+        static Function DeleteRecordJudgeInfo = new Function() { Name = "record.judgeinfo.delete" };
 
         static Function CreateUser = new Function() { Name = "user.create" };
         static Function ListUser = new Function() { Name = "user.list" };
@@ -268,6 +269,9 @@ namespace Moo.DB
             Organizer.AllowedFunction.Add(DeleteRecord);
             Worker.AllowedFunction.Add(DeleteRecord);
 
+            Organizer.AllowedFunction.Add(DeleteRecordJudgeInfo);
+            Worker.AllowedFunction.Add(DeleteRecordJudgeInfo);
+
             //User
             Organizer.AllowedFunction.Add(CreateUser);
             Worker.AllowedFunction.Add(CreateUser);
@@ -366,14 +370,15 @@ namespace Moo.DB
 
         static void AddOwner(MooDB db)
         {
-            owner=new User(){
-                Name=WebConfigurationManager.AppSettings["install.owner.name"],
-                Password=Moo.Utility.Converter.ToSHA256Hash(WebConfigurationManager.AppSettings["install.owner.password"]),
-                BriefDescription="这个账户为Moo的拥有者准备",
-                Description="",
-                ImageURL="",
-                Role=Organizer,
-                Score=0,
+            owner = new User()
+            {
+                Name = WebConfigurationManager.AppSettings["install.owner.name"],
+                Password = Moo.Utility.Converter.ToSHA256Hash(WebConfigurationManager.AppSettings["install.owner.password"]),
+                BriefDescription = "这个账户为Moo的拥有者准备",
+                Description = "",
+                ImageURL = "",
+                Role = Organizer,
+                Score = 0,
             };
             db.Users.AddObject(owner);
             db.SaveChanges();

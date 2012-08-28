@@ -115,5 +115,30 @@ public partial class Record_List : System.Web.UI.Page
 
         return query.OrderByDescending<Record, int>(r => r.ID);
     }
-    
+
+    protected void btnRejudge_Click(object sender, EventArgs e)
+    {
+        if (!Permission.Check("record.judgeinfo.delete", false)) return;
+
+        LinkButton theButton=(LinkButton)sender;
+        GridViewRow row = (GridViewRow)theButton.Parent.Parent;
+        int recordID = (int)grid.DataKeys[row.RowIndex][0];
+        using (MooDB db = new MooDB())
+        {
+            JudgeInfo info = (from j in db.JudgeInfos
+                              where j.Record.ID == recordID
+                              select j).SingleOrDefault<JudgeInfo>();
+            if (info == null)
+            {
+                PageUtil.Redirect("已经提交重测，请耐心等候。", "~/Record/List.aspx?" + Request.QueryString);
+                return;
+            }
+
+            info.Record.JudgeInfo = null;
+            db.JudgeInfos.DeleteObject(info);
+            db.SaveChanges();
+        }
+
+        PageUtil.Redirect("操作成功", "~/Record/List.aspx?" + Request.QueryString);
+    }
 }

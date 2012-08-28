@@ -20,7 +20,13 @@
         }
         SiteRoles.Initialize();
 
-        //MooTestData.AddTestData();
+        using (MooDB db = new MooDB())
+        {
+            if (db.Users.Count() <= 1)
+            {
+                MooTestData.AddTestData(db);
+            }
+        }
 
         TesterManager.Testers.Add(new Moo.Tester.MooTester.Tester());
         TesterManager.Start();

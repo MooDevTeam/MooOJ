@@ -40,8 +40,9 @@
         <asp:Button ID="btnQuery" runat="server" Text="查询" OnClick="btnQuery_Click" />
     </div>
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AutoGenerateColumns="False"
-        DataKeyNames="ID" CssClass="listTable" CellSpacing="-1" OnPageIndexChanging="grid_PageIndexChanging" PageSize='<%$Resources:Moo,GridViewPageSize %>'
-        OnRowDeleting="grid_RowDeleting" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
+        DataKeyNames="ID" CssClass="listTable" CellSpacing="-1" OnPageIndexChanging="grid_PageIndexChanging"
+        PageSize='<%$ Resources:Moo,GridViewPageSize %>' OnRowDeleting="grid_RowDeleting"
+        EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>
             <asp:BoundField DataField="ID" HeaderText="记录编号" ReadOnly="True" SortExpression="ID" />
@@ -73,7 +74,13 @@
                     </a>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:CommandField HeaderText="操作" ShowDeleteButton="True" />
+            <asp:TemplateField HeaderText="操作" ShowHeader="False">
+                <ItemTemplate>
+                    <asp:LinkButton runat="server" CausesValidation="False" CommandName="Delete" Text="删除"></asp:LinkButton>
+                    <asp:LinkButton ID="btnRejudge" runat="server" CausesValidation="False" 
+                        Text="重测" onclick="btnRejudge_Click"></asp:LinkButton>
+                </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
     </asp:GridView>
 </asp:Content>
