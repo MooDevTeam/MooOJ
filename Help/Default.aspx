@@ -6,6 +6,11 @@
     <title>帮助</title>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="main" runat="Server">
+    <Moo:LinkBar runat="server" Title="帮助">
+        <Moo:LinkBarItem URL='<%#"~/Help/?id="+int.Parse(Request["id"]) %>' Selected="true"
+            Text="帮助" />
+        <Moo:LinkBarItem URL='<%#"~/Help/"+int.Parse(Request["id"])+".txt" %>' Text="源代码" />
+    </Moo:LinkBar>
     <div>
         <%#WikiParser.Parse(content) %>
     </div>

@@ -1,0 +1,139 @@
+﻿! Wiki语法
+
+Moo目前使用 [url:WikiPlex|http://wikiplex.codeplex.com/] 作为Wiki语法解析器。
+此页目的为展示这种Wiki的语法。下面是最终效果，而 [url:Wiki源码在此|6.txt]。
+
+*粗体*
+_斜体_
++下划线+
+--删除线--
+^^上标^^
+,,下标,,
+
+<color:red|红色字体>
+
+<{左对齐}<
+>{右对齐}>
+
+:缩进
+::再缩进
+:{
+全部
+都有
+缩进
+:}
+
+! 一级标题
+!! 二级标题
+!!!!!! 直到六级标题
+
+{{
+#include <iostream>
+using namespace std;
+int main(){
+    cout<<"不支持高亮的代码块"<<endl;
+	return 0;
+}
+}}
+
+{{ System.out.println("没有高亮的单行代码块"); }}
+
+{"此处的文本不会被*Wiki*化~~"}
+
+* 无序
+* 列表
+** 子列表
+*** 孙列表
+
+# 有序
+# 列表
+## 子列表
+### 孙列表
+
+* 可以混用
+## 无序列表
+*** 和
+## 有序列表
+
+||表格||这是标题||这也是标题||
+|表格内容|内容|内|
+|表格内容|表格|表|
+
+----
+这是横线
+----
+
+图片
+[image:https://www.google.com.hk/intl/zh-CN_cn/images/logos/images_logo_lg.gif]
+带描述的图片
+[image:这是描述|https://www.google.com.hk/intl/zh-CN_cn/images/logos/images_logo_lg.gif]
+还可以规定大小
+[image:这是描述|https://www.google.com.hk/intl/zh-CN_cn/images/logos/images_logo_lg.gif,width=100px,height=100px]
+图片可作为链接
+[image:点此进入Google|https://www.google.com.hk/intl/zh-CN_cn/images/logos/images_logo_lg.gif|http://www.google.com.hk/]
+<[image:https://www.google.com.hk/intl/zh-CN_cn/images/logos/images_logo_lg.gif] 图片可以悬浮在左边
+>[image:https://www.google.com.hk/intl/zh-CN_cn/images/logos/images_logo_lg.gif] 图片可以悬浮在右边
+
+链接
+[url:http://www.google.com.hk/]
+带描述的链接
+[url:这里写描述|http://www.google.com.hk/]
+下载链接
+[file:点此下载|https://www.google.com.hk/intl/zh-CN_cn/images/logos/images_logo_lg.gif]
+
+这里有一个锚：
+{anchor:我的锚}
+这样可以链接到刚才的锚
+[#我的锚]
+
+{code:c#}
+using System;
+namespace Moo{
+    public class Program{
+        public static void Main(){
+            Console.WriteLine("这是加亮的程序块");
+        }
+    }
+}
+{code:c#}
+支持的语言有：
+* asp c#
+* asp vb.net
+* ashx
+* c#
+* c++
+* vb.net
+* html
+* sql
+* java
+* javascript
+* xml
+* php
+* css
+* powershell
+* *当然还有特意增加的pascal*
+
+当code后面填写的语言无法识别时，就是普通代码块。当然，如果您希望增加高亮语言的种类，请联系Moo。
+{code:NoSuchLanguage}
+类似这样的。
+    看，缩进被保留了。
+{code:NoSuchLanguage}
+
+这是M67大牛的博客。后面的条目数限制，和仅显示标题是可以去掉的。
+{rss:url=http://feed.feedsky.com/matrix67,max=5,titlesOnly=true}
+
+这是视频。
+{video:url=http://foo.com/bar.wmv,type=windows,align=center,height=100px,width=100px}
+align、height、width可以去掉。
+type支持
+* flash
+* quicktime
+* real
+* windows
+* youtube
+* c9
+* vimeo
+
+还有silverlight。
+{silverlight:url=http://foo.com/bar.xap,height=285px,width=880px,version=4,gpuAcceleration=true}
+除了url，都可以去掉。

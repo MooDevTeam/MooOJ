@@ -41,7 +41,7 @@ public partial class Mail_Create : System.Web.UI.Page
                     else
                     {
                         initialTitle = "回复:" + replyTo.Title;
-                        initialContent = "\n\n在 [B:" + replyTo.Title + "] 中， [B:" + replyTo.From.Name + "] 写道:\n[BQ " + replyTo.Content+" BQ]";
+                        initialContent = "\n\n在 *" + replyTo.Title + "* 中， *" + replyTo.From.Name + "* 写道:\n:{\n" + replyTo.Content+"\n:}";
                     }
                 }
                 

@@ -66,8 +66,6 @@ namespace WikiPlex.Formatting.Renderers
         {
             TextPart part = RenderException.ConvertAny(() => Utility.ExtractTextParts(input));
             string url = part.Text;
-            if (!url.StartsWith("http", StringComparison.OrdinalIgnoreCase) && !url.StartsWith("mailto", StringComparison.OrdinalIgnoreCase))
-                url = "http://" + url;
 
             return string.Format(LinkFormat, attributeEncode(url), htmlEncode(part.FriendlyText));
         }
@@ -75,8 +73,6 @@ namespace WikiPlex.Formatting.Renderers
         private static string ExpandLinkNoText(string input, Func<string, string> attributeEncode, Func<string, string> htmlEncode)
         {
             string url = input;
-            if (!url.StartsWith("http", StringComparison.OrdinalIgnoreCase))
-                url = "http://" + url;
 
             return string.Format(LinkFormat, attributeEncode(url), htmlEncode(input));
         }

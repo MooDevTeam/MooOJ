@@ -108,6 +108,8 @@
         public const string VimeoVideo = "Vimeo Video";
         public const string WindowsMediaVideo = "Windows Media Video";
         public const string YouTubeVideo = "YouTube Video";
+        public const string ColorBegin = "Color Begin";
+        public const string ColorEnd = "Color End";
 #pragma warning restore 1591
     }
 }

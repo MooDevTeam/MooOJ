@@ -25,7 +25,7 @@ namespace Moo.DB
                 Password = Converter.ToSHA256Hash("123456"),
                 Role = SiteRoles.ByType[RoleType.Organizer].GetDBRole(db),
                 BriefDescription = "我觉得我写这么多应该够两行了",
-                Description = "我是[I:屌丝]我骄傲，我为国家省钞票!",
+                Description = "我是--屌丝--我骄傲，我为国家省钞票!",
                 ImageURL = "https://www.google.com.hk/intl/zh-CN_cn/images/logos/images_logo_lg.gif",
                 Score = 256,
             };
@@ -37,7 +37,7 @@ namespace Moo.DB
                 Password = Converter.ToSHA256Hash("ShaBi"),
                 Role = SiteRoles.ByType[RoleType.Worker].GetDBRole(db),
                 BriefDescription = "我觉得我写这么多应该够两行了",
-                Description = "Moo[B:真]他妈的好！",
+                Description = "Moo*真*他妈的好！",
                 ImageURL = "http://www.baidu.com/img/baidu_sylogo1.gif",
                 Score = 128,
             };
@@ -100,7 +100,7 @@ namespace Moo.DB
 
             Problem CPlusD = new Problem()
             {
-                Name = "C+D问题[锁定]",
+                Name = "C+D问题",
                 Type = "Tranditional",
                 Lock = true,
                 Hidden = false,
@@ -119,7 +119,7 @@ namespace Moo.DB
 
             Problem EPlusF = new Problem()
             {
-                Name = "E+F问题[隐藏]",
+                Name = "E+F问题",
                 Type = "Tranditional",
                 Lock = false,
                 LockPost = false,
@@ -238,7 +238,7 @@ namespace Moo.DB
             CPlusD.LatestRevision = new ProblemRevision()
             {
                 Problem = CPlusD,
-                Content = "输入C,D。'''注意是Int64'''输出它们的和。",
+                Content = "输入C,D。*注意是Int64*输出它们的和。",
                 Reason = "蛋疼",
                 CreatedBy = ShaBi
             };
@@ -271,7 +271,7 @@ namespace Moo.DB
             APlusB.LatestSolution = new SolutionRevision()
             {
                 Problem = APlusB,
-                Content = "var a,b:[B:int64]; begin read(a,b); write(a+b); end.",
+                Content = "var a,b:*int64*; begin read(a,b); write(a+b); end.",
                 Reason = "上代码",
                 CreatedBy = MrPhone
             };
@@ -313,7 +313,7 @@ namespace Moo.DB
             db.PostItems.AddObject(new PostItem()
             {
                 Post = post,
-                Content = "出[B:这么水]的题，找死啊",
+                Content = "出--这么水--的题，找死啊",
                 CreatedBy = ShaBi,
             });
             db.SaveChanges();
@@ -360,7 +360,7 @@ namespace Moo.DB
             db.PostItems.AddObject(new PostItem()
             {
                 Post = post,
-                Content = "Moo很好啊。[B:注意此贴没有对应题目且被锁]",
+                Content = "Moo很好啊。*注意此贴没有对应题目且被锁*",
                 CreatedBy = MrPhone
             });
 
@@ -385,7 +385,7 @@ namespace Moo.DB
             db.Mails.AddObject(new Mail()
             {
                 Title = "咱把Moo黑了如何？",
-                Content = "嘿！onetwogoo!把Moo[B:黑]了吧！",
+                Content = "嘿！onetwogoo!把Moo--黑--了吧！",
                 IsRead = true,
                 From = ShaBi,
                 To = MrPhone
@@ -449,7 +449,7 @@ namespace Moo.DB
                 EndTime = DateTimeOffset.Now.AddMinutes(2),
                 Status = "Before",
                 Title = "Moo水题大赛",
-                Description = "全是[B:水]题啊！",
+                Description = "全是--水--题啊！",
                 LockProblemOnStart = true,
                 LockPostOnStart = true,
                 LockSolutionOnStart = true,
