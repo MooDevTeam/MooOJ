@@ -88,7 +88,7 @@ namespace Moo.Manager
                     {
                         Record = record,
                         Score = -1,
-                        Info = "正在评测"
+                        Info = "<color:blue|*正在评测*>"
                     };
                     db.SaveChanges();
 
@@ -115,7 +115,7 @@ namespace Moo.Manager
                     result = new TestResult()
                     {
                         Score = 0,
-                        Info = "未知的题目类型"
+                        Info = "<color:red|*未知的题目类型*>"
                     };
                     break;
             }

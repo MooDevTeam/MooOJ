@@ -37,7 +37,7 @@
             </th>
             <td>
                 <asp:DropDownList ID="ddlLanguage" runat="server">
-                    <asp:ListItem Selected="true" Value="cxx">CXX</asp:ListItem>
+                    <asp:ListItem Selected="true" Value="c++">C++</asp:ListItem>
                     <asp:ListItem Value="c">C</asp:ListItem>
                     <asp:ListItem Value="pascal">Pascal</asp:ListItem>
                 </asp:DropDownList>
@@ -48,7 +48,7 @@
                 选项
             </th>
             <td>
-                <asp:CheckBox ID="chkPublicCode" runat="server" Checked="true" Text="以XXX许可协议公开我的代码" />
+                <asp:CheckBox ID="chkPublicCode" runat="server" Checked="true" Text="公开我的代码" />
             </td>
         </tr>
         <tr>

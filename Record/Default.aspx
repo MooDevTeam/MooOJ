@@ -60,7 +60,7 @@
                 代码
             </th>
             <td>
-                <pre><%#HttpUtility.HtmlEncode(record.Code) %></pre>
+                <pre><%#WikiParser.Parse(string.Format("{{code:{0}}}\n{1}\n{{code:{0}}}",record.Language,record.Code)) %></pre>
             </td>
         </tr>
         <tr runat="server" visible='<%#info!=null %>'>

@@ -56,7 +56,7 @@ public partial class Controls_Captcha : System.Web.UI.UserControl
 
     protected void Validate(object source, ServerValidateEventArgs e)
     {
-        e.IsValid = (string)Session["MooCaptchaAnswer" + this.ClientID] == txtCaptcha.Text;
+        e.IsValid = txtCaptcha.Text.ToLower() == ((string)Session["MooCaptchaAnswer" + this.ClientID]).ToLower();
         GenerateCaptcha();
     }
 }

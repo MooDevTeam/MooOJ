@@ -87,7 +87,7 @@ namespace ColorCode.Styling.StyleSheets
                                  },
                              new Style(ScopeName.PreprocessorKeyword)
                                  {
-                                     Foreground = Color.Blue,
+                                     Foreground = Color.Green,
                                      CssClassName = "preprocessorKeyword"
                                  },
                              new Style(ScopeName.HtmlEntity)

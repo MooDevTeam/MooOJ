@@ -58,6 +58,7 @@ public partial class TestCase_Default : System.Web.UI.Page
 
             multiView.GetActiveView().DataBind();
             linkbar.DataBind();
+            Header.DataBind();
         }
     }
 

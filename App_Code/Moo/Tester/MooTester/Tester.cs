@@ -35,7 +35,7 @@ namespace Moo.Tester.MooTester
             return new TestResult()
             {
                 Score = 0,
-                Info = "评测机不配合 T_T"
+                Info = Resources.Moo.MooTester_NetworkError
             };
         }
 
@@ -62,7 +62,7 @@ namespace Moo.Tester.MooTester
             return new TestResult()
             {
                 Score = 0,
-                Info = "评测机不配合 T_T"
+                Info = Resources.Moo.MooTester_NetworkError
             };
         }
 
@@ -73,7 +73,7 @@ namespace Moo.Tester.MooTester
             string compileCommand;
             switch (language)
             {
-                case "cxx":
+                case "c++":
                     compileCommand = "g++ -o {Execute} {Source} {.cpp}";
                     break;
                 case "c":
@@ -83,7 +83,7 @@ namespace Moo.Tester.MooTester
                     return new TestResult()
                     {
                         Score = 0,
-                        Info = "不支持的语言"
+                        Info = Resources.Moo.MooTester_LanguageNotSupported
                     };
             }
 
@@ -109,25 +109,25 @@ namespace Moo.Tester.MooTester
                     return new TestResult()
                     {
                         Score = 0,
-                        Info = "编译器超时"
+                        Info = Resources.Moo.MooTester_CompilerTLE
                     };
                 case Out.ResultType.RuntimeError:
                     return new TestResult()
                     {
                         Score = 0,
-                        Info = "编译错误，信息如下：\n\n" + compileResult.Message
+                        Info = string.Format(Resources.Moo.MooTester_CompilerRE, compileResult.Message)
                     };
                 case Out.ResultType.MemoryLimitExceeded:
                     return new TestResult()
                     {
                         Score = 0,
-                        Info = "编译器内存超标"
+                        Info = Resources.Moo.MooTester_CompilerMLE
                     };
                 default:
                     return new TestResult()
                     {
                         Score = 0,
-                        Info = "编译器心情不好.T_T 请您自便。"
+                        Info = Resources.Moo.MooTester_CompilerUndefinedError
                     };
             }
         }
@@ -139,10 +139,10 @@ namespace Moo.Tester.MooTester
             if (compileResult != null) return compileResult;
 
             int score = 0;
-            StringBuilder sb = new StringBuilder("编译成功").AppendLine();
+            StringBuilder sb = new StringBuilder(Resources.Moo.MooTester_CompilerSuccess).AppendLine().AppendLine();
             foreach (TranditionalTestCase testCase in cases)
             {
-                sb.AppendLine("测试点" + testCase.ID + "：");
+                sb.AppendFormat(Resources.Moo.MooTester_TestCaseX, testCase.ID);
 
                 socket.Send(new Message()
                 {
@@ -163,22 +163,22 @@ namespace Moo.Tester.MooTester
                 {
                     case Out.ResultType.Success:
                         score += testCase.Score;
-                        sb.AppendLine("正确 用时" + testResult.Time + "毫秒 最大内存" + testResult.Memory + "字节");
+                        sb.AppendLine(string.Format(Resources.Moo.MooTester_TestSuccess,testResult.Time ,testResult.Memory));
                         break;
                     case Out.ResultType.WrongAnswer:
-                        sb.AppendLine("答案错误，信息如下：" + testResult.Message);
+                        sb.AppendLine(string.Format(Resources.Moo.MooTester_TestWA,testResult.Message));
                         break;
                     case Out.ResultType.TimeLimitExceeded:
-                        sb.AppendLine("程序超时");
+                        sb.AppendLine(Resources.Moo.MooTester_TestTLE);
                         break;
                     case Out.ResultType.RuntimeError:
-                        sb.AppendLine("程序崩溃");
+                        sb.AppendLine(Resources.Moo.MooTester_TestRE);
                         break;
                     case Out.ResultType.MemoryLimitExceeded:
-                        sb.AppendLine("超出内存限制");
+                        sb.AppendLine(Resources.Moo.MooTester_TestMLE);
                         break;
                     default:
-                        sb.AppendLine("程序心情不好T_T 请您自便。");
+                        sb.AppendLine(Resources.Moo.MooTester_TestUndefinedError);
                         break;
                 }
             }
@@ -198,10 +198,10 @@ namespace Moo.Tester.MooTester
             if (compileResult != null) return compileResult;
 
             int score = 0;
-            StringBuilder sb = new StringBuilder("编译成功").AppendLine();
+            StringBuilder sb = new StringBuilder(Resources.Moo.MooTester_CompilerSuccess).AppendLine().AppendLine();
             foreach (SpecialJudgedTestCase testCase in cases)
             {
-                sb.AppendLine("测试点" + testCase.ID + "：");
+                sb.AppendFormat(Resources.Moo.MooTester_TestCaseX, testCase.ID);
 
                 socket.Send(new Message()
                 {
@@ -222,22 +222,22 @@ namespace Moo.Tester.MooTester
                 {
                     case Out.ResultType.Success:
                         score += testCase.Score;
-                        sb.AppendLine("正确 用时" + testResult.Time + "毫秒 最大内存" + testResult.Memory + "字节");
+                        sb.AppendLine(string.Format(Resources.Moo.MooTester_TestSuccess, testResult.Time, testResult.Memory));
                         break;
                     case Out.ResultType.WrongAnswer:
-                        sb.AppendLine("答案错误，信息如下：" + testResult.Message);
+                        sb.AppendLine(string.Format(Resources.Moo.MooTester_TestWA, testResult.Message));
                         break;
                     case Out.ResultType.TimeLimitExceeded:
-                        sb.AppendLine("程序超时");
+                        sb.AppendLine(Resources.Moo.MooTester_TestTLE);
                         break;
                     case Out.ResultType.RuntimeError:
-                        sb.AppendLine("程序崩溃");
+                        sb.AppendLine(Resources.Moo.MooTester_TestRE);
                         break;
                     case Out.ResultType.MemoryLimitExceeded:
-                        sb.AppendLine("超出内存限制");
+                        sb.AppendLine(Resources.Moo.MooTester_TestMLE);
                         break;
                     default:
-                        sb.AppendLine("程序心情不好T_T 请您自便。");
+                        sb.AppendLine(Resources.Moo.MooTester_TestUndefinedError);
                         break;
                 }
             }

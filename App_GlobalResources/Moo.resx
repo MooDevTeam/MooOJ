@@ -134,15 +134,58 @@
     <value>104857600</value>
     <comment>100MB</comment>
   </data>
+  <data name="MooTester_CompilerMLE" xml:space="preserve">
+    <value>&lt;color:red|*内存太小，不够编译器折腾*&gt;</value>
+  </data>
+  <data name="MooTester_CompilerRE" xml:space="preserve">
+    <value>&lt;color:red|*编译器生气了：*
+{{"{0}"}}&gt;</value>
+  </data>
+  <data name="MooTester_CompilerSuccess" xml:space="preserve">
+    <value>&lt;color:green|*编译成功*&gt;</value>
+  </data>
+  <data name="MooTester_CompilerTLE" xml:space="preserve">
+    <value>&lt;color:red|*编译器太磨叽，等不及了*&gt;</value>
+  </data>
+  <data name="MooTester_CompilerUndefinedError" xml:space="preserve">
+    <value>&lt;color:red|*等等，编译器闹肚子了。*&gt;</value>
+  </data>
   <data name="MooTester_CompileTime" xml:space="preserve">
     <value>5000</value>
     <comment>5s</comment>
+  </data>
+  <data name="MooTester_LanguageNotSupported" xml:space="preserve">
+    <value>&lt;color:red|*这是啥语言的程序，咋没见过？*&gt;</value>
+  </data>
+  <data name="MooTester_NetworkError" xml:space="preserve">
+    <value>&lt;color:red|*评测机貌似出去遛弯了……*&gt;</value>
+  </data>
+  <data name="MooTester_TestCaseX" xml:space="preserve">
+    <value># &lt;color:blue|*[url:测试点#{0}|../TestCase/?id={0}]*&gt; </value>
   </data>
   <data name="MooTester_TesterIP" xml:space="preserve">
     <value>127.0.0.1</value>
   </data>
   <data name="MooTester_TesterPort" xml:space="preserve">
     <value>6000</value>
+  </data>
+  <data name="MooTester_TestMLE" xml:space="preserve">
+    <value>&lt;color:purple|内存超出限制。&gt;</value>
+  </data>
+  <data name="MooTester_TestRE" xml:space="preserve">
+    <value>&lt;color:orange|程序崩溃。&gt;</value>
+  </data>
+  <data name="MooTester_TestSuccess" xml:space="preserve">
+    <value>&lt;color:green|正确。&gt;(用时*{0}ms*，内存*{1}byte(s)*)</value>
+  </data>
+  <data name="MooTester_TestTLE" xml:space="preserve">
+    <value>&lt;color:pink|超出时间限制。&gt;</value>
+  </data>
+  <data name="MooTester_TestUndefinedError" xml:space="preserve">
+    <value>&lt;color:gray|天气不好，程序不开心。&gt;</value>
+  </data>
+  <data name="MooTester_TestWA" xml:space="preserve">
+    <value>&lt;color:red|答案错误。&gt;{{"{0}"}}</value>
   </data>
   <data name="MooTester_TranditionalJudger" xml:space="preserve">
     <value>D:\Special_Judge.exe</value>
