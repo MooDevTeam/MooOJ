@@ -24,6 +24,28 @@
         <Moo:LinkBarItem URL='<%#"~/Record/List.aspx?problemID="+problem.ID %>' Special="true"
             Text="记录" />
     </Moo:LinkBar>
+    <fieldset id="fieldQuery" runat="server">
+        <legend>查询</legend>
+        <asp:Label runat="server">旧版本编号</asp:Label>
+        <asp:TextBox ID="txtRevisionOld" runat="server" ValidationGroup="grpQuery" Text='<%#revisionOld.ID%>'></asp:TextBox>
+        <asp:RequiredFieldValidator runat="server" ValidationGroup="grpQuery" ControlToValidate="txtRevisionOld"
+            Display="Dynamic" CssClass="validator">不能为空</asp:RequiredFieldValidator>
+        <asp:CompareValidator runat="server" ValidationGroup="grpQuery" ControlToValidate="txtRevisionOld"
+            Operator="DataTypeCheck" Type="Integer" Display="Dynamic" CssClass="validator">需为整数</asp:CompareValidator>
+        <asp:CustomValidator runat="server" ValidationGroup="grpQuery" ControlToValidate="txtRevisionOld"
+            Display="Dynamic" CssClass="validator" OnServerValidate="ValidateRevisionID">无此版本</asp:CustomValidator>
+        <asp:Label runat="server">新版本编号</asp:Label>
+        <asp:TextBox ID="txtRevisionNew" runat="server" ValidationGroup="grpQuery" Text='<%#revisionNew.ID %>'></asp:TextBox>
+        <asp:RequiredFieldValidator runat="server" ValidationGroup="grpQuery" ControlToValidate="txtRevisionNew"
+            Display="Dynamic" CssClass="validator">不能为空</asp:RequiredFieldValidator>
+        <asp:CompareValidator runat="server" ValidationGroup="grpQuery" ControlToValidate="txtRevisionNew"
+            Operator="DataTypeCheck" Type="Integer" Display="Dynamic" CssClass="validator">需为整数</asp:CompareValidator>
+        <asp:CustomValidator runat="server" ValidationGroup="grpQuery" ControlToValidate="txtRevisionNew"
+            Display="Dynamic" CssClass="validator" OnServerValidate="ValidateRevisionID">无此版本</asp:CustomValidator>
+        <asp:CustomValidator ID="validateSameProblem" runat="server" ValidationGroup="grpQuery"
+            Display="Dynamic" CssClass="validator" OnServerValidate="validateSameProblem_ServerValidate">不是同一题目的版本</asp:CustomValidator>
+        <asp:Button ID="btnQuery" ValidationGroup="grpQuery" runat="server" Text="查询" OnClick="btnQuery_Click" />
+    </fieldset>
     <table style="width: 100%; border: none; table-layout: fixed;">
         <tr>
             <th style="padding: 10px; border: none; width: 50%; background: none;">

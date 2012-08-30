@@ -24,21 +24,22 @@
         <Moo:LinkBarItem URL='<%#"~/User/?id="+problemID %>' Special="true" Hidden='<%#problemID==null %>'
             Text="用户" />
     </Moo:LinkBar>
-    <div>
-        题目编号
+    <fieldset>
+        <legend>查询</legend>
+        <asp:Label runat="server">题目编号</asp:Label>
         <asp:TextBox ID="txtProblemID" runat="server" Text='<%#problemID %>'></asp:TextBox>
         <asp:CompareValidator runat="server" ControlToValidate="txtProblemID" Operator="DataTypeCheck"
             Type="Integer" Display="Dynamic" CssClass="validator">不是整数</asp:CompareValidator>
-        用户编号
+        <asp:Label runat="server">用户编号</asp:Label>
         <asp:TextBox ID="txtUserID" runat="server" Text='<%#userID %>'></asp:TextBox>
         <asp:CompareValidator runat="server" ControlToValidate="txtUserID" Operator="DataTypeCheck"
             Type="Integer" Display="Dynamic" CssClass="validator">不是整数</asp:CompareValidator>
-        比赛编号
+        <asp:Label runat="server">比赛编号</asp:Label>
         <asp:TextBox ID="txtContestID" runat="server" Text='<%#contestID %>'></asp:TextBox>
         <asp:CompareValidator runat="server" ControlToValidate="txtContestID" Operator="DataTypeCheck"
             Type="Integer" Display="Dynamic" CssClass="validator">不是整数</asp:CompareValidator>
         <asp:Button ID="btnQuery" runat="server" Text="查询" OnClick="btnQuery_Click" />
-    </div>
+    </fieldset>
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AutoGenerateColumns="False"
         DataKeyNames="ID" CssClass="listTable" CellSpacing="-1" OnPageIndexChanging="grid_PageIndexChanging"
         PageSize='<%$ Resources:Moo,GridViewPageSize %>' OnRowDeleting="grid_RowDeleting"
@@ -77,8 +78,8 @@
             <asp:TemplateField HeaderText="操作" ShowHeader="False">
                 <ItemTemplate>
                     <asp:LinkButton runat="server" CausesValidation="False" CommandName="Delete" Text="删除"></asp:LinkButton>
-                    <asp:LinkButton ID="btnRejudge" runat="server" CausesValidation="False" 
-                        Text="重测" onclick="btnRejudge_Click"></asp:LinkButton>
+                    <asp:LinkButton ID="btnRejudge" runat="server" CausesValidation="False" Text="重测"
+                        OnClick="btnRejudge_Click"></asp:LinkButton>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

@@ -21,37 +21,54 @@ public partial class Solution_Compare : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Permission.Check("solution.history.read", true)) return;
-        using (MooDB db = new MooDB())
+        if (!Page.IsPostBack)
         {
-            if (Request["revisionOld"] != null && Request["revisionNew"] != null)
+            using (MooDB db = new MooDB())
             {
-                CollectEntity(db, int.Parse(Request["revisionOld"]), int.Parse(Request["revisionNew"]));
+                if (Request["revisionOld"] != null && Request["revisionNew"] != null)
+                {
+                    CollectEntity(db, int.Parse(Request["revisionOld"]), int.Parse(Request["revisionNew"]));
+                }
+
+                if (revisionOld == null || revisionNew == null)
+                {
+                    PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
+                    return;
+                }
+
+                if (revisionOld.ID > revisionNew.ID)
+                {
+                    SolutionRevision tmp = revisionNew;
+                    revisionNew = revisionOld;
+                    revisionOld = tmp;
+                }
+
+                if (revisionOld.Problem.ID != revisionNew.Problem.ID)
+                {
+                    throw new Exception("试图比较不同题目之间的版本");
+                }
+
+                problem = revisionNew.Problem;
+
+                revisionOldPrev = (from r in db.SolutionRevisions
+                                   where r.Problem.ID == problem.ID && r.ID < revisionOld.ID
+                                   orderby r.ID descending
+                                   select r).FirstOrDefault<SolutionRevision>();
+                revisionNewPrev = (from r in db.SolutionRevisions
+                                   where r.Problem.ID == problem.ID && r.ID < revisionNew.ID
+                                   orderby r.ID descending
+                                   select r).FirstOrDefault<SolutionRevision>();
+                revisionOldNext = (from r in db.SolutionRevisions
+                                   where r.Problem.ID == problem.ID && r.ID > revisionOld.ID
+                                   orderby r.ID
+                                   select r).FirstOrDefault<SolutionRevision>();
+                revisionNewNext = (from r in db.SolutionRevisions
+                                   where r.Problem.ID == problem.ID && r.ID > revisionNew.ID
+                                   orderby r.ID
+                                   select r).FirstOrDefault<SolutionRevision>();
+
+                Page.DataBind();
             }
-
-            if (revisionOld == null || revisionNew == null || problem == null)
-            {
-                PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
-                return;
-            }
-
-            revisionOldPrev = (from r in db.SolutionRevisions
-                               where r.Problem.ID == problem.ID && r.ID < revisionOld.ID
-                               orderby r.ID descending
-                               select r).FirstOrDefault<SolutionRevision>();
-            revisionNewPrev = (from r in db.SolutionRevisions
-                               where r.Problem.ID == problem.ID && r.ID < revisionNew.ID
-                               orderby r.ID descending
-                               select r).FirstOrDefault<SolutionRevision>();
-            revisionOldNext = (from r in db.SolutionRevisions
-                               where r.Problem.ID == problem.ID && r.ID > revisionOld.ID
-                               orderby r.ID
-                               select r).FirstOrDefault<SolutionRevision>();
-            revisionNewNext = (from r in db.SolutionRevisions
-                               where r.Problem.ID == problem.ID && r.ID > revisionNew.ID
-                               orderby r.ID
-                               select r).FirstOrDefault<SolutionRevision>();
-
-            Page.DataBind();
         }
     }
 
@@ -59,22 +76,39 @@ public partial class Solution_Compare : System.Web.UI.Page
     {
         revisionOld = (from r in db.SolutionRevisions
                        where r.ID == oldID
-                       select r).Single<SolutionRevision>();
+                       select r).SingleOrDefault<SolutionRevision>();
         revisionNew = (from r in db.SolutionRevisions
                        where r.ID == newID
-                       select r).Single<SolutionRevision>();
-        if (revisionOld.ID > revisionNew.ID)
+                       select r).SingleOrDefault<SolutionRevision>();
+    }
+    protected void btnQuery_Click(object sender, EventArgs e)
+    {
+        if (!Page.IsValid) return;
+        Response.Redirect("~/Solution/Compare.aspx?revisionOld=" + txtRevisionOld.Text + "&revisionNew=" + txtRevisionNew.Text);
+    }
+    protected void ValidateRevisionID(object sender, ServerValidateEventArgs e)
+    {
+        TextBox toValidate = (TextBox)fieldQuery.FindControl(((CustomValidator)sender).ControlToValidate);
+        int revisionID = int.Parse(toValidate.Text);
+        using (MooDB db = new MooDB())
         {
-            SolutionRevision tmp = revisionNew;
-            revisionNew = revisionOld;
-            revisionOld = tmp;
+            e.IsValid = (from r in db.SolutionRevisions
+                         where r.ID == revisionID
+                         select r).Any();
         }
-
-        if (revisionOld.Problem.ID != revisionNew.Problem.ID)
+    }
+    protected void validateSameProblem_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        int revisionOldID = int.Parse(txtRevisionOld.Text), revisionNewID = int.Parse(txtRevisionNew.Text);
+        using (MooDB db = new MooDB())
         {
-            throw new Exception("试图比较不同题目之间的版本");
+            revisionOld = (from r in db.SolutionRevisions
+                           where r.ID == revisionOldID
+                           select r).SingleOrDefault<SolutionRevision>();
+            revisionNew = (from r in db.SolutionRevisions
+                           where r.ID == revisionNewID
+                           select r).SingleOrDefault<SolutionRevision>();
+            args.IsValid = revisionOld == null || revisionNew == null || revisionOld.Problem.ID == revisionNew.Problem.ID;
         }
-
-        problem = revisionNew.Problem;
     }
 }

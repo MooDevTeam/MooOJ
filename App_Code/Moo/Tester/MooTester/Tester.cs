@@ -74,10 +74,10 @@ namespace Moo.Tester.MooTester
             switch (language)
             {
                 case "c++":
-                    compileCommand = "g++ -o {Execute} {Source} {.cpp}";
+                    compileCommand = "g++ -o {Execute} {E.exeE} {Source} {S.cppS}";
                     break;
                 case "c":
-                    compileCommand = "gcc -o {Execute} {Source} {.c}";
+                    compileCommand = "gcc -o {Execute} {E.exeE} {Source} {S.cS}";
                     break;
                 default:
                     return new TestResult()
@@ -177,6 +177,9 @@ namespace Moo.Tester.MooTester
                     case Out.ResultType.MemoryLimitExceeded:
                         sb.AppendLine(Resources.Moo.MooTester_TestMLE);
                         break;
+                    case Out.ResultType.CompareError:
+                        sb.AppendLine(Resources.Moo.MooTester_TestCompareError);
+                        break;
                     default:
                         sb.AppendLine(Resources.Moo.MooTester_TestUndefinedError);
                         break;
@@ -235,6 +238,9 @@ namespace Moo.Tester.MooTester
                         break;
                     case Out.ResultType.MemoryLimitExceeded:
                         sb.AppendLine(Resources.Moo.MooTester_TestMLE);
+                        break;
+                    case Out.ResultType.CompareError:
+                        sb.AppendLine(Resources.Moo.MooTester_TestCompareError);
                         break;
                     default:
                         sb.AppendLine(Resources.Moo.MooTester_TestUndefinedError);

@@ -197,4 +197,7 @@
     <value>5000</value>
     <comment>5s</comment>
   </data>
+  <data name="MooTester_TestCompareError" xml:space="preserve">
+    <value>&lt;color:red|比较器抽风了~&gt;</value>
+  </data>
 </root>

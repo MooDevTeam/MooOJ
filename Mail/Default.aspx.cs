@@ -34,7 +34,11 @@ public partial class Mail_Default : System.Web.UI.Page
                     Permission.Check("i'm superman", false);
                     return;
                 }
-                mail.IsRead = true;
+
+                if (mail.To.ID == myUserID)
+                {
+                    mail.IsRead = true;
+                }
                 db.SaveChanges();
                 Page.DataBind();
             }

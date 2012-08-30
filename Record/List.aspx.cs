@@ -130,6 +130,11 @@ public partial class Record_List : System.Web.UI.Page
 
     protected void btnRejudge_Click(object sender, EventArgs e)
     {
+        if (!User.Identity.IsAuthenticated)
+        {
+            Permission.Check("i'm super man.", false);
+            return;
+        }
         if (!Permission.Check("record.judgeinfo.delete", false, false))
         {
             if (!allowRejudge)
@@ -157,14 +162,14 @@ public partial class Record_List : System.Web.UI.Page
                 return;
             }
 
+            User currentUser = ((SiteUser)User.Identity).GetDBUser(db);
             //Send A Mail
             db.Mails.AddObject(new Mail()
             {
-                Title = "您提交的记录被提请重测",
-                From = record.User,
+                Title = "您提交的记录 #" + record.ID + " 被我提请重新测评",
+                From = currentUser,
                 To = record.User,
-                Content = "您为[url:" + record.Problem.Name + "|../Problem/?id=" + record.Problem.ID + "]提交的记录已被提请重新测评，请[url:点击这里|../Record/?id=" + record.ID + "]了解最新情况。\n"
-                        + "申请重测者为" + (User.Identity.IsAuthenticated ? "[url:" + ((SiteUser)User.Identity).Name + "|../User/?id=" + ((SiteUser)User.Identity).ID + "]" : "匿名用户，IP=" + Request.UserHostAddress) + "\n\n"
+                Content = "您为 [url:" + record.Problem.Name + "|../Problem/?id=" + record.Problem.ID + "] 提交的记录已被我提请重新测评，请[url:点击这里|../Record/?id=" + record.ID + "]了解最新情况。\n\n"
                         + "*注意*：原始测评结果为*" + info.Score + "*分。详细测评信息为：\n"
                         + info.Info,
                 IsRead = false

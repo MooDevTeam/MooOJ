@@ -20,7 +20,7 @@ public partial class Record_Create : System.Web.UI.Page
             {
                 if (Request["problemID"] != null)
                 {
-                    CollectEntityByProblemID(db,int.Parse(Request["problemID"]));
+                    CollectEntityByProblemID(db, int.Parse(Request["problemID"]));
                 }
 
                 if (problem == null)
@@ -61,18 +61,25 @@ public partial class Record_Create : System.Web.UI.Page
                 if (!Permission.Check("record.create", false)) return;
             }
 
-            User currentUser=((SiteUser)User.Identity).GetDBUser(db);
-            db.Records.AddObject(new Record()
-            {
-                Problem = problem,
-                User = currentUser,
-                Code = txtCode.Text,
-                Language=ddlLanguage.SelectedValue,
-                PublicCode = chkPublicCode.Checked,
-                CreateTime=DateTimeOffset.Now
-            });
+            User currentUser = ((SiteUser)User.Identity).GetDBUser(db);
+            Record record = new Record()
+             {
+                 Problem = problem,
+                 User = currentUser,
+                 Code = txtCode.Text,
+                 Language = ddlLanguage.SelectedValue,
+                 PublicCode = chkPublicCode.Checked,
+                 CreateTime = DateTimeOffset.Now
+             };
+            db.Records.AddObject(record);
 
             problem.SubmissionCount++;
+            if (!(from r in db.Records
+                  where r.ID != record.ID && r.User.ID == currentUser.ID && r.Problem.ID == problem.ID
+                  select r).Any())
+            {
+                problem.SubmissionUser++;
+            }
 
             db.SaveChanges();
         }

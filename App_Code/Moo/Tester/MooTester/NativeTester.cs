@@ -5,7 +5,6 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Net.Sockets;
-using System.Windows.Forms;
 using Moo.Utility;
 namespace Moo.Tester.MooTester
 {
@@ -13,7 +12,7 @@ namespace Moo.Tester.MooTester
     {
         public enum ResultType : uint
         {
-            Success, WrongAnswer, TimeLimitExceeded, RuntimeError, MemoryLimitExceeded
+            Success, WrongAnswer, TimeLimitExceeded, RuntimeError, MemoryLimitExceeded, CompareError
         }
 
         public ResultType Type { get; set; }

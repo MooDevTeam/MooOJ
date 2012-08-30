@@ -37,12 +37,17 @@ namespace ColorCode.Compilation.Languages
                             {1,ScopeName.Comment}
                         }),
                     new LanguageRule(
-                        @"\{([^}]|[\r\n])*\}",
+                        @"(?s)\{\$.*?\}",
+                        new Dictionary<int,string>(){
+                            {0,ScopeName.PreprocessorKeyword}
+                        }),
+                    new LanguageRule(
+                        @"(?s)\{.*?\}",
                         new Dictionary<int,string>(){
                             {0,ScopeName.Comment}
                         }),
                     new LanguageRule(
-                        @"''|'[^\r\n]*?(?<!')'",
+                        @"''|'.*?(?<!')'",
                         new Dictionary<int,string>(){
                             {0,ScopeName.String}
                         }),

@@ -1479,7 +1479,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="MooDB" ZoomLevel="40" >
+      <Diagram Name="MooDB" ZoomLevel="100" >
         <EntityTypeShape EntityType="Moo.DB.User" Width="1.5" PointX="5.875" PointY="10.5" Height="2.7341113281249996" IsExpanded="true" />
         <EntityTypeShape EntityType="Moo.DB.Role" Width="1.5" PointX="8.125" PointY="11" Height="1.7790128580729174" IsExpanded="true" />
         <EntityTypeShape EntityType="Moo.DB.Function" Width="1.5" PointX="5.875" PointY="8.25" Height="1.3969734700520817" IsExpanded="true" />

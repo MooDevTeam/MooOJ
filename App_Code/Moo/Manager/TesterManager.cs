@@ -6,7 +6,6 @@ using System.Threading;
 using Moo.DB;
 using Moo.Utility;
 using Moo.Tester;
-using System.Windows.Forms;
 namespace Moo.Manager
 {
     /// <summary>
@@ -127,7 +126,6 @@ namespace Moo.Manager
             if (maxScore == null)//This is the first time
             {
                 record.User.Score += result.Score;
-                record.Problem.SubmissionUser++;
                 record.Problem.ScoreSum += result.Score;
             }
             else if (result.Score > maxScore.JudgeInfo.Score)

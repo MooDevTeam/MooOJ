@@ -13,7 +13,6 @@
         <Moo:LinkBarItem URL='<%#"~/Contest/Result.aspx?id="+contest.ID %>' Selected="true"
             Text="结果" />
     </Moo:LinkBar>
-    
     <table class="detailTable">
         <tr>
             <th>
@@ -37,9 +36,15 @@
             </th>
             <td>
                 <asp:GridView ID="grid" runat="server" AllowPaging="true" CssClass="listTable" AutoGenerateColumns="False"
-                    CellSpacing="-1" OnPageIndexChanging="grid_PageIndexChanging" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>' PageSize='<%$Resources:Moo,GridViewPageSize %>'>
+                    CellSpacing="-1" OnPageIndexChanging="grid_PageIndexChanging" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'
+                    PageSize='<%$Resources:Moo,GridViewPageSize %>'>
                     <AlternatingRowStyle BackColor="LightBlue" />
                     <Columns>
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <%#Container.DataItemIndex+grid.PageIndex*grid.PageSize+1 %>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="ID" HeaderText="用户编号" SortExpression="ID" />
                         <asp:TemplateField HeaderText="名称">
                             <ItemTemplate>
@@ -60,5 +65,4 @@
             </td>
         </tr>
     </table>
-    
 </asp:Content>
