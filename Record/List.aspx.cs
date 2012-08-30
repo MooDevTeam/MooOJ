@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Timers;
 using Moo.Authorization;
 using Moo.DB;
 using Moo.Utility;
@@ -12,6 +13,17 @@ public partial class Record_List : System.Web.UI.Page
     protected int? problemID;
     protected int? userID;
     protected int? contestID;
+    static volatile bool allowRejudge = true;
+    static readonly System.Timers.Timer rejudgeTimer = new System.Timers.Timer(double.Parse(Resources.Moo.Record_RejudgeInterval));
+
+    static Record_List()
+    {
+        rejudgeTimer.Elapsed += (sender, e) =>
+        {
+            allowRejudge = true;
+        };
+        rejudgeTimer.AutoReset = false;
+    }
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -118,23 +130,47 @@ public partial class Record_List : System.Web.UI.Page
 
     protected void btnRejudge_Click(object sender, EventArgs e)
     {
-        if (!Permission.Check("record.judgeinfo.delete", false)) return;
+        if (!Permission.Check("record.judgeinfo.delete", false, false))
+        {
+            if (!allowRejudge)
+            {
+                PageUtil.Redirect("请喝杯茶", "~/Record/List.aspx?" + Request.QueryString);
+                return;
+            }
 
-        LinkButton theButton=(LinkButton)sender;
+            allowRejudge = false;
+            rejudgeTimer.Start();
+        }
+
+        LinkButton theButton = (LinkButton)sender;
         GridViewRow row = (GridViewRow)theButton.Parent.Parent;
         int recordID = (int)grid.DataKeys[row.RowIndex][0];
         using (MooDB db = new MooDB())
         {
-            JudgeInfo info = (from j in db.JudgeInfos
-                              where j.Record.ID == recordID
-                              select j).SingleOrDefault<JudgeInfo>();
+            Record record = (from r in db.Records
+                             where r.ID == recordID
+                             select r).Single<Record>();
+            JudgeInfo info = record.JudgeInfo;
             if (info == null)
             {
                 PageUtil.Redirect("已经提交重测，请耐心等候。", "~/Record/List.aspx?" + Request.QueryString);
                 return;
             }
 
-            info.Record.JudgeInfo = null;
+            //Send A Mail
+            db.Mails.AddObject(new Mail()
+            {
+                Title = "您提交的记录被提请重测",
+                From = record.User,
+                To = record.User,
+                Content = "您为[url:" + record.Problem.Name + "|../Problem/?id=" + record.Problem.ID + "]提交的记录已被提请重新测评，请[url:点击这里|../Record/?id=" + record.ID + "]了解最新情况。\n"
+                        + "申请重测者为" + (User.Identity.IsAuthenticated ? "[url:" + ((SiteUser)User.Identity).Name + "|../User/?id=" + ((SiteUser)User.Identity).ID + "]" : "匿名用户，IP=" + Request.UserHostAddress) + "\n\n"
+                        + "*注意*：原始测评结果为*" + info.Score + "*分。详细测评信息为：\n"
+                        + info.Info,
+                IsRead = false
+            });
+
+            record.JudgeInfo = null;
             db.JudgeInfos.DeleteObject(info);
             db.SaveChanges();
         }

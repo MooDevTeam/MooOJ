@@ -102,7 +102,7 @@ namespace WikiPlex.Formatting
             writer.Append(EncodeContent(wikiContent.Substring(currentIndex)));
 
             // remove the trailing new line character
-            if (writer[writer.Length - 1] == '\r')
+            if (writer.Length>0 && writer[writer.Length - 1] == '\r')
                 writer.Remove(writer.Length - 1, 1);
             
             return writer.ToString();

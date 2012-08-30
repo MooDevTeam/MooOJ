@@ -193,4 +193,8 @@
   <data name="NoEnoughPermission" xml:space="preserve">
     <value>您可能不具备完成此操作所必须的权限。</value>
   </data>
+  <data name="Record_RejudgeInterval" xml:space="preserve">
+    <value>5000</value>
+    <comment>5s</comment>
+  </data>
 </root>
