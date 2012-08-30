@@ -7,7 +7,8 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderID="main" runat="Server">
     <Moo:LinkBar runat="server" Title="帮助">
-        <Moo:LinkBarItem URL='<%#"~/Help/?id="+int.Parse(Request["id"]) %>' Selected="true"
+    <Moo:LinkBarItem URL="~/Help/" Selected='<%#int.Parse(Request["id"])==1 %>' Text="目录" />
+        <Moo:LinkBarItem URL='<%#"~/Help/?id="+int.Parse(Request["id"]) %>' Hidden='<%#int.Parse(Request["id"])==1 %>' Selected="true"
             Text="帮助" />
         <Moo:LinkBarItem URL='<%#"~/Help/"+int.Parse(Request["id"])+".txt" %>' Text="源代码" />
     </Moo:LinkBar>

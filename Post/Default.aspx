@@ -33,7 +33,7 @@
         </WhereParameters>
     </asp:EntityDataSource>
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AutoGenerateColumns="False"
-        DataKeyNames="ID" DataSourceID="dataSource" ShowHeader="False" CssClass="postTable" PageSize='<%$Resources:Moo,GridViewPageSize %>'
+        DataKeyNames="ID" DataSourceID="dataSource" ShowHeader="False" CssClass="postTable" PageSize='20'
         OnRowDeleting="grid_RowDeleting" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <Columns>
             <asp:TemplateField HeaderText="内容" ItemStyle-CssClass="postCell">

@@ -13,6 +13,10 @@ public partial class Solution_Compare : System.Web.UI.Page
     protected Problem problem;
     protected SolutionRevision revisionOld;
     protected SolutionRevision revisionNew;
+    protected SolutionRevision revisionOldPrev;
+    protected SolutionRevision revisionOldNext;
+    protected SolutionRevision revisionNewPrev;
+    protected SolutionRevision revisionNewNext;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -23,11 +27,29 @@ public partial class Solution_Compare : System.Web.UI.Page
             {
                 CollectEntity(db, int.Parse(Request["revisionOld"]), int.Parse(Request["revisionNew"]));
             }
-            
-            if(revisionOld==null || revisionNew==null){
+
+            if (revisionOld == null || revisionNew == null || problem == null)
+            {
                 PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
                 return;
             }
+
+            revisionOldPrev = (from r in db.SolutionRevisions
+                               where r.Problem.ID == problem.ID && r.ID < revisionOld.ID
+                               orderby r.ID descending
+                               select r).FirstOrDefault<SolutionRevision>();
+            revisionNewPrev = (from r in db.SolutionRevisions
+                               where r.Problem.ID == problem.ID && r.ID < revisionNew.ID
+                               orderby r.ID descending
+                               select r).FirstOrDefault<SolutionRevision>();
+            revisionOldNext = (from r in db.SolutionRevisions
+                               where r.Problem.ID == problem.ID && r.ID > revisionOld.ID
+                               orderby r.ID
+                               select r).FirstOrDefault<SolutionRevision>();
+            revisionNewNext = (from r in db.SolutionRevisions
+                               where r.Problem.ID == problem.ID && r.ID > revisionNew.ID
+                               orderby r.ID
+                               select r).FirstOrDefault<SolutionRevision>();
 
             Page.DataBind();
         }

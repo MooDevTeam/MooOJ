@@ -41,8 +41,8 @@
             <asp:TemplateField HeaderText="方向">
                 <ItemStyle Font-Bold="true" />
                 <ItemTemplate>
-                    <asp:Literal runat="server" Visible='<%#(int)Eval("From.ID")==((SiteUser)User.Identity).ID %>'><span style="color:red;"><---</span></asp:Literal>
-                    <asp:Literal runat="server" Visible='<%#(int)Eval("To.ID")==((SiteUser)User.Identity).ID %>'><span style="color:Green;">---></span></asp:Literal>
+                    <asp:Literal runat="server" Visible='<%#(int)Eval("From.ID")==((SiteUser)User.Identity).ID %>'><span style="color:red;">&lt;---</span></asp:Literal>
+                    <asp:Literal runat="server" Visible='<%#(int)Eval("To.ID")==((SiteUser)User.Identity).ID %>'><span style="color:Green;">---&gt;</span></asp:Literal>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="标题">

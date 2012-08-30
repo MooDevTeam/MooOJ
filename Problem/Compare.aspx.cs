@@ -13,6 +13,10 @@ public partial class Problem_Compare : System.Web.UI.Page
     protected Problem problem;
     protected ProblemRevision revisionOld;
     protected ProblemRevision revisionNew;
+    protected ProblemRevision revisionOldPrev;
+    protected ProblemRevision revisionOldNext;
+    protected ProblemRevision revisionNewPrev;
+    protected ProblemRevision revisionNewNext;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -23,10 +27,27 @@ public partial class Problem_Compare : System.Web.UI.Page
                 CollectEntity(db, int.Parse(Request["revisionOld"]), int.Parse(Request["revisionNew"]));
             }
             
-            if(revisionOld==null || revisionNew==null){
+            if(revisionOld==null || revisionNew==null || problem==null){
                 PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
                 return;
             }
+
+            revisionOldPrev = (from r in db.ProblemRevisions
+                               where r.Problem.ID == problem.ID && r.ID < revisionOld.ID
+                               orderby r.ID descending
+                               select r).FirstOrDefault<ProblemRevision>();
+            revisionNewPrev = (from r in db.ProblemRevisions
+                               where r.Problem.ID == problem.ID && r.ID < revisionNew.ID
+                               orderby r.ID descending
+                               select r).FirstOrDefault<ProblemRevision>();
+            revisionOldNext = (from r in db.ProblemRevisions
+                               where r.Problem.ID == problem.ID && r.ID > revisionOld.ID
+                               orderby r.ID
+                               select r).FirstOrDefault<ProblemRevision>();
+            revisionNewNext = (from r in db.ProblemRevisions
+                               where r.Problem.ID == problem.ID && r.ID > revisionNew.ID
+                               orderby r.ID
+                               select r).FirstOrDefault<ProblemRevision>();
 
             if (problem.Hidden)
             {

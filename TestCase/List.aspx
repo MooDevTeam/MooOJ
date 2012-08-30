@@ -13,8 +13,6 @@
         <Moo:LinkBarItem URL='<%#"~/TestCase/List.aspx?id="+problem.ID %>' Selected="true"
             Text="列表" />
         <Moo:LinkBarItem URL='<%#"~/TestCase/Create.aspx?id="+problem.ID %>' Text="创建" />
-        <Moo:LinkBarItem URL='<%#"~/Record/Create.aspx?problemID="+problem.ID %>' Shortcut="true"
-            Text="提交" />
         <Moo:LinkBarItem URL='<%#"~/Problem/?id="+problem.ID %>' Special="true" Text="题目" />
         <Moo:LinkBarItem URL='<%#"~/Solution/?id="+problem.ID %>' Special="true" Text="题解" />
         <Moo:LinkBarItem URL='<%#"~/Post/List.aspx?problemID="+problem.ID %>' Special="true"

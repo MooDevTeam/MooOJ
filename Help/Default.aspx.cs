@@ -33,7 +33,7 @@ public partial class Help_Default : System.Web.UI.Page
 
             if (content == null)
             {
-                PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
+                Response.Redirect("~/Help/?id=1", true);
                 return;
             }
             Page.DataBind();

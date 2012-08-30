@@ -11,8 +11,6 @@
     <Moo:LinkBar ID="linkbar" runat="server" Title="测试数据">
         <Moo:LinkBarItem URL='<%#"~/TestCase/List.aspx?id="+problem.ID %>' Text="列表" />
         <Moo:LinkBarItem URL='<%#"~/TestCase/?id="+testCase.ID %>' Selected="true" Text="测试数据" />
-        <Moo:LinkBarItem URL='<%#"~/Record/Create.aspx?problemID="+problem.ID %>' Shortcut="true"
-            Text="提交" />
         <Moo:LinkBarItem URL='<%#"~/Problem/?id="+problem.ID %>' Special="true" Text="题目" />
         <Moo:LinkBarItem URL='<%#"~/Solution/?id="+problem.ID %>' Special="true" Text="题解" />
         <Moo:LinkBarItem URL='<%#"~/Post/List.aspx?problemID="+problem.ID %>' Special="true"

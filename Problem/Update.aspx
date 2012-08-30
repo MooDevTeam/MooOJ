@@ -49,7 +49,7 @@
         </tr>
         <tr>
             <th>
-                修改原因
+                原因
             </th>
             <td>
                 <asp:TextBox ID="txtReason" runat="server" ViewStateMode="Disabled" Width="100%"></asp:TextBox>

@@ -12,8 +12,6 @@
         <Moo:LinkBarItem URL='<%#"~/TestCase/List.aspx?id="+problem.ID %>' Text="列表" />
         <Moo:LinkBarItem URL='<%#"~/TestCase/Create.aspx?id="+problem.ID %>' Selected="true"
             Text="创建" />
-        <Moo:LinkBarItem URL='<%#"~/Record/Create.aspx?problemID="+problem.ID %>' Shortcut="true"
-            Text="提交" />
         <Moo:LinkBarItem URL='<%#"~/Problem/?id="+problem.ID %>' Special="true" Text="题目" />
         <Moo:LinkBarItem URL='<%#"~/Solution/?id="+problem.ID %>' Special="true" Text="题解" />
         <Moo:LinkBarItem URL='<%#"~/Post/List.aspx?problemID="+problem.ID %>' Special="true"
@@ -92,12 +90,15 @@
                 测评程序文件编号
             </th>
             <td>
+                <div style="font-weight: bold;">
+                    如果你尚未在文件版块添加所需的测评程序，请先到<a runat="server" href="~/File/Create.aspx">这里</a>上传您所需要的测评程序，然后再进行测试数据的创建。</div>
                 <asp:TextBox ID="txtJudger" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtJudger" Display="Dynamic" CssClass="validator">不能为空</asp:RequiredFieldValidator>
-                <asp:CompareValidator runat="server" ControlToValidate="txtJudger" Operator="DataTypeCheck" Type="Integer" Display="Dynamic" CssClass="validator">需为整数</asp:CompareValidator>
-                <asp:CustomValidator ID="validateJudger" runat="server" ControlToValidate="txtJudger" 
-                    Display="Dynamic" CssClass="validator" 
-                    onservervalidate="validateJudger_ServerValidate">无此文件</asp:CustomValidator>
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtJudger" Display="Dynamic"
+                    CssClass="validator">不能为空</asp:RequiredFieldValidator>
+                <asp:CompareValidator runat="server" ControlToValidate="txtJudger" Operator="DataTypeCheck"
+                    Type="Integer" Display="Dynamic" CssClass="validator">需为整数</asp:CompareValidator>
+                <asp:CustomValidator ID="validateJudger" runat="server" ControlToValidate="txtJudger"
+                    Display="Dynamic" CssClass="validator" OnServerValidate="validateJudger_ServerValidate">无此文件</asp:CustomValidator>
             </td>
         </tr>
         <tr>
