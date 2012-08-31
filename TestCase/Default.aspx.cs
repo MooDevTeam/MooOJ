@@ -16,6 +16,7 @@ public partial class TestCase_Default : System.Web.UI.Page
     protected TestCase testCase;
     protected TranditionalTestCase asTranditional;
     protected SpecialJudgedTestCase asSpecialJudged;
+    protected InteractiveTestCase asInteractive;
     protected void Page_Load(object sender, EventArgs e)
     {
         using (MooDB db = new MooDB())
@@ -49,6 +50,11 @@ public partial class TestCase_Default : System.Web.UI.Page
             {
                 asSpecialJudged = testCase as SpecialJudgedTestCase;
                 multiView.SetActiveView(viewSpecialJudged);
+            }
+            else if (testCase is InteractiveTestCase)
+            {
+                asInteractive = testCase as InteractiveTestCase;
+                multiView.SetActiveView(viewInteractive);
             }
             else
             {

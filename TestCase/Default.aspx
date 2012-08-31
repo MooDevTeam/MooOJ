@@ -109,14 +109,6 @@
                 </tr>
                 <tr>
                     <th>
-                        分数
-                    </th>
-                    <td>
-                        <%#asSpecialJudged.Score %>
-                    </td>
-                </tr>
-                <tr>
-                    <th>
                         时间限制
                     </th>
                     <td>
@@ -161,6 +153,66 @@
                         <pre><%#HttpUtility.HtmlEncode(Encoding.UTF8.GetString(asSpecialJudged.Answer,0,Math.Min(DISPLAY_LENGTH,asSpecialJudged.Answer.Length)))%></pre>
                         <a runat="server" href='<%#"~/TestCase/Download.ashx?id="+testCase.ID+"&field=Answer" %>'>
                             下载完整答案</a>
+                    </td>
+                </tr>
+            </table>
+        </asp:View>
+        <asp:View ID="viewInteractive" runat="server">
+            <table class="detailTable">
+                <tr>
+                    <th>
+                        题目
+                    </th>
+                    <td>
+                        <a runat="server" href='<%#"~/Problem/?id="+problem.ID %>'>
+                            <%#HttpUtility.HtmlEncode(problem.Name) %>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        类型
+                    </th>
+                    <td>
+                        Interactive
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        时间限制
+                    </th>
+                    <td>
+                        <%#asInteractive.TimeLimit%>
+                        ms
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        内存限制
+                    </th>
+                    <td>
+                        <%#asInteractive.MemoryLimit %>
+                        byte(s)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        调用程序
+                    </th>
+                    <td>
+                        <a runat="server" href='<%#"~/File/?id="+asInteractive.Invoker.ID %>'>
+                            <%#HttpUtility.HtmlEncode(asInteractive.Invoker.Name) %>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        测评资料
+                    </th>
+                    <td>
+                        <pre><%#HttpUtility.HtmlEncode(Encoding.UTF8.GetString(asInteractive.TestData,0,Math.Min(DISPLAY_LENGTH,asInteractive.TestData.Length)))%></pre>
+                        <a runat="server" href='<%#"~/TestCase/Download.ashx?id="+testCase.ID+"&field=TestData" %>'>
+                            下载完整测评资料</a>
                     </td>
                 </tr>
             </table>

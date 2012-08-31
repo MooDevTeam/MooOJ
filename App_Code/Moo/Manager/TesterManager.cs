@@ -110,6 +110,9 @@ namespace Moo.Manager
                 case "SpecialJudged":
                     result = TestSpecialJudged(db, record);
                     break;
+                case "Interactive":
+                    result = TestInteractive(db, record);
+                    break;
                 default:
                     result = new TestResult()
                     {
@@ -163,6 +166,15 @@ namespace Moo.Manager
                                                        where t.Problem.ID == record.Problem.ID
                                                        select t;
             return tester.TestSpecialJudged(record.Code, record.Language, cases);
+        }
+
+        static TestResult TestInteractive(MooDB db, Record record)
+        {
+            ITester tester = Testers[0];
+            IEnumerable<InteractiveTestCase> cases = from t in db.TestCases.OfType<InteractiveTestCase>()
+                                                       where t.Problem.ID == record.Problem.ID
+                                                       select t;
+            return tester.TestInteractive(record.Code, record.Language, cases);
         }
     }
 }

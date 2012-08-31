@@ -23,7 +23,7 @@
         <asp:Literal runat="server" Text="<%$Resources:Moo,NoEnoughPermission%>" />
     </Moo:InfoBlock>
     <table class="detailTable">
-        <tr>
+        <tr runat="server" visible='<%#problem.Type=="Tranditional"%>'>
             <th>
                 分数
             </th>
@@ -65,7 +65,7 @@
                     MinimumValue="0" MaximumValue="1073741824" Display="Dynamic" CssClass="validator">需在0~1073741824之间</asp:RangeValidator>
             </td>
         </tr>
-        <tr>
+        <tr runat="server" visible='<%#problem.Type=="Tranditional" || problem.Type=="SpecialJudged" %>'>
             <th>
                 输入文件
             </th>
@@ -75,13 +75,23 @@
                     CssClass="validator">不能为空</asp:RequiredFieldValidator>
             </td>
         </tr>
-        <tr>
+        <tr runat="server" visible='<%#problem.Type=="Tranditional" || problem.Type=="SpecialJudged" %>'>
             <th>
                 答案文件
             </th>
             <td>
                 <asp:FileUpload ID="fileAnswer" runat="server" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="fileAnswer" Display="Dynamic"
+                    CssClass="validator">不能为空</asp:RequiredFieldValidator>
+            </td>
+        </tr>
+        <tr runat="server" visible='<%#problem.Type=="Interactive"%>'>
+            <th>
+                测评资料文件
+            </th>
+            <td>
+                <asp:FileUpload ID="fileTestData" runat="server" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="fileTestData" Display="Dynamic"
                     CssClass="validator">不能为空</asp:RequiredFieldValidator>
             </td>
         </tr>
@@ -98,7 +108,23 @@
                 <asp:CompareValidator runat="server" ControlToValidate="txtJudger" Operator="DataTypeCheck"
                     Type="Integer" Display="Dynamic" CssClass="validator">需为整数</asp:CompareValidator>
                 <asp:CustomValidator ID="validateJudger" runat="server" ControlToValidate="txtJudger"
-                    Display="Dynamic" CssClass="validator" OnServerValidate="validateJudger_ServerValidate">无此文件</asp:CustomValidator>
+                    Display="Dynamic" CssClass="validator" OnServerValidate="ValidateFileID">无此文件</asp:CustomValidator>
+            </td>
+        </tr>
+        <tr runat="server" visible='<%#problem.Type=="Interactive" %>'>
+            <th>
+                调用程序文件编号
+            </th>
+            <td>
+                <div style="font-weight: bold;">
+                    如果你尚未在文件版块添加所需的调用程序，请先到<a runat="server" href="~/File/Create.aspx">这里</a>上传您所需要的调用程序，然后再进行测试数据的创建。</div>
+                <asp:TextBox ID="txtInvoker" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtInvoker" Display="Dynamic"
+                    CssClass="validator">不能为空</asp:RequiredFieldValidator>
+                <asp:CompareValidator runat="server" ControlToValidate="txtInvoker" Operator="DataTypeCheck"
+                    Type="Integer" Display="Dynamic" CssClass="validator">需为整数</asp:CompareValidator>
+                <asp:CustomValidator runat="server" ControlToValidate="txtInvoker"
+                    Display="Dynamic" CssClass="validator" OnServerValidate="ValidateFileID">无此文件</asp:CustomValidator>
             </td>
         </tr>
         <tr>

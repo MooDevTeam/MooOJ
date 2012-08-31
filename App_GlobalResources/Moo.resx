@@ -151,11 +151,8 @@
     <value>&lt;color:red|*等等，编译器闹肚子了。*&gt;</value>
   </data>
   <data name="MooTester_CompileTime" xml:space="preserve">
-    <value>5000</value>
-    <comment>5s</comment>
-  </data>
-  <data name="MooTester_LanguageNotSupported" xml:space="preserve">
-    <value>&lt;color:red|*这是啥语言的程序，咋没见过？*&gt;</value>
+    <value>8000</value>
+    <comment>8s</comment>
   </data>
   <data name="MooTester_NetworkError" xml:space="preserve">
     <value>&lt;color:red|*评测机貌似出去遛弯了……*&gt;</value>
@@ -176,7 +173,8 @@
     <value>&lt;color:orange|程序崩溃。&gt;</value>
   </data>
   <data name="MooTester_TestSuccess" xml:space="preserve">
-    <value>&lt;color:green|正确。&gt;(用时*{0}ms*，内存*{1}byte(s)*)</value>
+    <value>&lt;color:green|正确。&gt;(得分*{0}*，用时*{1}ms*，内存*{2}byte(s)*)
+{{"{3}"}}</value>
   </data>
   <data name="MooTester_TestTLE" xml:space="preserve">
     <value>&lt;color:pink|超出时间限制。&gt;</value>
@@ -185,7 +183,8 @@
     <value>&lt;color:gray|天气不好，程序不开心。&gt;</value>
   </data>
   <data name="MooTester_TestWA" xml:space="preserve">
-    <value>&lt;color:red|答案错误。&gt;{{"{0}"}}</value>
+    <value>&lt;color:red|答案错误。&gt;(得分*{0}*，用时*{1}ms*，内存*{2}byte(s)*)
+{{"{3}"}}</value>
   </data>
   <data name="MooTester_TranditionalJudger" xml:space="preserve">
     <value>D:\Special_Judge.exe</value>
@@ -199,5 +198,11 @@
   </data>
   <data name="MooTester_TestCompareError" xml:space="preserve">
     <value>&lt;color:red|比较器抽风了~&gt;</value>
+  </data>
+  <data name="MooTester_UnsupportedLanguage" xml:space="preserve">
+    <value>&lt;color:red|*不支持{0}语言*&gt;</value>
+  </data>
+  <data name="MooTester_UnsupportedLanguageOperation" xml:space="preserve">
+    <value>&lt;color:red|*{0}语言不支持{1}操作*&gt;</value>
   </data>
 </root>

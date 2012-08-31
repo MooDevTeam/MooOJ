@@ -18,7 +18,7 @@ namespace Moo.Tester.MooTester
         public ResultType Type { get; set; }
         public long Time { get; set; }
         public long Memory { get; set; }
-        public string Message { get; set; }
+        public string Message;
 
         void ReadIntoBuffer(Socket sock, byte[] buf)
         {
