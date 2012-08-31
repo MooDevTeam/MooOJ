@@ -154,9 +154,6 @@
     <value>5000</value>
     <comment>5s</comment>
   </data>
-  <data name="MooTester_LanguageNotSupported" xml:space="preserve">
-    <value>&lt;color:red|*这是啥语言的程序，咋没见过？*&gt;</value>
-  </data>
   <data name="MooTester_NetworkError" xml:space="preserve">
     <value>&lt;color:red|*评测机貌似出去遛弯了……*&gt;</value>
   </data>
@@ -199,5 +196,11 @@
   </data>
   <data name="MooTester_TestCompareError" xml:space="preserve">
     <value>&lt;color:red|比较器抽风了~&gt;</value>
+  </data>
+  <data name="MooTester_UnsupportedLanguage" xml:space="preserve">
+    <value>&lt;color:red|*不支持{0}语言*&gt;</value>
+  </data>
+  <data name="MooTester_UnsupportedLanguageOperation" xml:space="preserve">
+    <value>&lt;color:red|*{0}语言不支持{1}操作*&gt;</value>
   </data>
 </root>
