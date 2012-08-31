@@ -213,7 +213,6 @@ namespace Moo.DB
                 Answer = Encoding.ASCII.GetBytes("Miao~"),
                 TimeLimit = 1000,
                 MemoryLimit = 60 * 1024 * 1024,
-                Score = 100,
                 Judger = file
             });
 

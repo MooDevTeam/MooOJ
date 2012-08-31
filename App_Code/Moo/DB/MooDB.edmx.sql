@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 08/31/2012 20:01:45
+-- Date Created: 08/31/2012 21:50:58
 -- Generated from EDMX file: D:\WebSites\MooOJ\App_Code\Moo\DB\MooDB.edmx
 -- --------------------------------------------------
 
@@ -353,7 +353,6 @@ CREATE TABLE [dbo].[TestCases_SpecialJudgedTestCase] (
     [Answer] varbinary(max)  NOT NULL,
     [TimeLimit] int  NOT NULL,
     [MemoryLimit] int  NOT NULL,
-    [Score] int  NOT NULL,
     [ID] int  NOT NULL,
     [Judger_ID] int  NOT NULL
 );

@@ -80,13 +80,26 @@ public partial class TestCase_Create : System.Web.UI.Page
                                            select f).Single<UploadedFile>();
                     testCase = new SpecialJudgedTestCase()
                     {
-                        Score = int.Parse(txtScore.Text),
                         TimeLimit = int.Parse(txtTimeLimit.Text),
                         MemoryLimit = int.Parse(txtMemoryLimit.Text),
                         Input = fileInput.FileBytes,
                         Answer = fileAnswer.FileBytes,
                         Judger = judger,
                         Problem = problem
+                    };
+                    break;
+                case "Interactive":
+                    int invokerID = int.Parse(txtInvoker.Text);
+                    UploadedFile invoker = (from f in db.UploadedFiles
+                                            where f.ID == invokerID
+                                            select f).Single<UploadedFile>();
+                    testCase = new InteractiveTestCase()
+                    {
+                        Invoker=invoker,
+                        MemoryLimit=int.Parse(txtMemoryLimit.Text),
+                        TimeLimit=int.Parse(txtTimeLimit.Text),
+                        Problem=problem,
+                        TestData=fileTestData.FileBytes,
                     };
                     break;
                 default:
@@ -101,11 +114,13 @@ public partial class TestCase_Create : System.Web.UI.Page
 
         PageUtil.Redirect("操作成功", "~/TestCase/?id=" + testCaseID);
     }
-    protected void validateJudger_ServerValidate(object source, ServerValidateEventArgs args)
+    protected void ValidateFileID(object source, ServerValidateEventArgs args)
     {
+        CustomValidator validator = (CustomValidator)source;
+        TextBox toValidate=(TextBox)validator.Parent.FindControl(validator.ControlToValidate);
         using (MooDB db = new MooDB())
         {
-            int fileID = int.Parse(txtJudger.Text);
+            int fileID = int.Parse(toValidate.Text);
             UploadedFile theFile = (from f in db.UploadedFiles
                                     where f.ID == fileID
                                     select f).SingleOrDefault<UploadedFile>();

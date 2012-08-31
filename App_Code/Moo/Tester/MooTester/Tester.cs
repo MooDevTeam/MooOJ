@@ -49,7 +49,7 @@ namespace Moo.Tester.MooTester
                     {
                         case Out.ResultType.Success:
                             score += testCase.Score;
-                            sb.AppendLine(string.Format(Resources.Moo.MooTester_TestSuccess, score, testResult.Time, testResult.Memory, testResult.Message));
+                            sb.AppendLine(string.Format(Resources.Moo.MooTester_TestSuccess, testCase.Score, testResult.Time, testResult.Memory, testResult.Message));
                             break;
                         case Out.ResultType.WrongAnswer:
                             sb.AppendLine(string.Format(Resources.Moo.MooTester_TestWA, 0, testResult.Time, testResult.Memory, testResult.Message));
@@ -110,14 +110,18 @@ namespace Moo.Tester.MooTester
                     }.ToBytes());
                     Out testResult = new Out(socket);
 
+                    int currentScore;
                     switch (testResult.Type)
                     {
                         case Out.ResultType.Success:
-                            score += testCase.Score;
-                            sb.AppendLine(string.Format(Resources.Moo.MooTester_TestSuccess, score, testResult.Time, testResult.Memory, testResult.Message));
+                            currentScore = GetScore(ref testResult.Message);
+                            score += currentScore;
+                            sb.AppendLine(string.Format(Resources.Moo.MooTester_TestSuccess, currentScore, testResult.Time, testResult.Memory, testResult.Message));
                             break;
                         case Out.ResultType.WrongAnswer:
-                            sb.AppendLine(string.Format(Resources.Moo.MooTester_TestWA, 0, testResult.Time, testResult.Memory, testResult.Message));
+                            currentScore = GetScore(ref testResult.Message);
+                            score += currentScore;
+                            sb.AppendLine(string.Format(Resources.Moo.MooTester_TestWA, currentScore, testResult.Time, testResult.Memory, testResult.Message));
                             break;
                         case Out.ResultType.TimeLimitExceeded:
                             sb.AppendLine(Resources.Moo.MooTester_TestTLE);

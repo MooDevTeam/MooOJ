@@ -321,7 +321,6 @@
     <Property Name="Answer" Type="varbinary(max)" Nullable="false" />
     <Property Name="TimeLimit" Type="int" Nullable="false" />
     <Property Name="MemoryLimit" Type="int" Nullable="false" />
-    <Property Name="Score" Type="int" Nullable="false" />
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="Judger_ID" Type="int" Nullable="false" />
   </EntityType>
@@ -1118,7 +1117,6 @@
           <Property Type="Binary" Name="Answer" Nullable="false" />
           <Property Type="Int32" Name="TimeLimit" Nullable="false" />
           <Property Type="Int32" Name="MemoryLimit" Nullable="false" />
-          <Property Type="Int32" Name="Score" Nullable="false" />
           <NavigationProperty Name="Judger" Relationship="Moo.DB.SpecialJudgedTestCaseUploadedFile" FromRole="SpecialJudgedTestCase" ToRole="UploadedFile" />
         </EntityType>
         <Association Name="SpecialJudgedTestCaseUploadedFile">
@@ -1230,7 +1228,6 @@
           <ScalarProperty Name="Answer" ColumnName="Answer" />
           <ScalarProperty Name="TimeLimit" ColumnName="TimeLimit" />
           <ScalarProperty Name="MemoryLimit" ColumnName="MemoryLimit" />
-          <ScalarProperty Name="Score" ColumnName="Score" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Moo.DB.InteractiveTestCase)">
@@ -1703,7 +1700,7 @@
           <ConnectorPoint PointX="9.875" PointY="17.244164821777346" />
         </AssociationConnector>
         <EntityTypeShape EntityType="Moo.DB.UploadedFile" Width="1.5" PointX="7.375" PointY="27.75" Height="1.5879931640625031" />
-        <EntityTypeShape EntityType="Moo.DB.SpecialJudgedTestCase" Width="1.5" PointX="10" PointY="27" Height="2.1610522460937531" />
+        <EntityTypeShape EntityType="Moo.DB.SpecialJudgedTestCase" Width="1.5" PointX="10" PointY="27" Height="1.9700325520833353" />
         <InheritanceConnector EntityType="Moo.DB.SpecialJudgedTestCase" ManuallyRouted="false" >
           <ConnectorPoint PointX="1.5" PointY="26.271973470052082" />
           <ConnectorPoint PointX="1.5" PointY="26.625" />
@@ -1711,8 +1708,8 @@
           <ConnectorPoint PointX="10.75" PointY="27" />
         </InheritanceConnector>
         <AssociationConnector Association="Moo.DB.SpecialJudgedTestCaseUploadedFile">
-          <ConnectorPoint PointX="10" PointY="28.455526123046877" />
-          <ConnectorPoint PointX="8.875" PointY="28.455526123046877" />
+          <ConnectorPoint PointX="10" PointY="28.360016276041669" />
+          <ConnectorPoint PointX="8.875" PointY="28.360016276041669" />
         </AssociationConnector>
         <EntityTypeShape EntityType="Moo.DB.HomepageRevision" Width="1.5" PointX="2.75" PointY="7.875" Height="1.9700325520833353" />
         <AssociationConnector Association="Moo.DB.UserCreateHomepageRevision">

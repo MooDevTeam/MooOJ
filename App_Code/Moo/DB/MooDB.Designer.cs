@@ -3598,8 +3598,7 @@ namespace Moo.DB
         /// <param name="answer">Answer 属性的初始值。</param>
         /// <param name="timeLimit">TimeLimit 属性的初始值。</param>
         /// <param name="memoryLimit">MemoryLimit 属性的初始值。</param>
-        /// <param name="score">Score 属性的初始值。</param>
-        public static SpecialJudgedTestCase CreateSpecialJudgedTestCase(global::System.Int32 id, global::System.Byte[] input, global::System.Byte[] answer, global::System.Int32 timeLimit, global::System.Int32 memoryLimit, global::System.Int32 score)
+        public static SpecialJudgedTestCase CreateSpecialJudgedTestCase(global::System.Int32 id, global::System.Byte[] input, global::System.Byte[] answer, global::System.Int32 timeLimit, global::System.Int32 memoryLimit)
         {
             SpecialJudgedTestCase specialJudgedTestCase = new SpecialJudgedTestCase();
             specialJudgedTestCase.ID = id;
@@ -3607,7 +3606,6 @@ namespace Moo.DB
             specialJudgedTestCase.Answer = answer;
             specialJudgedTestCase.TimeLimit = timeLimit;
             specialJudgedTestCase.MemoryLimit = memoryLimit;
-            specialJudgedTestCase.Score = score;
             return specialJudgedTestCase;
         }
 
@@ -3709,30 +3707,6 @@ namespace Moo.DB
         private global::System.Int32 _MemoryLimit;
         partial void OnMemoryLimitChanging(global::System.Int32 value);
         partial void OnMemoryLimitChanged();
-    
-        /// <summary>
-        /// 没有元数据文档可用。
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 Score
-        {
-            get
-            {
-                return _Score;
-            }
-            set
-            {
-                OnScoreChanging(value);
-                ReportPropertyChanging("Score");
-                _Score = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Score");
-                OnScoreChanged();
-            }
-        }
-        private global::System.Int32 _Score;
-        partial void OnScoreChanging(global::System.Int32 value);
-        partial void OnScoreChanged();
 
         #endregion
     
