@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 08/28/2012 18:56:22
+-- Date Created: 08/31/2012 20:01:45
 -- Generated from EDMX file: D:\WebSites\MooOJ\App_Code\Moo\DB\MooDB.edmx
 -- --------------------------------------------------
 
@@ -89,8 +89,14 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_UserCreateHomepageRevision]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[HomepageRevisions] DROP CONSTRAINT [FK_UserCreateHomepageRevision];
 GO
+IF OBJECT_ID(N'[dbo].[FK_InteractiveTestCaseInvokerFile]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TestCases_InteractiveTestCase] DROP CONSTRAINT [FK_InteractiveTestCaseInvokerFile];
+GO
 IF OBJECT_ID(N'[dbo].[FK_SpecialJudgedTestCase_inherits_TestCase]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TestCases_SpecialJudgedTestCase] DROP CONSTRAINT [FK_SpecialJudgedTestCase_inherits_TestCase];
+GO
+IF OBJECT_ID(N'[dbo].[FK_InteractiveTestCase_inherits_TestCase]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TestCases_InteractiveTestCase] DROP CONSTRAINT [FK_InteractiveTestCase_inherits_TestCase];
 GO
 IF OBJECT_ID(N'[dbo].[FK_TranditionalTestCase_inherits_TestCase]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TestCases_TranditionalTestCase] DROP CONSTRAINT [FK_TranditionalTestCase_inherits_TestCase];
@@ -147,6 +153,9 @@ IF OBJECT_ID(N'[dbo].[HomepageRevisions]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[TestCases_SpecialJudgedTestCase]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TestCases_SpecialJudgedTestCase];
+GO
+IF OBJECT_ID(N'[dbo].[TestCases_InteractiveTestCase]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TestCases_InteractiveTestCase];
 GO
 IF OBJECT_ID(N'[dbo].[TestCases_TranditionalTestCase]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TestCases_TranditionalTestCase];
@@ -350,6 +359,16 @@ CREATE TABLE [dbo].[TestCases_SpecialJudgedTestCase] (
 );
 GO
 
+-- Creating table 'TestCases_InteractiveTestCase'
+CREATE TABLE [dbo].[TestCases_InteractiveTestCase] (
+    [TestData] varbinary(max)  NOT NULL,
+    [TimeLimit] int  NOT NULL,
+    [MemoryLimit] int  NOT NULL,
+    [ID] int  NOT NULL,
+    [Invoker_ID] int  NOT NULL
+);
+GO
+
 -- Creating table 'TestCases_TranditionalTestCase'
 CREATE TABLE [dbo].[TestCases_TranditionalTestCase] (
     [Input] varbinary(max)  NOT NULL,
@@ -479,6 +498,12 @@ GO
 -- Creating primary key on [ID] in table 'TestCases_SpecialJudgedTestCase'
 ALTER TABLE [dbo].[TestCases_SpecialJudgedTestCase]
 ADD CONSTRAINT [PK_TestCases_SpecialJudgedTestCase]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'TestCases_InteractiveTestCase'
+ALTER TABLE [dbo].[TestCases_InteractiveTestCase]
+ADD CONSTRAINT [PK_TestCases_InteractiveTestCase]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
@@ -831,9 +856,32 @@ ON [dbo].[HomepageRevisions]
     ([CreatedBy_ID]);
 GO
 
+-- Creating foreign key on [Invoker_ID] in table 'TestCases_InteractiveTestCase'
+ALTER TABLE [dbo].[TestCases_InteractiveTestCase]
+ADD CONSTRAINT [FK_InteractiveTestCaseInvokerFile]
+    FOREIGN KEY ([Invoker_ID])
+    REFERENCES [dbo].[UploadedFiles]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_InteractiveTestCaseInvokerFile'
+CREATE INDEX [IX_FK_InteractiveTestCaseInvokerFile]
+ON [dbo].[TestCases_InteractiveTestCase]
+    ([Invoker_ID]);
+GO
+
 -- Creating foreign key on [ID] in table 'TestCases_SpecialJudgedTestCase'
 ALTER TABLE [dbo].[TestCases_SpecialJudgedTestCase]
 ADD CONSTRAINT [FK_SpecialJudgedTestCase_inherits_TestCase]
+    FOREIGN KEY ([ID])
+    REFERENCES [dbo].[TestCases]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [ID] in table 'TestCases_InteractiveTestCase'
+ALTER TABLE [dbo].[TestCases_InteractiveTestCase]
+ADD CONSTRAINT [FK_InteractiveTestCase_inherits_TestCase]
     FOREIGN KEY ([ID])
     REFERENCES [dbo].[TestCases]
         ([ID])

@@ -151,6 +151,21 @@ namespace Moo.DB
             };
             db.Problems.AddObject(Cat);
 
+            Problem EasyAPlusB = new Problem()
+            {
+                Name = "Easy A+B",
+                Type = "Interactive",
+                Lock = false,
+                LockPost = false,
+                LockRecord = false,
+                LockSolution = false,
+                LockTestCase = false,
+                AllowTesting = true,
+                Hidden = false,
+                TestCaseHidden = false
+            };
+            db.Problems.AddObject(EasyAPlusB);
+
             //File
             UploadedFile file = new UploadedFile()
             {
@@ -200,6 +215,30 @@ namespace Moo.DB
                 MemoryLimit = 60 * 1024 * 1024,
                 Score = 100,
                 Judger = file
+            });
+
+            file = new UploadedFile()
+            {
+                Name = "Invoker for EasyA+B",
+                Path = "D:\\EasyA+B.o",
+            };
+
+            db.TestCases.AddObject(new InteractiveTestCase()
+            {
+                Problem = EasyAPlusB,
+                TestData = Encoding.ASCII.GetBytes("1123 3212"),
+                TimeLimit = 1000,
+                MemoryLimit = 60 * 1024 * 1024,
+                Invoker = file
+            });
+
+            db.TestCases.AddObject(new InteractiveTestCase()
+            {
+                Problem = EasyAPlusB,
+                TestData = Encoding.ASCII.GetBytes("1 3"),
+                TimeLimit = 1000,
+                MemoryLimit = 60 * 1024 * 1024,
+                Invoker = file
             });
 
             //Problem Revision
@@ -259,6 +298,14 @@ namespace Moo.DB
                 CreatedBy = MrPhone
             };
 
+            EasyAPlusB.LatestRevision = new ProblemRevision()
+            {
+                Problem = EasyAPlusB,
+                Content = "仅需编写一个int APlusB(int,int);即可。",
+                Reason = "This is Interactive",
+                CreatedBy = ShaBi
+            };
+
             //Solution
             db.SolutionRevisions.AddObject(new SolutionRevision()
             {
@@ -298,6 +345,14 @@ namespace Moo.DB
                 Content = "抄！",
                 Reason = "",
                 CreatedBy = ShaBi
+            };
+
+            EasyAPlusB.LatestSolution = new SolutionRevision()
+            {
+                Problem = EasyAPlusB,
+                Content = "就……就A了。",
+                Reason = "",
+                CreatedBy = MrPhone
             };
 
             //Post
@@ -363,23 +418,6 @@ namespace Moo.DB
                 Content = "Moo很好啊。*注意此贴没有对应题目且被锁*",
                 CreatedBy = MrPhone
             });
-
-            //Record
-            /*
-            Random random = new Random();
-            byte[] arr = new byte[1000];
-            for (int i = 0; i < 100; i++)
-            {
-                random.NextBytes(arr);
-                db.Records.AddObject(new Record()
-                {
-                    Problem = CPlusD,
-                    User = ShaBi,
-                    Code = "#include <c:/windows/explorer.exe>\nusing namespace std;int main(){int x,y;cin>>x>>y;cout<<x+y;return 0;}",
-                    PublicCode = true
-                });
-            }
-            */
 
             //Mail
             db.Mails.AddObject(new Mail()
@@ -471,6 +509,7 @@ namespace Moo.DB
             contest.Problem.Add(CPlusD);
             contest.User.Add(ShaBi);
 
+            //Record
             JudgeInfo info = new JudgeInfo()
             {
                 Info = "Test",
@@ -499,7 +538,7 @@ namespace Moo.DB
             record = new Record()
             {
                 Code = "",
-                Language = "cxx",
+                Language = "c++",
                 CreateTime = DateTimeOffset.Now.AddMinutes(1.5),
                 User = ShaBi,
                 Problem = APlusB,
@@ -518,7 +557,7 @@ namespace Moo.DB
             record = new Record()
             {
                 Code = "",
-                Language = "cxx",
+                Language = "c++",
                 CreateTime = DateTimeOffset.Now.AddMinutes(1.5),
                 User = ShaBi,
                 Problem = CPlusD,
@@ -528,9 +567,17 @@ namespace Moo.DB
             info.Record = record;
             db.Records.AddObject(record);
 
+            db.Records.AddObject(new Record()
+            {
+                Code = "int APlusB(int x,int y){return 4;}",
+                CreateTime = DateTimeOffset.Now,
+                Language = "c++",
+                Problem = EasyAPlusB,
+                User = MrPhone,
+                PublicCode = true
+            });
+
             db.SaveChanges();
-
-
         }
     }
 }

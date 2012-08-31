@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using System.Net.Sockets;
 using System.Threading;
+using System.Text.RegularExpressions;
 using Moo.Tester;
 using Moo.DB;
 using Moo.Utility;
@@ -48,10 +49,10 @@ namespace Moo.Tester.MooTester
                     {
                         case Out.ResultType.Success:
                             score += testCase.Score;
-                            sb.AppendLine(string.Format(Resources.Moo.MooTester_TestSuccess, testResult.Time, testResult.Memory));
+                            sb.AppendLine(string.Format(Resources.Moo.MooTester_TestSuccess, score, testResult.Time, testResult.Memory, testResult.Message));
                             break;
                         case Out.ResultType.WrongAnswer:
-                            sb.AppendLine(string.Format(Resources.Moo.MooTester_TestWA, testResult.Message));
+                            sb.AppendLine(string.Format(Resources.Moo.MooTester_TestWA, 0, testResult.Time, testResult.Memory, testResult.Message));
                             break;
                         case Out.ResultType.TimeLimitExceeded:
                             sb.AppendLine(Resources.Moo.MooTester_TestTLE);
@@ -113,10 +114,10 @@ namespace Moo.Tester.MooTester
                     {
                         case Out.ResultType.Success:
                             score += testCase.Score;
-                            sb.AppendLine(string.Format(Resources.Moo.MooTester_TestSuccess, testResult.Time, testResult.Memory));
+                            sb.AppendLine(string.Format(Resources.Moo.MooTester_TestSuccess, score, testResult.Time, testResult.Memory, testResult.Message));
                             break;
                         case Out.ResultType.WrongAnswer:
-                            sb.AppendLine(string.Format(Resources.Moo.MooTester_TestWA, testResult.Message));
+                            sb.AppendLine(string.Format(Resources.Moo.MooTester_TestWA, 0, testResult.Time, testResult.Memory, testResult.Message));
                             break;
                         case Out.ResultType.TimeLimitExceeded:
                             sb.AppendLine(Resources.Moo.MooTester_TestTLE);
@@ -133,6 +134,78 @@ namespace Moo.Tester.MooTester
                         default:
                             sb.AppendLine(Resources.Moo.MooTester_TestUndefinedError);
                             break;
+                    }
+                }
+
+                return new TestResult()
+                {
+                    Score = score,
+                    Info = sb.ToString()
+                };
+            }
+        }
+
+        public TestResult TestInteractive(string source, string language, IEnumerable<InteractiveTestCase> cases)
+        {
+            return WithSocket(socket => InnerTestInteractive(socket, source, language, cases));
+        }
+
+        public TestResult InnerTestInteractive(Socket socket, string source, string language, IEnumerable<InteractiveTestCase> cases)
+        {
+            using (TemporaryFile objectFile = Compile(socket, source, Command.GetCommand(language, "src2obj")))
+            {
+                int score = 0;
+                StringBuilder sb = new StringBuilder(Resources.Moo.MooTester_CompilerSuccess).AppendLine().AppendLine();
+                foreach (InteractiveTestCase testCase in cases)
+                {
+                    sb.AppendFormat(Resources.Moo.MooTester_TestCaseX, testCase.ID);
+
+                    string cmd = Command.GetCommand(language, "obj2exe");
+                    string objects = objectFile.Path + " " + testCase.Invoker.Path;
+                    cmd = cmd.Replace("{Object}", objects);
+                    using (TemporaryFile execFile = Compile(socket, "", cmd))
+                    {
+                        socket.Send(new Message()
+                        {
+                            Type = Message.MessageType.Test,
+                            Content = new TestIn()
+                            {
+                                Time = testCase.TimeLimit,
+                                Memory = testCase.MemoryLimit,
+                                CmpPath = "",
+                                ExecPath = execFile.Path,
+                                Input = testCase.TestData,
+                                Output = new byte[0]
+                            }
+                        }.ToBytes());
+
+                        Out result = new Out(socket);
+                        int currentScore;
+                        switch (result.Type)
+                        {
+                            case Out.ResultType.Success:
+                                currentScore = GetScore(ref result.Message);
+                                score += currentScore;
+                                sb.AppendLine(string.Format(Resources.Moo.MooTester_TestSuccess, currentScore, result.Time, result.Memory, result.Message));
+                                break;
+                            case Out.ResultType.WrongAnswer:
+                                currentScore = GetScore(ref result.Message);
+                                score += currentScore;
+                                sb.AppendLine(string.Format(Resources.Moo.MooTester_TestWA, currentScore, result.Time, result.Memory, result.Message));
+                                break;
+                            case Out.ResultType.TimeLimitExceeded:
+                                sb.AppendLine(Resources.Moo.MooTester_TestTLE);
+                                break;
+                            case Out.ResultType.RuntimeError:
+                                sb.AppendLine(Resources.Moo.MooTester_TestRE);
+                                break;
+                            case Out.ResultType.MemoryLimitExceeded:
+                                sb.AppendLine(Resources.Moo.MooTester_TestMLE);
+                                break;
+                            default:
+                                sb.AppendLine(Resources.Moo.MooTester_TestUndefinedError);
+                                break;
+                        }
                     }
                 }
 
@@ -162,6 +235,10 @@ namespace Moo.Tester.MooTester
                     failureCount++;
                     Thread.Sleep(1000);
                 }
+                catch (MooTesterException e)
+                {
+                    return e.Result;
+                }
             }
             Logger.Log("Many SocketExceptions In MooTester");
             return new TestResult()
@@ -169,6 +246,13 @@ namespace Moo.Tester.MooTester
                 Score = 0,
                 Info = Resources.Moo.MooTester_NetworkError
             };
+        }
+
+        int GetScore(ref string message)
+        {
+            int result = int.Parse(Regex.Match(message, @"{Score:(\d+)}").Groups[1].Value);
+            message = Regex.Replace(message, @"{Score:\d+}", "");
+            return result;
         }
 
         TemporaryFile Compile(Socket socket, string source, string command)

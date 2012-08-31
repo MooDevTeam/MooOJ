@@ -39,6 +39,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("Moo.DB", "ContestProblem", "Contest", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Moo.DB.Contest), "Problem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Moo.DB.Problem))]
 [assembly: EdmRelationshipAttribute("Moo.DB", "SpecialJudgedTestCaseUploadedFile", "SpecialJudgedTestCase", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Moo.DB.SpecialJudgedTestCase), "UploadedFile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Moo.DB.UploadedFile))]
 [assembly: EdmRelationshipAttribute("Moo.DB", "UserCreateHomepageRevision", "HomepageRevision", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Moo.DB.HomepageRevision), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Moo.DB.User))]
+[assembly: EdmRelationshipAttribute("Moo.DB", "InteractiveTestCaseInvokerFile", "InteractiveTestCase", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Moo.DB.InteractiveTestCase), "UploadedFile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Moo.DB.UploadedFile))]
 
 #endregion
 
@@ -1357,6 +1358,153 @@ namespace Moo.DB
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("Moo.DB.UserCreateHomepageRevision", "User", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// 没有元数据文档可用。
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="Moo.DB", Name="InteractiveTestCase")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class InteractiveTestCase : TestCase
+    {
+        #region 工厂方法
+    
+        /// <summary>
+        /// 创建新的 InteractiveTestCase 对象。
+        /// </summary>
+        /// <param name="id">ID 属性的初始值。</param>
+        /// <param name="testData">TestData 属性的初始值。</param>
+        /// <param name="timeLimit">TimeLimit 属性的初始值。</param>
+        /// <param name="memoryLimit">MemoryLimit 属性的初始值。</param>
+        public static InteractiveTestCase CreateInteractiveTestCase(global::System.Int32 id, global::System.Byte[] testData, global::System.Int32 timeLimit, global::System.Int32 memoryLimit)
+        {
+            InteractiveTestCase interactiveTestCase = new InteractiveTestCase();
+            interactiveTestCase.ID = id;
+            interactiveTestCase.TestData = testData;
+            interactiveTestCase.TimeLimit = timeLimit;
+            interactiveTestCase.MemoryLimit = memoryLimit;
+            return interactiveTestCase;
+        }
+
+        #endregion
+        #region 基元属性
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Byte[] TestData
+        {
+            get
+            {
+                return StructuralObject.GetValidValue(_TestData);
+            }
+            set
+            {
+                OnTestDataChanging(value);
+                ReportPropertyChanging("TestData");
+                _TestData = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("TestData");
+                OnTestDataChanged();
+            }
+        }
+        private global::System.Byte[] _TestData;
+        partial void OnTestDataChanging(global::System.Byte[] value);
+        partial void OnTestDataChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TimeLimit
+        {
+            get
+            {
+                return _TimeLimit;
+            }
+            set
+            {
+                OnTimeLimitChanging(value);
+                ReportPropertyChanging("TimeLimit");
+                _TimeLimit = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TimeLimit");
+                OnTimeLimitChanged();
+            }
+        }
+        private global::System.Int32 _TimeLimit;
+        partial void OnTimeLimitChanging(global::System.Int32 value);
+        partial void OnTimeLimitChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 MemoryLimit
+        {
+            get
+            {
+                return _MemoryLimit;
+            }
+            set
+            {
+                OnMemoryLimitChanging(value);
+                ReportPropertyChanging("MemoryLimit");
+                _MemoryLimit = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MemoryLimit");
+                OnMemoryLimitChanged();
+            }
+        }
+        private global::System.Int32 _MemoryLimit;
+        partial void OnMemoryLimitChanging(global::System.Int32 value);
+        partial void OnMemoryLimitChanged();
+
+        #endregion
+    
+        #region 导航属性
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Moo.DB", "InteractiveTestCaseInvokerFile", "UploadedFile")]
+        public UploadedFile Invoker
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UploadedFile>("Moo.DB.InteractiveTestCaseInvokerFile", "UploadedFile").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UploadedFile>("Moo.DB.InteractiveTestCaseInvokerFile", "UploadedFile").Value = value;
+            }
+        }
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<UploadedFile> InvokerReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UploadedFile>("Moo.DB.InteractiveTestCaseInvokerFile", "UploadedFile");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UploadedFile>("Moo.DB.InteractiveTestCaseInvokerFile", "UploadedFile", value);
                 }
             }
         }
@@ -3638,6 +3786,7 @@ namespace Moo.DB
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     [KnownTypeAttribute(typeof(SpecialJudgedTestCase))]
+    [KnownTypeAttribute(typeof(InteractiveTestCase))]
     [KnownTypeAttribute(typeof(TranditionalTestCase))]
     public abstract partial class TestCase : EntityObject
     {
