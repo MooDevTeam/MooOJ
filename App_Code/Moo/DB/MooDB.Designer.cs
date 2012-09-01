@@ -40,6 +40,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("Moo.DB", "SpecialJudgedTestCaseUploadedFile", "SpecialJudgedTestCase", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Moo.DB.SpecialJudgedTestCase), "UploadedFile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Moo.DB.UploadedFile))]
 [assembly: EdmRelationshipAttribute("Moo.DB", "UserCreateHomepageRevision", "HomepageRevision", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Moo.DB.HomepageRevision), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Moo.DB.User))]
 [assembly: EdmRelationshipAttribute("Moo.DB", "InteractiveTestCaseInvokerFile", "InteractiveTestCase", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Moo.DB.InteractiveTestCase), "UploadedFile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Moo.DB.UploadedFile))]
+[assembly: EdmRelationshipAttribute("Moo.DB", "AnswerOnlyTestCaseUploadedFile", "AnswerOnlyTestCase", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Moo.DB.AnswerOnlyTestCase), "UploadedFile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Moo.DB.UploadedFile))]
 
 #endregion
 
@@ -461,6 +462,101 @@ namespace Moo.DB
     #endregion
     
     #region 实体
+    
+    /// <summary>
+    /// 没有元数据文档可用。
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="Moo.DB", Name="AnswerOnlyTestCase")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class AnswerOnlyTestCase : TestCase
+    {
+        #region 工厂方法
+    
+        /// <summary>
+        /// 创建新的 AnswerOnlyTestCase 对象。
+        /// </summary>
+        /// <param name="id">ID 属性的初始值。</param>
+        /// <param name="testData">TestData 属性的初始值。</param>
+        public static AnswerOnlyTestCase CreateAnswerOnlyTestCase(global::System.Int32 id, global::System.Byte[] testData)
+        {
+            AnswerOnlyTestCase answerOnlyTestCase = new AnswerOnlyTestCase();
+            answerOnlyTestCase.ID = id;
+            answerOnlyTestCase.TestData = testData;
+            return answerOnlyTestCase;
+        }
+
+        #endregion
+        #region 基元属性
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Byte[] TestData
+        {
+            get
+            {
+                return StructuralObject.GetValidValue(_TestData);
+            }
+            set
+            {
+                OnTestDataChanging(value);
+                ReportPropertyChanging("TestData");
+                _TestData = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("TestData");
+                OnTestDataChanged();
+            }
+        }
+        private global::System.Byte[] _TestData;
+        partial void OnTestDataChanging(global::System.Byte[] value);
+        partial void OnTestDataChanged();
+
+        #endregion
+    
+        #region 导航属性
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Moo.DB", "AnswerOnlyTestCaseUploadedFile", "UploadedFile")]
+        public UploadedFile Judger
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UploadedFile>("Moo.DB.AnswerOnlyTestCaseUploadedFile", "UploadedFile").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UploadedFile>("Moo.DB.AnswerOnlyTestCaseUploadedFile", "UploadedFile").Value = value;
+            }
+        }
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<UploadedFile> JudgerReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UploadedFile>("Moo.DB.AnswerOnlyTestCaseUploadedFile", "UploadedFile");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UploadedFile>("Moo.DB.AnswerOnlyTestCaseUploadedFile", "UploadedFile", value);
+                }
+            }
+        }
+
+        #endregion
+    }
     
     /// <summary>
     /// 没有元数据文档可用。
@@ -3761,6 +3857,7 @@ namespace Moo.DB
     [DataContractAttribute(IsReference=true)]
     [KnownTypeAttribute(typeof(SpecialJudgedTestCase))]
     [KnownTypeAttribute(typeof(InteractiveTestCase))]
+    [KnownTypeAttribute(typeof(AnswerOnlyTestCase))]
     [KnownTypeAttribute(typeof(TranditionalTestCase))]
     public abstract partial class TestCase : EntityObject
     {

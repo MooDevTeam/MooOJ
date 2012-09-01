@@ -13,6 +13,7 @@ public class TestCase_Download : IHttpHandler
     TranditionalTestCase asTranditional;
     SpecialJudgedTestCase asSpecialJudged;
     InteractiveTestCase asInteractive;
+    AnswerOnlyTestCase asAnswerOnly;
     HttpRequest Request;
     HttpResponse Response;
 
@@ -92,6 +93,19 @@ public class TestCase_Download : IHttpHandler
                 {
                     case "TestData":
                         Download(asInteractive.TestData);
+                        break;
+                    default:
+                        PageUtil.Redirect("未知的字段", "~/");
+                        return;
+                }
+            }
+            else if (testCase is AnswerOnlyTestCase)
+            {
+                asAnswerOnly = testCase as AnswerOnlyTestCase;
+                switch (Request["field"])
+                {
+                    case "TestData":
+                        Download(asAnswerOnly.TestData);
                         break;
                     default:
                         PageUtil.Redirect("未知的字段", "~/");

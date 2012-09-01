@@ -35,7 +35,10 @@ public partial class File_List : System.Web.UI.Page
             var interactiveTestCases = from t in db.TestCases.OfType<InteractiveTestCase>()
                                        where t.Invoker.ID == file.ID
                                        select t;
-            if (spjTestCases.Any() || interactiveTestCases.Any())
+            var answerOnlyTestCases = from t in db.TestCases.OfType<AnswerOnlyTestCase>()
+                                      where t.Judger.ID == file.ID
+                                      select t;
+            if (spjTestCases.Any() || interactiveTestCases.Any() || answerOnlyTestCases.Any())
             {
                 PageUtil.Redirect("尚有测试点使用此文件，无法删除。", "~/File/List.aspx");
                 return;

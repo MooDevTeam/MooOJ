@@ -23,6 +23,7 @@
     <EntitySet Name="HomepageRevisions" EntityType="Moo.DB.Store.HomepageRevisions" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TestCases_SpecialJudgedTestCase" EntityType="Moo.DB.Store.TestCases_SpecialJudgedTestCase" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TestCases_InteractiveTestCase" EntityType="Moo.DB.Store.TestCases_InteractiveTestCase" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TestCases_AnswerOnlyTestCase" EntityType="Moo.DB.Store.TestCases_AnswerOnlyTestCase" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TestCases_TranditionalTestCase" EntityType="Moo.DB.Store.TestCases_TranditionalTestCase" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="FunctionForRole" EntityType="Moo.DB.Store.FunctionForRole" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserAttendContest" EntityType="Moo.DB.Store.UserAttendContest" store:Type="Tables" Schema="dbo" />
@@ -127,6 +128,10 @@
       <End Role="InteractiveTestCase" EntitySet="TestCases_InteractiveTestCase" />
       <End Role="UploadedFile" EntitySet="UploadedFiles" />
     </AssociationSet>
+    <AssociationSet Name="AnswerOnlyTestCaseUploadedFile" Association="Moo.DB.Store.AnswerOnlyTestCaseUploadedFile">
+      <End Role="AnswerOnlyTestCase" EntitySet="TestCases_AnswerOnlyTestCase" />
+      <End Role="UploadedFile" EntitySet="UploadedFiles" />
+    </AssociationSet>
     <AssociationSet Name="FK_SpecialJudgedTestCase_inherits_TestCase" Association="Moo.DB.Store.FK_SpecialJudgedTestCase_inherits_TestCase">
       <End Role="TestCase" EntitySet="TestCases" />
       <End Role="SpecialJudgedTestCase" EntitySet="TestCases_SpecialJudgedTestCase" />
@@ -134,6 +139,10 @@
     <AssociationSet Name="FK_InteractiveTestCase_inherits_TestCase" Association="Moo.DB.Store.FK_InteractiveTestCase_inherits_TestCase">
       <End Role="TestCase" EntitySet="TestCases" />
       <End Role="InteractiveTestCase" EntitySet="TestCases_InteractiveTestCase" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AnswerOnlyTestCase_inherits_TestCase" Association="Moo.DB.Store.FK_AnswerOnlyTestCase_inherits_TestCase">
+      <End Role="TestCase" EntitySet="TestCases" />
+      <End Role="AnswerOnlyTestCase" EntitySet="TestCases_AnswerOnlyTestCase" />
     </AssociationSet>
     <AssociationSet Name="FK_TranditionalTestCase_inherits_TestCase" Association="Moo.DB.Store.FK_TranditionalTestCase_inherits_TestCase">
       <End Role="TestCase" EntitySet="TestCases" />
@@ -333,6 +342,14 @@
     <Property Name="MemoryLimit" Type="int" Nullable="false" />
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="Invoker_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TestCases_AnswerOnlyTestCase">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="TestData" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Judger_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TestCases_TranditionalTestCase">
     <Key>
@@ -617,6 +634,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="AnswerOnlyTestCaseUploadedFile">
+    <End Role="AnswerOnlyTestCase" Type="Moo.DB.Store.TestCases_AnswerOnlyTestCase" Multiplicity="*" />
+    <End Role="UploadedFile" Type="Moo.DB.Store.UploadedFiles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UploadedFile">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AnswerOnlyTestCase">
+        <PropertyRef Name="Judger_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_FunctionForRole_Function">
     <End Role="Function" Type="Moo.DB.Store.Functions" Multiplicity="1" />
     <End Role="FunctionForRole" Type="Moo.DB.Store.FunctionForRole" Multiplicity="*" />
@@ -709,6 +738,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="InteractiveTestCase">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AnswerOnlyTestCase_inherits_TestCase">
+    <End Role="TestCase" Type="Moo.DB.Store.TestCases" Multiplicity="1" />
+    <End Role="AnswerOnlyTestCase" Type="Moo.DB.Store.TestCases_AnswerOnlyTestCase" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TestCase">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AnswerOnlyTestCase">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
@@ -831,6 +872,10 @@
           </AssociationSet>
           <AssociationSet Name="InteractiveTestCaseInvokerFile" Association="Moo.DB.InteractiveTestCaseInvokerFile">
             <End Role="InteractiveTestCase" EntitySet="TestCases" />
+            <End Role="UploadedFile" EntitySet="UploadedFiles" />
+          </AssociationSet>
+          <AssociationSet Name="AnswerOnlyTestCaseUploadedFile" Association="Moo.DB.AnswerOnlyTestCaseUploadedFile">
+            <End Role="AnswerOnlyTestCase" EntitySet="TestCases" />
             <End Role="UploadedFile" EntitySet="UploadedFiles" />
           </AssociationSet>
         </EntityContainer>
@@ -1147,6 +1192,14 @@
           <End Type="Moo.DB.InteractiveTestCase" Role="InteractiveTestCase" Multiplicity="*" />
           <End Type="Moo.DB.UploadedFile" Role="UploadedFile" Multiplicity="1" />
         </Association>
+        <EntityType Name="AnswerOnlyTestCase" BaseType="Moo.DB.TestCase" >
+          <Property Type="Binary" Name="TestData" Nullable="false" />
+          <NavigationProperty Name="Judger" Relationship="Moo.DB.AnswerOnlyTestCaseUploadedFile" FromRole="AnswerOnlyTestCase" ToRole="UploadedFile" />
+        </EntityType>
+        <Association Name="AnswerOnlyTestCaseUploadedFile">
+          <End Type="Moo.DB.AnswerOnlyTestCase" Role="AnswerOnlyTestCase" Multiplicity="*" />
+          <End Type="Moo.DB.UploadedFile" Role="UploadedFile" Multiplicity="1" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1236,6 +1289,12 @@
           <ScalarProperty Name="TestData" ColumnName="TestData" />
           <ScalarProperty Name="TimeLimit" ColumnName="TimeLimit" />
           <ScalarProperty Name="MemoryLimit" ColumnName="MemoryLimit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Moo.DB.AnswerOnlyTestCase)">
+        <MappingFragment StoreEntitySet="TestCases_AnswerOnlyTestCase">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TestData" ColumnName="TestData" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Moo.DB.TranditionalTestCase)">
@@ -1530,6 +1589,14 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
+    <AssociationSetMapping Name="AnswerOnlyTestCaseUploadedFile" TypeName="Moo.DB.AnswerOnlyTestCaseUploadedFile" StoreEntitySet="TestCases_AnswerOnlyTestCase">
+      <EndProperty Name="UploadedFile">
+        <ScalarProperty Name="ID" ColumnName="Judger_ID" />
+      </EndProperty>
+      <EndProperty Name="AnswerOnlyTestCase">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
@@ -1728,6 +1795,18 @@
         <AssociationConnector Association="Moo.DB.InteractiveTestCaseInvokerFile">
           <ConnectorPoint PointX="5.25" PointY="28.264506429036459" />
           <ConnectorPoint PointX="7.375" PointY="28.264506429036459" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Moo.DB.AnswerOnlyTestCase" Width="1.5" PointX="0.875" PointY="27.375" Height="1.2059537760416674" />
+        <InheritanceConnector EntityType="Moo.DB.AnswerOnlyTestCase" >
+          <ConnectorPoint PointX="1.5" PointY="26.271973470052082" />
+          <ConnectorPoint PointX="1.5" PointY="27" />
+          <ConnectorPoint PointX="1.0993016836532128" PointY="27" />
+          <ConnectorPoint PointX="1.0993016836532128" PointY="27.375" />
+        </InheritanceConnector>
+        <AssociationConnector Association="Moo.DB.AnswerOnlyTestCaseUploadedFile">
+          <ConnectorPoint PointX="1.625" PointY="28.771973470052085" />
+          <ConnectorPoint PointX="1.625" PointY="29.08975301106771" />
+          <ConnectorPoint PointX="7.375" PointY="29.08975301106771" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

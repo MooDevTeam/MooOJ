@@ -60,51 +60,66 @@ public partial class TestCase_Create : System.Web.UI.Page
             }
 
             TestCase testCase;
-            switch (problem.Type)
+            if (problem.Type == "Tranditional")
             {
-                case "Tranditional":
-                    testCase = new TranditionalTestCase()
-                    {
-                        Score = int.Parse(txtScore.Text),
-                        TimeLimit = int.Parse(txtTimeLimit.Text),
-                        MemoryLimit = int.Parse(txtMemoryLimit.Text),
-                        Input = fileInput.FileBytes,
-                        Answer = fileAnswer.FileBytes,
-                        Problem = problem
-                    };
-                    break;
-                case "SpecialJudged":
-                    int judgerID = int.Parse(txtJudger.Text);
-                    UploadedFile judger = (from f in db.UploadedFiles
-                                           where f.ID == judgerID
-                                           select f).Single<UploadedFile>();
-                    testCase = new SpecialJudgedTestCase()
-                    {
-                        TimeLimit = int.Parse(txtTimeLimit.Text),
-                        MemoryLimit = int.Parse(txtMemoryLimit.Text),
-                        Input = fileInput.FileBytes,
-                        Answer = fileAnswer.FileBytes,
-                        Judger = judger,
-                        Problem = problem
-                    };
-                    break;
-                case "Interactive":
-                    int invokerID = int.Parse(txtInvoker.Text);
-                    UploadedFile invoker = (from f in db.UploadedFiles
-                                            where f.ID == invokerID
-                                            select f).Single<UploadedFile>();
-                    testCase = new InteractiveTestCase()
-                    {
-                        Invoker=invoker,
-                        MemoryLimit=int.Parse(txtMemoryLimit.Text),
-                        TimeLimit=int.Parse(txtTimeLimit.Text),
-                        Problem=problem,
-                        TestData=fileTestData.FileBytes,
-                    };
-                    break;
-                default:
-                    PageUtil.Redirect("未知的题目类型", "~/");
-                    return;
+                testCase = new TranditionalTestCase()
+                {
+                    Score = int.Parse(txtScore.Text),
+                    TimeLimit = int.Parse(txtTimeLimit.Text),
+                    MemoryLimit = int.Parse(txtMemoryLimit.Text),
+                    Input = fileInput.FileBytes,
+                    Answer = fileAnswer.FileBytes,
+                    Problem = problem
+                };
+            }
+            else if (problem.Type == "SpecialJudged")
+            {
+                int judgerID = int.Parse(txtJudger.Text);
+                UploadedFile judger = (from f in db.UploadedFiles
+                                       where f.ID == judgerID
+                                       select f).Single<UploadedFile>();
+                testCase = new SpecialJudgedTestCase()
+                {
+                    TimeLimit = int.Parse(txtTimeLimit.Text),
+                    MemoryLimit = int.Parse(txtMemoryLimit.Text),
+                    Input = fileInput.FileBytes,
+                    Answer = fileAnswer.FileBytes,
+                    Judger = judger,
+                    Problem = problem
+                };
+            }
+            else if (problem.Type == "Interactive")
+            {
+                int invokerID = int.Parse(txtInvoker.Text);
+                UploadedFile invoker = (from f in db.UploadedFiles
+                                        where f.ID == invokerID
+                                        select f).Single<UploadedFile>();
+                testCase = new InteractiveTestCase()
+                {
+                    Invoker = invoker,
+                    MemoryLimit = int.Parse(txtMemoryLimit.Text),
+                    TimeLimit = int.Parse(txtTimeLimit.Text),
+                    Problem = problem,
+                    TestData = fileTestData.FileBytes,
+                };
+            }
+            else if (problem.Type == "AnswerOnly")
+            {
+                int judgerID = int.Parse(txtJudger.Text);
+                UploadedFile judger = (from f in db.UploadedFiles
+                                       where f.ID == judgerID
+                                       select f).Single<UploadedFile>();
+                testCase = new AnswerOnlyTestCase()
+                {
+                    Judger = judger,
+                    Problem = problem,
+                    TestData = fileTestData.FileBytes,
+                };
+            }
+            else
+            {
+                PageUtil.Redirect("未知的题目类型", "~/");
+                return;
             }
             db.TestCases.AddObject(testCase);
             db.SaveChanges();
@@ -117,7 +132,7 @@ public partial class TestCase_Create : System.Web.UI.Page
     protected void ValidateFileID(object source, ServerValidateEventArgs args)
     {
         CustomValidator validator = (CustomValidator)source;
-        TextBox toValidate=(TextBox)validator.Parent.FindControl(validator.ControlToValidate);
+        TextBox toValidate = (TextBox)validator.Parent.FindControl(validator.ControlToValidate);
         using (MooDB db = new MooDB())
         {
             int fileID = int.Parse(toValidate.Text);

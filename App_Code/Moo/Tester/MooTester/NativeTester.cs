@@ -25,7 +25,12 @@ namespace Moo.Tester.MooTester
             int haveRead = 0;
             while (haveRead < buf.Length)
             {
-                haveRead += sock.Receive(buf, haveRead, buf.Length - haveRead, SocketFlags.None);
+                int currentRead= sock.Receive(buf, haveRead, buf.Length - haveRead, SocketFlags.None);
+                if (currentRead == 0)
+                {
+                    throw new Exception("ReadIntoBuffer No Enough Bytes!");
+                }
+                haveRead += currentRead;
             }
         }
 

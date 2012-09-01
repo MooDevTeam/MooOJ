@@ -23,7 +23,7 @@
         <asp:Literal runat="server" Text="<%$Resources:Moo,NoEnoughPermission%>" />
     </Moo:InfoBlock>
     <table class="detailTable">
-        <tr>
+        <tr runat="server" visible='<%#problem.Type=="Tranditional" || problem.Type=="SpecialJudged" || problem.Type=="Interactive" %>'>
             <th>
                 代码
             </th>
@@ -31,7 +31,7 @@
                 <asp:TextBox ID="txtCode" runat="server" TextMode="MultiLine" Rows="20" Width="100%" />
             </td>
         </tr>
-        <tr>
+        <tr runat="server" visible='<%#problem.Type=="Tranditional" || problem.Type=="SpecialJudged" || problem.Type=="Interactive" %>'>
             <th>
                 语言
             </th>
@@ -41,6 +41,14 @@
                     <asp:ListItem Value="c">C</asp:ListItem>
                     <asp:ListItem Value="pascal">Pascal</asp:ListItem>
                 </asp:DropDownList>
+            </td>
+        </tr>
+        <tr runat="server" visible='<%#problem.Type=="AnswerOnly" %>'>
+            <th>
+                答案
+            </th>
+            <td>
+                <asp:PlaceHolder ID="answerArea" runat="server"></asp:PlaceHolder>
             </td>
         </tr>
         <tr>

@@ -163,6 +163,38 @@ public partial class Record_List : System.Web.UI.Page
             }
 
             User currentUser = ((SiteUser)User.Identity).GetDBUser(db);
+            //Refresh Score
+            if (info.Score >= 0)
+            {
+                record.User.Score -= info.Score;
+                record.Problem.ScoreSum -= info.Score;
+                var hisRecords = from r in db.Records
+                                 where r.ID != record.ID
+                                       && r.User.ID == record.User.ID && r.Problem.ID == record.Problem.ID
+                                       && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
+                                 select r;
+                int hisMaxScore = hisRecords.Any() ? hisRecords.Max(r => r.JudgeInfo.Score) : 0;
+                record.User.Score += hisMaxScore;
+                record.Problem.ScoreSum += hisMaxScore;
+
+                if (record.Problem.MaximumScore == info.Score)
+                {
+                    var problemRecords = from r in db.Records
+                                         where r.ID != record.ID
+                                               && r.Problem.ID == record.Problem.ID
+                                               && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
+                                         select r;
+                    if (problemRecords.Any())
+                    {
+                        record.Problem.MaximumScore = problemRecords.Max(r => r.JudgeInfo.Score);
+                    }
+                    else
+                    {
+                        record.Problem.MaximumScore = null;
+                    }
+                }
+            }
+
             //Send A Mail
             db.Mails.AddObject(new Mail()
             {

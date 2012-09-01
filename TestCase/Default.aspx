@@ -217,5 +217,47 @@
                 </tr>
             </table>
         </asp:View>
+        <asp:View ID="viewAnswerOnly" runat="server">
+            <table class="detailTable">
+                <tr>
+                    <th>
+                        题目
+                    </th>
+                    <td>
+                        <a runat="server" href='<%#"~/Problem/?id="+problem.ID %>'>
+                            <%#HttpUtility.HtmlEncode(problem.Name) %>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        类型
+                    </th>
+                    <td>
+                        AnswerOnly
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        测评程序
+                    </th>
+                    <td>
+                        <a runat="server" href='<%#"~/File/?id="+asAnswerOnly.Judger.ID %>'>
+                            <%#HttpUtility.HtmlEncode(asAnswerOnly.Judger.Name) %>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        测评资料
+                    </th>
+                    <td>
+                        <pre><%#HttpUtility.HtmlEncode(Encoding.UTF8.GetString(asAnswerOnly.TestData,0,Math.Min(DISPLAY_LENGTH,asAnswerOnly.TestData.Length)))%></pre>
+                        <a runat="server" href='<%#"~/TestCase/Download.ashx?id="+testCase.ID+"&field=TestData" %>'>
+                            下载完整测评资料</a>
+                    </td>
+                </tr>
+            </table>
+        </asp:View>
     </asp:MultiView>
 </asp:Content>

@@ -166,6 +166,20 @@ namespace Moo.DB
             };
             db.Problems.AddObject(EasyAPlusB);
 
+            Problem AnswerAPlusB = new Problem()
+            {
+                Name="Answer A+B",
+                Type="AnswerOnly",
+                Lock = false,
+                LockPost = false,
+                LockRecord = false,
+                LockSolution = false,
+                LockTestCase = false,
+                AllowTesting = true,
+                Hidden = false,
+                TestCaseHidden = false
+            };
+
             //File
             UploadedFile file = new UploadedFile()
             {
@@ -240,6 +254,28 @@ namespace Moo.DB
                 Invoker = file
             });
 
+            file = new UploadedFile()
+            {
+                Name="Judger Of Answer A+B",
+                Path="D:\\AnswerA+B.exe"
+            };
+
+            AnswerOnlyTestCase answerOnlyTestCase1=new AnswerOnlyTestCase()
+            {
+                Problem=AnswerAPlusB,
+                TestData=Encoding.ASCII.GetBytes("23 345"),
+                Judger=file,
+            };
+            db.TestCases.AddObject(answerOnlyTestCase1);
+
+            AnswerOnlyTestCase answerOnlyTestCase2=new AnswerOnlyTestCase()
+            {
+                Problem = AnswerAPlusB,
+                TestData = Encoding.ASCII.GetBytes("453 123"),
+                Judger = file,
+            };
+            db.TestCases.AddObject(answerOnlyTestCase2);
+
             //Problem Revision
             db.ProblemRevisions.AddObject(new ProblemRevision()
              {
@@ -305,6 +341,14 @@ namespace Moo.DB
                 CreatedBy = ShaBi
             };
 
+            AnswerAPlusB.LatestRevision = new ProblemRevision()
+            {
+                Problem=AnswerAPlusB,
+                Content="提交答案吧！",
+                Reason="None",
+                CreatedBy=MrPhone
+            };
+
             //Solution
             db.SolutionRevisions.AddObject(new SolutionRevision()
             {
@@ -352,6 +396,14 @@ namespace Moo.DB
                 Content = "就……就A了。",
                 Reason = "",
                 CreatedBy = MrPhone
+            };
+
+            AnswerAPlusB.LatestSolution = new SolutionRevision()
+            {
+                Problem=AnswerAPlusB,
+                Content="弱爆了",
+                Reason="xxx",
+                CreatedBy=ShaBi
             };
 
             //Post
@@ -574,6 +626,17 @@ namespace Moo.DB
                 Problem = EasyAPlusB,
                 User = MrPhone,
                 PublicCode = true
+            });
+
+            db.Records.AddObject(new Record()
+            {
+                Code="<Moo:Answer testCase='"+answerOnlyTestCase1.ID+"'>368</Moo:Answer>\n"
+                + "<Moo:Answer testCase='" + answerOnlyTestCase2.ID + "'>496</Moo:Answer>",
+                CreateTime=DateTimeOffset.Now,
+                Language="plaintext",
+                Problem=AnswerAPlusB,
+                User=MrPhone,
+                PublicCode=true
             });
 
             db.SaveChanges();

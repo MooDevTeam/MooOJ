@@ -62,7 +62,7 @@
 
     void Application_AuthorizeRequest(object sender, EventArgs e)
     {
-        if (User.Identity.IsAuthenticated && User.Identity.AuthenticationType == "Forms")
+        if (User.Identity.IsAuthenticated && User.Identity is FormsIdentity)
         {
             FormsIdentity formsIdentity = User.Identity as FormsIdentity;
             string userData = formsIdentity.Ticket.UserData;

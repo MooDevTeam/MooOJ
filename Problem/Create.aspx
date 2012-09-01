@@ -35,6 +35,7 @@
                     <asp:ListItem Selected="True" Value="Tranditional">传统</asp:ListItem>
                     <asp:ListItem Value="SpecialJudged">自定义测评</asp:ListItem>
                     <asp:ListItem Value="Interactive">交互式</asp:ListItem>
+                    <asp:ListItem Value="AnswerOnly">提交答案</asp:ListItem>
                 </asp:DropDownList>
             </td>
         </tr>

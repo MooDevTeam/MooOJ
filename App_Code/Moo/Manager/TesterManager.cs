@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Threading;
+using System.Text.RegularExpressions;
 using Moo.DB;
 using Moo.Utility;
 using Moo.Tester;
@@ -113,6 +114,9 @@ namespace Moo.Manager
                 case "Interactive":
                     result = TestInteractive(db, record);
                     break;
+                case "AnswerOnly":
+                    result = TestAnswerOnly(db, record);
+                    break;
                 default:
                     result = new TestResult()
                     {
@@ -172,9 +176,26 @@ namespace Moo.Manager
         {
             ITester tester = Testers[0];
             IEnumerable<InteractiveTestCase> cases = from t in db.TestCases.OfType<InteractiveTestCase>()
-                                                       where t.Problem.ID == record.Problem.ID
-                                                       select t;
+                                                     where t.Problem.ID == record.Problem.ID
+                                                     select t;
             return tester.TestInteractive(record.Code, record.Language, cases);
+        }
+
+        static TestResult TestAnswerOnly(MooDB db, Record record)
+        {
+            ITester tester = Testers[0];
+            IEnumerable<AnswerOnlyTestCase> cases = from t in db.TestCases.OfType<AnswerOnlyTestCase>()
+                                                    where t.Problem.ID == record.Problem.ID
+                                                    select t;
+            Dictionary<int, string> answers=new Dictionary<int,string>();
+            MatchCollection matches=Regex.Matches(record.Code,@"<Moo:Answer testCase='(\d+)'>(.*?)</Moo:Answer>",RegexOptions.Singleline);
+            foreach (Match match in matches)
+            {
+                int testCaseID=int.Parse(match.Groups[1].Value);
+                string answer = match.Groups[2].Value;
+                answers.Add(testCaseID, answer);
+            }
+            return tester.TestAnswerOnly(answers, cases);
         }
     }
 }

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 08/31/2012 21:50:58
+-- Date Created: 08/31/2012 23:07:40
 -- Generated from EDMX file: D:\WebSites\MooOJ\App_Code\Moo\DB\MooDB.edmx
 -- --------------------------------------------------
 
@@ -368,6 +368,14 @@ CREATE TABLE [dbo].[TestCases_InteractiveTestCase] (
 );
 GO
 
+-- Creating table 'TestCases_AnswerOnlyTestCase'
+CREATE TABLE [dbo].[TestCases_AnswerOnlyTestCase] (
+    [TestData] varbinary(max)  NOT NULL,
+    [ID] int  NOT NULL,
+    [Judger_ID] int  NOT NULL
+);
+GO
+
 -- Creating table 'TestCases_TranditionalTestCase'
 CREATE TABLE [dbo].[TestCases_TranditionalTestCase] (
     [Input] varbinary(max)  NOT NULL,
@@ -503,6 +511,12 @@ GO
 -- Creating primary key on [ID] in table 'TestCases_InteractiveTestCase'
 ALTER TABLE [dbo].[TestCases_InteractiveTestCase]
 ADD CONSTRAINT [PK_TestCases_InteractiveTestCase]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'TestCases_AnswerOnlyTestCase'
+ALTER TABLE [dbo].[TestCases_AnswerOnlyTestCase]
+ADD CONSTRAINT [PK_TestCases_AnswerOnlyTestCase]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
@@ -869,6 +883,20 @@ ON [dbo].[TestCases_InteractiveTestCase]
     ([Invoker_ID]);
 GO
 
+-- Creating foreign key on [Judger_ID] in table 'TestCases_AnswerOnlyTestCase'
+ALTER TABLE [dbo].[TestCases_AnswerOnlyTestCase]
+ADD CONSTRAINT [FK_AnswerOnlyTestCaseUploadedFile]
+    FOREIGN KEY ([Judger_ID])
+    REFERENCES [dbo].[UploadedFiles]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AnswerOnlyTestCaseUploadedFile'
+CREATE INDEX [IX_FK_AnswerOnlyTestCaseUploadedFile]
+ON [dbo].[TestCases_AnswerOnlyTestCase]
+    ([Judger_ID]);
+GO
+
 -- Creating foreign key on [ID] in table 'TestCases_SpecialJudgedTestCase'
 ALTER TABLE [dbo].[TestCases_SpecialJudgedTestCase]
 ADD CONSTRAINT [FK_SpecialJudgedTestCase_inherits_TestCase]
@@ -881,6 +909,15 @@ GO
 -- Creating foreign key on [ID] in table 'TestCases_InteractiveTestCase'
 ALTER TABLE [dbo].[TestCases_InteractiveTestCase]
 ADD CONSTRAINT [FK_InteractiveTestCase_inherits_TestCase]
+    FOREIGN KEY ([ID])
+    REFERENCES [dbo].[TestCases]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [ID] in table 'TestCases_AnswerOnlyTestCase'
+ALTER TABLE [dbo].[TestCases_AnswerOnlyTestCase]
+ADD CONSTRAINT [FK_AnswerOnlyTestCase_inherits_TestCase]
     FOREIGN KEY ([ID])
     REFERENCES [dbo].[TestCases]
         ([ID])

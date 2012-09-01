@@ -37,7 +37,7 @@
                     MaximumValue="1000" Display="Dynamic" CssClass="validator">需在0~1000之间</asp:RangeValidator>
             </td>
         </tr>
-        <tr>
+        <tr runat="server" visible='<%#problem.Type=="Tranditional" || problem.Type=="SpecialJudged" || problem.Type=="Interactive" %>'>
             <th>
                 时间限制
             </th>
@@ -51,7 +51,7 @@
                     MinimumValue="0" MaximumValue="60000" Display="Dynamic" CssClass="validator">需在0~60000之间</asp:RangeValidator>
             </td>
         </tr>
-        <tr>
+        <tr runat="server" visible='<%#problem.Type=="Tranditional" || problem.Type=="SpecialJudged" || problem.Type=="Interactive" %>'>
             <th>
                 内存限制
             </th>
@@ -85,7 +85,7 @@
                     CssClass="validator">不能为空</asp:RequiredFieldValidator>
             </td>
         </tr>
-        <tr runat="server" visible='<%#problem.Type=="Interactive"%>'>
+        <tr runat="server" visible='<%#problem.Type=="Interactive" || problem.Type=="AnswerOnly"%>'>
             <th>
                 测评资料文件
             </th>
@@ -95,7 +95,7 @@
                     CssClass="validator">不能为空</asp:RequiredFieldValidator>
             </td>
         </tr>
-        <tr runat="server" visible='<%#problem.Type=="SpecialJudged" %>'>
+        <tr runat="server" visible='<%#problem.Type=="SpecialJudged" || problem.Type=="AnswerOnly"%>'>
             <th>
                 测评程序文件编号
             </th>
