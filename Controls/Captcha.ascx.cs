@@ -31,7 +31,7 @@ public partial class Controls_Captcha : System.Web.UI.UserControl
     {
         string answer = GetRandomText();
         string message = answer + "," + this.ClientID + "," + Rand.RAND.Next();
-        imgCaptcha.ImageUrl = "~/Special/Captcha.ashx?message=" + HttpUtility.UrlEncode(Convert.ToBase64String(Converter.Encrypt(Encoding.UTF8.GetBytes(message))));
+        imgCaptcha.ImageUrl = "~/Special/Captcha.ashx?message=" + HttpUtility.UrlEncode(Convert.ToBase64String(Converter.Encrypt(Encoding.Unicode.GetBytes(message))));
         if (Permission.Check("captcha.skip", false, false))
         {
             txtCaptcha.Text = answer;

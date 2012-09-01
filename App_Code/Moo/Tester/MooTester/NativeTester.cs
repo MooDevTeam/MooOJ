@@ -55,7 +55,7 @@ namespace Moo.Tester.MooTester
             {
                 buf = new byte[messageLength];
                 sock.Receive(buf);
-                Message = Encoding.UTF8.GetString(buf);
+                Message = Encoding.Default.GetString(buf);
             }
             else
             {
@@ -115,10 +115,10 @@ namespace Moo.Tester.MooTester
                 {
                     writer.Write(Time);
                     writer.Write(Memory);
-                    byte[] code = Encoding.UTF8.GetBytes(Code);
+                    byte[] code = Encoding.Default.GetBytes(Code);
                     writer.Write((uint)code.Length);
                     writer.Write(code);
-                    writer.Write(Encoding.UTF8.GetBytes(Command));
+                    writer.Write(Encoding.Default.GetBytes(Command));
                     writer.Write((byte)0);
                 }
                 return stream.ToArray();
@@ -141,8 +141,8 @@ namespace Moo.Tester.MooTester
             {
                 using (BinaryWriter writer = new BinaryWriter(stream))
                 {
-                    byte[] execPath = Encoding.UTF8.GetBytes(ExecPath);
-                    byte[] cmpPath = Encoding.UTF8.GetBytes(CmpPath);
+                    byte[] execPath = Encoding.Default.GetBytes(ExecPath);
+                    byte[] cmpPath = Encoding.Default.GetBytes(CmpPath);
                     writer.Write((uint)0);
                     writer.Write((uint)(execPath.Length + 1));
                     writer.Write((uint)(execPath.Length + 1 + Input.Length));

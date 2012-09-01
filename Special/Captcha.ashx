@@ -26,7 +26,7 @@ public class Special_Captcha : IHttpHandler, IRequiresSessionState
     public void ProcessRequest(HttpContext context)
     {
         context.Response.ContentType = "image/png";
-        string message = Encoding.UTF8.GetString(Converter.Decrypt(Convert.FromBase64String(context.Request["message"])));
+        string message = Encoding.Unicode.GetString(Converter.Decrypt(Convert.FromBase64String(context.Request["message"])));
         string[] splited = message.Split(',');
         string text = splited[0];
         string clientID = splited[1];

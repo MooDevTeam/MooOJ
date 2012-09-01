@@ -70,7 +70,7 @@
                         输入
                     </th>
                     <td>
-                        <pre><%#HttpUtility.HtmlEncode(Encoding.UTF8.GetString(asTranditional.Input,0,Math.Min(DISPLAY_LENGTH,asTranditional.Input.Length)))%></pre>
+                        <pre><%#HttpUtility.HtmlEncode(Encoding.Default.GetString(asTranditional.Input,0,Math.Min(DISPLAY_LENGTH,asTranditional.Input.Length)))%></pre>
                         <a runat="server" href='<%#"~/TestCase/Download.ashx?id="+testCase.ID+"&field=Input" %>'>
                             下载完整输入</a>
                     </td>
@@ -80,7 +80,7 @@
                         答案
                     </th>
                     <td>
-                        <pre><%#HttpUtility.HtmlEncode(Encoding.UTF8.GetString(asTranditional.Answer,0,Math.Min(DISPLAY_LENGTH,asTranditional.Answer.Length)))%></pre>
+                        <pre><%#HttpUtility.HtmlEncode(Encoding.Default.GetString(asTranditional.Answer, 0, Math.Min(DISPLAY_LENGTH, asTranditional.Answer.Length)))%></pre>
                         <a runat="server" href='<%#"~/TestCase/Download.ashx?id="+testCase.ID+"&field=Answer" %>'>
                             下载完整答案</a>
                     </td>
@@ -140,7 +140,7 @@
                         输入
                     </th>
                     <td>
-                        <pre><%#HttpUtility.HtmlEncode(Encoding.UTF8.GetString(asSpecialJudged.Input,0,Math.Min(DISPLAY_LENGTH,asSpecialJudged.Input.Length)))%></pre>
+                        <pre><%#HttpUtility.HtmlEncode(Encoding.Default.GetString(asSpecialJudged.Input, 0, Math.Min(DISPLAY_LENGTH, asSpecialJudged.Input.Length)))%></pre>
                         <a runat="server" href='<%#"~/TestCase/Download.ashx?id="+testCase.ID+"&field=Input" %>'>
                             下载完整输入</a>
                     </td>
@@ -150,7 +150,7 @@
                         答案
                     </th>
                     <td>
-                        <pre><%#HttpUtility.HtmlEncode(Encoding.UTF8.GetString(asSpecialJudged.Answer,0,Math.Min(DISPLAY_LENGTH,asSpecialJudged.Answer.Length)))%></pre>
+                        <pre><%#HttpUtility.HtmlEncode(Encoding.Default.GetString(asSpecialJudged.Answer, 0, Math.Min(DISPLAY_LENGTH, asSpecialJudged.Answer.Length)))%></pre>
                         <a runat="server" href='<%#"~/TestCase/Download.ashx?id="+testCase.ID+"&field=Answer" %>'>
                             下载完整答案</a>
                     </td>
@@ -210,7 +210,7 @@
                         测评资料
                     </th>
                     <td>
-                        <pre><%#HttpUtility.HtmlEncode(Encoding.UTF8.GetString(asInteractive.TestData,0,Math.Min(DISPLAY_LENGTH,asInteractive.TestData.Length)))%></pre>
+                        <pre><%#HttpUtility.HtmlEncode(Encoding.Default.GetString(asInteractive.TestData, 0, Math.Min(DISPLAY_LENGTH, asInteractive.TestData.Length)))%></pre>
                         <a runat="server" href='<%#"~/TestCase/Download.ashx?id="+testCase.ID+"&field=TestData" %>'>
                             下载完整测评资料</a>
                     </td>
@@ -252,7 +252,7 @@
                         测评资料
                     </th>
                     <td>
-                        <pre><%#HttpUtility.HtmlEncode(Encoding.UTF8.GetString(asAnswerOnly.TestData,0,Math.Min(DISPLAY_LENGTH,asAnswerOnly.TestData.Length)))%></pre>
+                        <pre><%#HttpUtility.HtmlEncode(Encoding.Default.GetString(asAnswerOnly.TestData, 0, Math.Min(DISPLAY_LENGTH, asAnswerOnly.TestData.Length)))%></pre>
                         <a runat="server" href='<%#"~/TestCase/Download.ashx?id="+testCase.ID+"&field=TestData" %>'>
                             下载完整测评资料</a>
                     </td>

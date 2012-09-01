@@ -1,0 +1,47 @@
+﻿! 快速入门-测试数据的添加-提交答案
+
+提交答案的测试数据需要编写一个测评程序作为附加文件。此测评程序应能根据选手答案与测评资料评判选手的得分，并给出相应意见。
+
+评测机将会把选手答案与测评资料通过标准输入传递给测评程序。测评程序应通过标准输出与程序返回值给出评测结果。
+
+其中标准输入的数据结构如下：
+{code:c++}
+struct Input{
+	//选手提交答案长度
+	uint32_t AnswerLen;
+	//选手提交答案内容,长度为AnswerLen
+	char Answer[];
+	//测试资料。直到 EOF
+	char TestData[];
+};
+{code:c++}
+
+测评程序的C++模版如下：
+{code:c++}
+#include <cstdio>
+#include <cstdint>
+#include <vector>
+
+//主函数返回值常量
+const int ACCEPT = 0;
+const int WRONG_ANSWER = 1;
+
+std::vector<char> answer;
+void ReadAnswer(){
+	uint32_t answerSize;
+	fread(&answerSize,sizeof(answerSize),1,stdin);
+
+	answer.resize(answerSize);
+	fread(&answer[0],answerSize,1,stdin);
+}
+
+int main(){
+	ReadAnswer();
+	/*
+	 * 此时已完成对标准输入的分离，现在answer中存储选手答案。
+	 * 而标准输入中剩余部分为测评资料。
+	 * 下面应该进行测评工作。主函数返回ACCEPT代表完全正确。返回WRONG_ANSER代表有错误
+	 * 程序必须向标准输出中输出类似"{Score:xxx}"的字符串，代表本测试点得分为xxx。
+	 */
+}
+{code:c++}

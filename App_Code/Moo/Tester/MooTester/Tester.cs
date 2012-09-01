@@ -282,7 +282,7 @@ namespace Moo.Tester.MooTester
             {
                 using (BinaryWriter writer = new BinaryWriter(mem))
                 {
-                    byte[] answerBytes = Encoding.UTF8.GetBytes(answer);
+                    byte[] answerBytes = Encoding.Default.GetBytes(answer);
                     writer.Write((uint)answerBytes.LongLength);
                     writer.Write(answerBytes);
                     writer.Write(testData);

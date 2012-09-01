@@ -1,0 +1,47 @@
+﻿! 快速入门-测试数据的添加-自定义测评
+
+自定义测评的测试数据需要编写一个测评程序作为附加文件。此测评程序应能根据标准输入、标准输出和选手输出评判选手的得分，并给出相应意见。
+
+评测机将会把标准输出、选手输出和标准输入三个文件的句柄通过命令行参数传递给测评程序。测评程序应通过标准输出与程序返回值给出评测结果。
+
+测评程序的C++模版如下：
+{code:c++}
+//必须的头文件
+#include <io.h>
+#include <fcntl.h>
+
+//主函数返回值常量
+const int ACCEPT = 0;
+const int WRONG_ANSWER = 1;
+
+//fstd 标准输出 fout 选手输出 fin 标准输入
+FILE *fstd,*fout,*fin;
+
+//初始化文件指针。
+void InitFiles(wchar_t* argv[]){
+	HANDLE hOut,hTmp,hIn;
+	swscanf_s(argv[1],L"%u",&hOut);
+	swscanf_s(argv[2],L"%u",&hTmp);
+	swscanf_s(argv[3],L"%u",&hIn);
+	fstd = _fdopen( _open_osfhandle((intptr_t)hOut,_O_TEXT),"r");
+	fout = _fdopen( _open_osfhandle((intptr_t)(HANDLE)hTmp,_O_TEXT),"r");
+	fin = _fdopen(_open_osfhandle((intptr_t)hIn,_O_TEXT),"r");
+	fseek(fstd,0,SEEK_SET);
+	fseek(fout,0,SEEK_SET);
+	fseek(fin,0,SEEK_SET);
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	if(argc!=4){
+		throw "参数不足";
+	}
+	InitFiles(argv);
+	/*
+	 * 现在已经做好了全部的初始化工作。
+	 * 其中，fstd是标准输出，fout是选手输出，fin是标准输入。
+	 * 下面应该进行测评工作。主函数返回ACCEPT代表完全正确。返回WRONG_ANSER代表有错误
+	 * 程序必须向标准输出中输出类似"{Score:xxx}"的字符串，代表本测试点得分为xxx。
+	 */
+}
+{code:c++}

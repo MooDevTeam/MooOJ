@@ -52,7 +52,7 @@ namespace Moo.Utility
 
         public static string ToSHA256Hash(string text)
         {
-            return ToHexString(SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(text)));
+            return ToHexString(SHA256.Create().ComputeHash(Encoding.Unicode.GetBytes(text)));
         }
 
         public static byte[] Encrypt(byte[] input)

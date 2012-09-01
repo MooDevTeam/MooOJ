@@ -168,8 +168,8 @@ namespace Moo.DB
 
             Problem AnswerAPlusB = new Problem()
             {
-                Name="Answer A+B",
-                Type="AnswerOnly",
+                Name = "Answer A+B",
+                Type = "AnswerOnly",
                 Lock = false,
                 LockPost = false,
                 LockRecord = false,
@@ -256,19 +256,19 @@ namespace Moo.DB
 
             file = new UploadedFile()
             {
-                Name="Judger Of Answer A+B",
-                Path="D:\\AnswerA+B.exe"
+                Name = "Judger Of Answer A+B",
+                Path = "D:\\AnswerA+B.exe"
             };
 
-            AnswerOnlyTestCase answerOnlyTestCase1=new AnswerOnlyTestCase()
+            AnswerOnlyTestCase answerOnlyTestCase1 = new AnswerOnlyTestCase()
             {
-                Problem=AnswerAPlusB,
-                TestData=Encoding.ASCII.GetBytes("23 345"),
-                Judger=file,
+                Problem = AnswerAPlusB,
+                TestData = Encoding.ASCII.GetBytes("23 345"),
+                Judger = file,
             };
             db.TestCases.AddObject(answerOnlyTestCase1);
 
-            AnswerOnlyTestCase answerOnlyTestCase2=new AnswerOnlyTestCase()
+            AnswerOnlyTestCase answerOnlyTestCase2 = new AnswerOnlyTestCase()
             {
                 Problem = AnswerAPlusB,
                 TestData = Encoding.ASCII.GetBytes("453 123"),
@@ -343,10 +343,10 @@ namespace Moo.DB
 
             AnswerAPlusB.LatestRevision = new ProblemRevision()
             {
-                Problem=AnswerAPlusB,
-                Content="提交答案吧！",
-                Reason="None",
-                CreatedBy=MrPhone
+                Problem = AnswerAPlusB,
+                Content = "提交答案吧！",
+                Reason = "None",
+                CreatedBy = MrPhone
             };
 
             //Solution
@@ -400,10 +400,10 @@ namespace Moo.DB
 
             AnswerAPlusB.LatestSolution = new SolutionRevision()
             {
-                Problem=AnswerAPlusB,
-                Content="弱爆了",
-                Reason="xxx",
-                CreatedBy=ShaBi
+                Problem = AnswerAPlusB,
+                Content = "弱爆了",
+                Reason = "xxx",
+                CreatedBy = ShaBi
             };
 
             //Post
@@ -630,13 +630,13 @@ namespace Moo.DB
 
             db.Records.AddObject(new Record()
             {
-                Code="<Moo:Answer testCase='"+answerOnlyTestCase1.ID+"'>368</Moo:Answer>\n"
+                Code = "<Moo:Answer testCase='" + answerOnlyTestCase1.ID + "'>368</Moo:Answer>\n"
                 + "<Moo:Answer testCase='" + answerOnlyTestCase2.ID + "'>496</Moo:Answer>",
-                CreateTime=DateTimeOffset.Now,
-                Language="plaintext",
-                Problem=AnswerAPlusB,
-                User=MrPhone,
-                PublicCode=true
+                CreateTime = DateTimeOffset.Now,
+                Language = "plaintext",
+                Problem = AnswerAPlusB,
+                User = MrPhone,
+                PublicCode = true
             });
 
             db.SaveChanges();
