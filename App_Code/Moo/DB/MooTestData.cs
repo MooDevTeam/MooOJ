@@ -184,6 +184,7 @@ namespace Moo.DB
             UploadedFile file = new UploadedFile()
             {
                 Name = "SPJ for Cat",
+                Description = "给Cat的SPJ",
                 Path = "D:\\Cat.exe"
             };
             db.UploadedFiles.AddObject(file);
@@ -233,6 +234,7 @@ namespace Moo.DB
             file = new UploadedFile()
             {
                 Name = "Invoker for EasyA+B",
+                Description = "EasyA+B的调用程序",
                 Path = "D:\\EasyA+B.o",
             };
 
@@ -257,6 +259,7 @@ namespace Moo.DB
             file = new UploadedFile()
             {
                 Name = "Judger Of Answer A+B",
+                Description="*测评程序*啊",
                 Path = "D:\\AnswerA+B.exe"
             };
 

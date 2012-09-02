@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 08/31/2012 23:07:40
+-- Date Created: 09/02/2012 20:14:49
 -- Generated from EDMX file: D:\WebSites\MooOJ\App_Code\Moo\DB\MooDB.edmx
 -- --------------------------------------------------
 
@@ -92,11 +92,17 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_InteractiveTestCaseInvokerFile]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TestCases_InteractiveTestCase] DROP CONSTRAINT [FK_InteractiveTestCaseInvokerFile];
 GO
+IF OBJECT_ID(N'[dbo].[FK_AnswerOnlyTestCaseUploadedFile]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TestCases_AnswerOnlyTestCase] DROP CONSTRAINT [FK_AnswerOnlyTestCaseUploadedFile];
+GO
 IF OBJECT_ID(N'[dbo].[FK_SpecialJudgedTestCase_inherits_TestCase]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TestCases_SpecialJudgedTestCase] DROP CONSTRAINT [FK_SpecialJudgedTestCase_inherits_TestCase];
 GO
 IF OBJECT_ID(N'[dbo].[FK_InteractiveTestCase_inherits_TestCase]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TestCases_InteractiveTestCase] DROP CONSTRAINT [FK_InteractiveTestCase_inherits_TestCase];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AnswerOnlyTestCase_inherits_TestCase]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TestCases_AnswerOnlyTestCase] DROP CONSTRAINT [FK_AnswerOnlyTestCase_inherits_TestCase];
 GO
 IF OBJECT_ID(N'[dbo].[FK_TranditionalTestCase_inherits_TestCase]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TestCases_TranditionalTestCase] DROP CONSTRAINT [FK_TranditionalTestCase_inherits_TestCase];
@@ -156,6 +162,9 @@ IF OBJECT_ID(N'[dbo].[TestCases_SpecialJudgedTestCase]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[TestCases_InteractiveTestCase]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TestCases_InteractiveTestCase];
+GO
+IF OBJECT_ID(N'[dbo].[TestCases_AnswerOnlyTestCase]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TestCases_AnswerOnlyTestCase];
 GO
 IF OBJECT_ID(N'[dbo].[TestCases_TranditionalTestCase]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TestCases_TranditionalTestCase];
@@ -333,7 +342,8 @@ GO
 CREATE TABLE [dbo].[UploadedFiles] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(40)  NOT NULL,
-    [Path] nvarchar(max)  NOT NULL
+    [Path] nvarchar(max)  NOT NULL,
+    [Description] nvarchar(max)  NOT NULL
 );
 GO
 

@@ -59,6 +59,7 @@ namespace Moo.DB
         static Function CreateRecord = new Function() { Name = "record.create" };
         static Function CreateLockedRecord = new Function() { Name = "record.locked.create" };
         static Function DeleteRecord = new Function() { Name = "record.delete" };
+        static Function DeleteRecordJudgeInfoLimited = new Function() { Name = "record.judgeinfo.delete.limited" };
         static Function DeleteRecordJudgeInfo = new Function() { Name = "record.judgeinfo.delete" };
 
         static Function CreateUser = new Function() { Name = "user.create" };
@@ -274,6 +275,10 @@ namespace Moo.DB
 
             Organizer.AllowedFunction.Add(DeleteRecord);
             Worker.AllowedFunction.Add(DeleteRecord);
+
+            Organizer.AllowedFunction.Add(DeleteRecordJudgeInfoLimited);
+            Worker.AllowedFunction.Add(DeleteRecordJudgeInfoLimited);
+            NormalUser.AllowedFunction.Add(DeleteRecordJudgeInfoLimited);
 
             Organizer.AllowedFunction.Add(DeleteRecordJudgeInfo);
             Worker.AllowedFunction.Add(DeleteRecordJudgeInfo);

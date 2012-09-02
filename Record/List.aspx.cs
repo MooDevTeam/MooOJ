@@ -150,11 +150,8 @@ public partial class Record_List : System.Web.UI.Page
 
     protected void btnRejudge_Click(object sender, EventArgs e)
     {
-        if (!User.Identity.IsAuthenticated)
-        {
-            Permission.Check("i'm super man.", false);
-            return;
-        }
+        if (!Permission.Check("record.judgeinfo.delete.limited", false)) return;
+
         if (!Permission.Check("record.judgeinfo.delete", false, false))
         {
             if (!allowRejudge)

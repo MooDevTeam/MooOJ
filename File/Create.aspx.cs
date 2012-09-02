@@ -8,6 +8,7 @@ using System.IO;
 using Moo.DB;
 using Moo.Authorization;
 using Moo.Utility;
+using Moo.Text;
 public partial class File_Create : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -34,6 +35,7 @@ public partial class File_Create : System.Web.UI.Page
             UploadedFile file = new UploadedFile()
             {
                 Name = txtName.Text,
+                Description = txtDescription.Text,
                 Path = fileName
             };
             db.UploadedFiles.AddObject(file);
@@ -42,5 +44,11 @@ public partial class File_Create : System.Web.UI.Page
         }
 
         PageUtil.Redirect("操作成功", "~/File/?id=" + fileID);
+    }
+    protected void btnQuery_Click(object sender, EventArgs e)
+    {
+        trPreview.Visible = true;
+        divPreview.InnerHtml = WikiParser.Parse(txtDescription.Text);
+        btnSubmit.Enabled = true;
     }
 }

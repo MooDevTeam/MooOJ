@@ -12,12 +12,6 @@ public partial class Post_List : System.Web.UI.Page
         if (!Permission.Check("post.list", true)) return;
         if (!Page.IsPostBack)
         {
-            if (Request["problemID"] != null)
-            {
-                int problemID=int.Parse(Request["problemID"]);
-                dataSource.Where += " and it.[Problem].ID=" + problemID;
-            }
-
             Page.DataBind();
         }
     }

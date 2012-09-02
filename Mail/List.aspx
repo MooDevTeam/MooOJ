@@ -13,17 +13,35 @@
         <Moo:LinkBarItem URL='<%#"~/Mail/Create.aspx?to="+(Request["otherID"]==null?0:int.Parse(Request["otherID"])) %>'
             Hidden='<%#Request["otherID"]==null %>' Text="创建" />
     </Moo:LinkBar>
+    <fieldset>
+        <legend>查询</legend>
+        <asp:Label runat="server">对方名称</asp:Label>
+        <asp:TextBox ID="txtOtherName" runat="server" ValidationGroup="grpQuery" Text='<%#otherName %>'></asp:TextBox>
+        <asp:RequiredFieldValidator runat="server" ValidationGroup="grpQuery" ControlToValidate="txtOtherName"
+            Display="Dynamic" CssClass="validator">不能为空</asp:RequiredFieldValidator>
+        <asp:CustomValidator ID="validateOtherName" runat="server" ValidationGroup="grpQuery"
+            ControlToValidate="txtOtherName" Display="Dynamic" CssClass="validator" 
+            onservervalidate="validateOtherName_ServerValidate">无此用户</asp:CustomValidator>
+        <asp:Button ID="btnQuery" runat="server" ValidationGroup="grpQuery" Text="查询" 
+            onclick="btnQuery_Click" />
+    </fieldset>
     <Moo:InfoBlock ID="deletingFailure" runat="server" Type="Error" ViewStateMode="Disabled"
         Visible="false">
         您不是收信人且收信人已读
     </Moo:InfoBlock>
     <asp:EntityDataSource ID="dataSource" runat="server" ConnectionString="name=MooDB"
         DefaultContainerName="MooDB" EntitySetName="Mails" OrderBy="it.[ID] DESC" Include="From,To"
-        EnableDelete="True">
+        EnableDelete="True" Where="(it.[To].[ID]=@currentUserID or it.[From].[ID]=@currentUserID)
+and
+(@otherID is null or it.[To].[ID]=@otherID or it.[From].[ID]=@otherID)">
+        <WhereParameters>
+            <asp:QueryStringParameter Name="otherID" QueryStringField="otherID" Type="Int32" />
+        </WhereParameters>
     </asp:EntityDataSource>
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False"
-        CssClass="listTable" DataSourceID="dataSource" CellSpacing="-1" DataKeyNames="ID" PageSize='<%$Resources:Moo,GridViewPageSize %>'
-        OnRowDeleting="grid_RowDeleting" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
+        CssClass="listTable" DataSourceID="dataSource" CellSpacing="-1" DataKeyNames="ID"
+        PageSize='<%$Resources:Moo,GridViewPageSize %>' OnRowDeleting="grid_RowDeleting"
+        EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>
             <asp:BoundField DataField="ID" HeaderText="邮件编号" SortExpression="ID" />

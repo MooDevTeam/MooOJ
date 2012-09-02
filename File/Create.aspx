@@ -38,6 +38,24 @@
                     Display="Dynamic" CssClass="validator" OnServerValidate="validateFileLength_ServerValidate">须小于10MB</asp:CustomValidator>
             </td>
         </tr>
+        <tr id="trPreview" runat="server" visible="false">
+            <th>
+                预览
+            </th>
+            <td>
+                <div id="divPreview" runat="server">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                描述
+            </th>
+            <td>
+                <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine" Rows="20" Width="100%"></asp:TextBox>
+                <Moo:WikiSupported ID="wikiSupported" runat="server" />
+            </td>
+        </tr>
         <tr>
             <th>
                 验证码
@@ -48,7 +66,9 @@
         </tr>
         <tr>
             <td colspan="2" style="text-align: center;">
-                <asp:Button ID="btnSubmit" runat="server" Text="创建" OnClick="btnSubmit_Click" />
+                <asp:Button ID="btnQuery" runat="server" Text="预览" CausesValidation="false" 
+                    onclick="btnQuery_Click" />
+                <asp:Button ID="btnSubmit" runat="server" Text="创建" Enabled="false" OnClick="btnSubmit_Click" />
             </td>
         </tr>
     </table>

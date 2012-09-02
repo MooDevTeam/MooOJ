@@ -4109,12 +4109,14 @@ namespace Moo.DB
         /// <param name="id">ID 属性的初始值。</param>
         /// <param name="name">Name 属性的初始值。</param>
         /// <param name="path">Path 属性的初始值。</param>
-        public static UploadedFile CreateUploadedFile(global::System.Int32 id, global::System.String name, global::System.String path)
+        /// <param name="description">Description 属性的初始值。</param>
+        public static UploadedFile CreateUploadedFile(global::System.Int32 id, global::System.String name, global::System.String path, global::System.String description)
         {
             UploadedFile uploadedFile = new UploadedFile();
             uploadedFile.ID = id;
             uploadedFile.Name = name;
             uploadedFile.Path = path;
+            uploadedFile.Description = description;
             return uploadedFile;
         }
 
@@ -4195,6 +4197,30 @@ namespace Moo.DB
         private global::System.String _Path;
         partial void OnPathChanging(global::System.String value);
         partial void OnPathChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
+            }
+        }
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
 
         #endregion
     
