@@ -93,4 +93,19 @@ public partial class Problem_List : System.Web.UI.Page
         if (!Page.IsValid) return;
         Response.Redirect("~/Problem/List.aspx?name=" + HttpUtility.UrlEncode(txtName.Text), true);
     }
+    protected void btnGoIn_Click(object sender, EventArgs e)
+    {
+        if (!Page.IsValid) return;
+        Response.Redirect("~/Problem/?id=" + txtID.Text, true);
+    }
+    protected void ValidateProblemID(object sender, ServerValidateEventArgs e)
+    {
+        using (MooDB db = new MooDB())
+        {
+            int id = int.Parse(txtID.Text);
+            e.IsValid = (from p in db.Problems
+                         where p.ID == id
+                         select p).Any();
+        }
+    }
 }

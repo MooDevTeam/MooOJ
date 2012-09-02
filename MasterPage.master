@@ -15,7 +15,8 @@
 </head>
 <body>
     <form runat="server">
-    <asp:ScriptManager runat="server"></asp:ScriptManager>
+    <asp:ScriptManager runat="server">
+    </asp:ScriptManager>
     <div id="page">
         <div id="header">
             <h1>
@@ -64,7 +65,7 @@
         <div class="clear">
         </div>
         <div id="footer">
-            丰没备字1111号，此网站没有备案，纠结了！
+            <a href="https://github.com/onetwogoo/MooOJ">Moo</a>是由<a href="http://imeng.de/">Mr.Phone</a>开发的。所用测评核心<a href="http://code.google.com/p/v-judge-kernel/">v-Judge_Kernel</a>由Variantf提供。
             <div style="float: right;">
                 ServerTime:
                 <%=DateTimeOffset.Now %>

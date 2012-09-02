@@ -12,6 +12,7 @@ public partial class Record_List : System.Web.UI.Page
 {
     protected int? problemID;
     protected int? userID;
+    protected string userName;
     protected int? contestID;
     static volatile bool allowRejudge = true;
     static readonly System.Timers.Timer rejudgeTimer = new System.Timers.Timer(double.Parse(Resources.Moo.Record_RejudgeInterval));
@@ -40,6 +41,12 @@ public partial class Record_List : System.Web.UI.Page
 
             using (MooDB db = new MooDB())
             {
+                if (userID != null)
+                {
+                    userName = (from u in db.Users
+                                where u.ID == userID
+                                select u).Single<User>().Name;
+                }
                 grid.DataSource = GetDataToBind(db);
                 Page.DataBind();
             }
@@ -49,9 +56,20 @@ public partial class Record_List : System.Web.UI.Page
     protected void btnQuery_Click(object sender, EventArgs e)
     {
         if (!Page.IsValid) return;
+
+        if (txtUserName.Text != "")
+        {
+            using (MooDB db = new MooDB())
+            {
+                userID = (from u in db.Users
+                          where u.Name == txtUserName.Text
+                          select u).Single<User>().ID;
+            }
+        }
+
         Response.Redirect("~/Record/List.aspx?"
             + (txtProblemID.Text.Length > 0 ? "problemID=" + txtProblemID.Text : "")
-            + (txtUserID.Text.Length > 0 ? "&userID=" + txtUserID.Text : "")
+            + (userID != null ? "&userID=" + userID : "")
             + (txtContestID.Text.Length > 0 ? "&contestID=" + txtContestID.Text : ""));
     }
 
@@ -78,9 +96,11 @@ public partial class Record_List : System.Web.UI.Page
                              select r).Single<Record>();
             if (record.JudgeInfo != null)
             {
+                DeleteJudgeInfoAndRefresh(db, record, record.JudgeInfo);
                 db.JudgeInfos.DeleteObject(record.JudgeInfo);
                 db.SaveChanges();
             }
+            DeleteRecordAndRefresh(db, record);
             db.Records.DeleteObject(record);
             db.SaveChanges();
         }
@@ -164,36 +184,7 @@ public partial class Record_List : System.Web.UI.Page
 
             User currentUser = ((SiteUser)User.Identity).GetDBUser(db);
             //Refresh Score
-            if (info.Score >= 0)
-            {
-                record.User.Score -= info.Score;
-                record.Problem.ScoreSum -= info.Score;
-                var hisRecords = from r in db.Records
-                                 where r.ID != record.ID
-                                       && r.User.ID == record.User.ID && r.Problem.ID == record.Problem.ID
-                                       && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
-                                 select r;
-                int hisMaxScore = hisRecords.Any() ? hisRecords.Max(r => r.JudgeInfo.Score) : 0;
-                record.User.Score += hisMaxScore;
-                record.Problem.ScoreSum += hisMaxScore;
-
-                if (record.Problem.MaximumScore == info.Score)
-                {
-                    var problemRecords = from r in db.Records
-                                         where r.ID != record.ID
-                                               && r.Problem.ID == record.Problem.ID
-                                               && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
-                                         select r;
-                    if (problemRecords.Any())
-                    {
-                        record.Problem.MaximumScore = problemRecords.Max(r => r.JudgeInfo.Score);
-                    }
-                    else
-                    {
-                        record.Problem.MaximumScore = null;
-                    }
-                }
-            }
+            DeleteJudgeInfoAndRefresh(db, record, info);
 
             //Send A Mail
             db.Mails.AddObject(new Mail()
@@ -213,5 +204,62 @@ public partial class Record_List : System.Web.UI.Page
         }
 
         PageUtil.Redirect("操作成功", "~/Record/List.aspx?" + Request.QueryString);
+    }
+
+    void DeleteJudgeInfoAndRefresh(MooDB db, Record record, JudgeInfo info)
+    {
+        if (info.Score >= 0)
+        {
+            record.User.Score -= info.Score;
+            record.Problem.ScoreSum -= info.Score;
+            var hisRecords = from r in db.Records
+                             where r.ID != record.ID
+                                   && r.User.ID == record.User.ID && r.Problem.ID == record.Problem.ID
+                                   && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
+                             select r;
+            int hisMaxScore = hisRecords.Any() ? hisRecords.Max(r => r.JudgeInfo.Score) : 0;
+            record.User.Score += hisMaxScore;
+            record.Problem.ScoreSum += hisMaxScore;
+
+            if (record.Problem.MaximumScore == info.Score)
+            {
+                var problemRecords = from r in db.Records
+                                     where r.ID != record.ID
+                                           && r.Problem.ID == record.Problem.ID
+                                           && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
+                                     select r;
+                if (problemRecords.Any())
+                {
+                    record.Problem.MaximumScore = problemRecords.Max(r => r.JudgeInfo.Score);
+                }
+                else
+                {
+                    record.Problem.MaximumScore = null;
+                }
+            }
+        }
+    }
+
+    void DeleteRecordAndRefresh(MooDB db, Record record)
+    {
+        record.Problem.SubmissionCount--;
+        var hisRecords = from r in db.Records
+                         where r.ID != record.ID
+                               && r.User.ID == record.User.ID && r.Problem.ID == record.Problem.ID
+                               && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
+                         select r;
+        if (!hisRecords.Any())
+        {
+            record.Problem.SubmissionUser--;
+        }
+    }
+    protected void validateUserName_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        using (MooDB db = new MooDB())
+        {
+            args.IsValid = (from u in db.Users
+                            where u.Name == txtUserName.Text
+                            select u).Any();
+        }
     }
 }

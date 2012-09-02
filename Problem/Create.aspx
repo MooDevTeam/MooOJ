@@ -53,7 +53,26 @@
                 内容
             </th>
             <td>
-                <asp:TextBox ID="txtContent" runat="server" TextMode="MultiLine" Rows="20" Width="100%"></asp:TextBox>
+                <asp:TextBox ID="txtContent" runat="server" TextMode="MultiLine" Rows="20" Width="100%">!! 描述
+&lt;在此填入题目描述&gt;
+!! 输入格式
+&lt;在此填入样例输入格式&gt;
+!! 输出格式
+&lt;在此填入样例输出格式&gt;
+!! 样例输入
+{code:plaintext}
+&lt;在此填入样例输入&gt;
+{code:plaintext}
+!! 样例输出
+{code:plaintext}
+&lt;在此填入样例输出&gt;
+{code:plaintext}
+!! 限制
+&lt;在此填入时间内存等限制&gt;
+!! 注释
+&lt;在此填入注释&gt;
+!! 来源
+&lt;在此填入题目来源&gt;</asp:TextBox>
                 <Moo:WikiSupported runat="server" />
             </td>
         </tr>

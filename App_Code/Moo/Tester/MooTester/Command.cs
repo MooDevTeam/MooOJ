@@ -28,6 +28,13 @@ namespace Moo.Tester.MooTester
                     {"src2obj","gcc -c -o {Execute} {E.oE} {Source} {S.cS}"},
                     {"obj2exe","gcc -o {Execute} {E.exeE} {Object}"}
                 }
+            },
+            {
+                "pascal",
+                new Dictionary<string,string>()
+                {
+                    {"src2exe","ppcrossx64 -o{Execute} {E.exeE} {Source} {S.pasS}"}
+                }
             }
         };
 

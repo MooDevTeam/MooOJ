@@ -16,22 +16,18 @@
     </Moo:LinkBar>
     <fieldset id="fldQuery" runat="server">
         <legend>查询</legend>
-        <asp:Label runat="server">用户A编号</asp:Label>
-        <asp:TextBox ID="txtUserA" runat="server" Text='<%#userA.ID %>'></asp:TextBox>
+        <asp:Label runat="server">用户A名称</asp:Label>
+        <asp:TextBox ID="txtUserA" runat="server" Text='<%#userA.Name %>'></asp:TextBox>
         <asp:RequiredFieldValidator runat="server" ControlToValidate="txtUserA" Display="Dynamic"
             CssClass="validator">不能为空</asp:RequiredFieldValidator>
-        <asp:CompareValidator runat="server" ControlToValidate="txtUserA" Operator="DataTypeCheck"
-            Type="Integer" Display="Dynamic" CssClass="validator">需为整数</asp:CompareValidator>
         <asp:CustomValidator runat="server" ControlToValidate="txtUserA" Display="Dynamic"
-            CssClass="validator" OnServerValidate="ValidateUserID">无此用户</asp:CustomValidator>
-        <asp:Label runat="server">用户B编号</asp:Label>
-        <asp:TextBox ID="txtUserB" runat="server" Text='<%#userB.ID %>'></asp:TextBox>
+            CssClass="validator" OnServerValidate="ValidateUserName">无此用户</asp:CustomValidator>
+        <asp:Label runat="server">用户B名称</asp:Label>
+        <asp:TextBox ID="txtUserB" runat="server" Text='<%#userB.Name %>'></asp:TextBox>
         <asp:RequiredFieldValidator runat="server" ControlToValidate="txtUserB" Display="Dynamic"
             CssClass="validator">不能为空</asp:RequiredFieldValidator>
-        <asp:CompareValidator runat="server" ControlToValidate="txtUserB" Operator="DataTypeCheck"
-            Type="Integer" Display="Dynamic" CssClass="validator">需为整数</asp:CompareValidator>
         <asp:CustomValidator runat="server" ControlToValidate="txtUserB" Display="Dynamic"
-            CssClass="validator" OnServerValidate="ValidateUserID">无此用户</asp:CustomValidator>
+            CssClass="validator" OnServerValidate="ValidateUserName">无此用户</asp:CustomValidator>
         <asp:Button ID="btnQuery" runat="server" Text="查询" OnClick="btnQuery_Click" />
     </fieldset>
     <div style="font-size: 20pt; text-align: center;">

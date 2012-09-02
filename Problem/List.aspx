@@ -12,10 +12,18 @@
     <fieldset>
         <legend>查询</legend>
         <asp:Label runat="server">题目名称</asp:Label>
-        <asp:TextBox ID="txtName" runat="server" ValidationGroup="grpQuery"></asp:TextBox>
+        <asp:TextBox ID="txtName" runat="server" ValidationGroup="grpQuery" Text='<%#Request["name"] %>'></asp:TextBox>
         <asp:RequiredFieldValidator runat="server" ValidationGroup="grpQuery" ControlToValidate="txtName"
             Display="Dynamic" CssClass="validator">不能为空</asp:RequiredFieldValidator>
         <asp:Button ID="btnQuery" runat="server" ValidationGroup="grpQuery" Text="查询" OnClick="btnQuery_Click" />
+
+        <asp:Label runat="server">题目编号</asp:Label>
+        <asp:TextBox ID="txtID" runat="server" ValidationGroup="grpIDOnly"></asp:TextBox>
+        <asp:RequiredFieldValidator runat="server" ValidationGroup="grpIDOnly" ControlToValidate="txtID" Display="Dynamic" CssClass="validator">不能为空</asp:RequiredFieldValidator>
+        <asp:CompareValidator runat="server" ValidationGroup="grpIDOnly" ControlToValidate="txtID" Operator="DataTypeCheck" Type="Integer" Display="Dynamic" CssClass="validator">需为整数</asp:CompareValidator>
+        <asp:CustomValidator runat="server" ValidationGroup="grpIDOnly" ControlToValidate="txtID" OnServerValidate="ValidateProblemID" Display="Dynamic" CssClass="validator">无此题目</asp:CustomValidator>
+        <asp:Button ID="btnGoIn" runat="server" ValidationGroup="grpIDOnly" Text="进入" 
+            onclick="btnGoIn_Click" />
     </fieldset>
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AutoGenerateColumns="False"
         CssClass="listTable" CellSpacing="-1" OnRowDeleting="grid_RowDeleting" DataKeyNames="ID" PageSize='<%$Resources:Moo,GridViewPageSize %>'

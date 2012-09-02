@@ -94,4 +94,8 @@ public partial class User_List : System.Web.UI.Page
         }
         Response.Redirect("~/User/Compare.aspx?userA=" + userAID + "&userB=" + userBID);
     }
+    protected void btnQuery_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/User/List.aspx?name=" + HttpUtility.UrlEncode(txtName.Text), true);
+    }
 }

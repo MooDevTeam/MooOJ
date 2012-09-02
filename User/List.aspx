@@ -11,14 +11,24 @@
         <Moo:LinkBarItem URL="~/User/List.aspx" Selected="true" Text="列表" />
         <Moo:LinkBarItem URL="~/User/Register.aspx" Text="注册" />
     </Moo:LinkBar>
+    <fieldset>
+        <legend>查询</legend>
+        <asp:Label runat="server">名称</asp:Label>
+        <asp:TextBox ID="txtName" runat="server" ValidationGroup="grpQuery" Text='<%#Request["name"] %>'></asp:TextBox>
+        <asp:Button ID="btnQuery" runat="server" ValidationGroup="grpQuery" Text="查询" OnClick="btnQuery_Click" />
+    </fieldset>
     <asp:EntityDataSource ID="dataSource" runat="server" ConnectionString="name=MooDB"
         DefaultContainerName="MooDB" EntitySetName="Users" OrderBy="it.[Score] DESC"
-        Include="Role">
+        Include="Role" Where="(it.[Name] like &quot;%&quot;+@userName+&quot;%&quot;) or @userName is null"
+        EntityTypeFilter="" Select="">
+        <WhereParameters>
+            <asp:QueryStringParameter ConvertEmptyStringToNull="False" DefaultValue="" Name="userName"
+                QueryStringField="name" Type="String" />
+        </WhereParameters>
     </asp:EntityDataSource>
-    <asp:GridView ID="grid" runat="server" AllowPaging="True" AllowSorting="True" 
-        AutoGenerateColumns="False" PageSize='<%$ Resources:Moo,GridViewPageSize %>'
-        CssClass="listTable" DataKeyNames="ID" DataSourceID="dataSource" 
-        CellSpacing="-1" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
+    <asp:GridView ID="grid" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False"
+        PageSize='<%$ Resources:Moo,GridViewPageSize %>' CssClass="listTable" DataKeyNames="ID"
+        DataSourceID="dataSource" CellSpacing="-1" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>
             <asp:TemplateField>
@@ -58,6 +68,5 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
-    <asp:Button ID="btnCompare" runat="server" Enabled="false" Text="比较选定的用户" 
-        onclick="btnCompare_Click" />
+    <asp:Button ID="btnCompare" runat="server" Enabled="false" Text="比较选定的用户" OnClick="btnCompare_Click" />
 </asp:Content>

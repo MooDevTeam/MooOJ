@@ -26,7 +26,7 @@ public partial class Special_Login : System.Web.UI.Page
             string userName = (loginView.FindControl("txtUserName") as TextBox).Text;
             e.IsValid = (from u in db.Users
                          where u.Name == userName
-                         select u).SingleOrDefault<User>() != null;
+                         select u).Any();
         }
     }
 

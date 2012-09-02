@@ -30,10 +30,11 @@
         <asp:TextBox ID="txtProblemID" runat="server" Text='<%#problemID %>'></asp:TextBox>
         <asp:CompareValidator runat="server" ControlToValidate="txtProblemID" Operator="DataTypeCheck"
             Type="Integer" Display="Dynamic" CssClass="validator">不是整数</asp:CompareValidator>
-        <asp:Label runat="server">用户编号</asp:Label>
-        <asp:TextBox ID="txtUserID" runat="server" Text='<%#userID %>'></asp:TextBox>
-        <asp:CompareValidator runat="server" ControlToValidate="txtUserID" Operator="DataTypeCheck"
-            Type="Integer" Display="Dynamic" CssClass="validator">不是整数</asp:CompareValidator>
+        <asp:Label runat="server">用户名称</asp:Label>
+        <asp:TextBox ID="txtUserName" runat="server" Text='<%#userName %>'></asp:TextBox>
+        <asp:CustomValidator ID="validateUserName" runat="server" ControlToValidate="txtUserName"
+            Display="Dynamic" CssClass="validator" 
+            onservervalidate="validateUserName_ServerValidate">用户不存在</asp:CustomValidator>
         <asp:Label runat="server">比赛编号</asp:Label>
         <asp:TextBox ID="txtContestID" runat="server" Text='<%#contestID %>'></asp:TextBox>
         <asp:CompareValidator runat="server" ControlToValidate="txtContestID" Operator="DataTypeCheck"

@@ -4,6 +4,7 @@
 <%@ Import Namespace="Moo.Text" %>
 <asp:Content ContentPlaceHolderID="head" runat="Server">
     <title>
+        <%#problem.ID %>#
         <%#HttpUtility.HtmlEncode(problem.Name) %></title>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="main" runat="Server">
@@ -12,11 +13,15 @@
         <Moo:LinkBarItem URL='<%#"~/Problem/Modify.aspx?id="+problem.ID %>' Text="修改" />
         <Moo:LinkBarItem URL='<%#"~/Problem/Update.aspx?revision="+revision.ID %>' Text="更新" />
         <Moo:LinkBarItem URL='<%#"~/Problem/History.aspx?id="+problem.ID %>' Text="历史" />
-        <Moo:LinkBarItem URL='<%#"~/Record/Create.aspx?problemID="+problem.ID %>' Shortcut="true" Text="提交" />
-        <Moo:LinkBarItem URL='<%#"~/TestCase/List.aspx?id="+problem.ID %>' Special="true" Text="测试数据" />
+        <Moo:LinkBarItem URL='<%#"~/Record/Create.aspx?problemID="+problem.ID %>' Shortcut="true"
+            Text="提交" />
+        <Moo:LinkBarItem URL='<%#"~/TestCase/List.aspx?id="+problem.ID %>' Special="true"
+            Text="测试数据" />
         <Moo:LinkBarItem URL='<%#"~/Solution/?id="+problem.ID %>' Special="true" Text="题解" />
-        <Moo:LinkBarItem URL='<%#"~/Post/List.aspx?problemID="+problem.ID %>' Special="true" Text="帖子" />
-        <Moo:LinkBarItem URL='<%#"~/Record/List.aspx?problemID="+problem.ID %>' Special="true" Text="记录" />
+        <Moo:LinkBarItem URL='<%#"~/Post/List.aspx?problemID="+problem.ID %>' Special="true"
+            Text="帖子" />
+        <Moo:LinkBarItem URL='<%#"~/Record/List.aspx?problemID="+problem.ID %>' Special="true"
+            Text="记录" />
     </Moo:LinkBar>
     <Moo:InfoBlock runat="server" Type="Alert" Visible="<%#revision.ID!=problem.LatestRevision.ID %>">
         您阅读的是
@@ -24,6 +29,7 @@
         的历史版本，如需阅读最新版本请<a href='<%#"~/Problem/?id="+problem.ID %>' runat="server">单击这里</a>。
     </Moo:InfoBlock>
     <h1>
+        <%#problem.ID %>#
         <%#HttpUtility.HtmlEncode(problem.Name) %>
     </h1>
     <div>

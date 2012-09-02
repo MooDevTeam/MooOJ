@@ -13,7 +13,7 @@ const int ACCEPT = 0;
 const int WRONG_ANSWER = 1;
 
 //此处声明选手提交程序所导出的函数
-// extern int APlusB(int,int);
+// extern "C" int APlusB(int,int);
 
 int main(){
 	/*

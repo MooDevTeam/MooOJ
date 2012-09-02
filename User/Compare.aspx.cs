@@ -133,20 +133,28 @@ public partial class User_Compare : System.Web.UI.Page
             holder.Controls.Add(new Literal() { Text = " " });
         }
     }
-    protected void ValidateUserID(object source, ServerValidateEventArgs args)
+    protected void ValidateUserName(object source, ServerValidateEventArgs args)
     {
         TextBox toValidate = (TextBox)fldQuery.FindControl(((CustomValidator)source).ControlToValidate);
         using (MooDB db = new MooDB())
         {
-            int id = int.Parse(toValidate.Text);
             args.IsValid = (from u in db.Users
-                            where u.ID == id
-                            select u).SingleOrDefault<User>() != null;
+                            where u.Name == toValidate.Text
+                            select u).Any();
         }
     }
     protected void btnQuery_Click(object sender, EventArgs e)
     {
         if (!Page.IsValid) return;
-        Response.Redirect("~/User/Compare.aspx?userA=" + txtUserA.Text + "&userB=" + txtUserB.Text, true);
+        using (MooDB db = new MooDB())
+        {
+            User userA = (from u in db.Users
+                          where u.Name == txtUserA.Text
+                          select u).Single<User>();
+            User userB = (from u in db.Users
+                          where u.Name == txtUserB.Text
+                          select u).Single<User>();
+            Response.Redirect("~/User/Compare.aspx?userA=" + userA.ID + "&userB=" + userB.ID, true);
+        }
     }
 }
