@@ -185,7 +185,7 @@
     <value>&lt;color:red|答案错误。&gt;(得分*{0}*，用时*{1}ms*，内存*{2}byte(s)*) {{"{3}"}}</value>
   </data>
   <data name="MooTester_TranditionalJudger" xml:space="preserve">
-    <value>D:\Special_Judge.exe</value>
+    <value>D:\v-Judge_Kernel\Special_Judge.exe</value>
   </data>
   <data name="NoEnoughPermission" xml:space="preserve">
     <value>您可能不具备完成此操作所必须的权限。</value>
