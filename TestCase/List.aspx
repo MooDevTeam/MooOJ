@@ -22,14 +22,15 @@
     </Moo:LinkBar>
     <asp:EntityDataSource ID="dataSource" runat="server" ConnectionString="name=MooDB"
         DefaultContainerName="MooDB" EntitySetName="TestCases" OrderBy="it.[ID] DESC"
-        Include="Problem" EntityTypeFilter="" Select="" Where="it.[Problem].ID=@problemID">
+        Include="Problem,CreatedBy" EntityTypeFilter="" Select="" Where="it.[Problem].ID=@problemID">
         <WhereParameters>
             <asp:QueryStringParameter Name="problemID" QueryStringField="id" Type="Int32" />
         </WhereParameters>
     </asp:EntityDataSource>
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False"
-        CssClass="listTable" DataSourceID="dataSource" OnRowDeleting="grid_RowDeleting" PageSize='<%$Resources:Moo,GridViewPageSize %>'
-        DataKeyNames="ID" CellSpacing="-1" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
+        CssClass="listTable" DataSourceID="dataSource" OnRowDeleting="grid_RowDeleting"
+        PageSize='<%$ Resources:Moo,GridViewPageSize %>' DataKeyNames="ID" CellSpacing="-1"
+        EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>
             <asp:BoundField DataField="ID" HeaderText="测试数据编号" SortExpression="ID" />
@@ -38,9 +39,20 @@
                     <%#PageUtil.GetEntity<TestCase>(Container.DataItem).GetType().Name %>
                 </ItemTemplate>
             </asp:TemplateField>
+            <asp:TemplateField HeaderText="创建者">
+                <ItemTemplate>
+                    <a runat="server" href='<%#"~/User/?id="+Eval("CreatedBy.ID") %>'>
+                        <%#HttpUtility.HtmlEncode(Eval("CreatedBy.Name")) %>
+                    </a>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:HyperLinkField DataNavigateUrlFields="ID" DataNavigateUrlFormatString="~/TestCase/?id={0}"
                 DataTextField="ID" DataTextFormatString="查看" HeaderText="查看" />
-            <asp:CommandField ShowDeleteButton="True" HeaderText="操作" />
+            <asp:TemplateField HeaderText="操作" ShowHeader="False">
+                <ItemTemplate>
+                    <asp:LinkButton runat="server" CausesValidation="False" CommandName="Delete" Text="删除"></asp:LinkButton>
+                </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
     </asp:GridView>
 </asp:Content>

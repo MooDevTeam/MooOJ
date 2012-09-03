@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 09/02/2012 20:14:49
+-- Date Created: 09/03/2012 21:50:42
 -- Generated from EDMX file: D:\WebSites\MooOJ\App_Code\Moo\DB\MooDB.edmx
 -- --------------------------------------------------
 
@@ -246,7 +246,8 @@ GO
 -- Creating table 'TestCases'
 CREATE TABLE [dbo].[TestCases] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [Problem_ID] int  NOT NULL
+    [Problem_ID] int  NOT NULL,
+    [CreatedBy_ID] int  NOT NULL
 );
 GO
 
@@ -905,6 +906,20 @@ ADD CONSTRAINT [FK_AnswerOnlyTestCaseUploadedFile]
 CREATE INDEX [IX_FK_AnswerOnlyTestCaseUploadedFile]
 ON [dbo].[TestCases_AnswerOnlyTestCase]
     ([Judger_ID]);
+GO
+
+-- Creating foreign key on [CreatedBy_ID] in table 'TestCases'
+ALTER TABLE [dbo].[TestCases]
+ADD CONSTRAINT [FK_UserTestCase]
+    FOREIGN KEY ([CreatedBy_ID])
+    REFERENCES [dbo].[Users]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserTestCase'
+CREATE INDEX [IX_FK_UserTestCase]
+ON [dbo].[TestCases]
+    ([CreatedBy_ID]);
 GO
 
 -- Creating foreign key on [ID] in table 'TestCases_SpecialJudgedTestCase'

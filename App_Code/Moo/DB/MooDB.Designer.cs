@@ -41,6 +41,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("Moo.DB", "UserCreateHomepageRevision", "HomepageRevision", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Moo.DB.HomepageRevision), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Moo.DB.User))]
 [assembly: EdmRelationshipAttribute("Moo.DB", "InteractiveTestCaseInvokerFile", "InteractiveTestCase", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Moo.DB.InteractiveTestCase), "UploadedFile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Moo.DB.UploadedFile))]
 [assembly: EdmRelationshipAttribute("Moo.DB", "AnswerOnlyTestCaseUploadedFile", "AnswerOnlyTestCase", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Moo.DB.AnswerOnlyTestCase), "UploadedFile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Moo.DB.UploadedFile))]
+[assembly: EdmRelationshipAttribute("Moo.DB", "UserTestCase", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Moo.DB.User), "TestCase", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Moo.DB.TestCase))]
 
 #endregion
 
@@ -3928,6 +3929,44 @@ namespace Moo.DB
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Problem>("Moo.DB.TestDataProblem", "Problem", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Moo.DB", "UserTestCase", "User")]
+        public User CreatedBy
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Moo.DB.UserTestCase", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Moo.DB.UserTestCase", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> CreatedByReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Moo.DB.UserTestCase", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("Moo.DB.UserTestCase", "User", value);
                 }
             }
         }

@@ -132,6 +132,10 @@
       <End Role="AnswerOnlyTestCase" EntitySet="TestCases_AnswerOnlyTestCase" />
       <End Role="UploadedFile" EntitySet="UploadedFiles" />
     </AssociationSet>
+    <AssociationSet Name="UserTestCase" Association="Moo.DB.Store.UserTestCase">
+      <End Role="User" EntitySet="Users" />
+      <End Role="TestCase" EntitySet="TestCases" />
+    </AssociationSet>
     <AssociationSet Name="FK_SpecialJudgedTestCase_inherits_TestCase" Association="Moo.DB.Store.FK_SpecialJudgedTestCase_inherits_TestCase">
       <End Role="TestCase" EntitySet="TestCases" />
       <End Role="SpecialJudgedTestCase" EntitySet="TestCases_SpecialJudgedTestCase" />
@@ -215,6 +219,7 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Problem_ID" Type="int" Nullable="false" />
+    <Property Name="CreatedBy_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ProblemRevisions">
     <Key>
@@ -647,6 +652,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="UserTestCase">
+    <End Role="User" Type="Moo.DB.Store.Users" Multiplicity="1" />
+    <End Role="TestCase" Type="Moo.DB.Store.TestCases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TestCase">
+        <PropertyRef Name="CreatedBy_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_FunctionForRole_Function">
     <End Role="Function" Type="Moo.DB.Store.Functions" Multiplicity="1" />
     <End Role="FunctionForRole" Type="Moo.DB.Store.FunctionForRole" Multiplicity="*" />
@@ -879,6 +896,10 @@
             <End Role="AnswerOnlyTestCase" EntitySet="TestCases" />
             <End Role="UploadedFile" EntitySet="UploadedFiles" />
           </AssociationSet>
+          <AssociationSet Name="UserTestCase" Association="Moo.DB.UserTestCase">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TestCase" EntitySet="TestCases" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -962,6 +983,7 @@
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Problem" Relationship="Moo.DB.TestDataProblem" FromRole="TestData" ToRole="Problem" />
+          <NavigationProperty Name="CreatedBy" Relationship="Moo.DB.UserTestCase" FromRole="TestCase" ToRole="User" />
         </EntityType>
         <Association Name="TestDataProblem">
           <End Type="Moo.DB.TestCase" Role="TestData" Multiplicity="*" >
@@ -1201,6 +1223,10 @@
         <Association Name="AnswerOnlyTestCaseUploadedFile">
           <End Type="Moo.DB.AnswerOnlyTestCase" Role="AnswerOnlyTestCase" Multiplicity="*" />
           <End Type="Moo.DB.UploadedFile" Role="UploadedFile" Multiplicity="1" />
+        </Association>
+        <Association Name="UserTestCase">
+          <End Type="Moo.DB.User" Role="User" Multiplicity="1" />
+          <End Type="Moo.DB.TestCase" Role="TestCase" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1600,6 +1626,14 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
+    <AssociationSetMapping Name="UserTestCase" TypeName="Moo.DB.UserTestCase" StoreEntitySet="TestCases">
+      <EndProperty Name="User">
+        <ScalarProperty Name="ID" ColumnName="CreatedBy_ID" />
+      </EndProperty>
+      <EndProperty Name="TestCase">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
@@ -1640,16 +1674,18 @@
         <EntityTypeShape EntityType="Moo.DB.TestCase" Width="1.5" PointX="0.75" PointY="27.375" Height="1.3969734700520817" IsExpanded="true" />
         <AssociationConnector Association="Moo.DB.TestDataProblem">
           <ConnectorPoint PointX="1.5" PointY="27.375" />
-          <ConnectorPoint PointX="1.5" PointY="16.693845766601562" />
-          <ConnectorPoint PointX="3.5104141666666666" PointY="16.693845766601562" />
-          <ConnectorPoint PointX="3.6770808333333336" PointY="16.693845766601562" />
-          <ConnectorPoint PointX="4.3229191666666669" PointY="16.693845766601562" />
-          <ConnectorPoint PointX="4.4895858333333329" PointY="16.693845766601562" />
-          <ConnectorPoint PointX="4.5260454166666664" PointY="16.693845766601562" />
-          <ConnectorPoint PointX="4.6927120833333325" PointY="16.693845766601562" />
-          <ConnectorPoint PointX="7.291666666666667" PointY="16.693845766601562" />
-          <ConnectorPoint PointX="7.458333333333333" PointY="16.693845766601562" />
-          <ConnectorPoint PointX="8.125" PointY="16.693845766601562" />
+          <ConnectorPoint PointX="1.5" PointY="16.52939613647461" />
+          <ConnectorPoint PointX="3.3072879166666667" PointY="16.52939613647461" />
+          <ConnectorPoint PointX="3.4739545833333336" PointY="16.52939613647461" />
+          <ConnectorPoint PointX="3.5104141666666666" PointY="16.52939613647461" />
+          <ConnectorPoint PointX="3.6770808333333336" PointY="16.52939613647461" />
+          <ConnectorPoint PointX="4.3229191666666669" PointY="16.52939613647461" />
+          <ConnectorPoint PointX="4.4895858333333329" PointY="16.52939613647461" />
+          <ConnectorPoint PointX="4.5260454166666664" PointY="16.52939613647461" />
+          <ConnectorPoint PointX="4.6927120833333325" PointY="16.52939613647461" />
+          <ConnectorPoint PointX="7.291666666666667" PointY="16.52939613647461" />
+          <ConnectorPoint PointX="7.458333333333333" PointY="16.52939613647461" />
+          <ConnectorPoint PointX="8.125" PointY="16.52939613647461" />
         </AssociationConnector>
         <EntityTypeShape EntityType="Moo.DB.ProblemRevision" Width="1.5" PointX="8.5" PointY="10.875" Height="2.1610522460937496" IsExpanded="true" />
         <AssociationConnector Association="Moo.DB.ProblemProblemRevision">
@@ -1694,6 +1730,8 @@
           <ConnectorPoint PointX="2.5" PointY="12.36551164355469" />
           <ConnectorPoint PointX="3" PointY="12.36551164355469" />
           <ConnectorPoint PointX="3" PointY="13.484111328125" />
+          <ConnectorPoint PointX="3.3072879166666667" PointY="13.484111328125" />
+          <ConnectorPoint PointX="3.4739545833333336" PointY="13.484111328125" />
           <ConnectorPoint PointX="3.5104141666666666" PointY="13.484111328125" />
           <ConnectorPoint PointX="3.6770808333333336" PointY="13.484111328125" />
           <ConnectorPoint PointX="3.9166666666666665" PointY="13.484111328125" />
@@ -1832,6 +1870,11 @@
           <ConnectorPoint PointX="4.9062525" PointY="29.5" />
           <ConnectorPoint PointX="4.9062525" PointY="28.25" />
           <ConnectorPoint PointX="8.5" PointY="28.25" />
+        </AssociationConnector>
+        <AssociationConnector Association="Moo.DB.UserTestCase">
+          <ConnectorPoint PointX="3.39062125" PointY="13.234111328125" />
+          <ConnectorPoint PointX="3.39062125" PointY="28.168996582031248" />
+          <ConnectorPoint PointX="2.25" PointY="28.168996582031248" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

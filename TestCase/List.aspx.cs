@@ -60,17 +60,23 @@ public partial class TestCase_List : System.Web.UI.Page
     {
         e.Cancel = true;
 
-        if (!Permission.Check("testcase.delete",false)) return;
-
-        int testCaseID=(int)e.Keys[0];
+        int testCaseID = (int)e.Keys[0];
         using (MooDB db = new MooDB())
         {
-            db.TestCases.DeleteObject((from t in db.TestCases
-                                       where t.ID == testCaseID
-                                       select t).Single<TestCase>());
+            TestCase testCase = (from t in db.TestCases
+                                 where t.ID == testCaseID
+                                 select t).Single<TestCase>();
+            bool allowed = Permission.Check("testcase.delete", false, false)
+                   || User.Identity.IsAuthenticated && ((SiteUser)User.Identity).ID == testCase.CreatedBy.ID;
+            if (!allowed)
+            {
+                Permission.Check("i'm superman.", false);
+                return;
+            }
+            db.TestCases.DeleteObject(testCase);
             db.SaveChanges();
         }
 
-        grid.Rows[e.RowIndex].Style.Add(HtmlTextWriterStyle.Display, "none");
+        grid.Rows[e.RowIndex].Visible = false;
     }
 }

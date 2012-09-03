@@ -41,6 +41,25 @@
             Type="Integer" Display="Dynamic" CssClass="validator">不是整数</asp:CompareValidator>
         <asp:Button ID="btnQuery" runat="server" Text="查询" OnClick="btnQuery_Click" />
     </fieldset>
+    <%-- 
+    <asp:EntityDataSource ID="dataSource" runat="server" 
+        ConnectionString="name=MooDB" DefaultContainerName="MooDB" EnableDelete="True" 
+        EntitySetName="Records" Include="JudgeInfo" 
+        Where="(@problemID is null or it.[Problem].[ID]=@problemID)
+and (@userID is null or it.[User].[ID]=@userID)
+and (@contestID is null or select )">
+        <WhereParameters>
+            <asp:QueryStringParameter Name="problemID" QueryStringField="problemID" 
+                Type="Int32" />
+            <asp:QueryStringParameter Name="userID" QueryStringField="userID" 
+                Type="Int32" />
+            <asp:QueryStringParameter Name="contestID" QueryStringField="contestID" 
+                Type="Int32" />
+        </WhereParameters>
+    </asp:EntityDataSource>
+    <asp:GridView runat="server" DataKeyNames="ID" DataSourceID="dataSource">
+    </asp:GridView>
+        --%>
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AutoGenerateColumns="False"
         DataKeyNames="ID" CssClass="listTable" CellSpacing="-1" OnPageIndexChanging="grid_PageIndexChanging"
         PageSize='<%$ Resources:Moo,GridViewPageSize %>' OnRowDeleting="grid_RowDeleting"

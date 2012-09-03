@@ -62,7 +62,7 @@
                 <asp:CompareValidator runat="server" ControlToValidate="txtMemoryLimit" Operator="DataTypeCheck"
                     Type="Integer" Display="Dynamic" CssClass="validator">不是整数</asp:CompareValidator>
                 <asp:RangeValidator runat="server" ControlToValidate="txtMemoryLimit" Type="Integer"
-                    MinimumValue="0" MaximumValue="1073741824" Display="Dynamic" CssClass="validator">需在0~1073741824之间</asp:RangeValidator>
+                    MinimumValue="0" MaximumValue="2147483647" Display="Dynamic" CssClass="validator">需在0~2147483647之间</asp:RangeValidator>
             </td>
         </tr>
         <tr runat="server" visible='<%#problem.Type=="Tranditional" || problem.Type=="SpecialJudged" %>'>

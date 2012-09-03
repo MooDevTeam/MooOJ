@@ -41,6 +41,16 @@
                 </tr>
                 <tr>
                     <th>
+                        创建者
+                    </th>
+                    <td>
+                        <a runat="server" href='<%#"~/User/?id="+testCase.CreatedBy.ID %>'>
+                            <%#HttpUtility.HtmlEncode(testCase.CreatedBy.Name) %>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
                         分数
                     </th>
                     <td>
@@ -105,6 +115,16 @@
                     </th>
                     <td>
                         SpecialJudged
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        创建者
+                    </th>
+                    <td>
+                        <a id="A1" runat="server" href='<%#"~/User/?id="+testCase.CreatedBy.ID %>'>
+                            <%#HttpUtility.HtmlEncode(testCase.CreatedBy.Name) %>
+                        </a>
                     </td>
                 </tr>
                 <tr>
@@ -179,6 +199,16 @@
                 </tr>
                 <tr>
                     <th>
+                        创建者
+                    </th>
+                    <td>
+                        <a id="A2" runat="server" href='<%#"~/User/?id="+testCase.CreatedBy.ID %>'>
+                            <%#HttpUtility.HtmlEncode(testCase.CreatedBy.Name) %>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
                         时间限制
                     </th>
                     <td>
@@ -235,6 +265,16 @@
                     </th>
                     <td>
                         AnswerOnly
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        创建者
+                    </th>
+                    <td>
+                        <a id="A3" runat="server" href='<%#"~/User/?id="+testCase.CreatedBy.ID %>'>
+                            <%#HttpUtility.HtmlEncode(testCase.CreatedBy.Name) %>
+                        </a>
                     </td>
                 </tr>
                 <tr>

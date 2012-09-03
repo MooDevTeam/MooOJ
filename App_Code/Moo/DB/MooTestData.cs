@@ -197,7 +197,8 @@ namespace Moo.DB
                 Answer = Encoding.ASCII.GetBytes("mnbvcxzasdfghjklpoiuytrewq"),
                 TimeLimit = 1000,
                 MemoryLimit = 1024 * 1024 * 6,
-                Score = 12
+                Score = 12,
+                CreatedBy=MrPhone
             });
             db.SaveChanges();
 
@@ -208,7 +209,8 @@ namespace Moo.DB
                 Answer = Encoding.ASCII.GetBytes("3"),
                 TimeLimit = 1000,
                 MemoryLimit = 60 * 1024 * 1024,
-                Score = 50
+                Score = 50,
+                CreatedBy = MrPhone
             });
 
             db.TestCases.AddObject(new TranditionalTestCase()
@@ -218,7 +220,8 @@ namespace Moo.DB
                 Answer = Encoding.ASCII.GetBytes("445"),
                 TimeLimit = 1000,
                 MemoryLimit = 60 * 1024 * 1024,
-                Score = 50
+                Score = 50,
+                CreatedBy = MrPhone
             });
 
             db.TestCases.AddObject(new SpecialJudgedTestCase()
@@ -228,7 +231,8 @@ namespace Moo.DB
                 Answer = Encoding.ASCII.GetBytes("Miao~"),
                 TimeLimit = 1000,
                 MemoryLimit = 60 * 1024 * 1024,
-                Judger = file
+                Judger = file,
+                CreatedBy = MrPhone
             });
 
             file = new UploadedFile()
@@ -244,7 +248,8 @@ namespace Moo.DB
                 TestData = Encoding.ASCII.GetBytes("1123 3212"),
                 TimeLimit = 1000,
                 MemoryLimit = 60 * 1024 * 1024,
-                Invoker = file
+                Invoker = file,
+                CreatedBy = MrPhone
             });
 
             db.TestCases.AddObject(new InteractiveTestCase()
@@ -253,7 +258,8 @@ namespace Moo.DB
                 TestData = Encoding.ASCII.GetBytes("1 3"),
                 TimeLimit = 1000,
                 MemoryLimit = 60 * 1024 * 1024,
-                Invoker = file
+                Invoker = file,
+                CreatedBy = MrPhone
             });
 
             file = new UploadedFile()
@@ -268,6 +274,7 @@ namespace Moo.DB
                 Problem = AnswerAPlusB,
                 TestData = Encoding.ASCII.GetBytes("23 345"),
                 Judger = file,
+                CreatedBy = MrPhone
             };
             db.TestCases.AddObject(answerOnlyTestCase1);
 
@@ -276,6 +283,7 @@ namespace Moo.DB
                 Problem = AnswerAPlusB,
                 TestData = Encoding.ASCII.GetBytes("453 123"),
                 Judger = file,
+                CreatedBy = MrPhone
             };
             db.TestCases.AddObject(answerOnlyTestCase2);
 

@@ -59,6 +59,8 @@ public partial class TestCase_Create : System.Web.UI.Page
                 if (!Permission.Check("testcase.create", false)) return;
             }
 
+            User currentUser = ((SiteUser)User.Identity).GetDBUser(db);
+
             TestCase testCase;
             if (problem.Type == "Tranditional")
             {
@@ -69,7 +71,8 @@ public partial class TestCase_Create : System.Web.UI.Page
                     MemoryLimit = int.Parse(txtMemoryLimit.Text),
                     Input = fileInput.FileBytes,
                     Answer = fileAnswer.FileBytes,
-                    Problem = problem
+                    Problem = problem,
+                    CreatedBy = currentUser
                 };
             }
             else if (problem.Type == "SpecialJudged")
@@ -85,7 +88,8 @@ public partial class TestCase_Create : System.Web.UI.Page
                     Input = fileInput.FileBytes,
                     Answer = fileAnswer.FileBytes,
                     Judger = judger,
-                    Problem = problem
+                    Problem = problem,
+                    CreatedBy = currentUser
                 };
             }
             else if (problem.Type == "Interactive")
@@ -101,6 +105,7 @@ public partial class TestCase_Create : System.Web.UI.Page
                     TimeLimit = int.Parse(txtTimeLimit.Text),
                     Problem = problem,
                     TestData = fileTestData.FileBytes,
+                    CreatedBy = currentUser
                 };
             }
             else if (problem.Type == "AnswerOnly")
@@ -114,6 +119,7 @@ public partial class TestCase_Create : System.Web.UI.Page
                     Judger = judger,
                     Problem = problem,
                     TestData = fileTestData.FileBytes,
+                    CreatedBy = currentUser
                 };
             }
             else

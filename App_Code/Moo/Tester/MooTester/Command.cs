@@ -15,18 +15,18 @@ namespace Moo.Tester.MooTester
                 "c++",
                 new Dictionary<string,string>()
                 {
-                    {"src2exe","g++ -o {Execute} {E.exeE} {Source} {S.cppS}"},
-                    {"src2obj","g++ -c -o {Execute} {E.oE} {Source} {S.cppS}"},
-                    {"obj2exe","g++ -o {Execute} {E.exeE} {Object}"}
+                    {"src2exe","g++ -Wall -O2 -std=c++0x -o {Execute} {E.exeE} {Source} {S.cppS}"},
+                    {"src2obj","g++ -Wall -O2 -std=c++0x -c -o {Execute} {E.oE} {Source} {S.cppS}"},
+                    {"obj2exe","g++ -Wall -O2 -std=c++0x -o {Execute} {E.exeE} {Object}"}
                 }
             },
             {
                 "c",
                 new Dictionary<string,string>()
                 {
-                    {"src2exe","gcc -o {Execute} {E.exeE} {Source} {S.cS}"},
-                    {"src2obj","gcc -c -o {Execute} {E.oE} {Source} {S.cS}"},
-                    {"obj2exe","gcc -o {Execute} {E.exeE} {Object}"}
+                    {"src2exe","gcc -Wall -O2 -o {Execute} {E.exeE} {Source} {S.cS}"},
+                    {"src2obj","gcc -Wall -O2 -c -o {Execute} {E.oE} {Source} {S.cS}"},
+                    {"obj2exe","gcc -Wall -O2 -o {Execute} {E.exeE} {Object}"}
                 }
             },
             {
