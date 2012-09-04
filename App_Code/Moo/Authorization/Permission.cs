@@ -16,6 +16,11 @@ namespace Moo.Authorization
             return Check(permission, allowAnonymous, true);
         }
 
+        public static bool Check(SiteRole role, string permission)
+        {
+            return role.AllowedFunction.Contains(permission);
+        }
+
         public static bool Check(string permission, bool allowAnonymous, bool autoRedirect)
         {
             bool result;
