@@ -40,7 +40,7 @@ public partial class User_Register : System.Web.UI.Page
                 Role = SiteRoles.ByType[RoleType.NormalUser].GetDBRole(db),
                 BriefDescription = "我很懒，什么都没留下~",
                 Description="我懒到头了，*真的*啥都没写",
-                ImageURL = "",
+                Email = "",
                 Score=0
             };
             db.Users.AddObject(user);

@@ -91,7 +91,7 @@ public partial class User_Modify : System.Web.UI.Page
             }
 
             user.Role = SiteRoles.ByID[int.Parse(ddlRole.SelectedValue)].GetDBRole(db);
-            user.ImageURL = txtImageURL.Text;
+            user.Email = txtEmail.Text;
             user.BriefDescription = txtBriefDescription.Text;
             user.Description = txtDescription.Text;
 

@@ -1,8 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="UserSign.ascx.cs" Inherits="UserSign" %>
 <%@ Import Namespace="Moo.Authorization" %>
 <div runat="server" id="signWrap" class='<%#Vertical?"signWrapVertical":"signWrap" %>'>
-    <img class="signImage" runat="server" src="<%#HttpUtility.HtmlAttributeEncode(user.ImageURL)%>"
-        alt="" />
+    <asp:Literal ID="signRememberEmail" runat="server" Text='<%#user.Email %>' Visible="false"></asp:Literal>
+    <ajax:Gravatar ID="signImage" CssClass="signImage" runat="server" DefaultImageBehavior="MysteryMan" Email='<%#signRememberEmail.Text %>' Size='<%#Vertical?120:80 %>'/>
     <div class="signRight">
         <div class="signName">
             <a runat="server" class="signNameLink" href='<%#"~/User/?id="+user.ID %>' title='<%#user.Role.DisplayName %>'>

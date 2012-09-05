@@ -25,11 +25,10 @@
                 <asp:TextBox ID="txtName" runat="server" Width="100%" Text='<%#user.Name %>' Enabled='<%#Permission.Check("user.name.modify",false,false) %>'></asp:TextBox>
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtName" Display="Dynamic"
                     CssClass="validator">不能为空</asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtName"
-                    ValidationExpression=".{1,20}" Display="Dynamic" CssClass="validator">长度需在1~20位之间</asp:RegularExpressionValidator>
-                <asp:CustomValidator ID="validateName" runat="server" 
-                    ControlToValidate="txtName" Display="Dynamic"
-                    CssClass="validator" onservervalidate="validateName_ServerValidate">用户名已被抢注</asp:CustomValidator>
+                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtName" ValidationExpression=".{1,20}"
+                    Display="Dynamic" CssClass="validator">长度需在1~20位之间</asp:RegularExpressionValidator>
+                <asp:CustomValidator ID="validateName" runat="server" ControlToValidate="txtName"
+                    Display="Dynamic" CssClass="validator" OnServerValidate="validateName_ServerValidate">用户名已被抢注</asp:CustomValidator>
                 <asp:Button ID="btnForceLogout" runat="server" CausesValidation="false" Text="强制登出"
                     OnClick="btnForceLogout_Click" />
             </td>
@@ -71,10 +70,13 @@
         </tr>
         <tr>
             <th>
-                头像URL
+                电子邮箱
             </th>
             <td>
-                <asp:TextBox ID="txtImageURL" runat="server" Width="100%" Text='<%#user.ImageURL %>'></asp:TextBox>
+                <b><span style="color:Red;">注意</span>：您的头像将会根据这个电子邮箱，从<a href="https://gravatar.com/">Gavatar</a>获取，详见<a runat="server" href="~/Help/?id=15">快速入门-用户页的使用与用户之间的比较</a>。</b><br/>
+                <asp:TextBox ID="txtEmail" runat="server" Width="100%" Text='<%#user.Email %>'></asp:TextBox>
+                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtEmail" ValidationExpression=".+@.+\..+"
+                    Display="Dynamic" CssClass="validator">格式错误</asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr>

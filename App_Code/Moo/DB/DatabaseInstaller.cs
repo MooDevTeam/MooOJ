@@ -389,7 +389,7 @@ namespace Moo.DB
                 Password = Moo.Utility.Converter.ToSHA256Hash(WebConfigurationManager.AppSettings["install.owner.password"]),
                 BriefDescription = "这个账户为Moo的拥有者准备",
                 Description = "",
-                ImageURL = "",
+                Email = "",
                 Role = Organizer,
                 Score = 0,
             };

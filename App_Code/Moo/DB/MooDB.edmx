@@ -161,7 +161,7 @@
     <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
     <Property Name="Password" Type="char" Nullable="false" MaxLength="64" />
     <Property Name="BriefDescription" Type="nvarchar" Nullable="false" MaxLength="40" />
-    <Property Name="ImageURL" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Score" Type="int" Nullable="false" />
     <Property Name="Role_ID" Type="int" Nullable="false" />
@@ -910,7 +910,7 @@
           <Property Type="String" Name="Password" Nullable="false" MaxLength="64" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="Role" Relationship="Moo.DB.UserRole" FromRole="User" ToRole="Role" />
           <Property Type="String" Name="BriefDescription" Nullable="false" MaxLength="40" />
-          <Property Type="String" Name="ImageURL" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="false" />
           <Property Type="String" Name="Description" Nullable="false" />
           <Property Type="Int32" Name="Score" Nullable="false" />
           <NavigationProperty Name="Record" Relationship="Moo.DB.UserRecord" FromRole="User" ToRole="Record" />
@@ -1241,7 +1241,7 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="BriefDescription" ColumnName="BriefDescription" />
-          <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Score" ColumnName="Score" />
         </MappingFragment>

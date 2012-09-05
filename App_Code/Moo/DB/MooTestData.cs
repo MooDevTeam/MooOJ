@@ -26,7 +26,7 @@ namespace Moo.DB
                 Role = SiteRoles.ByType[RoleType.Organizer].GetDBRole(db),
                 BriefDescription = "我觉得我写这么多应该够两行了",
                 Description = "我是--屌丝--我骄傲，我为国家省钞票!",
-                ImageURL = "https://www.google.com.hk/intl/zh-CN_cn/images/logos/images_logo_lg.gif",
+                Email = "onetwogoo@live.com",
                 Score = 256,
             };
             db.Users.AddObject(MrPhone);
@@ -38,7 +38,7 @@ namespace Moo.DB
                 Role = SiteRoles.ByType[RoleType.Worker].GetDBRole(db),
                 BriefDescription = "我觉得我写这么多应该够两行了",
                 Description = "Moo*真*他妈的好！",
-                ImageURL = "http://www.baidu.com/img/baidu_sylogo1.gif",
+                Email = "sunjiayu_2006@126.com",
                 Score = 128,
             };
             db.Users.AddObject(ShaBi);
@@ -50,7 +50,7 @@ namespace Moo.DB
                 Role = SiteRoles.ByType[RoleType.NormalUser].GetDBRole(db),
                 BriefDescription = "我啥都不懂",
                 Description = "真不懂",
-                ImageURL = "http://www.9thome.com/ggb/upload/f86432898c354fec8915b0c03e368232.jpg",
+                Email = "helloyuhao@gmail.com",
                 Score = 1000,
             };
             db.Users.AddObject(Baby);
@@ -62,7 +62,7 @@ namespace Moo.DB
                 Role = SiteRoles.ByType[RoleType.Malefactor].GetDBRole(db),
                 BriefDescription = "冤枉啊!啥都没干就被封了！",
                 Description = "太他妈冤枉了！",
-                ImageURL = "http://www.idaocao.com/daocaoeditor/2009_image/201104/201141910409550.jpg",
+                Email = "",
                 Score = 0,
             });
 

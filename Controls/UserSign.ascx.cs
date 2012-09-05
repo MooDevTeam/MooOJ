@@ -9,6 +9,8 @@ using Moo.DB;
 using Moo.Authorization;
 public partial class UserSign : System.Web.UI.UserControl
 {
+    //protected string userEmail;
+
     protected User user;
     public User User
     {
@@ -61,5 +63,23 @@ public partial class UserSign : System.Web.UI.UserControl
         }
     }
 
-    public bool Vertical { get; set; }
+    public bool Vertical
+    {
+        get
+        {
+            return ViewState["vertical"] == null ? false : (bool)ViewState["vertical"];
+        }
+        set
+        {
+            ViewState["vertical"] = value;
+        }
+    }
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (Page.IsPostBack)
+        {
+            signImage.DataBind();
+        }
+    }
 }
