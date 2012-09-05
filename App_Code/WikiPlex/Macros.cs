@@ -34,7 +34,7 @@ namespace WikiPlex
             Register<ListMacro>();
             Register<EscapedMarkupMacro>();
             Register<SyndicatedFeedMacro>();
-            Register<SilverlightMacro>();
+            //Register<SilverlightMacro>();
             Register<VideoMacro>();
             Register<TableMacro>();
             Register<ContentLeftAlignmentMacro>();

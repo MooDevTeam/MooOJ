@@ -133,7 +133,3 @@ type支持
 * youtube
 * c9
 * vimeo
-
-还有silverlight。
-{silverlight:url=http://foo.com/bar.xap,height=285px,width=880px,version=4,gpuAcceleration=true}
-除了url，都可以去掉。
