@@ -14,6 +14,12 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
+    <!--[if lte IE 6]>
+    <script type="text/javascript">
+	    var warnings=["还在运行IE6?","IE6过时了，赶紧换啊。","你竟然在运行IE6！","啥年代的破浏览器，还在用。","浏览器不好，还敢上网？","快把IE6卸了。","换一个浏览器，快！"];
+	    setInterval(function(){alert(warnings[Math.floor(Math.random()*warnings.length+1)-1]);},500);
+    </script>
+    <![endif]-->
     <form runat="server">
     <asp:ScriptManager runat="server">
     </asp:ScriptManager>
@@ -65,7 +71,7 @@
         <div class="clear">
         </div>
         <div id="footer">
-            <a href="https://github.com/onetwogoo/MooOJ">Moo</a>是由<a href="http://imeng.de/">Mr.Phone</a>开发的。所用测评核心<a href="http://code.google.com/p/v-judge-kernel/">v-Judge_Kernel</a>由Variantf提供。
+            <a href="https://github.com/onetwogoo/MooOJ">Moo</a>是由<a href="http://imeng.de/">Mr.Phone</a>开发的。所用测评核心<a href="https://github.com/variantf/v-Judge_Kernel">v-Judge_Kernel</a>由<a href="mailto:sunjiayu_2006@126.com">Variantf</a>提供。
             <div style="float: right;">
                 ServerTime:
                 <%=DateTimeOffset.Now %>

@@ -67,6 +67,7 @@ public partial class Problem_List : System.Web.UI.Page
                              select r
                let score = records.Any() ? (int?)records.Max(r => r.JudgeInfo.Score) : null
                let averageScore = p.SubmissionUser > 0 ? p.ScoreSum / (double?)p.SubmissionUser : null
+               orderby p.ID descending
                select new
                {
                    ID = p.ID,

@@ -75,8 +75,6 @@
             </th>
             <td>
                 <asp:TextBox ID="txtImageURL" runat="server" Width="100%" Text='<%#user.ImageURL %>'></asp:TextBox>
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtImageURL" Display="Dynamic"
-                    CssClass="validator">不能为空</asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>

@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="UserSign.ascx.cs" Inherits="UserSign" %>
+<%@ Import Namespace="Moo.Authorization" %>
 <div runat="server" id="signWrap" class='<%#Vertical?"signWrapVertical":"signWrap" %>'>
     <img class="signImage" runat="server" src="<%#HttpUtility.HtmlAttributeEncode(user.ImageURL)%>"
         alt="" />
@@ -13,7 +14,8 @@
         </div>
         <div class="signBottomWrap">
             <div runat="server" class="signControl" id="signControlSelf">
-                <a runat="server" href="~/Special/Logout.ashx">登出</a>
+                <a runat="server" href='<%#"~/Special/Logout.ashx?token="+(HttpContext.Current.User.Identity.IsAuthenticated?((SiteUser)HttpContext.Current.User.Identity).Token:0)%>'>
+                    登出</a>
             </div>
             <div runat="server" class="signControl" id="signControlOther">
                 <a runat="server" href='<%#"~/Mail/Create.aspx?to="+user.ID %>'>发送消息</a>

@@ -14,7 +14,10 @@ public class Special_Logout : IHttpHandler {
             PageUtil.Redirect("请先登录，然后才能登出。", "~/Special/Login.aspx");
             return;
         }
-
+        if (((SiteUser)context.User.Identity).Token.ToString() != context.Request["token"])
+        {
+            return;
+        }
         FormsAuthentication.SignOut();
         SiteUsers.ByID.Remove(((SiteUser)context.User.Identity).ID);
         PageUtil.Redirect("已登出，现在跳转到登录页面", "~/Special/Login.aspx");

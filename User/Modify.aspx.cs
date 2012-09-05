@@ -96,6 +96,14 @@ public partial class User_Modify : System.Web.UI.Page
             user.Description = txtDescription.Text;
 
             db.SaveChanges();
+
+            //Refresh SiteUser
+            if (SiteUsers.ByID.ContainsKey(user.ID))
+            {
+                siteUser = SiteUsers.ByID[user.ID];
+                siteUser.Role = SiteRoles.ByID[user.Role.ID];
+                siteUser.Name = user.Name;
+            }
         }
 
         PageUtil.Redirect("操作成功", "~/User/?id=" + userID);
