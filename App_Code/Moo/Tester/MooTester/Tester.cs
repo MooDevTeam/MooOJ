@@ -65,6 +65,9 @@ namespace Moo.Tester.MooTester
                     case Out.ResultType.CompareError:
                         sb.AppendLine(Resources.Moo.MooTester_TestCompareError);
                         break;
+                    case Out.ResultType.OutputLimitExceeded:
+                        sb.AppendLine(Resources.Moo.MooTester_TestOLE);
+                        break;
                     default:
                         sb.AppendLine(Resources.Moo.MooTester_TestUndefinedError);
                         break;
@@ -131,6 +134,9 @@ namespace Moo.Tester.MooTester
                         break;
                     case Out.ResultType.CompareError:
                         sb.AppendLine(Resources.Moo.MooTester_TestCompareError);
+                        break;
+                    case Out.ResultType.OutputLimitExceeded:
+                        sb.AppendLine(Resources.Moo.MooTester_TestOLE);
                         break;
                     default:
                         sb.AppendLine(Resources.Moo.MooTester_TestUndefinedError);
@@ -201,6 +207,9 @@ namespace Moo.Tester.MooTester
                     case Out.ResultType.MemoryLimitExceeded:
                         sb.AppendLine(Resources.Moo.MooTester_TestMLE);
                         break;
+                    case Out.ResultType.OutputLimitExceeded:
+                        sb.AppendLine(Resources.Moo.MooTester_TestOLE);
+                        break;
                     default:
                         sb.AppendLine(Resources.Moo.MooTester_TestUndefinedError);
                         break;
@@ -264,6 +273,9 @@ namespace Moo.Tester.MooTester
                     case Out.ResultType.MemoryLimitExceeded:
                         sb.AppendLine(Resources.Moo.MooTester_TestMLE);
                         break;
+                    case Out.ResultType.OutputLimitExceeded:
+                        sb.AppendLine(Resources.Moo.MooTester_TestOLE);
+                        break;
                     default:
                         sb.AppendLine(Resources.Moo.MooTester_TestUndefinedError);
                         break;
@@ -303,6 +315,14 @@ namespace Moo.Tester.MooTester
                         socket.Connect(Resources.Moo.MooTester_TesterIP, int.Parse(Resources.Moo.MooTester_TesterPort));
                         //TODO: FIXME ReceiveTimeout
                         socket.SendTimeout = int.Parse(Resources.Moo.MooTester_SocketSendTimeout);
+                        using (MemoryStream mem = new MemoryStream())
+                        {
+                            using (BinaryWriter writer = new BinaryWriter(mem))
+                            {
+                                writer.Write(34659308463532339L);
+                            }
+                            socket.Send(mem.ToArray());
+                        }
                         return func(socket);
                     }
                 }
@@ -375,6 +395,15 @@ namespace Moo.Tester.MooTester
                                 {
                                     Score = 0,
                                     Info = Resources.Moo.MooTester_CompilerMLE
+                                }
+                    };
+                case Out.ResultType.OutputLimitExceeded:
+                    throw new MooTesterException()
+                    {
+                        Result = new TestResult()
+                                {
+                                    Score=0,
+                                    Info=Resources.Moo.MooTester_CompileOLE
                                 }
                     };
                 default:

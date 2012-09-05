@@ -12,7 +12,7 @@ namespace Moo.Tester.MooTester
     {
         public enum ResultType : uint
         {
-            Success, WrongAnswer, TimeLimitExceeded, RuntimeError, MemoryLimitExceeded, CompareError
+            Success, WrongAnswer, TimeLimitExceeded, RuntimeError, MemoryLimitExceeded, CompareError,OutputLimitExceeded
         }
 
         public ResultType Type { get; set; }

@@ -215,4 +215,10 @@
     <value>5000</value>
     <comment>5s</comment>
   </data>
+  <data name="MooTester_CompileOLE" xml:space="preserve">
+    <value>&lt;color:red|*您程序的恶心让编译器不住地吐槽*&gt;</value>
+  </data>
+  <data name="MooTester_TestOLE" xml:space="preserve">
+    <value>&lt;color:cyan|程序吐槽过多。&gt;</value>
+  </data>
 </root>
