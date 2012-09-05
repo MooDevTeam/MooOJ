@@ -4282,17 +4282,17 @@ namespace Moo.DB
         /// <param name="name">Name 属性的初始值。</param>
         /// <param name="password">Password 属性的初始值。</param>
         /// <param name="briefDescription">BriefDescription 属性的初始值。</param>
-        /// <param name="imageURL">ImageURL 属性的初始值。</param>
+        /// <param name="email">Email 属性的初始值。</param>
         /// <param name="description">Description 属性的初始值。</param>
         /// <param name="score">Score 属性的初始值。</param>
-        public static User CreateUser(global::System.Int32 id, global::System.String name, global::System.String password, global::System.String briefDescription, global::System.String imageURL, global::System.String description, global::System.Int32 score)
+        public static User CreateUser(global::System.Int32 id, global::System.String name, global::System.String password, global::System.String briefDescription, global::System.String email, global::System.String description, global::System.Int32 score)
         {
             User user = new User();
             user.ID = id;
             user.Name = name;
             user.Password = password;
             user.BriefDescription = briefDescription;
-            user.ImageURL = imageURL;
+            user.Email = email;
             user.Description = description;
             user.Score = score;
             return user;
@@ -4405,24 +4405,24 @@ namespace Moo.DB
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String ImageURL
+        public global::System.String Email
         {
             get
             {
-                return _ImageURL;
+                return _Email;
             }
             set
             {
-                OnImageURLChanging(value);
-                ReportPropertyChanging("ImageURL");
-                _ImageURL = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("ImageURL");
-                OnImageURLChanged();
+                OnEmailChanging(value);
+                ReportPropertyChanging("Email");
+                _Email = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Email");
+                OnEmailChanged();
             }
         }
-        private global::System.String _ImageURL;
-        partial void OnImageURLChanging(global::System.String value);
-        partial void OnImageURLChanged();
+        private global::System.String _Email;
+        partial void OnEmailChanging(global::System.String value);
+        partial void OnEmailChanged();
     
         /// <summary>
         /// 没有元数据文档可用。
