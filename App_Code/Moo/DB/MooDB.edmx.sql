@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 09/05/2012 16:57:46
+-- Date Created: 09/06/2012 11:33:52
 -- Generated from EDMX file: D:\WebSites\MooOJ\App_Code\Moo\DB\MooDB.edmx
 -- --------------------------------------------------
 
@@ -361,6 +361,16 @@ CREATE TABLE [dbo].[HomepageRevisions] (
 );
 GO
 
+-- Creating table 'Logs'
+CREATE TABLE [dbo].[Logs] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [CreateTime] datetimeoffset  NOT NULL,
+    [Level] tinyint  NOT NULL,
+    [Info] nvarchar(max)  NOT NULL,
+    [User_ID] int  NULL
+);
+GO
+
 -- Creating table 'TestCases_SpecialJudgedTestCase'
 CREATE TABLE [dbo].[TestCases_SpecialJudgedTestCase] (
     [Input] varbinary(max)  NOT NULL,
@@ -513,6 +523,12 @@ GO
 -- Creating primary key on [ID] in table 'HomepageRevisions'
 ALTER TABLE [dbo].[HomepageRevisions]
 ADD CONSTRAINT [PK_HomepageRevisions]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'Logs'
+ALTER TABLE [dbo].[Logs]
+ADD CONSTRAINT [PK_Logs]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
@@ -923,6 +939,20 @@ ADD CONSTRAINT [FK_UserTestCase]
 CREATE INDEX [IX_FK_UserTestCase]
 ON [dbo].[TestCases]
     ([CreatedBy_ID]);
+GO
+
+-- Creating foreign key on [User_ID] in table 'Logs'
+ALTER TABLE [dbo].[Logs]
+ADD CONSTRAINT [FK_LogUser]
+    FOREIGN KEY ([User_ID])
+    REFERENCES [dbo].[Users]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_LogUser'
+CREATE INDEX [IX_FK_LogUser]
+ON [dbo].[Logs]
+    ([User_ID]);
 GO
 
 -- Creating foreign key on [ID] in table 'TestCases_SpecialJudgedTestCase'

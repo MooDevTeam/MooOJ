@@ -48,7 +48,10 @@
     void Session_Start(object sender, EventArgs e)
     {
         //在新会话启动时运行的代码
-
+        using (MooDB db = new MooDB())
+        {
+            Logger.Info(db, "访问");
+        }
     }
 
     void Session_End(object sender, EventArgs e)
@@ -70,18 +73,19 @@
             int userID = int.Parse(splited[0]);
             int token = int.Parse(splited[1]);
 
-            SiteUser siteUser;
-            if (!SiteUsers.ByID.ContainsKey(userID) || (siteUser = SiteUsers.ByID[userID]).Token != token)
+            if (!SiteUsers.ByID.ContainsKey(userID) || ((HttpContext.Current.User = new CustomPrincipal() { Identity = SiteUsers.ByID[userID] }).Identity as SiteUser).Token != token)
             {
+                using (MooDB db = new MooDB())
+                {
+                    Logger.Warning(db, "Token无效");
+                }
                 FormsAuthentication.SignOut();
                 SiteUsers.ByID.Remove(userID);
                 Response.Redirect("~/Special/Security.aspx", true);
                 return;
             }
 
-            CustomPrincipal principal = new CustomPrincipal() { Identity = siteUser };
-            HttpContext.Current.User = principal;
-            Thread.CurrentPrincipal = principal;
+            Thread.CurrentPrincipal = HttpContext.Current.User;
         }
     }
 </script>

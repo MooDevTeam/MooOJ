@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Diagnostics;
 using System.IO;
+using System.Security.Principal;
+using Moo.DB;
+using Moo.Authorization;
 namespace Moo.Utility
 {
     /// <summary>
@@ -14,9 +17,9 @@ namespace Moo.Utility
         //public const string LOG_FILE = "D:\\MooError.log";
         public static void Log(Exception e)
         {
-            Log(e.ToString(),2);
+            Log(e.ToString(), 2);
         }
-        public static void Log(string message,int frameID=1)
+        public static void Log(string message, int frameID = 1)
         {
             StackTrace stack = new StackTrace(true);
 
@@ -29,6 +32,77 @@ namespace Moo.Utility
             EventLog log = new EventLog("Moo");
             log.Source = "Moo";
             log.WriteEntry(logItem, EventLogEntryType.Error);
+        }
+
+        public static User GetCurrentUser(MooDB db)
+        {
+            IIdentity identity = (IIdentity)HttpContext.Current.User.Identity;
+            User currentUser = null;
+            if (identity is SiteUser)
+            {
+                currentUser = ((SiteUser)identity).GetDBUser(db);
+            }
+            return currentUser;
+        }
+
+        public static void Debug(MooDB db, string info)
+        {
+            db.Logs.AddObject(new Log()
+            {
+                CreateTime = DateTimeOffset.Now,
+                Level = (byte)LogLevel.Debug,
+                User = GetCurrentUser(db),
+                Info = info
+            });
+            db.SaveChanges();
+        }
+
+        public static void Info(MooDB db, string info)
+        {
+            db.Logs.AddObject(new Log()
+            {
+                CreateTime = DateTimeOffset.Now,
+                Level = (byte)LogLevel.Info,
+                User = GetCurrentUser(db),
+                Info = info
+            });
+            db.SaveChanges();
+        }
+
+        public static void Warning(MooDB db, string info)
+        {
+            db.Logs.AddObject(new Log()
+            {
+                CreateTime = DateTimeOffset.Now,
+                Level = (byte)LogLevel.Warning,
+                User = GetCurrentUser(db),
+                Info = info
+            });
+            db.SaveChanges();
+        }
+
+        public static void Error(MooDB db, string info)
+        {
+            db.Logs.AddObject(new Log()
+            {
+                CreateTime = DateTimeOffset.Now,
+                Level = (byte)LogLevel.Error,
+                User = GetCurrentUser(db),
+                Info = info
+            });
+            db.SaveChanges();
+        }
+
+        public static void Fatal(MooDB db, string info)
+        {
+            db.Logs.AddObject(new Log()
+            {
+                CreateTime = DateTimeOffset.Now,
+                Level = (byte)LogLevel.Fatal,
+                User = GetCurrentUser(db),
+                Info = info
+            });
+            db.SaveChanges();
         }
     }
 }
