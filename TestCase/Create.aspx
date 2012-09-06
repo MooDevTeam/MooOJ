@@ -39,7 +39,7 @@
         </tr>
         <tr runat="server" visible='<%#problem.Type=="Tranditional" || problem.Type=="SpecialJudged" || problem.Type=="Interactive" %>'>
             <th>
-                时间限制
+                时间限制(ms)
             </th>
             <td>
                 <asp:TextBox ID="txtTimeLimit" runat="server" Width="100%"></asp:TextBox>
@@ -53,7 +53,7 @@
         </tr>
         <tr runat="server" visible='<%#problem.Type=="Tranditional" || problem.Type=="SpecialJudged" || problem.Type=="Interactive" %>'>
             <th>
-                内存限制
+                内存限制(byte)
             </th>
             <td>
                 <asp:TextBox ID="txtMemoryLimit" runat="server" Width="100%"></asp:TextBox>
