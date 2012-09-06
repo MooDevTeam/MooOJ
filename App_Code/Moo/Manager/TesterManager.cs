@@ -40,6 +40,10 @@ namespace Moo.Manager
             shouldStop = false;
             testThread = new Thread(new ThreadStart(ThreadMain));
             testThread.Start();
+            using (MooDB db = new MooDB())
+            {
+                Logger.Info(db, "评测进程启动");
+            }
         }
 
         public static void Stop()
@@ -48,6 +52,11 @@ namespace Moo.Manager
             testThread.Interrupt();
             testThread.Join();
             testThread = null;
+
+            using (MooDB db = new MooDB())
+            {
+                Logger.Info(db, "评测进程停止");
+            }
         }
 
         static void ThreadMain()
@@ -62,7 +71,10 @@ namespace Moo.Manager
                 {
                     if (!(e is ThreadInterruptedException))
                     {
-                        Logger.Log(e);
+                        using (MooDB db = new MooDB())
+                        {
+                            Logger.Fatal(db, e.ToString());
+                        }
                     }
                 }
             }
@@ -92,8 +104,12 @@ namespace Moo.Manager
                     };
                     db.SaveChanges();
 
+                    Logger.Info(db, "开始评测记录#" + record.ID);
+
                     Test(db, record);
                     db.SaveChanges();
+
+                    Logger.Info(db, "记录#" + record.ID + "评测完成");
 
                     return 0;
                 }

@@ -48,10 +48,10 @@ namespace Moo.Tester.MooTester
                 {
                     case Out.ResultType.Success:
                         score += testCase.Score;
-                        sb.AppendLine(string.Format(Resources.Moo.MooTester_TestSuccess, testCase.Score, testResult.Time, testResult.Memory, testResult.Message.Replace('\r',' ').Replace('\n',' ')));
+                        sb.AppendLine(string.Format(Resources.Moo.MooTester_TestSuccess, testCase.Score, testResult.Time, testResult.Memory, testResult.Message.Replace('\r', ' ').Replace('\n', ' ')));
                         break;
                     case Out.ResultType.WrongAnswer:
-                        sb.AppendLine(string.Format(Resources.Moo.MooTester_TestWA, 0, testResult.Time, testResult.Memory, testResult.Message.Replace('\r',' ').Replace('\n', ' ')));
+                        sb.AppendLine(string.Format(Resources.Moo.MooTester_TestWA, 0, testResult.Time, testResult.Memory, testResult.Message.Replace('\r', ' ').Replace('\n', ' ')));
                         break;
                     case Out.ResultType.TimeLimitExceeded:
                         sb.AppendLine(Resources.Moo.MooTester_TestTLE);
@@ -116,12 +116,12 @@ namespace Moo.Tester.MooTester
                     case Out.ResultType.Success:
                         currentScore = GetScore(ref testResult.Message);
                         score += currentScore;
-                        sb.AppendLine(string.Format(Resources.Moo.MooTester_TestSuccess, currentScore, testResult.Time, testResult.Memory, testResult.Message.Replace('\r',' ').Replace('\n', ' ')));
+                        sb.AppendLine(string.Format(Resources.Moo.MooTester_TestSuccess, currentScore, testResult.Time, testResult.Memory, testResult.Message.Replace('\r', ' ').Replace('\n', ' ')));
                         break;
                     case Out.ResultType.WrongAnswer:
                         currentScore = GetScore(ref testResult.Message);
                         score += currentScore;
-                        sb.AppendLine(string.Format(Resources.Moo.MooTester_TestWA, currentScore, testResult.Time, testResult.Memory, testResult.Message.Replace('\r',' ').Replace('\n', ' ')));
+                        sb.AppendLine(string.Format(Resources.Moo.MooTester_TestWA, currentScore, testResult.Time, testResult.Memory, testResult.Message.Replace('\r', ' ').Replace('\n', ' ')));
                         break;
                     case Out.ResultType.TimeLimitExceeded:
                         sb.AppendLine(Resources.Moo.MooTester_TestTLE);
@@ -191,12 +191,12 @@ namespace Moo.Tester.MooTester
                     case Out.ResultType.Success:
                         currentScore = GetScore(ref result.Message);
                         score += currentScore;
-                        sb.AppendLine(string.Format(Resources.Moo.MooTester_TestSuccess, currentScore, result.Time, result.Memory, result.Message.Replace('\r',' ').Replace('\n', ' ')));
+                        sb.AppendLine(string.Format(Resources.Moo.MooTester_TestSuccess, currentScore, result.Time, result.Memory, result.Message.Replace('\r', ' ').Replace('\n', ' ')));
                         break;
                     case Out.ResultType.WrongAnswer:
                         currentScore = GetScore(ref result.Message);
                         score += currentScore;
-                        sb.AppendLine(string.Format(Resources.Moo.MooTester_TestWA, currentScore, result.Time, result.Memory, result.Message.Replace('\r',' ').Replace('\n', ' ')));
+                        sb.AppendLine(string.Format(Resources.Moo.MooTester_TestWA, currentScore, result.Time, result.Memory, result.Message.Replace('\r', ' ').Replace('\n', ' ')));
                         break;
                     case Out.ResultType.TimeLimitExceeded:
                         sb.AppendLine(Resources.Moo.MooTester_TestTLE);
@@ -257,12 +257,12 @@ namespace Moo.Tester.MooTester
                     case Out.ResultType.Success:
                         currentScore = GetScore(ref result.Message);
                         score += currentScore;
-                        sb.AppendLine(string.Format(Resources.Moo.MooTester_TestSuccess, currentScore, result.Time, result.Memory, result.Message.Replace('\r',' ').Replace('\n', ' ')));
+                        sb.AppendLine(string.Format(Resources.Moo.MooTester_TestSuccess, currentScore, result.Time, result.Memory, result.Message.Replace('\r', ' ').Replace('\n', ' ')));
                         break;
                     case Out.ResultType.WrongAnswer:
                         currentScore = GetScore(ref result.Message);
                         score += currentScore;
-                        sb.AppendLine(string.Format(Resources.Moo.MooTester_TestWA, currentScore, result.Time, result.Memory, result.Message.Replace('\r',' ').Replace('\n', ' ')));
+                        sb.AppendLine(string.Format(Resources.Moo.MooTester_TestWA, currentScore, result.Time, result.Memory, result.Message.Replace('\r', ' ').Replace('\n', ' ')));
                         break;
                     case Out.ResultType.TimeLimitExceeded:
                         sb.AppendLine(Resources.Moo.MooTester_TestTLE);
@@ -336,7 +336,10 @@ namespace Moo.Tester.MooTester
                     return e.Result;
                 }
             }
-            Logger.Log("Many SocketExceptions In MooTester");
+            using (MooDB db = new MooDB())
+            {
+                Logger.Warning(db, "MooTester与评测机之间出现多次网络异常");
+            }
             return new TestResult()
             {
                 Score = 0,
@@ -402,8 +405,8 @@ namespace Moo.Tester.MooTester
                     {
                         Result = new TestResult()
                                 {
-                                    Score=0,
-                                    Info=Resources.Moo.MooTester_CompileOLE
+                                    Score = 0,
+                                    Info = Resources.Moo.MooTester_CompileOLE
                                 }
                     };
                 default:
