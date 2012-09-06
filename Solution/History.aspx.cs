@@ -36,6 +36,8 @@ public partial class Solution_History : System.Web.UI.Page
                 PageUtil.Redirect(Resources.Moo.FoundNothing, "~/");
                 return;
             }
+
+            ViewState["problemID"] = problem.ID;
             Page.DataBind();
         }
     }
@@ -124,13 +126,20 @@ public partial class Solution_History : System.Web.UI.Page
         using (MooDB db = new MooDB())
         {
             SolutionRevision revision = (from r in db.SolutionRevisions
-                                        where r.ID == revisionID
-                                        select r).Single<SolutionRevision>();
+                                         where r.ID == revisionID
+                                         select r).Single<SolutionRevision>();
             if (revision.Problem.LatestSolution.ID == revision.ID)
             {
                 e.Cancel = true;
                 infoDeletingLatest.Visible = true;
             }
+        }
+    }
+    protected void grid_RowDeleted(object sender, GridViewDeletedEventArgs e)
+    {
+        using (MooDB db = new MooDB())
+        {
+            Logger.Warning(db, string.Format("删除题目#{0}的题解#{1}", ViewState["problemID"], e.Keys[0]));
         }
     }
 }

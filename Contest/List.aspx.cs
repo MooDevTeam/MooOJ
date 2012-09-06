@@ -33,6 +33,8 @@ public partial class Contest_List : System.Web.UI.Page
             contest.User.Clear();
             db.Contests.DeleteObject(contest);
             db.SaveChanges();
+
+            Logger.Warning(db, "删除比赛#" + contest.ID);
         }
 
         grid.Rows[e.RowIndex].Visible = false;

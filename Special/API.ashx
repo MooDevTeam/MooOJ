@@ -12,7 +12,7 @@ using Moo.Utility;
 
 public class API : IHttpHandler
 {
-    static volatile bool allowAccess = true;
+    static volatile bool allowAccess = false;
     static Timer accessTimer = new Timer(5 * 1000);
 
     static API()
@@ -23,7 +23,7 @@ public class API : IHttpHandler
                 allowAccess = true;
             };
     }
-    
+
     HttpResponse Response;
     HttpRequest Request;
     SiteRole role;
@@ -149,10 +149,10 @@ public class API : IHttpHandler
         {
             if (!Permission.Check(role, "testcase.create")) return;
         }
-        
+
         TestCase testCase = new TranditionalTestCase()
         {
-            Answer =Convert.FromBase64String(document.SelectSingleNode("/request/answer").InnerText),
+            Answer = Convert.FromBase64String(document.SelectSingleNode("/request/answer").InnerText),
             CreatedBy = currentUser,
             Input = Convert.FromBase64String(document.SelectSingleNode("/request/input").InnerText),
             MemoryLimit = int.Parse(document.SelectSingleNode("/request/memorylimit").InnerText),

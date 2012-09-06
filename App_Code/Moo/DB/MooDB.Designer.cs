@@ -42,6 +42,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("Moo.DB", "InteractiveTestCaseInvokerFile", "InteractiveTestCase", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Moo.DB.InteractiveTestCase), "UploadedFile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Moo.DB.UploadedFile))]
 [assembly: EdmRelationshipAttribute("Moo.DB", "AnswerOnlyTestCaseUploadedFile", "AnswerOnlyTestCase", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Moo.DB.AnswerOnlyTestCase), "UploadedFile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Moo.DB.UploadedFile))]
 [assembly: EdmRelationshipAttribute("Moo.DB", "UserTestCase", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Moo.DB.User), "TestCase", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Moo.DB.TestCase))]
+[assembly: EdmRelationshipAttribute("Moo.DB", "LogUser", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Moo.DB.User), "Log", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Moo.DB.Log))]
 
 #endregion
 
@@ -332,6 +333,22 @@ namespace Moo.DB
             }
         }
         private ObjectSet<HomepageRevision> _HomepageRevisions;
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        public ObjectSet<Log> Logs
+        {
+            get
+            {
+                if ((_Logs == null))
+                {
+                    _Logs = base.CreateObjectSet<Log>("Logs");
+                }
+                return _Logs;
+            }
+        }
+        private ObjectSet<Log> _Logs;
 
         #endregion
         #region AddTo 方法
@@ -454,6 +471,14 @@ namespace Moo.DB
         public void AddToHomepageRevisions(HomepageRevision homepageRevision)
         {
             base.AddObject("HomepageRevisions", homepageRevision);
+        }
+    
+        /// <summary>
+        /// 用于向 Logs EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
+        /// </summary>
+        public void AddToLogs(Log log)
+        {
+            base.AddObject("Logs", log);
         }
 
         #endregion
@@ -1750,6 +1775,206 @@ namespace Moo.DB
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Record>("Moo.DB.RecordJudgeInfo", "Record", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// 没有元数据文档可用。
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="Moo.DB", Name="Log")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Log : EntityObject
+    {
+        #region 工厂方法
+    
+        /// <summary>
+        /// 创建新的 Log 对象。
+        /// </summary>
+        /// <param name="id">ID 属性的初始值。</param>
+        /// <param name="createTime">CreateTime 属性的初始值。</param>
+        /// <param name="level">Level 属性的初始值。</param>
+        /// <param name="info">Info 属性的初始值。</param>
+        /// <param name="remoteAddress">RemoteAddress 属性的初始值。</param>
+        public static Log CreateLog(global::System.Int32 id, global::System.DateTimeOffset createTime, global::System.Byte level, global::System.String info, global::System.String remoteAddress)
+        {
+            Log log = new Log();
+            log.ID = id;
+            log.CreateTime = createTime;
+            log.Level = level;
+            log.Info = info;
+            log.RemoteAddress = remoteAddress;
+            return log;
+        }
+
+        #endregion
+        #region 基元属性
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTimeOffset CreateTime
+        {
+            get
+            {
+                return _CreateTime;
+            }
+            set
+            {
+                OnCreateTimeChanging(value);
+                ReportPropertyChanging("CreateTime");
+                _CreateTime = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreateTime");
+                OnCreateTimeChanged();
+            }
+        }
+        private global::System.DateTimeOffset _CreateTime;
+        partial void OnCreateTimeChanging(global::System.DateTimeOffset value);
+        partial void OnCreateTimeChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Byte Level
+        {
+            get
+            {
+                return _Level;
+            }
+            set
+            {
+                OnLevelChanging(value);
+                ReportPropertyChanging("Level");
+                _Level = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Level");
+                OnLevelChanged();
+            }
+        }
+        private global::System.Byte _Level;
+        partial void OnLevelChanging(global::System.Byte value);
+        partial void OnLevelChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Info
+        {
+            get
+            {
+                return _Info;
+            }
+            set
+            {
+                OnInfoChanging(value);
+                ReportPropertyChanging("Info");
+                _Info = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Info");
+                OnInfoChanged();
+            }
+        }
+        private global::System.String _Info;
+        partial void OnInfoChanging(global::System.String value);
+        partial void OnInfoChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String RemoteAddress
+        {
+            get
+            {
+                return _RemoteAddress;
+            }
+            set
+            {
+                OnRemoteAddressChanging(value);
+                ReportPropertyChanging("RemoteAddress");
+                _RemoteAddress = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("RemoteAddress");
+                OnRemoteAddressChanged();
+            }
+        }
+        private global::System.String _RemoteAddress;
+        partial void OnRemoteAddressChanging(global::System.String value);
+        partial void OnRemoteAddressChanged();
+
+        #endregion
+    
+        #region 导航属性
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Moo.DB", "LogUser", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Moo.DB.LogUser", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Moo.DB.LogUser", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Moo.DB.LogUser", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("Moo.DB.LogUser", "User", value);
                 }
             }
         }

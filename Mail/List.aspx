@@ -41,7 +41,8 @@ and
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False"
         CssClass="listTable" DataSourceID="dataSource" CellSpacing="-1" DataKeyNames="ID"
         PageSize='<%$Resources:Moo,GridViewPageSize %>' OnRowDeleting="grid_RowDeleting"
-        EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
+        EmptyDataText='<%$ Resources:Moo,EmptyDataText %>' 
+        onrowdeleted="grid_RowDeleted">
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>
             <asp:BoundField DataField="ID" HeaderText="邮件编号" SortExpression="ID" />

@@ -77,7 +77,7 @@ public partial class Mail_Create : System.Web.UI.Page
         int receiverID=(int)ViewState["receiverID"];
         using (MooDB db = new MooDB())
         {
-            db.Mails.AddObject(new Mail()
+            Mail mail=new Mail()
             {
                 From = ((SiteUser)User.Identity).GetDBUser(db),
                 To = (from u in db.Users
@@ -86,9 +86,13 @@ public partial class Mail_Create : System.Web.UI.Page
                 Title = txtTitle.Text,
                 Content = txtContent.Text,
                 IsRead = false,
-            });
+            };
+
+            db.Mails.AddObject(mail);
 
             db.SaveChanges();
+
+            Logger.Info(db,string.Format("向用户#{0}发送邮件#{1}",receiverID,mail.ID));
         }
 
         PageUtil.Redirect("操作成功", "~/Mail/List.aspx");

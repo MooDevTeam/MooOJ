@@ -94,8 +94,10 @@ public partial class Problem_Update : System.Web.UI.Page
             db.ProblemRevisions.AddObject(revision);
             problem.LatestRevision = revision;
             db.SaveChanges();
+
+            Logger.Info(db, string.Format("更新题目#{0}，新版本为#{1}", problem.ID, revision.ID));
         }
-        PageUtil.Redirect("修改成功", "~/Problem/?id=" + problemID);
+        PageUtil.Redirect("更新成功", "~/Problem/?id=" + problemID);
     }
     protected void btnPreview_Click(object sender, EventArgs e)
     {

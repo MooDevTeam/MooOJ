@@ -41,7 +41,7 @@ public partial class Problem_History : System.Web.UI.Page
             {
                 if (!Permission.Check("problem.hidden.read", false)) return;
             }
-
+            ViewState["problemID"] = problem.ID;
             Page.DataBind();
         }
     }
@@ -137,6 +137,13 @@ public partial class Problem_History : System.Web.UI.Page
                 e.Cancel = true;
                 infoDeletingLatest.Visible = true;
             }
+        }
+    }
+    protected void grid_RowDeleted(object sender, GridViewDeletedEventArgs e)
+    {
+        using (MooDB db = new MooDB())
+        {
+            Logger.Warning(db, string.Format("删除题目#{0}的历史#{1}", ViewState["problemID"], e.Keys[0]));
         }
     }
 }

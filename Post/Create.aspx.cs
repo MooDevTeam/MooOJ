@@ -89,6 +89,8 @@ public partial class Post_Create : System.Web.UI.Page
             db.SaveChanges();
 
             postID = post.ID;
+
+            Logger.Info(db, "创建帖子#" + postID);
         }
         PageUtil.Redirect("操作成功", "~/Post/?id=" + postID);
     }

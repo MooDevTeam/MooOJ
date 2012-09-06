@@ -38,6 +38,7 @@ public partial class Mail_Default : System.Web.UI.Page
                 if (mail.To.ID == myUserID)
                 {
                     mail.IsRead = true;
+                    Logger.Info(db, "阅读邮件#" + mail.ID);
                 }
                 db.SaveChanges();
                 Page.DataBind();

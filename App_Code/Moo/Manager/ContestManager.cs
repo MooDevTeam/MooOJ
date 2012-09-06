@@ -26,6 +26,10 @@ namespace Moo.Manager
             shouldStop = false;
             daemonThread = new Thread(new ThreadStart(ThreadMain));
             daemonThread.Start();
+            using (MooDB db = new MooDB())
+            {
+                Logger.Info(db, "比赛进程启动");
+            }
         }
 
         public static void Stop()
@@ -34,6 +38,10 @@ namespace Moo.Manager
             daemonThread.Interrupt();
             daemonThread.Join();
             daemonThread = null;
+            using (MooDB db = new MooDB())
+            {
+                Logger.Info(db, "比赛进程停止");
+            }
         }
 
         static void ThreadMain()
@@ -48,7 +56,10 @@ namespace Moo.Manager
                 {
                     if (!(e is ThreadInterruptedException))
                     {
-                        Logger.Log(e);
+                        using (MooDB db = new MooDB())
+                        {
+                            Logger.Fatal(db, e.ToString());
+                        }
                     }
                 }
             }
@@ -66,9 +77,9 @@ namespace Moo.Manager
                     contest.Status = "During";
                     foreach (Problem problem in contest.Problem)
                     {
-                        problem.AllowTesting=contest.AllowTestingOnStart;
-                        problem.TestCaseHidden=contest.HideTestCaseOnStart;
-                        problem.LockPost=contest.LockPostOnStart;
+                        problem.AllowTesting = contest.AllowTestingOnStart;
+                        problem.TestCaseHidden = contest.HideTestCaseOnStart;
+                        problem.LockPost = contest.LockPostOnStart;
                         problem.LockTestCase = contest.LockTestCaseOnStart;
                         problem.LockSolution = contest.LockSolutionOnStart;
                         problem.Lock = contest.LockProblemOnStart;
@@ -76,6 +87,8 @@ namespace Moo.Manager
                         problem.LockRecord = contest.LockRecordOnStart;
                     }
                     db.SaveChanges();
+
+                    Logger.Info(db, "开始比赛#" + contest.ID);
                     return 0;
                 }
 
@@ -97,6 +110,7 @@ namespace Moo.Manager
                         problem.LockRecord = contest.LockRecordOnEnd;
                     }
                     db.SaveChanges();
+                    Logger.Info(db, "结束比赛#" + contest.ID);
                     return 0;
                 }
 

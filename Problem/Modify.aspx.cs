@@ -59,6 +59,7 @@ public partial class Problem_Modify : System.Web.UI.Page
             problem.LockTestCase = chkLockTestCase.Checked;
 
             db.SaveChanges();
+            Logger.Info(db, "修改题目#" + problem.ID);
         }
 
         PageUtil.Redirect("操作成功", "~/Problem/?id=" + problemID);

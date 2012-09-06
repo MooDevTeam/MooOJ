@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="Special_Login"
     MasterPageFile="~/MasterPage.master" Title="" %>
 
+<%@ Import Namespace="Moo.Authorization" %>
 <asp:Content ContentPlaceHolderID="head" runat="Server">
     <title>登录</title>
 </asp:Content>
@@ -8,15 +9,15 @@
     <Moo:InfoBlock runat="server" Type="Error" Visible='<%#Request["noPermission"]!=null %>'>
         您不具备完成此操作的权限，请更换更高权限的账户。
     </Moo:InfoBlock>
-    <h1>登录</h1>
+    <h1>
+        登录</h1>
     <asp:LoginView ID="loginView" runat="server">
         <LoggedInTemplate>
             <Moo:InfoBlock runat="server" Type="Alert">
-                对不起!您不能重复登录。是否需要<a href="Logout.ashx">登出</a>？
+                对不起!您不能重复登录。是否需要<a runat="server" href='<%#"~/Special/Logout.ashx?token="+((SiteUser)User.Identity).Token%>'>登出</a>？
             </Moo:InfoBlock>
         </LoggedInTemplate>
         <AnonymousTemplate>
-            
             <div>
                 <table class="detailTable">
                     <tr>
@@ -60,7 +61,6 @@
                     </tr>
                 </table>
             </div>
-            
         </AnonymousTemplate>
     </asp:LoginView>
 </asp:Content>

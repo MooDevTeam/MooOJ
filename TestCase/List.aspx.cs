@@ -75,6 +75,8 @@ public partial class TestCase_List : System.Web.UI.Page
             }
             db.TestCases.DeleteObject(testCase);
             db.SaveChanges();
+
+            Logger.Warning(db, "删除测试数据#" + testCase.ID);
         }
 
         grid.Rows[e.RowIndex].Visible = false;

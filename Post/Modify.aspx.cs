@@ -53,6 +53,8 @@ public partial class Post_Modify : System.Web.UI.Page
             post.Lock = chkLock.Checked;
             post.OnTop = chkOnTop.Checked;
             db.SaveChanges();
+
+            Logger.Info(db, "修改帖子#" + post.ID);
         }
 
         PageUtil.Redirect("操作成功", "~/Post/?id=" + postID);

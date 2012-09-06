@@ -45,6 +45,8 @@ public partial class User_Register : System.Web.UI.Page
             };
             db.Users.AddObject(user);
             db.SaveChanges();
+
+            Logger.Info(db, "创建用户#" + user.ID);
         }
         PageUtil.Redirect("注册成功，请登录。","~/Special/Login.aspx");
     }

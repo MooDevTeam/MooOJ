@@ -38,8 +38,9 @@ public class File_Download : IHttpHandler {
             path = file.Path;
             fileID = file.ID;
             fileName = file.Name;
+            
+            Logger.Info(db, "下载文件#" + fileID);
         }
-
         Download(Request, Response, path,fileID,fileName);
     }
 

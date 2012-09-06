@@ -42,6 +42,8 @@ public partial class Problem_List : System.Web.UI.Page
             }
             db.Problems.DeleteObject(problem);
             db.SaveChanges();
+
+            Logger.Warning(db, "删除题目#" + problem.ID);
         }
 
         grid.Rows[e.RowIndex].Visible = false;

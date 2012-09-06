@@ -61,6 +61,8 @@ public partial class Problem_Create : System.Web.UI.Page
             db.SaveChanges();
 
             problemID = revision.Problem.ID;
+
+            Logger.Info(db, "创建题目#" + problemID);
         }
         PageUtil.Redirect("操作成功", "~/Problem/?id=" + problemID);
     }

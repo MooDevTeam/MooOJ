@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Security;
 using Moo.Authorization;
 using Moo.Utility;
-
+using Moo.DB;
 public class Special_Logout : IHttpHandler {
     
     public void ProcessRequest (HttpContext context) {
@@ -17,6 +17,11 @@ public class Special_Logout : IHttpHandler {
         if (((SiteUser)context.User.Identity).Token.ToString() != context.Request["token"])
         {
             return;
+        }
+        
+        using (MooDB db = new MooDB())
+        {
+            Logger.Info(db, "登出");
         }
         FormsAuthentication.SignOut();
         SiteUsers.ByID.Remove(((SiteUser)context.User.Identity).ID);

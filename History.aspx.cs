@@ -113,4 +113,11 @@ public partial class History : System.Web.UI.Page
             }
         }
     }
+    protected void grid_RowDeleted(object sender, GridViewDeletedEventArgs e)
+    {
+        using (MooDB db = new MooDB())
+        {
+            Logger.Warning(db, "删除主页版本#" + e.Keys[0]);
+        }
+    }
 }
