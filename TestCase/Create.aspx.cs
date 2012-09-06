@@ -131,6 +131,7 @@ public partial class TestCase_Create : System.Web.UI.Page
             db.SaveChanges();
 
             testCaseID = testCase.ID;
+            Logger.Info(db, "创建测试数据#" + testCaseID);
         }
 
         PageUtil.Redirect("操作成功", "~/TestCase/?id=" + testCaseID);

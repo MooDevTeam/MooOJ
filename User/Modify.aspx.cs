@@ -104,6 +104,8 @@ public partial class User_Modify : System.Web.UI.Page
                 siteUser.Role = SiteRoles.ByID[user.Role.ID];
                 siteUser.Name = user.Name;
             }
+
+            Logger.Info(db, "修改用户#" + user.ID);
         }
 
         PageUtil.Redirect("操作成功", "~/User/?id=" + userID);
@@ -120,7 +122,10 @@ public partial class User_Modify : System.Web.UI.Page
 
         int userID = (int)ViewState["userID"];
         SiteUsers.ByID.Remove(userID);
-
+        using (MooDB db = new MooDB())
+        {
+            Logger.Info(db, "强制用户#" + userID + "登出");
+        }
         PageUtil.Redirect("操作成功", "~/User/Modify.aspx?id=" + userID);
     }
     protected void validateRole_ServerValidate(object source, ServerValidateEventArgs args)

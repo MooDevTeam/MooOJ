@@ -41,6 +41,8 @@ public partial class File_Create : System.Web.UI.Page
             db.UploadedFiles.AddObject(file);
             db.SaveChanges();
             fileID = file.ID;
+
+            Logger.Info(db, "创建文件#" + fileID);
         }
 
         PageUtil.Redirect("操作成功", "~/File/?id=" + fileID);

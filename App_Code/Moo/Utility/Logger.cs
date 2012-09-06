@@ -36,13 +36,32 @@ namespace Moo.Utility
 
         public static User GetCurrentUser(MooDB db)
         {
-            IIdentity identity = (IIdentity)HttpContext.Current.User.Identity;
-            User currentUser = null;
-            if (identity is SiteUser)
+            if (HttpContext.Current != null && HttpContext.Current.User != null && HttpContext.Current.User.Identity != null)
             {
-                currentUser = ((SiteUser)identity).GetDBUser(db);
+                IIdentity identity = (IIdentity)HttpContext.Current.User.Identity;
+                User currentUser = null;
+                if (identity is SiteUser)
+                {
+                    currentUser = ((SiteUser)identity).GetDBUser(db);
+                }
+                return currentUser;
             }
-            return currentUser;
+            else
+            {
+                return null;
+            }
+        }
+
+        public static string GetRemoteAddress()
+        {
+            if (HttpContext.Current != null && HttpContext.Current.Request != null && HttpContext.Current.Request.UserHostAddress != null)
+            {
+                return HttpContext.Current.Request.UserHostAddress;
+            }
+            else
+            {
+                return "";
+            }
         }
 
         public static void Debug(MooDB db, string info)
@@ -52,7 +71,8 @@ namespace Moo.Utility
                 CreateTime = DateTimeOffset.Now,
                 Level = (byte)LogLevel.Debug,
                 User = GetCurrentUser(db),
-                Info = info
+                Info = info,
+                RemoteAddress = GetRemoteAddress()
             });
             db.SaveChanges();
         }
@@ -64,7 +84,8 @@ namespace Moo.Utility
                 CreateTime = DateTimeOffset.Now,
                 Level = (byte)LogLevel.Info,
                 User = GetCurrentUser(db),
-                Info = info
+                Info = info,
+                RemoteAddress = GetRemoteAddress()
             });
             db.SaveChanges();
         }
@@ -76,7 +97,8 @@ namespace Moo.Utility
                 CreateTime = DateTimeOffset.Now,
                 Level = (byte)LogLevel.Warning,
                 User = GetCurrentUser(db),
-                Info = info
+                Info = info,
+                RemoteAddress = GetRemoteAddress()
             });
             db.SaveChanges();
         }
@@ -88,7 +110,8 @@ namespace Moo.Utility
                 CreateTime = DateTimeOffset.Now,
                 Level = (byte)LogLevel.Error,
                 User = GetCurrentUser(db),
-                Info = info
+                Info = info,
+                RemoteAddress = GetRemoteAddress()
             });
             db.SaveChanges();
         }
@@ -100,7 +123,8 @@ namespace Moo.Utility
                 CreateTime = DateTimeOffset.Now,
                 Level = (byte)LogLevel.Fatal,
                 User = GetCurrentUser(db),
-                Info = info
+                Info = info,
+                RemoteAddress = GetRemoteAddress()
             });
             db.SaveChanges();
         }

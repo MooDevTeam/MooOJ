@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Moo.Authorization;
 using Moo.DB;
+using Moo.Utility;
 public partial class Mail_List : System.Web.UI.Page
 {
     protected string otherName;
@@ -64,6 +65,13 @@ public partial class Mail_List : System.Web.UI.Page
             args.IsValid = (from u in db.Users
                             where u.Name == txtOtherName.Text
                             select u).Any();
+        }
+    }
+    protected void grid_RowDeleted(object sender, GridViewDeletedEventArgs e)
+    {
+        using (MooDB db = new MooDB())
+        {
+            Logger.Warning(db, "删除邮件#" + e.Keys[0]);
         }
     }
 }

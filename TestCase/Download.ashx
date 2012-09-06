@@ -122,6 +122,10 @@ public class TestCase_Download : IHttpHandler
 
     void Download(byte[] toDownload)
     {
+        using (MooDB db = new MooDB())
+        {
+            Logger.Info(db, string.Format("下载测试数据#{0}的字段{1}", Request["id"], Request["field"]));
+        }
         int start = 0;
         int length = toDownload.Length;
 

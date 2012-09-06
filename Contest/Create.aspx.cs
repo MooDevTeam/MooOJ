@@ -64,6 +64,8 @@ public partial class Contest_Create : System.Web.UI.Page
             db.Contests.AddObject(contest);
             db.SaveChanges();
             contestID = contest.ID;
+
+            Logger.Info(db, "创建比赛#" + contestID);
         }
 
         PageUtil.Redirect("操作成功", "~/Contest/?id=" + contestID);

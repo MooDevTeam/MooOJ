@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 09/06/2012 11:33:52
+-- Date Created: 09/06/2012 12:36:09
 -- Generated from EDMX file: D:\WebSites\MooOJ\App_Code\Moo\DB\MooDB.edmx
 -- --------------------------------------------------
 
@@ -98,6 +98,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_UserTestCase]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TestCases] DROP CONSTRAINT [FK_UserTestCase];
 GO
+IF OBJECT_ID(N'[dbo].[FK_LogUser]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Logs] DROP CONSTRAINT [FK_LogUser];
+GO
 IF OBJECT_ID(N'[dbo].[FK_SpecialJudgedTestCase_inherits_TestCase]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TestCases_SpecialJudgedTestCase] DROP CONSTRAINT [FK_SpecialJudgedTestCase_inherits_TestCase];
 GO
@@ -159,6 +162,9 @@ IF OBJECT_ID(N'[dbo].[UploadedFiles]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[HomepageRevisions]', 'U') IS NOT NULL
     DROP TABLE [dbo].[HomepageRevisions];
+GO
+IF OBJECT_ID(N'[dbo].[Logs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Logs];
 GO
 IF OBJECT_ID(N'[dbo].[TestCases_SpecialJudgedTestCase]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TestCases_SpecialJudgedTestCase];
@@ -367,6 +373,7 @@ CREATE TABLE [dbo].[Logs] (
     [CreateTime] datetimeoffset  NOT NULL,
     [Level] tinyint  NOT NULL,
     [Info] nvarchar(max)  NOT NULL,
+    [RemoteAddress] nvarchar(max)  NOT NULL,
     [User_ID] int  NULL
 );
 GO

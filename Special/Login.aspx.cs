@@ -55,6 +55,8 @@ public partial class Special_Login : System.Web.UI.Page
             return;
         }
         SetCookie(user, isPersistent);
+        Context.User = new CustomPrincipal() { Identity = SiteUsers.ByID[user.ID] };
+        Logger.Info(db, "登录");
         PageUtil.Redirect("登录成功", FormsAuthentication.GetRedirectUrl(user.Name, isPersistent));
     }
     User GetUser(MooDB db, string userName, string password)
@@ -66,7 +68,7 @@ public partial class Special_Login : System.Web.UI.Page
     void SetCookie(User user, bool isPersistent)
     {
         int token = Rand.RAND.Next();
-        SiteUsers.ByID[user.ID]=new SiteUser(user) { Token = token };
+        SiteUsers.ByID[user.ID] = new SiteUser(user) { Token = token };
 
         //string userData = new SiteUser(user).Serialize();
         string userData = user.ID + "," + token;

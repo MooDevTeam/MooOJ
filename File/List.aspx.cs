@@ -47,6 +47,8 @@ public partial class File_List : System.Web.UI.Page
             File.Delete(file.Path);
             db.UploadedFiles.DeleteObject(file);
             db.SaveChanges();
+
+            Logger.Warning(db, "删除文件#" + file.ID);
         }
 
         grid.Rows[e.RowIndex].Visible = false;

@@ -69,6 +69,8 @@ public partial class Contest_Default : System.Web.UI.Page
 
             contest.User.Add(currentUser);
             db.SaveChanges();
+
+            Logger.Info(db, "报名比赛#" + contest.ID);
         }
 
         Response.Redirect("~/Contest/?id=" + contestID, true);
@@ -119,6 +121,8 @@ public partial class Contest_Default : System.Web.UI.Page
 
             contest.Problem.Add(problem);
             db.SaveChanges();
+
+            Logger.Info(db, string.Format("向比赛#{0}加入题目#{1}", contest.ID, problem.ID));
         }
         Response.Redirect("~/Contest/?id=" + contestID);
     }
@@ -131,12 +135,16 @@ public partial class Contest_Default : System.Web.UI.Page
         int contestID = (int)ViewState["contestID"];
         using (MooDB db = new MooDB())
         {
-            (from c in db.Contests
-             where c.ID == contestID
-             select c).Single<Contest>().Problem.Remove((from p in db.Problems
-                                                         where p.ID == problemID
-                                                         select p).Single<Problem>());
+            contest = (from c in db.Contests
+                       where c.ID == contestID
+                       select c).Single<Contest>();
+            Problem problem = (from p in db.Problems
+                               where p.ID == problemID
+                               select p).Single<Problem>();
+            contest.Problem.Remove(problem);
             db.SaveChanges();
+
+            Logger.Warning(db, string.Format("删除比赛#{0}的题目#{1}", contest.ID, problem.ID));
         }
         Response.Redirect("~/Contest/?id=" + contestID);
     }

@@ -69,15 +69,18 @@ public partial class Update : System.Web.UI.Page
         using (MooDB db = new MooDB())
         {
             User currentUser = ((SiteUser)User.Identity).GetDBUser(db);
-            db.HomepageRevisions.AddObject(new HomepageRevision()
+            HomepageRevision revision=new HomepageRevision()
             {
                 Title = txtTitle.Text,
                 Content = txtContent.Text,
                 Reason = txtReason.Text,
                 CreatedBy = currentUser
-            });
+            };
+
+            db.HomepageRevisions.AddObject(revision);
 
             db.SaveChanges();
+            Logger.Info(db, "更新主页，新版本为#" + revision.ID);
         }
 
         PageUtil.Redirect("操作成功", "~/");

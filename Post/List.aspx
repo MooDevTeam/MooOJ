@@ -32,7 +32,9 @@ it.[ID] DESC" Where="@problemID is null or it.[Problem].[ID]=@problemID"
     </asp:EntityDataSource>
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False"
         CssClass="listTable" DataKeyNames="ID" DataSourceID="dataSource" PageSize='<%$Resources:Moo,GridViewPageSize %>'
-        CellSpacing="-1" onrowdeleting="grid_RowDeleting" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
+        CellSpacing="-1" onrowdeleting="grid_RowDeleting" 
+        EmptyDataText='<%$ Resources:Moo,EmptyDataText %>' 
+        onrowdeleted="grid_RowDeleted">
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>
             <asp:BoundField DataField="ID" HeaderText="帖子编号" ReadOnly="True" SortExpression="ID" />

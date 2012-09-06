@@ -1799,13 +1799,15 @@ namespace Moo.DB
         /// <param name="createTime">CreateTime 属性的初始值。</param>
         /// <param name="level">Level 属性的初始值。</param>
         /// <param name="info">Info 属性的初始值。</param>
-        public static Log CreateLog(global::System.Int32 id, global::System.DateTimeOffset createTime, global::System.Byte level, global::System.String info)
+        /// <param name="remoteAddress">RemoteAddress 属性的初始值。</param>
+        public static Log CreateLog(global::System.Int32 id, global::System.DateTimeOffset createTime, global::System.Byte level, global::System.String info, global::System.String remoteAddress)
         {
             Log log = new Log();
             log.ID = id;
             log.CreateTime = createTime;
             log.Level = level;
             log.Info = info;
+            log.RemoteAddress = remoteAddress;
             return log;
         }
 
@@ -1910,6 +1912,30 @@ namespace Moo.DB
         private global::System.String _Info;
         partial void OnInfoChanging(global::System.String value);
         partial void OnInfoChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String RemoteAddress
+        {
+            get
+            {
+                return _RemoteAddress;
+            }
+            set
+            {
+                OnRemoteAddressChanging(value);
+                ReportPropertyChanging("RemoteAddress");
+                _RemoteAddress = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("RemoteAddress");
+                OnRemoteAddressChanged();
+            }
+        }
+        private global::System.String _RemoteAddress;
+        partial void OnRemoteAddressChanging(global::System.String value);
+        partial void OnRemoteAddressChanged();
 
         #endregion
     

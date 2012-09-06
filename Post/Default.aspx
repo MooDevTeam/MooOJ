@@ -24,7 +24,6 @@
     <h1>
         <%#HttpUtility.HtmlEncode(post.Name) %>
     </h1>
-    
     <asp:EntityDataSource ID="dataSource" runat="server" ConnectionString="name=MooDB"
         DefaultContainerName="MooDB" EntitySetName="PostItems" OrderBy="it.[ID]" Where="it.[Post].ID=@postID"
         Include="CreatedBy,CreatedBy.Role,Post,Post.Problem" EnableDelete="True">
@@ -33,8 +32,8 @@
         </WhereParameters>
     </asp:EntityDataSource>
     <asp:GridView ID="grid" runat="server" AllowPaging="True" AutoGenerateColumns="False"
-        DataKeyNames="ID" DataSourceID="dataSource" ShowHeader="False" CssClass="postTable" PageSize='20'
-        OnRowDeleting="grid_RowDeleting" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
+        DataKeyNames="ID" DataSourceID="dataSource" ShowHeader="False" CssClass="postTable"
+        PageSize='20' OnRowDeleting="grid_RowDeleting" EmptyDataText="人去楼空" OnRowDeleted="grid_RowDeleted">
         <Columns>
             <asp:TemplateField HeaderText="内容" ItemStyle-CssClass="postCell">
                 <ItemTemplate>
@@ -53,5 +52,4 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
-    
 </asp:Content>

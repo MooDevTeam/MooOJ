@@ -103,6 +103,8 @@ public partial class Record_List : System.Web.UI.Page
             DeleteRecordAndRefresh(db, record);
             db.Records.DeleteObject(record);
             db.SaveChanges();
+
+            Logger.Warning(db, "删除记录#" + record.ID);
         }
 
         grid.Rows[e.RowIndex].Visible = false;
@@ -198,6 +200,8 @@ public partial class Record_List : System.Web.UI.Page
             record.JudgeInfo = null;
             db.JudgeInfos.DeleteObject(info);
             db.SaveChanges();
+
+            Logger.Warning(db, "删除测评信息#" + info.ID);
         }
 
         PageUtil.Redirect("操作成功", "~/Record/List.aspx?" + Request.QueryString);

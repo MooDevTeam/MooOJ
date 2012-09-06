@@ -55,10 +55,19 @@ public partial class Post_Default : System.Web.UI.Page
             {
                 Page.DataBind();
             }
+
+            ViewState["postID"] = post.ID;
         }
     }
     protected void grid_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         if (!Permission.Check("post.item.delete", false)) e.Cancel = true;
+    }
+    protected void grid_RowDeleted(object sender, GridViewDeletedEventArgs e)
+    {
+        using (MooDB db = new MooDB())
+        {
+            Logger.Warning(db, string.Format("删除帖子#{0}的项#{1}", ViewState["postID"], e.Keys[0]));
+        }
     }
 }

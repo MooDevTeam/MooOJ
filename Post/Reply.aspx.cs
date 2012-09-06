@@ -100,13 +100,16 @@ public partial class Post_Reply : System.Web.UI.Page
             }
 
             User currentUser = ((SiteUser)User.Identity).GetDBUser(db);
-            db.PostItems.AddObject(new PostItem()
+            PostItem postItem = new PostItem()
             {
                 Post = post,
                 Content = txtContent.Text,
                 CreatedBy = currentUser
-            });
+            };
+            db.PostItems.AddObject(postItem);
             db.SaveChanges();
+
+            Logger.Info(db, string.Format("创建帖子#{0}的新项#{1}", post.ID, postItem.ID));
         }
 
         PageUtil.Redirect("操作成功", "~/Post/?id=" + postID);
