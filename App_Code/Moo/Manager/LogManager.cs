@@ -71,13 +71,8 @@ namespace Moo.Manager
         {
             using (MooDB db = new MooDB())
             {
-                int count = db.ExecuteStoreCommand("DELETE FROM [dbo].[Logs] WHERE [CreateTime] < @minTime", new SqlParameter("minTime", DateTimeOffset.Now.AddMonths(-1)));
-
+                db.ExecuteStoreCommand("DELETE FROM [dbo].[Logs] WHERE [CreateTime] < @minTime", new SqlParameter("minTime", DateTimeOffset.Now.AddMonths(-1)));
                 db.SaveChanges();
-                if (count > 0)
-                {
-                    Logger.Warning(db, "删除了" + count + "条日志");
-                }
             }
 
             return 5 * 60 * 1000;

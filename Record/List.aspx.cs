@@ -201,7 +201,7 @@ public partial class Record_List : System.Web.UI.Page
             db.JudgeInfos.DeleteObject(info);
             db.SaveChanges();
 
-            Logger.Warning(db, "删除测评信息#" + info.ID);
+            Logger.Warning(db, string.Format("删除记录#{0}的测评信息#{1}", record.ID, info.ID));
         }
 
         PageUtil.Redirect("操作成功", "~/Record/List.aspx?" + Request.QueryString);
@@ -211,16 +211,18 @@ public partial class Record_List : System.Web.UI.Page
     {
         if (info.Score >= 0)
         {
-            record.User.Score -= info.Score;
-            record.Problem.ScoreSum -= info.Score;
             var hisRecords = from r in db.Records
-                             where r.ID != record.ID
-                                   && r.User.ID == record.User.ID && r.Problem.ID == record.Problem.ID
+                             where r.User.ID == record.User.ID && r.Problem.ID == record.Problem.ID
                                    && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
                              select r;
-            int hisMaxScore = hisRecords.Any() ? hisRecords.Max(r => r.JudgeInfo.Score) : 0;
-            record.User.Score += hisMaxScore;
-            record.Problem.ScoreSum += hisMaxScore;
+            int oldScore = hisRecords.Max(r => r.JudgeInfo.Score);
+            int newScore = (from r in hisRecords
+                            where r.ID != record.ID
+                            select r.JudgeInfo.Score).DefaultIfEmpty().Max();
+            record.User.Score -= oldScore;
+            record.Problem.ScoreSum -= oldScore;
+            record.User.Score += newScore;
+            record.Problem.ScoreSum += newScore;
 
             if (record.Problem.MaximumScore == info.Score)
             {
@@ -247,7 +249,6 @@ public partial class Record_List : System.Web.UI.Page
         var hisRecords = from r in db.Records
                          where r.ID != record.ID
                                && r.User.ID == record.User.ID && r.Problem.ID == record.Problem.ID
-                               && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
                          select r;
         if (!hisRecords.Any())
         {
