@@ -103,7 +103,6 @@
                     Logger.Warning(db, "Token无效");
                 }
                 FormsAuthentication.SignOut();
-                SiteUsers.ByID.Remove(userID);
                 Response.Redirect("~/Special/Security.aspx", true);
                 return;
             }
