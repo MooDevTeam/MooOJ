@@ -36,7 +36,7 @@ namespace Moo.Utility
 
         public static User GetCurrentUser(MooDB db)
         {
-            if (HttpContext.Current != null && HttpContext.Current.User != null && HttpContext.Current.User.Identity != null)
+            try
             {
                 IIdentity identity = (IIdentity)HttpContext.Current.User.Identity;
                 User currentUser = null;
@@ -46,7 +46,7 @@ namespace Moo.Utility
                 }
                 return currentUser;
             }
-            else
+            catch
             {
                 return null;
             }
@@ -54,11 +54,18 @@ namespace Moo.Utility
 
         public static string GetRemoteAddress()
         {
-            if (HttpContext.Current != null && HttpContext.Current.Request != null && HttpContext.Current.Request.UserHostAddress != null)
+            try
             {
-                return HttpContext.Current.Request.UserHostAddress;
+                if (HttpContext.Current.Request.UserHostAddress == null)
+                {
+                    return "";
+                }
+                else
+                {
+                    return HttpContext.Current.Request.UserHostAddress;
+                }
             }
-            else
+            catch
             {
                 return "";
             }

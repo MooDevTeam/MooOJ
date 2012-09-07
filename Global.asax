@@ -33,6 +33,7 @@
         TesterManager.Testers.Add(new Moo.Tester.MooTester.Tester());
         TesterManager.Start();
         ContestManager.Start();
+        LogManager.Start();
 
         using (MooDB db = new MooDB())
         {
@@ -45,7 +46,8 @@
         //在应用程序关闭时运行的代码
         TesterManager.Stop();
         ContestManager.Stop();
-        
+        LogManager.Stop();
+
         using (MooDB db = new MooDB())
         {
             Logger.Info(db, "Moo停止");
@@ -60,7 +62,8 @@
         {
             ex = ex.InnerException;
         }
-        using(MooDB db=new MooDB()){
+        using (MooDB db = new MooDB())
+        {
             Logger.Error(db, ex.ToString());
         }
     }

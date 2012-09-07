@@ -142,20 +142,16 @@ namespace Moo.Manager
                     break;
             }
 
-            Record maxScore = (from r in db.Records
-                               where r.JudgeInfo != null && r.User.ID == record.User.ID && r.Problem.ID == record.Problem.ID && r.JudgeInfo.Score >= 0
-                               orderby r.JudgeInfo.Score descending
-                               select r).FirstOrDefault<Record>();
-            if (maxScore == null)//This is the first time
-            {
-                record.User.Score += result.Score;
-                record.Problem.ScoreSum += result.Score;
-            }
-            else if (result.Score > maxScore.JudgeInfo.Score)
-            {
-                record.User.Score += result.Score - maxScore.JudgeInfo.Score;
-                record.Problem.ScoreSum += result.Score - maxScore.JudgeInfo.Score;
-            }
+            int oldScore = (from r in db.Records
+                            where r.User.ID == record.User.ID && r.Problem.ID == record.Problem.ID
+                                && r.JudgeInfo != null && r.JudgeInfo.Score >= 0
+                            select r.JudgeInfo.Score).DefaultIfEmpty().Max();
+            int currentScore = Math.Max(oldScore, result.Score);
+
+            record.User.Score -= oldScore;
+            record.Problem.ScoreSum -= oldScore;
+            record.User.Score += currentScore;
+            record.Problem.ScoreSum += currentScore;
 
             if (record.Problem.MaximumScore == null)
             {
@@ -203,11 +199,11 @@ namespace Moo.Manager
             IEnumerable<AnswerOnlyTestCase> cases = from t in db.TestCases.OfType<AnswerOnlyTestCase>()
                                                     where t.Problem.ID == record.Problem.ID
                                                     select t;
-            Dictionary<int, string> answers=new Dictionary<int,string>();
-            MatchCollection matches=Regex.Matches(record.Code,@"<Moo:Answer testCase='(\d+)'>(.*?)</Moo:Answer>",RegexOptions.Singleline);
+            Dictionary<int, string> answers = new Dictionary<int, string>();
+            MatchCollection matches = Regex.Matches(record.Code, @"<Moo:Answer testCase='(\d+)'>(.*?)</Moo:Answer>", RegexOptions.Singleline);
             foreach (Match match in matches)
             {
-                int testCaseID=int.Parse(match.Groups[1].Value);
+                int testCaseID = int.Parse(match.Groups[1].Value);
                 string answer = match.Groups[2].Value;
                 answers.Add(testCaseID, answer);
             }
