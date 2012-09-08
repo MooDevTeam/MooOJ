@@ -141,6 +141,10 @@
       <End Role="User" EntitySet="Users" />
       <End Role="Log" EntitySet="Logs" />
     </AssociationSet>
+    <AssociationSet Name="UploadedFileUser" Association="Moo.DB.Store.UploadedFileUser">
+      <End Role="UploadedFile" EntitySet="UploadedFiles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
     <AssociationSet Name="FK_SpecialJudgedTestCase_inherits_TestCase" Association="Moo.DB.Store.FK_SpecialJudgedTestCase_inherits_TestCase">
       <End Role="TestCase" EntitySet="TestCases" />
       <End Role="SpecialJudgedTestCase" EntitySet="TestCases_SpecialJudgedTestCase" />
@@ -322,6 +326,7 @@
     <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="40" />
     <Property Name="Path" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedBy_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="HomepageRevisions">
     <Key>
@@ -692,6 +697,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="UploadedFileUser">
+    <End Role="UploadedFile" Type="Moo.DB.Store.UploadedFiles" Multiplicity="*" />
+    <End Role="User" Type="Moo.DB.Store.Users" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UploadedFile">
+        <PropertyRef Name="CreatedBy_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_FunctionForRole_Function">
     <End Role="Function" Type="Moo.DB.Store.Functions" Multiplicity="1" />
     <End Role="FunctionForRole" Type="Moo.DB.Store.FunctionForRole" Multiplicity="*" />
@@ -932,6 +949,10 @@
           <AssociationSet Name="LogUser" Association="Moo.DB.LogUser">
             <End Role="User" EntitySet="Users" />
             <End Role="Log" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="UploadedFileUser" Association="Moo.DB.UploadedFileUser">
+            <End Role="UploadedFile" EntitySet="UploadedFiles" />
+            <End Role="User" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
@@ -1213,6 +1234,7 @@
           <Property Type="String" Name="Name" Nullable="false" MaxLength="40" />
           <Property Type="String" Name="Path" Nullable="false" />
           <Property Type="String" Name="Description" Nullable="false" />
+          <NavigationProperty Name="CreatedBy" Relationship="Moo.DB.UploadedFileUser" FromRole="UploadedFile" ToRole="User" />
         </EntityType>
         <EntityType Name="SpecialJudgedTestCase" BaseType="Moo.DB.TestCase" >
           <Property Type="Binary" Name="Input" Nullable="false" />
@@ -1275,6 +1297,10 @@
         <Association Name="LogUser">
           <End Type="Moo.DB.User" Role="User" Multiplicity="0..1" />
           <End Type="Moo.DB.Log" Role="Log" Multiplicity="*" />
+        </Association>
+        <Association Name="UploadedFileUser">
+          <End Type="Moo.DB.UploadedFile" Role="UploadedFile" Multiplicity="*" />
+          <End Type="Moo.DB.User" Role="User" Multiplicity="1" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1702,6 +1728,14 @@
       </EndProperty>
       <Condition ColumnName="User_ID" IsNull="false" />
     </AssociationSetMapping>
+    <AssociationSetMapping Name="UploadedFileUser" TypeName="Moo.DB.UploadedFileUser" StoreEntitySet="UploadedFiles">
+      <EndProperty Name="User">
+        <ScalarProperty Name="ID" ColumnName="CreatedBy_ID" />
+      </EndProperty>
+      <EndProperty Name="UploadedFile">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
@@ -1747,6 +1781,8 @@
           <ConnectorPoint PointX="3.4739545833333336" PointY="16.830526123046877" />
           <ConnectorPoint PointX="3.5104141666666666" PointY="16.830526123046877" />
           <ConnectorPoint PointX="3.6770808333333336" PointY="16.830526123046877" />
+          <ConnectorPoint PointX="4.1197929166666674" PointY="16.830526123046877" />
+          <ConnectorPoint PointX="4.2864595833333334" PointY="16.830526123046877" />
           <ConnectorPoint PointX="4.3229191666666669" PointY="16.830526123046877" />
           <ConnectorPoint PointX="4.4895858333333329" PointY="16.830526123046877" />
           <ConnectorPoint PointX="4.5260454166666664" PointY="16.830526123046877" />
@@ -1784,6 +1820,8 @@
         <AssociationConnector Association="Moo.DB.UserCreateSolutionRevision">
           <ConnectorPoint PointX="4" PointY="13.234111328125" />
           <ConnectorPoint PointX="4" PointY="14.955526123046877" />
+          <ConnectorPoint PointX="4.1197929166666674" PointY="14.955526123046877" />
+          <ConnectorPoint PointX="4.2864595833333334" PointY="14.955526123046877" />
           <ConnectorPoint PointX="4.3229191666666669" PointY="14.955526123046877" />
           <ConnectorPoint PointX="4.4895858333333329" PointY="14.955526123046877" />
           <ConnectorPoint PointX="4.5260454166666664" PointY="14.955526123046877" />
@@ -1806,6 +1844,8 @@
           <ConnectorPoint PointX="3.6770808333333336" PointY="13.484111328125" />
           <ConnectorPoint PointX="3.9166666666666665" PointY="13.484111328125" />
           <ConnectorPoint PointX="4.083333333333333" PointY="13.484111328125" />
+          <ConnectorPoint PointX="4.1197929166666674" PointY="13.484111328125" />
+          <ConnectorPoint PointX="4.2864595833333334" PointY="13.484111328125" />
           <ConnectorPoint PointX="4.3229191666666669" PointY="13.484111328125" />
           <ConnectorPoint PointX="4.4895858333333329" PointY="13.484111328125" />
           <ConnectorPoint PointX="4.5260454166666664" PointY="13.484111328125" />
@@ -1852,6 +1892,8 @@
         <AssociationConnector Association="Moo.DB.MailTo">
           <ConnectorPoint PointX="3.5937475" PointY="13.234111328125" />
           <ConnectorPoint PointX="3.5937475" PointY="18.134010561523436" />
+          <ConnectorPoint PointX="4.1197929166666674" PointY="18.134010561523436" />
+          <ConnectorPoint PointX="4.2864595833333334" PointY="18.134010561523436" />
           <ConnectorPoint PointX="4.3229191666666669" PointY="18.134010561523436" />
           <ConnectorPoint PointX="4.4895858333333329" PointY="18.134010561523436" />
           <ConnectorPoint PointX="4.5260454166666664" PointY="18.134010561523436" />
@@ -1936,8 +1978,8 @@
         </InheritanceConnector>
         <AssociationConnector Association="Moo.DB.AnswerOnlyTestCaseUploadedFile">
           <ConnectorPoint PointX="4.9062525" PointY="29.5" />
-          <ConnectorPoint PointX="4.9062525" PointY="28.25" />
-          <ConnectorPoint PointX="8.5" PointY="28.25" />
+          <ConnectorPoint PointX="4.9062525" PointY="28.04687625" />
+          <ConnectorPoint PointX="8.5" PointY="28.04687625" />
         </AssociationConnector>
         <AssociationConnector Association="Moo.DB.UserTestCase">
           <ConnectorPoint PointX="3.39062125" PointY="13.234111328125" />
@@ -1951,6 +1993,13 @@
           <ConnectorPoint PointX="7.458333333333333" PointY="13.166331787109375" />
           <ConnectorPoint PointX="8.28125" PointY="13.166331787109375" />
           <ConnectorPoint PointX="8.28125" PointY="10.53605224609375" />
+        </AssociationConnector>
+        <AssociationConnector Association="Moo.DB.UploadedFileUser">
+          <ConnectorPoint PointX="8.5" PointY="28.646998291015624" />
+          <ConnectorPoint PointX="4.9895858333333329" PointY="28.646998291015624" />
+          <ConnectorPoint PointX="4.8229191666666669" PointY="28.646998291015624" />
+          <ConnectorPoint PointX="4.20312625" PointY="28.646998291015624" />
+          <ConnectorPoint PointX="4.20312625" PointY="13.234111328125" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

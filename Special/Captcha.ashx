@@ -58,7 +58,7 @@ public class Special_Captcha : IHttpHandler, IRequiresSessionState
                 }
 
                 Transform1(final);
-                Transform2(final);
+                //Transform2(final);
                 Transform3(final);
                 //Transform4(final);
                 final.Save(context.Response.OutputStream, ImageFormat.Png);

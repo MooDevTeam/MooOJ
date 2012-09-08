@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 09/06/2012 12:36:09
+-- Date Created: 09/08/2012 07:41:45
 -- Generated from EDMX file: D:\WebSites\MooOJ\App_Code\Moo\DB\MooDB.edmx
 -- --------------------------------------------------
 
@@ -353,7 +353,8 @@ CREATE TABLE [dbo].[UploadedFiles] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(40)  NOT NULL,
     [Path] nvarchar(max)  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL
+    [Description] nvarchar(max)  NOT NULL,
+    [CreatedBy_ID] int  NOT NULL
 );
 GO
 
@@ -960,6 +961,20 @@ ADD CONSTRAINT [FK_LogUser]
 CREATE INDEX [IX_FK_LogUser]
 ON [dbo].[Logs]
     ([User_ID]);
+GO
+
+-- Creating foreign key on [CreatedBy_ID] in table 'UploadedFiles'
+ALTER TABLE [dbo].[UploadedFiles]
+ADD CONSTRAINT [FK_UploadedFileUser]
+    FOREIGN KEY ([CreatedBy_ID])
+    REFERENCES [dbo].[Users]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UploadedFileUser'
+CREATE INDEX [IX_FK_UploadedFileUser]
+ON [dbo].[UploadedFiles]
+    ([CreatedBy_ID]);
 GO
 
 -- Creating foreign key on [ID] in table 'TestCases_SpecialJudgedTestCase'

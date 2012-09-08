@@ -32,11 +32,13 @@ public partial class File_Create : System.Web.UI.Page
         int fileID;
         using (MooDB db = new MooDB())
         {
+            User currentUser = ((SiteUser)User.Identity).GetDBUser(db);
             UploadedFile file = new UploadedFile()
             {
                 Name = txtName.Text,
                 Description = txtDescription.Text,
-                Path = fileName
+                Path = fileName,
+                CreatedBy=currentUser
             };
             db.UploadedFiles.AddObject(file);
             db.SaveChanges();

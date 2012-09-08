@@ -11,11 +11,12 @@
     </Moo:LinkBar>
     <asp:EntityDataSource ID="dataSource" runat="server" ConnectionString="name=MooDB"
         DefaultContainerName="MooDB" EnableFlattening="False" EntitySetName="UploadedFiles"
-        EntityTypeFilter="" OrderBy="it.[ID] DESC" Select="">
+        EntityTypeFilter="" OrderBy="it.[ID] DESC" Include="CreatedBy">
     </asp:EntityDataSource>
     <asp:GridView ID="grid" runat="server" DataSourceID="dataSource" AutoGenerateColumns="False"
-        CssClass="listTable" CellSpacing="-1" AllowPaging="True" AllowSorting="True" PageSize='<%$Resources:Moo,GridViewPageSize %>'
-        DataKeyNames="ID" OnRowDeleting="grid_RowDeleting" EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
+        CssClass="listTable" CellSpacing="-1" AllowPaging="True" AllowSorting="True"
+        PageSize='<%$Resources:Moo,GridViewPageSize %>' DataKeyNames="ID" OnRowDeleting="grid_RowDeleting"
+        EmptyDataText='<%$ Resources:Moo,EmptyDataText %>'>
         <AlternatingRowStyle BackColor="LightBlue" />
         <Columns>
             <asp:BoundField DataField="ID" HeaderText="文件编号" SortExpression="ID" />
@@ -23,6 +24,13 @@
                 <ItemTemplate>
                     <a runat="server" href='<%#"~/File/?id="+Eval("ID") %>'>
                         <%#HttpUtility.HtmlEncode(Eval("Name")) %>
+                    </a>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="创建者">
+                <ItemTemplate>
+                    <a runat="server" href='<%#"~/User/?id="+Eval("CreatedBy.ID") %>'>
+                        <%#HttpUtility.HtmlEncode(Eval("CreatedBy.Name")) %>
                     </a>
                 </ItemTemplate>
             </asp:TemplateField>

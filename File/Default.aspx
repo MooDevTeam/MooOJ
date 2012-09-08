@@ -13,8 +13,34 @@
     </Moo:LinkBar>
     <h1>
         <%#HttpUtility.HtmlEncode(file.Name) %></h1>
-    <a runat="server" href='<%#"~/File/Download.ashx?id="+file.ID %>'>下载文件</a>
-    <div>
-        <%#WikiParser.Parse(file.Description)%>
-    </div>
+    <table class="detailTable">
+        <tr>
+            <th>
+                创建者
+            </th>
+            <td>
+                <a runat="server" href='<%#"~/User/?id="+file.CreatedBy.ID %>'>
+                    <%#HttpUtility.HtmlEncode(file.CreatedBy.Name) %>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                下载
+            </th>
+            <td>
+                <a runat="server" href='<%#"~/File/Download.ashx?id="+file.ID %>'>下载文件</a>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                描述
+            </th>
+            <td>
+                <div>
+                    <%#WikiParser.Parse(file.Description)%>
+                </div>
+            </td>
+        </tr>
+    </table>
 </asp:Content>

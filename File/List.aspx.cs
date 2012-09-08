@@ -21,7 +21,6 @@ public partial class File_List : System.Web.UI.Page
     protected void grid_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         e.Cancel = true;
-        if (!Permission.Check("file.delete", false)) return;
 
         int fileID = (int)e.Keys[0];
         using (MooDB db = new MooDB())
@@ -29,6 +28,13 @@ public partial class File_List : System.Web.UI.Page
             UploadedFile file = (from f in db.UploadedFiles
                                  where f.ID == fileID
                                  select f).Single<UploadedFile>();
+            bool allowed = User.Identity.IsAuthenticated && ((SiteUser)User.Identity).ID == file.CreatedBy.ID
+                    || Permission.Check("file.delete", false,false);
+            if (!allowed)
+            {
+                Permission.Check("i'm super man.", false);
+                return;
+            }
             var spjTestCases = from t in db.TestCases.OfType<SpecialJudgedTestCase>()
                                where t.Judger.ID == file.ID
                                select t;
