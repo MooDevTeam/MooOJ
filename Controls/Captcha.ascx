@@ -2,10 +2,10 @@
 <%@ Import Namespace="Moo.Authorization" %>
 <asp:UpdatePanel ID="updateCaptcha" runat="server" UpdateMode="Conditional">
     <ContentTemplate>
-        <div style="color: Green;" runat="server" visible='<%#Permission.Check("captcha.skip",false,false) %>'>
-            根据您的权限，验证码已略过。
+        <div style="color: Green;" runat="server" visible='<%#isSkip %>'>
+            验证码已略过，(*^__^*) 。
         </div>
-        <div runat="server" visible='<%#!Permission.Check("captcha.skip",false,false) %>'>
+        <div runat="server" visible='<%#!isSkip %>'>
             <asp:Image ID="imgCaptcha" runat="server" Width="200px" Height="100px"/><br />
             <asp:TextBox ID="txtCaptcha" runat="server" MaxLength="5" ViewStateMode="Disabled"></asp:TextBox>
             <asp:LinkButton ID="btnChange" runat="server" CausesValidation="false" OnClick="btnChange_Click">换一个</asp:LinkButton>

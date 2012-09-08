@@ -185,7 +185,8 @@ namespace Moo.DB
             {
                 Name = "SPJ for Cat",
                 Description = "给Cat的SPJ",
-                Path = "D:\\Cat.exe"
+                Path = "D:\\Cat.exe",
+                CreatedBy=MrPhone
             };
             db.UploadedFiles.AddObject(file);
 
@@ -240,6 +241,7 @@ namespace Moo.DB
                 Name = "Invoker for EasyA+B",
                 Description = "EasyA+B的调用程序",
                 Path = "D:\\EasyA+B.o",
+                CreatedBy = MrPhone
             };
 
             db.TestCases.AddObject(new InteractiveTestCase()
@@ -266,7 +268,8 @@ namespace Moo.DB
             {
                 Name = "Judger Of Answer A+B",
                 Description="*测评程序*啊",
-                Path = "D:\\AnswerA+B.exe"
+                Path = "D:\\AnswerA+B.exe",
+                CreatedBy = MrPhone
             };
 
             AnswerOnlyTestCase answerOnlyTestCase1 = new AnswerOnlyTestCase()

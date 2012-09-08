@@ -13,6 +13,9 @@ public partial class Controls_Captcha : System.Web.UI.UserControl
     static char[] CHARACTERS = new char[]{'A','B','D','E','F','G','H','J','N','Q','R','T','Y',
                                           'a','b','d','e','f',    'h',    'n',    'r','t','y',
                                           '2','3','4','5','6','7','8'};
+    static Dictionary<int, DateTimeOffset> lastSkip = new Dictionary<int, DateTimeOffset>();
+
+    protected bool isSkip;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
@@ -32,7 +35,24 @@ public partial class Controls_Captcha : System.Web.UI.UserControl
         string answer = GetRandomText();
         string message = answer + "," + this.ClientID + "," + Rand.RAND.Next();
         imgCaptcha.ImageUrl = "~/Special/Captcha.ashx?message=" + HttpUtility.UrlEncode(Convert.ToBase64String(Converter.Encrypt(Encoding.Unicode.GetBytes(message))));
-        if (Permission.Check("captcha.skip", false, false))
+
+        if (HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+            SiteUser siteUser = (SiteUser)HttpContext.Current.User.Identity;
+            isSkip = Permission.Check("captcha.skip", false, false)
+                || !lastSkip.ContainsKey(siteUser.ID)
+                || lastSkip[siteUser.ID] < DateTimeOffset.Now.AddSeconds(-10);
+            if (isSkip)
+            {
+                lastSkip[siteUser.ID] = DateTimeOffset.Now;
+            }
+        }
+        else
+        {
+            isSkip = false;
+        }
+
+        if (isSkip)
         {
             txtCaptcha.Text = answer;
         }
@@ -42,6 +62,8 @@ public partial class Controls_Captcha : System.Web.UI.UserControl
         }
         Session["MooCaptchaAnswer" + this.ClientID] = answer;
         Session["MooCaptchaGetImage" + this.ClientID] = "allowed";
+
+        updateCaptcha.DataBind();
     }
 
     string GetRandomText()

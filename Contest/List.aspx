@@ -28,8 +28,8 @@
                     </a>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField DataField="StartTime" HeaderText="开始时间" SortExpression="StartTime" />
-            <asp:BoundField DataField="EndTime" HeaderText="结束时间" SortExpression="EndTime" />
+            <asp:BoundField DataField="StartTime" HeaderText="开始时间" SortExpression="StartTime" DataFormatString="{0:yyyy-MM-dd hh:mm:ss}" />
+            <asp:BoundField DataField="EndTime" HeaderText="结束时间" SortExpression="EndTime" DataFormatString="{0:yyyy-MM-dd hh:mm:ss}" />
             <asp:CommandField HeaderText="操作" ShowDeleteButton="True" />
         </Columns>
     </asp:GridView>

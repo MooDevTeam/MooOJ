@@ -14,14 +14,13 @@
     </Moo:LinkBar>
     <h1>
         <%#HttpUtility.HtmlEncode(contest.Title) %></h1>
-    
     <table class="detailTable">
         <tr>
             <th>
                 开始时间
             </th>
             <td>
-                <%#contest.StartTime %>
+                <%#string.Format("{0:yyyy-MM-dd hh:mm:ss}",contest.StartTime) %>
             </td>
         </tr>
         <tr>
@@ -29,7 +28,7 @@
                 结束时间
             </th>
             <td>
-                <%#contest.EndTime %>
+                <%#string.Format("{0:yyyy-MM-dd hh:mm:ss}", contest.EndTime)%>
             </td>
         </tr>
         <tr>
@@ -119,5 +118,4 @@
             </td>
         </tr>
     </table>
-    
 </asp:Content>

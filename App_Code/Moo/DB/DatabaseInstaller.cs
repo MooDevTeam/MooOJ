@@ -32,6 +32,7 @@ namespace Moo.DB
         static Function DeleteProblemHistory = new Function() { Name = "problem.history.delete" };
 
         static Function ReadTestCase = new Function() { Name = "testcase.read" };
+        static Function ReadHiddenTestCase = new Function() { Name = "testcase.hidden.read" };
         static Function ListTestCase = new Function() { Name = "testcase.list" };
         static Function CreateTestCase = new Function() { Name = "testcase.create" };
         static Function CreateLockedTestCase = new Function() { Name = "testcase.locked.create" };
@@ -189,6 +190,9 @@ namespace Moo.DB
             Worker.AllowedFunction.Add(ReadTestCase);
             NormalUser.AllowedFunction.Add(ReadTestCase);
 
+            Organizer.AllowedFunction.Add(ReadHiddenTestCase);
+            Worker.AllowedFunction.Add(ReadHiddenTestCase);
+
             Organizer.AllowedFunction.Add(ListTestCase);
             Worker.AllowedFunction.Add(ListTestCase);
             NormalUser.AllowedFunction.Add(ListTestCase);
@@ -286,7 +290,6 @@ namespace Moo.DB
             //User
             Organizer.AllowedFunction.Add(CreateUser);
             Worker.AllowedFunction.Add(CreateUser);
-            NormalUser.AllowedFunction.Add(CreateUser);
 
             Organizer.AllowedFunction.Add(ListUser);
             Worker.AllowedFunction.Add(ListUser);

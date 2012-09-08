@@ -82,7 +82,7 @@ and (@contestID is null or select )">
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:BoundField HeaderText="语言" DataField="Language" SortExpression="Language" />
-            <asp:BoundField HeaderText="创建时间" DataField="CreateTime" SortExpression="CreateTime" />
+            <asp:BoundField HeaderText="创建时间" DataField="CreateTime" SortExpression="CreateTime" DataFormatString="{0:yyyy-MM-dd hh:mm:ss}" />
             <asp:TemplateField HeaderText="分数">
                 <ItemTemplate>
                     <a runat="server" href='<%#"~/Record/?id="+Eval("ID") %>'>
