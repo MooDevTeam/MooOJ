@@ -134,7 +134,7 @@ public partial class TestCase_Create : System.Web.UI.Page
             Logger.Info(db, "创建测试数据#" + testCaseID);
         }
 
-        PageUtil.Redirect("操作成功", "~/TestCase/?id=" + testCaseID);
+        PageUtil.Redirect("创建成功", "~/TestCase/?id=" + testCaseID);
     }
     protected void ValidateFileID(object source, ServerValidateEventArgs args)
     {

@@ -108,7 +108,7 @@ public partial class User_Modify : System.Web.UI.Page
             Logger.Info(db, "修改用户#" + user.ID);
         }
 
-        PageUtil.Redirect("操作成功", "~/User/?id=" + userID);
+        PageUtil.Redirect("修改成功", "~/User/?id=" + userID);
     }
     protected void btnPreview_Click(object sender, EventArgs e)
     {
@@ -126,7 +126,7 @@ public partial class User_Modify : System.Web.UI.Page
         {
             Logger.Info(db, "强制用户#" + userID + "登出");
         }
-        PageUtil.Redirect("操作成功", "~/User/Modify.aspx?id=" + userID);
+        PageUtil.Redirect("强制登出成功", "~/User/Modify.aspx?id=" + userID);
     }
     protected void validateRole_ServerValidate(object source, ServerValidateEventArgs args)
     {

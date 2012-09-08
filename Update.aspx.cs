@@ -83,6 +83,6 @@ public partial class Update : System.Web.UI.Page
             Logger.Info(db, "更新主页，新版本为#" + revision.ID);
         }
 
-        PageUtil.Redirect("操作成功", "~/");
+        PageUtil.Redirect("更新成功", "~/");
     }
 }

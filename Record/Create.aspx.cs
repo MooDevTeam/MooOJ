@@ -128,7 +128,7 @@ public partial class Record_Create : System.Web.UI.Page
             Logger.Info(db, "创建记录#" + record.ID);
         }
 
-        PageUtil.Redirect("操作成功", "~/Record/List.aspx?userID=" + ((SiteUser)User.Identity).ID);
+        PageUtil.Redirect("创建成功", "~/Record/List.aspx?userID=" + ((SiteUser)User.Identity).ID);
     }
 
     string MergeAnswers(MooDB db)

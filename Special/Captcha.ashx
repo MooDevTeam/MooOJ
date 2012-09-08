@@ -159,7 +159,7 @@ public class Special_Captcha : IHttpHandler, IRequiresSessionState
         {
             for (int y = 0; y < bitmap.Height; y++)
             {
-                if (bitmap.GetPixel(x, y).A > 250)
+                if (bitmap.GetPixel(x, y).A > 0)
                 {
                     bitmap.SetPixel(x, y, RandomColor());
                 }

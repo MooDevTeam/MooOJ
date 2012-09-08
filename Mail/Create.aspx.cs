@@ -95,6 +95,6 @@ public partial class Mail_Create : System.Web.UI.Page
             Logger.Info(db,string.Format("向用户#{0}发送邮件#{1}",receiverID,mail.ID));
         }
 
-        PageUtil.Redirect("操作成功", "~/Mail/List.aspx");
+        PageUtil.Redirect("创建成功", "~/Mail/List.aspx");
     }
 }

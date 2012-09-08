@@ -92,7 +92,7 @@ public partial class Post_Create : System.Web.UI.Page
 
             Logger.Info(db, "创建帖子#" + postID);
         }
-        PageUtil.Redirect("操作成功", "~/Post/?id=" + postID);
+        PageUtil.Redirect("创建成功", "~/Post/?id=" + postID);
     }
     protected void btnPreview_Click(object sender, EventArgs e)
     {

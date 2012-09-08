@@ -158,7 +158,7 @@ public partial class Record_List : System.Web.UI.Page
         {
             if (!allowRejudge)
             {
-                PageUtil.Redirect("请喝杯茶", "~/Record/List.aspx?" + Request.QueryString);
+                PageUtil.Redirect("请喝杯茶", Request.RawUrl);
                 return;
             }
 
@@ -177,7 +177,7 @@ public partial class Record_List : System.Web.UI.Page
             JudgeInfo info = record.JudgeInfo;
             if (info == null)
             {
-                PageUtil.Redirect("已经提交重测，请耐心等候。", "~/Record/List.aspx?" + Request.QueryString);
+                PageUtil.Redirect("已经提交重测，请耐心等候。", Request.RawUrl);
                 return;
             }
 
@@ -204,7 +204,7 @@ public partial class Record_List : System.Web.UI.Page
             Logger.Warning(db, string.Format("删除记录#{0}的测评信息#{1}", record.ID, info.ID));
         }
 
-        PageUtil.Redirect("操作成功", "~/Record/List.aspx?" + Request.QueryString);
+        PageUtil.Redirect("提交重测成功", Request.RawUrl);
     }
 
     void DeleteJudgeInfoAndRefresh(MooDB db, Record record, JudgeInfo info)

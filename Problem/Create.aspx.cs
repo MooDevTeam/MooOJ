@@ -64,7 +64,7 @@ public partial class Problem_Create : System.Web.UI.Page
 
             Logger.Info(db, "创建题目#" + problemID);
         }
-        PageUtil.Redirect("操作成功", "~/Problem/?id=" + problemID);
+        PageUtil.Redirect("创建成功", "~/Problem/?id=" + problemID);
     }
     protected void btnPreview_Click(object sender, EventArgs e)
     {

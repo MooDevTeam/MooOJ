@@ -68,6 +68,6 @@ public partial class Contest_Create : System.Web.UI.Page
             Logger.Info(db, "创建比赛#" + contestID);
         }
 
-        PageUtil.Redirect("操作成功", "~/Contest/?id=" + contestID);
+        PageUtil.Redirect("创建成功", "~/Contest/?id=" + contestID);
     }
 }

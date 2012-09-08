@@ -112,6 +112,6 @@ public partial class Post_Reply : System.Web.UI.Page
             Logger.Info(db, string.Format("创建帖子#{0}的新项#{1}", post.ID, postItem.ID));
         }
 
-        PageUtil.Redirect("操作成功", "~/Post/?id=" + postID);
+        PageUtil.Redirect("回复成功", "~/Post/?id=" + postID);
     }
 }

@@ -47,7 +47,7 @@ public partial class File_Create : System.Web.UI.Page
             Logger.Info(db, "创建文件#" + fileID);
         }
 
-        PageUtil.Redirect("操作成功", "~/File/?id=" + fileID);
+        PageUtil.Redirect("创建成功", "~/File/?id=" + fileID);
     }
     protected void btnQuery_Click(object sender, EventArgs e)
     {

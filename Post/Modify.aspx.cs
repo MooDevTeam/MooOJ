@@ -57,6 +57,6 @@ public partial class Post_Modify : System.Web.UI.Page
             Logger.Info(db, "修改帖子#" + post.ID);
         }
 
-        PageUtil.Redirect("操作成功", "~/Post/?id=" + postID);
+        PageUtil.Redirect("修改成功", "~/Post/?id=" + postID);
     }
 }

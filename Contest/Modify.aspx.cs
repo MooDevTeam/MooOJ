@@ -88,6 +88,6 @@ public partial class Contest_Modify : System.Web.UI.Page
             Logger.Info(db, "修改比赛#" + contest.ID);
         }
 
-        PageUtil.Redirect("操作成功", "~/Contest/?id=" + contestID);
+        PageUtil.Redirect("修改成功", "~/Contest/?id=" + contestID);
     }
 }
