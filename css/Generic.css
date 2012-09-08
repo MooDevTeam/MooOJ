@@ -101,10 +101,30 @@ th
 {
     border: none;
     margin: auto;
+    border-collapse: separate;
+    padding:10px;
 }
 .listTable table td
 {
     border: none;
+    font-size: 16pt;
+    font-weight: bold;
+}
+.listTable table td span
+{
+    padding: 5px;
+    background: black;
+    color: White;
+    border-radius: 5px;
+}
+.listTable table td a
+{
+    padding: 5px;
+    background: green;
+    border-radius: 5px;
+    border: none;
+    color: White;
+    background: rgb(26,92,200);
 }
 .validator
 {

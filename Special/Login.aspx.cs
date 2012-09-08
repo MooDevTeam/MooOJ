@@ -51,7 +51,7 @@ public partial class Special_Login : System.Web.UI.Page
         User user = GetUser(db, userName, password);
         if (user == null)
         {
-            PageUtil.Redirect("密码错误", "~/Special/Login.aspx");
+            PageUtil.Redirect("密码错误", Request.RawUrl);
             return;
         }
         SetCookie(user, isPersistent);
@@ -74,9 +74,10 @@ public partial class Special_Login : System.Web.UI.Page
         string userData = user.ID + "," + token;
 
         FormsAuthenticationTicket ticket;
-        ticket = new FormsAuthenticationTicket(1, user.Name, DateTime.Now, DateTime.Now.AddMinutes(20), isPersistent, userData);
+        ticket = new FormsAuthenticationTicket(1, user.Name, DateTime.Now, DateTime.Now + FormsAuthentication.Timeout, isPersistent, userData);
         HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(ticket));
-        cookie.Expires = ticket.Expiration;
+        cookie.Expires = isPersistent ? ticket.Expiration : DateTime.MinValue;
+        cookie.HttpOnly = true;
         cookie.Path = FormsAuthentication.FormsCookiePath;
         Response.Cookies.Add(cookie);
     }

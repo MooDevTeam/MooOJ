@@ -53,8 +53,8 @@
                 <asp:LoginView ID="viewUserInfo" runat="server">
                     <AnonymousTemplate>
                         您尚未登录。<br />
-                        请选择<a runat="server" href="~/Special/Login.aspx">登录</a>或<a id="A2" runat="server"
-                            href="~/User/Register.aspx">注册</a>。
+                        请选择<a runat="server" href='<%#"~/Special/Login.aspx?returnUrl="+HttpUtility.UrlEncode(Request.RawUrl) %>'>登录</a>或<a
+                            runat="server" href="~/User/Register.aspx">注册</a>。
                     </AnonymousTemplate>
                     <LoggedInTemplate>
                         <Moo:UserSign ID="userSign" runat="server" Vertical="true" UserID='<%#((SiteUser)HttpContext.Current.User.Identity).ID %>' />
@@ -71,7 +71,8 @@
         <div class="clear">
         </div>
         <div id="footer">
-            <a href="https://github.com/onetwogoo/MooOJ">Moo</a>是由<a href="http://imeng.de/">Mr.Phone</a>开发的。所用测评核心<a href="https://github.com/variantf/v-Judge_Kernel">v-Judge_Kernel</a>由<a href="mailto:sunjiayu_2006@126.com">Variantf</a>提供。
+            <a href="https://github.com/onetwogoo/MooOJ">Moo</a>是由<a href="http://imeng.de/">Mr.Phone</a>开发的。所用测评核心<a
+                href="https://github.com/variantf/v-Judge_Kernel">v-Judge_Kernel</a>由<a href="mailto:sunjiayu_2006@126.com">Variantf</a>提供。
             <div style="float: right;">
                 ServerTime:
                 <%=DateTimeOffset.Now %>

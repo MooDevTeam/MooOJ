@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Security.Principal;
+using System.Web.Security;
 using Moo.Authorization;
 using Moo.DB;
 public partial class MasterPage : System.Web.UI.MasterPage
