@@ -15,7 +15,7 @@
         <Columns>
             <asp:BoundField DataField="ID" HeaderText="日志编号" ReadOnly="True" SortExpression="ID" />
             <asp:BoundField DataField="CreateTime" HeaderText="日期" SortExpression="CreateTime"
-                 DataFormatString="{0:yyyy-MM-dd hh:mm:ss}" />
+                 DataFormatString="{0:yyyy-MM-dd HH:mm:ss}" />
             <asp:TemplateField HeaderText="级别" SortExpression="Level">
                 <ItemStyle Font-Bold="true" />
                 <ItemTemplate>

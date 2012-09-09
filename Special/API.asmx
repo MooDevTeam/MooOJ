@@ -2,6 +2,7 @@
 
 using System;
 using System.Linq;
+using System.Collections.Generic;
 using System.Threading;
 using System.Security;
 using System.Web;
@@ -18,12 +19,14 @@ using Moo.Authorization;
 public class API : System.Web.Services.WebService
 {
     static object loginLock = new object();
+    static ISet<int> trustedUsers = new HashSet<int>();
 
     bool Authenticate(string sToken)
     {
         string[] splited = sToken.Split(',');
         int userID = int.Parse(splited[0]), token = int.Parse(splited[1]);
-        if (!SiteUsers.ByID.ContainsKey(userID) || SiteUsers.ByID[userID].Token != token || SiteUsers.ByID[userID].Role.Type > RoleType.Worker)
+        if (!SiteUsers.ByID.ContainsKey(userID) || SiteUsers.ByID[userID].Token != token
+            || SiteUsers.ByID[userID].Role.Type!=RoleType.Organizer && !trustedUsers.Contains(userID))
         {
             return false;
         }
@@ -66,6 +69,28 @@ public class API : System.Web.Services.WebService
                 SiteUsers.ByID[user.ID] = new SiteUser(user) { Token = token };
                 return user.ID + "," + token;
             }
+        }
+    }
+
+    [WebMethod]
+    public void AddTrustedUser(string sToken, int userID)
+    {
+        if (!Authenticate(sToken)) throw new SecurityException();
+        if (CurrentUser.Role.Type != RoleType.Organizer) throw new SecurityException();
+        if (!trustedUsers.Contains(userID))
+        {
+            trustedUsers.Add(userID);
+        }
+    }
+    
+    [WebMethod]
+    public void RemoveTrustedUser(string sToken, int userID)
+    {
+        if (!Authenticate(sToken)) throw new SecurityException();
+        if (CurrentUser.Role.Type != RoleType.Organizer) throw new SecurityException();
+        if (trustedUsers.Contains(userID))
+        {
+            trustedUsers.Remove(userID);
         }
     }
 

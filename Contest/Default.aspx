@@ -20,7 +20,7 @@
                 开始时间
             </th>
             <td>
-                <%#string.Format("{0:yyyy-MM-dd hh:mm:ss}",contest.StartTime) %>
+                <%#string.Format("{0:yyyy-MM-dd HH:mm:ss}",contest.StartTime) %>
             </td>
         </tr>
         <tr>
@@ -28,7 +28,7 @@
                 结束时间
             </th>
             <td>
-                <%#string.Format("{0:yyyy-MM-dd hh:mm:ss}", contest.EndTime)%>
+                <%#string.Format("{0:yyyy-MM-dd HH:mm:ss}", contest.EndTime)%>
             </td>
         </tr>
         <tr>
