@@ -20,15 +20,32 @@ public class API : System.Web.Services.WebService
 {
     static object loginLock = new object();
     static ISet<int> trustedUsers = new HashSet<int>();
+    static IDictionary<int, DateTimeOffset> lastAccess = new Dictionary<int, DateTimeOffset>();
 
     bool Authenticate(string sToken)
     {
         string[] splited = sToken.Split(',');
         int userID = int.Parse(splited[0]), token = int.Parse(splited[1]);
-        if (!SiteUsers.ByID.ContainsKey(userID) || SiteUsers.ByID[userID].Token != token
-            || SiteUsers.ByID[userID].Role.Type!=RoleType.Organizer && !trustedUsers.Contains(userID))
+        if (!SiteUsers.ByID.ContainsKey(userID) || SiteUsers.ByID[userID].Token != token) return false;
+        
+        if (SiteUsers.ByID[userID].Role.Type != RoleType.Organizer && !trustedUsers.Contains(userID))
         {
-            return false;
+            lock (SiteUsers.ByID[userID])
+            {
+                if (lastAccess.ContainsKey(userID))
+                {
+                    if (lastAccess[userID] > DateTimeOffset.Now.AddSeconds(-10))
+                    {
+                        Thread.Sleep(lastAccess[userID].AddSeconds(10) - DateTimeOffset.Now);
+                    }
+                }
+                else
+                {
+                    lastAccess[userID] = DateTimeOffset.Now;
+                }
+                
+                lastAccess[userID] = DateTimeOffset.Now;
+            }
         }
         Thread.CurrentPrincipal = new CustomPrincipal() { Identity = SiteUsers.ByID[userID] };
         return true;
@@ -66,7 +83,15 @@ public class API : System.Web.Services.WebService
                 }
 
                 int token = Rand.RAND.Next();
-                SiteUsers.ByID[user.ID] = new SiteUser(user) { Token = token };
+                if (SiteUsers.ByID.ContainsKey(user.ID))
+                {
+                    SiteUsers.ByID[user.ID].Initialize(user);
+                    SiteUsers.ByID[user.ID].Token = token;
+                }
+                else
+                {
+                    SiteUsers.ByID[user.ID] = new SiteUser(user) { Token = token };
+                }
                 return user.ID + "," + token;
             }
         }
@@ -82,7 +107,7 @@ public class API : System.Web.Services.WebService
             trustedUsers.Add(userID);
         }
     }
-    
+
     [WebMethod]
     public void RemoveTrustedUser(string sToken, int userID)
     {

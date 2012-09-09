@@ -24,9 +24,7 @@ namespace Moo.Authorization
 
         public SiteUser(User user)
         {
-            ID = user.ID;
-            Name = user.Name;
-            Role = SiteRoles.ByID[user.Role.ID];
+            Initialize(user);
         }
 
         public User GetDBUser(MooDB db)
@@ -36,32 +34,11 @@ namespace Moo.Authorization
                     select u).Single<User>();
         }
 
-        /*
-        public string Serialize()
+        public void Initialize(User user)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(ID).Append(',');
-            sb.Append(Name).Append(',');
-            sb.Append(Role.ID);
-            return sb.ToString();
+            ID = user.ID;
+            Name = user.Name;
+            Role = SiteRoles.ByID[user.Role.ID];
         }
-
-        public static SiteUser Deserialize(string serialized)
-        {
-            string[] fields = serialized.Split(',');
-            string[] roles = fields[2].Split(':');
-
-            SiteUser result = new SiteUser();
-            result.ID = int.Parse(fields[0]);
-            result.Name = fields[1];
-            result.Role = SiteRoles.ByID[int.Parse(fields[2])];
-            return result;
-        }
-
-        public override string ToString()
-        {
-            return Serialize();
-        }
-         * */
     }
 }
