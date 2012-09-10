@@ -29,7 +29,7 @@
                 Logger.Debug(db, "加入测试数据");
             }
         }
-
+        
         TesterManager.Testers.Add(new Moo.Tester.MooTester.Tester());
         TesterManager.Start();
         ContestManager.Start();

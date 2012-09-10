@@ -176,7 +176,7 @@
     <value>&lt;color:green|正确。&gt;(得分*{0}*，用时*{1}ms*，内存*{2}byte(s)*) {{"{3}"}}</value>
   </data>
   <data name="MooTester_TestTLE" xml:space="preserve">
-    <value>&lt;color:pink|超出时间限制。&gt;</value>
+    <value>&lt;color:darkred|超出时间限制。&gt;</value>
   </data>
   <data name="MooTester_TestUndefinedError" xml:space="preserve">
     <value>&lt;color:gray|天气不好，程序不开心。&gt;</value>

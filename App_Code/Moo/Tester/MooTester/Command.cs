@@ -15,9 +15,9 @@ namespace Moo.Tester.MooTester
                 "c++",
                 new Dictionary<string,string>()
                 {
-                    {"src2exe","g++ -Wall -O2 -std=c++0x -o {Execute} {E.exeE} {Source} {S.cppS}"},
-                    {"src2obj","g++ -Wall -O2 -std=c++0x -c -o {Execute} {E.oE} {Source} {S.cppS}"},
-                    {"obj2exe","g++ -Wall -O2 -std=c++0x -o {Execute} {E.exeE} {Object}"}
+                    {"src2exe","g++ -Wall -O2 -o {Execute} {E.exeE} {Source} {S.cppS}"},
+                    {"src2obj","g++ -Wall -O2 -c -o {Execute} {E.oE} {Source} {S.cppS}"},
+                    {"obj2exe","g++ -Wall -O2 -o {Execute} {E.exeE} {Object}"}
                 }
             },
             {

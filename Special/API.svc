@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Moo.API.API" CodeBehind="~/App_Code/Moo/API/API.cs" %>
