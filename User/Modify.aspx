@@ -73,7 +73,8 @@
                 电子邮箱
             </th>
             <td>
-                <b><span style="color:Red;">注意</span>：您的头像将会根据这个电子邮箱，从<a href="https://gravatar.com/">Gavatar</a>获取，详见<a runat="server" href="~/Help/?id=15">快速入门-用户页的使用与用户之间的比较</a>。</b><br/>
+                <b><span style="color: Red;">注意</span>：您的头像将会根据这个电子邮箱，从<a href="https://gravatar.com/">Gavatar</a>获取，详见<a
+                    runat="server" href="~/Help/?id=15">快速入门-用户页的使用与用户之间的比较</a>。</b><br />
                 <asp:TextBox ID="txtEmail" runat="server" Width="100%" Text='<%#user.Email %>'></asp:TextBox>
                 <asp:RegularExpressionValidator runat="server" ControlToValidate="txtEmail" ValidationExpression=".+@.+\..+"
                     Display="Dynamic" CssClass="validator">格式错误</asp:RegularExpressionValidator>
@@ -94,6 +95,7 @@
                 预览
             </th>
             <td>
+                <asp:Literal ID="litOnlyPreview" runat="server" Text='<%$Resources:Moo,ItsOnlyPreview %>' />
                 <div runat="server" id="divPreview">
                 </div>
             </td>
@@ -118,8 +120,8 @@
         </tr>
         <tr>
             <td colspan="2" style="text-align: center;">
-                <asp:Button ID="btnPreview" runat="server" Text="预览" CausesValidation="false" OnClick="btnPreview_Click" />
-                <asp:Button ID="btnSubmit" runat="server" Text="修改" Enabled="false" OnClick="btnSubmit_Click" />
+                <asp:Button ID="btnPreview" runat="server" Text="先预览" CausesValidation="false" OnClick="btnPreview_Click" />
+                <asp:Button ID="btnSubmit" runat="server" Text="后修改" Enabled="false" OnClick="btnSubmit_Click" />
             </td>
         </tr>
     </table>

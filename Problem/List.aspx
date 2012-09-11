@@ -33,6 +33,7 @@
             <asp:BoundField DataField="ID" HeaderText="题目编号" SortExpression="ID" />
             <asp:BoundField DataField="AverageScore" HeaderText="平均分" DataFormatString="{0:0.00}" SortExpression="AverageScore" />
             <asp:BoundField DataField="MaximumScore" HeaderText="最高分" SortExpression="MaximumScore" />
+            <asp:BoundField DataField="FullScore" HeaderText="满分" SortExpression="FullScore" />
             <asp:BoundField DataField="Score" HeaderText="我的得分" SortExpression="Score" />
             <asp:TemplateField HeaderText="名称">
                 <ItemTemplate>

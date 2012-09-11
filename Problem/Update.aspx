@@ -33,6 +33,7 @@
                 预览
             </th>
             <td>
+            <asp:Literal ID="litOnlyPreview" runat="server" Text='<%$Resources:Moo,ItsOnlyPreview %>' />
                 <div id="divPreview" runat="server">
                 </div>
             </td>
@@ -69,8 +70,8 @@
         <tr>
             <td colspan="2" style="text-align: center;">
                 <asp:Button ID="btnPreview" runat="server" ViewStateMode="Disabled" CausesValidation="false"
-                    Text="预览" OnClick="btnPreview_Click" />
-                <asp:Button ID="btnSubmit" runat="server" Text="更新" Enabled="false" OnClick="btnSubmit_Click" />
+                    Text="先预览" OnClick="btnPreview_Click" />
+                <asp:Button ID="btnSubmit" runat="server" Text="后更新" Enabled="false" OnClick="btnSubmit_Click" />
             </td>
         </tr>
     </table>

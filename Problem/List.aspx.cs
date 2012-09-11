@@ -69,6 +69,10 @@ public partial class Problem_List : System.Web.UI.Page
                              select r
                let score = records.Any() ? (int?)records.Max(r => r.JudgeInfo.Score) : null
                let averageScore = p.SubmissionUser > 0 ? p.ScoreSum / (double?)p.SubmissionUser : null
+               let testCases = from t in db.TestCases.OfType<TranditionalTestCase>()
+                               where t.Problem.ID == p.ID
+                               select t
+               let fullScore = testCases.Any() ? (int?)testCases.Sum(t => t.Score) : null
                orderby p.ID descending
                select new
                {
@@ -79,7 +83,8 @@ public partial class Problem_List : System.Web.UI.Page
                    SubmissionCount = p.SubmissionCount,
                    SubmissionUser = p.SubmissionUser,
                    AverageScore = averageScore,
-                   MaximumScore = p.MaximumScore
+                   MaximumScore = p.MaximumScore,
+                   FullScore = fullScore
                };
     }
     protected void grid_PageIndexChanging(object sender, GridViewPageEventArgs e)

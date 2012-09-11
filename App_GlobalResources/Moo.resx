@@ -221,4 +221,7 @@
   <data name="MooTester_TestOLE" xml:space="preserve">
     <value>&lt;color:cyan|程序吐槽过多。&gt;</value>
   </data>
+  <data name="ItsOnlyPreview" xml:space="preserve">
+    <value>&lt;span style="font-size:larger;font-weight:bold;color:red;"&gt;请注意，这仅仅是预览，真正内容并未保存。&lt;/span&gt;</value>
+  </data>
 </root>

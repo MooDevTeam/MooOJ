@@ -6,16 +6,18 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Security;
+using System.IO;
 using Moo.DB;
 using Moo.Authorization;
 using Moo.Utility;
 namespace Moo.API
 {
     // 注意: 使用“重构”菜单上的“重命名”命令，可以同时更改代码、svc 和配置文件中的类名“API”。
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall, ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class API : IAPI
     {
         static object loginLock = new object();
-        static ISet<int> trustedUsers = new HashSet<int>();
+        static ISet<SiteUser> trustedUsers = new HashSet<SiteUser>();
         static IDictionary<int, DateTimeOffset> lastAccess = new Dictionary<int, DateTimeOffset>();
 
         bool Authenticate(string sToken, bool throwIfFailure = true)
@@ -26,7 +28,7 @@ namespace Moo.API
             {
                 if (throwIfFailure)
                 {
-                    throw new SecurityException("身份验证失败") ;
+                    throw new SecurityException("身份验证失败");
                 }
                 else
                 {
@@ -34,7 +36,7 @@ namespace Moo.API
                 }
             }
 
-            if (SiteUsers.ByID[userID].Role.Type != RoleType.Organizer && !trustedUsers.Contains(userID))
+            if (SiteUsers.ByID[userID].Role.Type != RoleType.Organizer && !trustedUsers.Contains(SiteUsers.ByID[userID]))
             {
                 lock (SiteUsers.ByID[userID])
                 {
@@ -120,19 +122,62 @@ namespace Moo.API
         {
             Authenticate(sToken);
             if (CurrentUser.Role.Type != RoleType.Organizer) Authorize("");
-            if (!trustedUsers.Contains(userID))
+
+            if (!SiteUsers.ByID.ContainsKey(userID))
             {
-                trustedUsers.Add(userID);
+                using (MooDB db = new MooDB())
+                {
+                    User user = (from u in db.Users
+                                 where u.ID == userID
+                                 select u).SingleOrDefault<User>();
+                    if (user == null) throw new ArgumentException("无此用户");
+                    SiteUsers.ByID[userID] = new SiteUser(user);
+                }
             }
+
+            if (!trustedUsers.Contains(SiteUsers.ByID[userID]))
+            {
+                trustedUsers.Add(SiteUsers.ByID[userID]);
+            }
+            else throw new ArgumentException("用户已在列表中");
         }
 
         public void RemoveTrustedUser(string sToken, int userID)
         {
             Authenticate(sToken);
             if (CurrentUser.Role.Type != RoleType.Organizer) Authorize("");
-            if (trustedUsers.Contains(userID))
+            if (!SiteUsers.ByID.ContainsKey(userID)) throw new ArgumentException("用户不在列表中");
+
+            if (trustedUsers.Contains(SiteUsers.ByID[userID]))
             {
-                trustedUsers.Remove(userID);
+                trustedUsers.Remove(SiteUsers.ByID[userID]);
+            }
+        }
+
+        public List<BriefUserInfo> ListTrustedUser(string sToken)
+        {
+            Authenticate(sToken);
+            if (CurrentUser.Role.Type != RoleType.Organizer) Authorize("");
+            return (from u in trustedUsers
+                    select new BriefUserInfo()
+                    {
+                        ID=u.ID,
+                        Name=u.Name
+                    }).ToList();
+        }
+
+        public BriefUserInfo GetUserByName(string sToken, string userName)
+        {
+            Authenticate(sToken);
+            using (MooDB db = new MooDB())
+            {
+                return (from u in db.Users
+                        where u.Name == userName
+                        select new BriefUserInfo()
+                        {
+                            ID = u.ID,
+                            Name = u.Name
+                        }).SingleOrDefault<BriefUserInfo>();
             }
         }
 

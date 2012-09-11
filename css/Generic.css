@@ -28,7 +28,11 @@ h2
 {
     border-bottom: 1px gray solid;
 }
-
+pre
+{
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
 table
 {
     border: 1px solid;
