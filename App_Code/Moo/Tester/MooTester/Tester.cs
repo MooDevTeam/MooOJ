@@ -349,7 +349,10 @@ namespace Moo.Tester.MooTester
 
         int GetScore(ref string message)
         {
-            int result = int.Parse(Regex.Match(message, @"{Score:(\d+)}").Groups[1].Value);
+            int result = 0;
+            foreach(Match match in Regex.Matches(message, @"{Score:(\d+)}")){
+                result+=int.Parse(match.Groups[1].Value);
+            }
             message = Regex.Replace(message, @"{Score:\d+}", "");
             return result;
         }

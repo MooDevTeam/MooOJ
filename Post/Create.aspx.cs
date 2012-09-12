@@ -77,11 +77,12 @@ public partial class Post_Create : System.Web.UI.Page
                 Lock=false
             };
             db.Posts.AddObject(post);
+            db.SaveChanges();
 
             PostItem item = new PostItem()
             {
                 Post = post,
-                Content = txtContent.Text,
+                Content = WikiParser.DoAt(db,txtContent.Text,post,currentUser,true),
                 CreatedBy = currentUser
             };
 
@@ -98,6 +99,9 @@ public partial class Post_Create : System.Web.UI.Page
     {
         btnSubmit.Enabled = true;
         trPreview.Visible = true;
-        divPreview.InnerHtml = WikiParser.Parse(txtContent.Text);
+        using (MooDB db = new MooDB())
+        {
+            divPreview.InnerHtml = WikiParser.Parse(WikiParser.DoAt(db,txtContent.Text,null,null,false));
+        }
     }
 }

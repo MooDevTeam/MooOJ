@@ -77,7 +77,10 @@ public partial class Post_Reply : System.Web.UI.Page
     {
         btnSubmit.Enabled = true;
         trPreview.Visible = true;
-        divPreview.InnerHtml = WikiParser.Parse(txtContent.Text);
+        using (MooDB db = new MooDB())
+        {
+            divPreview.InnerHtml = WikiParser.Parse(WikiParser.DoAt(db,txtContent.Text,null,null,false));
+        }
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
@@ -103,7 +106,7 @@ public partial class Post_Reply : System.Web.UI.Page
             PostItem postItem = new PostItem()
             {
                 Post = post,
-                Content = txtContent.Text,
+                Content = WikiParser.DoAt(db,txtContent.Text,post,currentUser,true),
                 CreatedBy = currentUser
             };
             db.PostItems.AddObject(postItem);
