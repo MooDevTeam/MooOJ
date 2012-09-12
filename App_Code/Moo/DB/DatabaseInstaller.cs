@@ -395,6 +395,7 @@ namespace Moo.DB
                 Email = "",
                 Role = Organizer,
                 Score = 0,
+                PreferredLanguage="c++",
             };
             db.Users.AddObject(owner);
             db.SaveChanges();

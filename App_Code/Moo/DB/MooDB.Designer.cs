@@ -4552,7 +4552,8 @@ namespace Moo.DB
         /// <param name="email">Email 属性的初始值。</param>
         /// <param name="description">Description 属性的初始值。</param>
         /// <param name="score">Score 属性的初始值。</param>
-        public static User CreateUser(global::System.Int32 id, global::System.String name, global::System.String password, global::System.String briefDescription, global::System.String email, global::System.String description, global::System.Int32 score)
+        /// <param name="preferredLanguage">PreferredLanguage 属性的初始值。</param>
+        public static User CreateUser(global::System.Int32 id, global::System.String name, global::System.String password, global::System.String briefDescription, global::System.String email, global::System.String description, global::System.Int32 score, global::System.String preferredLanguage)
         {
             User user = new User();
             user.ID = id;
@@ -4562,6 +4563,7 @@ namespace Moo.DB
             user.Email = email;
             user.Description = description;
             user.Score = score;
+            user.PreferredLanguage = preferredLanguage;
             return user;
         }
 
@@ -4738,6 +4740,30 @@ namespace Moo.DB
         private global::System.Int32 _Score;
         partial void OnScoreChanging(global::System.Int32 value);
         partial void OnScoreChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String PreferredLanguage
+        {
+            get
+            {
+                return _PreferredLanguage;
+            }
+            set
+            {
+                OnPreferredLanguageChanging(value);
+                ReportPropertyChanging("PreferredLanguage");
+                _PreferredLanguage = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("PreferredLanguage");
+                OnPreferredLanguageChanged();
+            }
+        }
+        private global::System.String _PreferredLanguage;
+        partial void OnPreferredLanguageChanging(global::System.String value);
+        partial void OnPreferredLanguageChanged();
 
         #endregion
     

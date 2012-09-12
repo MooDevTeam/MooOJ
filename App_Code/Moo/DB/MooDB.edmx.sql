@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 09/08/2012 07:41:45
+-- Date Created: 09/12/2012 14:57:09
 -- Generated from EDMX file: D:\WebSites\MooOJ\App_Code\Moo\DB\MooDB.edmx
 -- --------------------------------------------------
 
@@ -100,6 +100,9 @@ IF OBJECT_ID(N'[dbo].[FK_UserTestCase]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_LogUser]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Logs] DROP CONSTRAINT [FK_LogUser];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UploadedFileUser]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UploadedFiles] DROP CONSTRAINT [FK_UploadedFileUser];
 GO
 IF OBJECT_ID(N'[dbo].[FK_SpecialJudgedTestCase_inherits_TestCase]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TestCases_SpecialJudgedTestCase] DROP CONSTRAINT [FK_SpecialJudgedTestCase_inherits_TestCase];
@@ -201,6 +204,7 @@ CREATE TABLE [dbo].[Users] (
     [Email] nvarchar(max)  NOT NULL,
     [Description] nvarchar(max)  NOT NULL,
     [Score] int  NOT NULL,
+    [PreferredLanguage] nvarchar(12)  NOT NULL,
     [Role_ID] int  NOT NULL
 );
 GO

@@ -56,6 +56,11 @@ public partial class Record_Create : System.Web.UI.Page
                 {
                     AddToAnswerArea(db);
                 }
+                else if (User.Identity.IsAuthenticated)
+                {
+                    User currentUser = ((SiteUser)User.Identity).GetDBUser(db);
+                    ddlLanguage.SelectedIndex = ddlLanguage.Items.IndexOf(ddlLanguage.Items.FindByValue(currentUser.PreferredLanguage));
+                }
 
                 ViewState["problemID"] = problem.ID;
                 Page.DataBind();
@@ -104,14 +109,15 @@ public partial class Record_Create : System.Web.UI.Page
             else
             {
                 record = new Record()
-                 {
-                     Problem = problem,
-                     User = currentUser,
-                     Code = txtCode.Text,
-                     Language = ddlLanguage.SelectedValue,
-                     PublicCode = chkPublicCode.Checked,
-                     CreateTime = DateTimeOffset.Now
-                 };
+                {
+                    Problem = problem,
+                    User = currentUser,
+                    Code = txtCode.Text,
+                    Language = ddlLanguage.SelectedValue,
+                    PublicCode = chkPublicCode.Checked,
+                    CreateTime = DateTimeOffset.Now
+                };
+                currentUser.PreferredLanguage = ddlLanguage.SelectedValue;
             }
             db.Records.AddObject(record);
 

@@ -68,7 +68,7 @@ public partial class Post_Reply : System.Web.UI.Page
         }
         else
         {
-            initialContent = "\n\n*" + postItem.CreatedBy.Name + "* 写道：\n:{\n" + postItem.Content + "\n:}";
+            initialContent = "\n\n@" + postItem.CreatedBy.Name + " 写道：\n:{\n" + postItem.Content + "\n:}";
             post = postItem.Post;
         }
     }

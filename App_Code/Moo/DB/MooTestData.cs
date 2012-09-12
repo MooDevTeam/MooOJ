@@ -28,6 +28,7 @@ namespace Moo.DB
                 Description = "我是--屌丝--我骄傲，我为国家省钞票!",
                 Email = "onetwogoo@live.com",
                 Score = 256,
+                PreferredLanguage="c++"
             };
             db.Users.AddObject(MrPhone);
 
@@ -40,6 +41,7 @@ namespace Moo.DB
                 Description = "Moo*真*他妈的好！",
                 Email = "sunjiayu_2006@126.com",
                 Score = 128,
+                PreferredLanguage="c++"
             };
             db.Users.AddObject(ShaBi);
 
@@ -52,6 +54,7 @@ namespace Moo.DB
                 Description = "真不懂",
                 Email = "helloyuhao@gmail.com",
                 Score = 1000,
+                PreferredLanguage="pascal"
             };
             db.Users.AddObject(Baby);
 
@@ -64,6 +67,7 @@ namespace Moo.DB
                 Description = "太他妈冤枉了！",
                 Email = "",
                 Score = 0,
+                PreferredLanguage="c"
             });
 
             //Homepage
