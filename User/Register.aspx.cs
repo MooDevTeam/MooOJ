@@ -39,15 +39,16 @@ public partial class User_Register : System.Web.UI.Page
                 Password = Converter.ToSHA256Hash(txtPassword.Text),
                 Role = SiteRoles.ByType[RoleType.NormalUser].GetDBRole(db),
                 BriefDescription = "我很懒，什么都没留下~",
-                Description="我懒到头了，*真的*啥都没写",
+                Description = "我懒到头了，*真的*啥都没写",
                 Email = "",
-                Score=0
+                Score = 0,
+                PreferredLanguage = "c++"
             };
             db.Users.AddObject(user);
             db.SaveChanges();
 
             Logger.Info(db, "创建用户#" + user.ID);
         }
-        PageUtil.Redirect("注册成功，请登录","~/Special/Login.aspx");
+        PageUtil.Redirect("注册成功，请登录", "~/Special/Login.aspx");
     }
 }

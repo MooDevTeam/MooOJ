@@ -46,7 +46,7 @@
         <tr runat="server" visible='<%#problem.Type=="AnswerOnly" %>'>
             <th>
                 答案
-            </th>
+            </th> 
             <td>
                 <asp:PlaceHolder ID="answerArea" runat="server"></asp:PlaceHolder>
             </td>
@@ -56,7 +56,7 @@
                 选项
             </th>
             <td>
-                <asp:CheckBox ID="chkPublicCode" runat="server" Checked="true" Text="公开我的代码" />
+                <asp:CheckBox ID="chkPublicCode" runat="server" Checked='<%#!duringContest %>' Text="公开我的代码" />
             </td>
         </tr>
         <tr>

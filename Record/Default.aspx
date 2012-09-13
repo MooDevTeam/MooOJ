@@ -12,6 +12,7 @@
 <asp:Content ContentPlaceHolderID="main" runat="Server">
     <Moo:LinkBar runat="server" Title="记录">
         <Moo:LinkBarItem URL='<%#"~/Record/?id="+record.ID %>' Selected="true" Text="记录" />
+        <Moo:LinkBarItem URL='<%#"~/Record/Modify.aspx?id="+record.ID %>' Text="修改" />
         <Moo:LinkBarItem URL='<%#"~/Problem/?id="+record.Problem.ID %>' Special="true" Text="题目" />
         <Moo:LinkBarItem URL='<%#"~/TestCase/List.aspx?id="+record.Problem.ID %>' Special="true"
             Text="测试数据" />

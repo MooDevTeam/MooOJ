@@ -57,6 +57,7 @@ namespace Moo.DB
         static Function ReadRecord = new Function() { Name = "record.read" };
         static Function ReadRecordCode = new Function() { Name = "record.code.read" };
         static Function ListRecord = new Function() { Name = "record.list" };
+        static Function ModifyRecord = new Function() { Name = "record.modify" };
         static Function CreateRecord = new Function() { Name = "record.create" };
         static Function CreateLockedRecord = new Function() { Name = "record.locked.create" };
         static Function DeleteRecord = new Function() { Name = "record.delete" };
@@ -270,6 +271,9 @@ namespace Moo.DB
             Worker.AllowedFunction.Add(ListRecord);
             NormalUser.AllowedFunction.Add(ListRecord);
 
+            Organizer.AllowedFunction.Add(ModifyRecord);
+            Worker.AllowedFunction.Add(ModifyRecord);
+
             Organizer.AllowedFunction.Add(CreateRecord);
             Worker.AllowedFunction.Add(CreateRecord);
             NormalUser.AllowedFunction.Add(CreateRecord);
@@ -395,7 +399,7 @@ namespace Moo.DB
                 Email = "",
                 Role = Organizer,
                 Score = 0,
-                PreferredLanguage="c++",
+                PreferredLanguage = "c++",
             };
             db.Users.AddObject(owner);
             db.SaveChanges();

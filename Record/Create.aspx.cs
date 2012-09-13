@@ -12,6 +12,7 @@ using Moo.Utility;
 public partial class Record_Create : System.Web.UI.Page
 {
     protected bool canCreate;
+    protected bool duringContest;
 
     protected Problem problem;
 
@@ -61,6 +62,12 @@ public partial class Record_Create : System.Web.UI.Page
                     User currentUser = ((SiteUser)User.Identity).GetDBUser(db);
                     ddlLanguage.SelectedIndex = ddlLanguage.Items.IndexOf(ddlLanguage.Items.FindByValue(currentUser.PreferredLanguage));
                 }
+
+                duringContest = (from c in db.Contests
+                                      where c.Status == "During"
+                                      from p in c.Problem
+                                      where p.ID == problem.ID
+                                      select p).Any();
 
                 ViewState["problemID"] = problem.ID;
                 Page.DataBind();
