@@ -31,26 +31,13 @@
         <%#HttpUtility.HtmlEncode(problem.Name) %>
         的历史版本。如需基于最新版本编辑，请<a runat="server" href='<%#"~/Solution/Modify.aspx?id="+problem.ID %>'>单击这里</a>。
     </Moo:InfoBlock>
-    
     <table class="detailTable">
-        <tr id="trPreview" runat="server" visible="false">
-            <th>
-                预览
-            </th>
-            <td>
-            <asp:Literal ID="litOnlyPreview" runat="server" Text='<%$Resources:Moo,ItsOnlyPreview %>' />
-                <div id="divPreview" runat="server">
-                </div>
-            </td>
-        </tr>
         <tr>
             <th>
                 内容
             </th>
             <td>
-                <asp:TextBox ID="txtContent" runat="server" ViewStateMode="Disabled" TextMode="MultiLine"
-                    Rows="20" Width="100%" Text='<%#revision.Content %>'></asp:TextBox>
-                <Moo:WikiSupported runat="server" />
+                <Moo:WikiEditor ID="txtContent" runat="server" Text='<%#revision.Content %>' />
             </td>
         </tr>
         <tr>
@@ -75,11 +62,8 @@
         </tr>
         <tr>
             <td colspan="2" style="text-align: center;">
-                <asp:Button ID="btnPreview" runat="server" ViewStateMode="Disabled" CausesValidation="false"
-                    Text="先预览" OnClick="btnPreview_Click" />
-                <asp:Button ID="btnSubmit" runat="server" Text="后修改" Enabled="false" OnClick="btnSubmit_Click" />
+                <asp:Button ID="btnSubmit" runat="server" Text="修改" OnClick="btnSubmit_Click" />
             </td>
         </tr>
     </table>
-    
 </asp:Content>

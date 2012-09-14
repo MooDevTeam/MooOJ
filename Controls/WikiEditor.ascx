@@ -1,11 +1,12 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="WikiEditor.ascx.cs" Inherits="Controls_WikiEditor" %>
 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
     <ContentTemplate>
-        <div id="divPreviewWrapper" runat="server" visible="false">
+        <fieldset id="fieldPreview" runat="server" visible="false">
+            <legend>预览</legend>
             <asp:Literal ID="litOnlyPreview" runat="server" Text='<%$Resources:Moo,ItsOnlyPreview %>' />
             <div id="divPreview" runat="server">
             </div>
-        </div>
+        </fieldset>
         <div class="wikiEditorToolBar">
             <div>
                 <a href="javascript:toBold('<%=txtWiki.ClientID %>');" style="font-weight: bold;">B</a>
@@ -51,7 +52,7 @@
             </div>
         </div>
         <asp:TextBox ID="txtWiki" runat="server" Width="100%" Rows="20" ViewStateMode="Disabled"
-            TextMode="MultiLine">Test Text.</asp:TextBox>
+            TextMode="MultiLine"></asp:TextBox>
         <div style="text-align: center;">
             <div style="float: left;">
                 <img id="wikiSupportedImg" runat="server" src="~/image/OK.png" alt="" />
@@ -59,7 +60,7 @@
                     id="wikiSupportedLink" runat="server" href="~/Help/?id=6">Wiki格式</a>。</span>
             </div>
             <div style="float: right;">
-                <asp:Button ID="btnPreview" runat="server" Text="预览" OnClick="btnPreview_Click" />
+                <asp:Button ID="btnPreview" runat="server" Text="预览" CausesValidation="false" OnClick="btnPreview_Click" />
             </div>
             <div class="clear">
             </div>

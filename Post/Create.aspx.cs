@@ -95,13 +95,4 @@ public partial class Post_Create : System.Web.UI.Page
         }
         PageUtil.Redirect("创建成功", "~/Post/?id=" + postID);
     }
-    protected void btnPreview_Click(object sender, EventArgs e)
-    {
-        btnSubmit.Enabled = true;
-        trPreview.Visible = true;
-        using (MooDB db = new MooDB())
-        {
-            divPreview.InnerHtml = WikiParser.Parse(WikiParser.DoAt(db,txtContent.Text,null,null,false));
-        }
-    }
 }

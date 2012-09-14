@@ -20,7 +20,7 @@ namespace WikiPlex.Compilation.Macros
             {
                 return new List<MacroRule>(){
                     new MacroRule(
-                       @"(?is)(<color:(?:[^;\r\n]*?)\|).*?(>)",
+                       @"(?is)(<color:(?:[^;\r\n]*?)>).*?(</color>)",
                         new Dictionary<int,string>(){
                             {1,ScopeName.ColorBegin},
                             {2,ScopeName.ColorEnd}

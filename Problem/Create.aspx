@@ -39,42 +39,12 @@
                 </asp:DropDownList>
             </td>
         </tr>
-        <tr id="trPreview" runat="server" visible="false">
-            <th>
-                预览
-            </th>
-            <td>
-                <asp:Literal ID="litOnlyPreview" runat="server" Text='<%$Resources:Moo,ItsOnlyPreview %>' />
-                <div id="divPreview" runat="server">
-                </div>
-            </td>
-        </tr>
         <tr>
             <th>
                 内容
             </th>
             <td>
-                <asp:TextBox ID="txtContent" runat="server" TextMode="MultiLine" Rows="20" Width="100%">!! 描述
-&lt;在此填入题目描述&gt;
-!! 输入格式
-&lt;在此填入样例输入格式&gt;
-!! 输出格式
-&lt;在此填入样例输出格式&gt;
-!! 样例输入
-{code:plaintext}
-&lt;在此填入样例输入&gt;
-{code:plaintext}
-!! 样例输出
-{code:plaintext}
-&lt;在此填入样例输出&gt;
-{code:plaintext}
-!! 限制
-&lt;在此填入各种限制&gt;
-!! 注释
-&lt;在此填入注释&gt;
-!! 来源
-&lt;在此填入题目来源&gt;</asp:TextBox>
-                <Moo:WikiSupported runat="server" />
+                <Moo:WikiEditor ID="txtContent" runat="server" />
             </td>
         </tr>
         <tr>
@@ -87,8 +57,7 @@
         </tr>
         <tr>
             <td colspan="2" style="text-align: center;">
-                <asp:Button ID="btnPreview" runat="server" Text="先预览" CausesValidation="false" OnClick="btnPreview_Click" />
-                <asp:Button ID="btnSubmit" runat="server" Text="后创建" Enabled="false" OnClick="btnSubmit_Click" />
+                <asp:Button ID="btnSubmit" runat="server" Text="创建" OnClick="btnSubmit_Click" />
             </td>
         </tr>
     </table>

@@ -65,12 +65,6 @@ public partial class Mail_Create : System.Web.UI.Page
                     where u.ID == id
                     select u).SingleOrDefault<User>();
     }
-    protected void btnPreview_Click(object sender, EventArgs e)
-    {
-        trPreview.Visible = true;
-        btnSubmit.Enabled = true;
-        divPreview.InnerHtml = WikiParser.Parse(txtContent.Text);
-    }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         if (!Page.IsValid) return;

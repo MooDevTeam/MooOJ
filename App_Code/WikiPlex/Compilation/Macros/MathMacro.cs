@@ -17,7 +17,7 @@ namespace WikiPlex.Compilation.Macros
             {
                 return new List<MacroRule>(){
                     new MacroRule(
-                       @"(?is)(\[\[math:)(.*?)(\]\])",
+                       @"(?is)(<math>)(.*?)(</math>)",
                         new Dictionary<int,string>(){
                             {1,ScopeName.Remove},
                             {2,ScopeName.Math},

@@ -73,16 +73,6 @@ public partial class Post_Reply : System.Web.UI.Page
         }
     }
 
-    protected void btnPreview_Click(object sender, EventArgs e)
-    {
-        btnSubmit.Enabled = true;
-        trPreview.Visible = true;
-        using (MooDB db = new MooDB())
-        {
-            divPreview.InnerHtml = WikiParser.Parse(WikiParser.DoAt(db,txtContent.Text,null,null,false));
-        }
-    }
-
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         if (!Page.IsValid) return;

@@ -12,7 +12,6 @@
         <Moo:LinkBarItem URL='<%#"~/Mail/Create.aspx?to="+receiver.ID %>' Selected="true"
             Text="创建" />
     </Moo:LinkBar>
-    
     <table class="detailTable">
         <tr>
             <th>
@@ -34,24 +33,12 @@
                     Display="Dynamic" CssClass="validator">长度需在1~40位之间</asp:RegularExpressionValidator>
             </td>
         </tr>
-        <tr runat="server" id="trPreview" visible="false">
-            <th>
-                预览
-            </th>
-            <td>
-            <asp:Literal ID="litOnlyPreview" runat="server" Text='<%$Resources:Moo,ItsOnlyPreview %>' />
-                <div runat="server" id="divPreview">
-                </div>
-            </td>
-        </tr>
         <tr>
             <th>
                 内容
             </th>
             <td>
-                <asp:TextBox ID="txtContent" runat="server" Style="width: 100%" Rows="20" TextMode="MultiLine"
-                    Text='<%#initialContent %>'></asp:TextBox>
-                <Moo:WikiSupported runat="server" />
+                <Moo:WikiEditor ID="txtContent" runat="server" Text='<%#initialContent %>' />
             </td>
         </tr>
         <tr>
@@ -72,10 +59,8 @@
         </tr>
         <tr>
             <td colspan="2" style="text-align: center;">
-                <asp:Button ID="btnPreview" runat="server" CausesValidation="false" Text="先预览" OnClick="btnPreview_Click" />
-                <asp:Button ID="btnSubmit" runat="server" Enabled="false" Text="后发送" OnClick="btnSubmit_Click" />
+                <asp:Button ID="btnSubmit" runat="server" Text="发送" OnClick="btnSubmit_Click" />
             </td>
         </tr>
     </table>
-    
 </asp:Content>

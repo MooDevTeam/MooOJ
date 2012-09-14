@@ -21,12 +21,6 @@ public partial class Contest_Create : System.Web.UI.Page
     {
         args.IsValid = timeEnd.Value >= timeStart.Value;
     }
-    protected void btnPreview_Click(object sender, EventArgs e)
-    {
-        btnSubmit.Enabled = true;
-        trPreview.Visible = true;
-        divPreview.InnerHtml = WikiParser.Parse(txtDescription.Text);
-    }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         if (!Page.IsValid) return;

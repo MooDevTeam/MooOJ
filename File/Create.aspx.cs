@@ -49,10 +49,4 @@ public partial class File_Create : System.Web.UI.Page
 
         PageUtil.Redirect("创建成功", "~/File/?id=" + fileID);
     }
-    protected void btnQuery_Click(object sender, EventArgs e)
-    {
-        trPreview.Visible = true;
-        divPreview.InnerHtml = WikiParser.Parse(txtDescription.Text);
-        btnSubmit.Enabled = true;
-    }
 }

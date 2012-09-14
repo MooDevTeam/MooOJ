@@ -110,12 +110,6 @@ public partial class User_Modify : System.Web.UI.Page
 
         PageUtil.Redirect("修改成功", "~/User/?id=" + userID);
     }
-    protected void btnPreview_Click(object sender, EventArgs e)
-    {
-        trPreview.Visible = true;
-        btnSubmit.Enabled = true;
-        divPreview.InnerHtml = WikiParser.Parse(txtDescription.Text);
-    }
     protected void btnForceLogout_Click(object sender, EventArgs e)
     {
         if (!Permission.Check("user.forcelogout", false)) return;
