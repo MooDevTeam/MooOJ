@@ -1,0 +1,23 @@
+﻿.wikiEditorToolBar
+{
+    background: #4444FF;
+}
+.wikiEditorToolBar > div
+{
+    display: inline-block;
+    float: left;
+}
+.wikiEditorToolBar > div > a
+{
+    padding: 5px;
+    border: none;
+    color: White;
+}
+.wikiEditorToolBar > div > a:hover
+{
+    background: #0000CC;
+}
+.wikiEditorToolBar > div > select
+{
+    margin: 5px;
+}

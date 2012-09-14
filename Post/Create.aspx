@@ -41,7 +41,7 @@
                 预览
             </th>
             <td>
-            <asp:Literal ID="litOnlyPreview" runat="server" Text='<%$Resources:Moo,ItsOnlyPreview %>' />
+                <asp:Literal ID="litOnlyPreview" runat="server" Text='<%$Resources:Moo,ItsOnlyPreview %>' />
                 <div id="divPreview" runat="server">
                 </div>
             </td>
