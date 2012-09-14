@@ -12,7 +12,7 @@ _斜体_
 
 <color:red>红色字体</color>
 
-<math>\frac{-b\pm\sqrt{b^2-4ac}}{2a}</math>数学公式
+数学公式：<math>\frac{-b\pm\sqrt{b^2-4ac}}{2a}</math>
 
 <{左对齐}<
 >{右对齐}>

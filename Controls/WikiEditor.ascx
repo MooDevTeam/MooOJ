@@ -9,18 +9,31 @@
         </fieldset>
         <div class="wikiEditorToolBar">
             <div>
-                <a href="javascript:toBold('<%=txtWiki.ClientID %>');" style="font-weight: bold;">B</a>
+                <a href="javascript:asBold('<%=txtWiki.ClientID %>');" style="font-weight: bold;">B</a>
             </div>
             <div>
-                <a href="javascript:toItalic('<%=txtWiki.ClientID %>');" style="font-style: italic;">
+                <a href="javascript:asItalic('<%=txtWiki.ClientID %>');" style="font-style: italic;">
                     I</a>
             </div>
             <div>
-                <a href="javascript:toUnderline('<%=txtWiki.ClientID %>');" style="text-decoration: underline;">
+                <a href="javascript:asUnderline('<%=txtWiki.ClientID %>');" style="text-decoration: underline;">
                     U</a>
             </div>
             <div>
+                <a href="javascript:asStrick('<%=txtWiki.ClientID %>');" style="text-decoration: line-through;">
+                    S</a>
+            </div>
+            <div>
+                <a href="javascript:asSup('<%=txtWiki.ClientID %>');">x<sup>2</sup></a>
+            </div>
+            <div>
+                <a href="javascript:asSub('<%=txtWiki.ClientID %>');">x<sub>2</sub></a>
+            </div>
+            <div>
                 <a href="javascript:asMath('<%=txtWiki.ClientID %>');">公式</a>
+            </div>
+            <div>
+                <a href="javascript:asNoWiki('<%=txtWiki.ClientID %>');">NoWiki</a>
             </div>
             <div>
                 <select id="selectColor" onchange="changeColor('<%=txtWiki.ClientID %>',this)">
@@ -28,6 +41,11 @@
                     <option value="red">红色</option>
                     <option value="green">绿色</option>
                     <option value="blue">蓝色</option>
+                    <option value="yellow">黄色</option>
+                    <option value="cyan">青色</option>
+                    <option value="magenta">品红</option>
+                    <option value="white">白色</option>
+                    <option value="black">黑色</option>
                 </select>
             </div>
             <div>
@@ -42,7 +60,7 @@
             </div>
             <div>
                 <select id="selectSourceCode" onchange="asSourceCode('<%=txtWiki.ClientID %>',this)">
-                    <option selected="selected" value="">源码</option>
+                    <option selected="selected" value="">语言高亮</option>
                     <option value="c++">C++</option>
                     <option value="c++">C</option>
                     <option value="pascal">Pascal</option>

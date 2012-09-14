@@ -1,6 +1,6 @@
 ﻿.wikiEditorToolBar
 {
-    background: #4444FF;
+    background: #000099;
 }
 .wikiEditorToolBar > div
 {
@@ -16,7 +16,7 @@
 }
 .wikiEditorToolBar > div > a:hover
 {
-    background: #0000CC;
+    background: #3333FF;
 }
 .wikiEditorToolBar > div > select
 {

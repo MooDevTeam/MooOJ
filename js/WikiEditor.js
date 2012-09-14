@@ -11,17 +11,29 @@
         txtWiki.selectionEnd = end + prefix.length + suffix.length;
     }
 }
-function toBold(clientID) {
+function asBold(clientID) {
     decorateText(document.getElementById(clientID), "*", "*", "在此输入需要加粗的内容");
 }
-function toItalic(clientID) {
+function asItalic(clientID) {
     decorateText(document.getElementById(clientID), "_", "_", "在此输入需要倾斜的内容");
 }
-function toUnderline(clientID) {
+function asUnderline(clientID) {
     decorateText(document.getElementById(clientID), "+", "+", "在此输入需要加下划线的内容");
+}
+function asStrick(clientID) {
+    decorateText(document.getElementById(clientID), "--", "--", "在此输入需要加删除线的内容");
+}
+function asSup(clientID) {
+    decorateText(document.getElementById(clientID), "^^", "^^", "在此输入需要上标的内容");
+}
+function asSub(clientID) {
+    decorateText(document.getElementById(clientID), ",,", ",,", "在此输入需要下标的内容");
 }
 function asMath(clientID) {
     decorateText(document.getElementById(clientID), "<math>", "</math>", "在此输入LaTeX数学公式");
+}
+function asNoWiki(clientID) {
+    decorateText(document.getElementById(clientID), "{\"", "\"}", "在此输入的内容不会被Wiki化");
 }
 function changeColor(clientID, selectElement) {
     var color = selectElement.options[selectElement.selectedIndex].value;
