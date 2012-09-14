@@ -30,10 +30,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     }
                 }
             }
-            if (HttpContext.Current.User.Identity.IsAuthenticated)
-            {
-                viewUserInfo.FindControl("userSign").DataBind();
-            }
+            viewUserInfo.DataBind();
         }
     }
 }
