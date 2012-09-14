@@ -74,15 +74,30 @@ public partial class Post_Create : System.Web.UI.Page
             {
                 Name = txtName.Text,
                 Problem = problem,
-                Lock=false
+                Lock = false
             };
             db.Posts.AddObject(post);
             db.SaveChanges();
 
+            //Send Mails
+            SortedSet<User> userBeAt;
+            string parsed = WikiParser.ParseAt(db, txtContent.Text, out userBeAt);
+            foreach (User user in userBeAt)
+            {
+                db.Mails.AddObject(new Mail()
+                {
+                    Title = "我@了您哦~",
+                    Content = "我新建了帖子[url:" + post.Name + "|../Post/?id=" + post.ID + "]，并在其中*@*了您哦~快去看看！\r\n\r\n*原文如下*：\r\n" + parsed,
+                    From = currentUser,
+                    To = user,
+                    IsRead = false
+                });
+            }
+
             PostItem item = new PostItem()
             {
                 Post = post,
-                Content = WikiParser.DoAt(db,txtContent.Text,post,currentUser,true),
+                Content = txtContent.Text,
                 CreatedBy = currentUser
             };
 

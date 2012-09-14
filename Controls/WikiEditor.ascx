@@ -20,7 +20,7 @@
                     U</a>
             </div>
             <div>
-                <a href="javascript:asMath('<%=txtWiki.ClientID %>');">数学公式</a>
+                <a href="javascript:asMath('<%=txtWiki.ClientID %>');">公式</a>
             </div>
             <div>
                 <select id="selectColor" onchange="changeColor('<%=txtWiki.ClientID %>',this)">
@@ -48,22 +48,18 @@
                     <option value="pascal">Pascal</option>
                 </select>
             </div>
+            <div style="float: right;">
+                <asp:Button ID="btnPreview" runat="server" CausesValidation="false" Text="预览" OnClick="btnPreview_Click" />
+            </div>
             <div class="clear" style="display: block; float: none;">
             </div>
         </div>
         <asp:TextBox ID="txtWiki" runat="server" Width="100%" Rows="20" ViewStateMode="Disabled"
             TextMode="MultiLine"></asp:TextBox>
-        <div style="text-align: center;">
-            <div style="float: left;">
-                <img id="wikiSupportedImg" runat="server" src="~/image/OK.png" alt="" />
-                <span style="color: Green; font-weight: bold;">WikiSupported</span> <span>此处内容支持<a
-                    id="wikiSupportedLink" runat="server" href="~/Help/?id=6">Wiki格式</a>。</span>
-            </div>
-            <div style="float: right;">
-                <asp:Button ID="btnPreview" runat="server" Text="预览" CausesValidation="false" OnClick="btnPreview_Click" />
-            </div>
-            <div class="clear">
-            </div>
+        <div>
+            <img id="wikiSupportedImg" runat="server" src="~/image/OK.png" alt="" />
+            <span style="color: Green; font-weight: bold;">WikiSupported</span> <span>此处内容支持<a
+                id="wikiSupportedLink" runat="server" href="~/Help/?id=6">Wiki格式</a>。</span>
         </div>
     </ContentTemplate>
 </asp:UpdatePanel>
