@@ -110,6 +110,7 @@
         public const string YouTubeVideo = "YouTube Video";
         public const string ColorBegin = "Color Begin";
         public const string ColorEnd = "Color End";
+        public const string Math = "Math Tag";
 #pragma warning restore 1591
     }
 }

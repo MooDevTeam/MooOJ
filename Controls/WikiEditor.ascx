@@ -8,16 +8,18 @@
         </div>
         <div class="wikiEditorToolBar">
             <div>
-                <a href="javascript:toBold('<%=txtWiki.ClientID %>');" style="display: inline-block;
-                    font-weight: bold;">B</a>
+                <a href="javascript:toBold('<%=txtWiki.ClientID %>');" style="font-weight: bold;">B</a>
             </div>
             <div>
-                <a href="javascript:toItalic('<%=txtWiki.ClientID %>');" style="display: inline-block;
-                    font-style: italic;">I</a>
+                <a href="javascript:toItalic('<%=txtWiki.ClientID %>');" style="font-style: italic;">
+                    I</a>
             </div>
             <div>
-                <a href="javascript:toUnderline('<%=txtWiki.ClientID %>');" style="display: inline-block;
-                    text-decoration: underline;">U</a>
+                <a href="javascript:toUnderline('<%=txtWiki.ClientID %>');" style="text-decoration: underline;">
+                    U</a>
+            </div>
+            <div>
+                <a href="javascript:asMath('<%=txtWiki.ClientID %>');">数学公式</a>
             </div>
             <div>
                 <select id="selectColor" onchange="changeColor('<%=txtWiki.ClientID %>',this)">

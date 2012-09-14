@@ -20,6 +20,9 @@ function toItalic(clientID) {
 function toUnderline(clientID) {
     decorateText(document.getElementById(clientID), "+", "+", "在此输入需要加下划线的内容");
 }
+function asMath(clientID) {
+    decorateText(document.getElementById(clientID), "[[math:", "]]", "在此输入LaTeX数学公式");
+}
 function changeColor(clientID, selectElement) {
     var color = selectElement.options[selectElement.selectedIndex].value;
     var colorName = selectElement.options[selectElement.selectedIndex].text;

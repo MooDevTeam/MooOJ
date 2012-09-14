@@ -33,6 +33,7 @@ namespace WikiPlex
             Register<ContentAlignmentRenderer>();
             Register<IndentationRenderer>();
             Register<ColorRenderer>();
+            Register<MathRenderer>();
         }
 
         /// <summary>
