@@ -14,6 +14,26 @@ public partial class Problem_Create : System.Web.UI.Page
     {
         if (!Page.IsPostBack)
         {
+            txtContent.Text = "!! 描述" + Environment.NewLine
+                + "<在此填入题目描述>" + Environment.NewLine + Environment.NewLine
+                + "!! 输入格式" + Environment.NewLine
+                + "<在此填入样例输入格式>" + Environment.NewLine + Environment.NewLine
+                + "!! 输出格式" + Environment.NewLine
+                + "<在此填入样例输出格式>" + Environment.NewLine + Environment.NewLine
+                + "!! 样例输入" + Environment.NewLine
+                + "{code:plaintext}" + Environment.NewLine
+                + "<在此填入样例输入>" + Environment.NewLine
+                + "{code:plaintext}" + Environment.NewLine + Environment.NewLine
+                + "!! 样例输出" + Environment.NewLine
+                + "{code:plaintext}" + Environment.NewLine
+                + "<在此填入样例输出>" + Environment.NewLine
+                + "{code:plaintext}" + Environment.NewLine + Environment.NewLine
+                + "!! 限制" + Environment.NewLine
+                + "<在此填入各种限制>" + Environment.NewLine + Environment.NewLine
+                + "!! 注释" + Environment.NewLine
+                + "<在此填入注释>" + Environment.NewLine + Environment.NewLine
+                + "!! 来源" + Environment.NewLine
+                + "<在此填入题目来源>";
             Page.DataBind();
         }
     }
@@ -31,14 +51,14 @@ public partial class Problem_Create : System.Web.UI.Page
             {
                 Name = txtName.Text,
                 Type = ddlType.SelectedValue,
-                AllowTesting=true,
-                Lock=false,
-                LockPost=false,
-                LockRecord=false,
-                LockSolution=false,
-                LockTestCase=false,
-                Hidden=false,
-                TestCaseHidden=false,
+                AllowTesting = true,
+                Lock = false,
+                LockPost = false,
+                LockRecord = false,
+                LockSolution = false,
+                LockTestCase = false,
+                Hidden = false,
+                TestCaseHidden = false,
             };
             ProblemRevision revision = new ProblemRevision()
             {
@@ -65,11 +85,5 @@ public partial class Problem_Create : System.Web.UI.Page
             Logger.Info(db, "创建题目#" + problemID);
         }
         PageUtil.Redirect("创建成功", "~/Problem/?id=" + problemID);
-    }
-    protected void btnPreview_Click(object sender, EventArgs e)
-    {
-        btnSubmit.Enabled = true;
-        trPreview.Visible = true;
-        divPreview.InnerHtml = WikiParser.Parse(txtContent.Text);
     }
 }

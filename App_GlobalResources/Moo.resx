@@ -135,30 +135,30 @@
     <comment>100MB</comment>
   </data>
   <data name="MooTester_CompilerMLE" xml:space="preserve">
-    <value>&lt;color:red|*内存太小，不够编译器折腾*&gt;</value>
+    <value>&lt;color:red&gt;*内存太小，不够编译器折腾*&lt;/color&gt;</value>
   </data>
   <data name="MooTester_CompilerRE" xml:space="preserve">
-    <value>&lt;color:red|*编译器生气了：*
-{{"{0}"}}&gt;</value>
+    <value>&lt;color:red&gt;*编译器生气了：*
+{{"{0}"}}&lt;/color&gt;</value>
   </data>
   <data name="MooTester_CompilerSuccess" xml:space="preserve">
-    <value>&lt;color:green|*编译成功*&gt;</value>
+    <value>&lt;color:green&gt;*编译成功*&lt;/color&gt;</value>
   </data>
   <data name="MooTester_CompilerTLE" xml:space="preserve">
-    <value>&lt;color:red|*编译器太磨叽，等不及了*&gt;</value>
+    <value>&lt;color:red&gt;*编译器太磨叽，等不及了*&lt;/color&gt;</value>
   </data>
   <data name="MooTester_CompilerUndefinedError" xml:space="preserve">
-    <value>&lt;color:red|*等等，编译器闹肚子了。*&gt;</value>
+    <value>&lt;color:red&gt;*等等，编译器闹肚子了。*&lt;/color&gt;</value>
   </data>
   <data name="MooTester_CompileTime" xml:space="preserve">
     <value>8000</value>
     <comment>8s</comment>
   </data>
   <data name="MooTester_NetworkError" xml:space="preserve">
-    <value>&lt;color:red|*评测机貌似出去遛弯了……*&gt;</value>
+    <value>&lt;color:red&gt;*评测机貌似出去遛弯了……*&lt;/color&gt;</value>
   </data>
   <data name="MooTester_TestCaseX" xml:space="preserve">
-    <value># &lt;color:blue|*[url:测试点#{0}|../TestCase/?id={0}]*&gt; </value>
+    <value># &lt;color:blue&gt;*[url:测试点#{0}|../TestCase/?id={0}]*&lt;/color&gt; </value>
   </data>
   <data name="MooTester_TesterIP" xml:space="preserve">
     <value>127.0.0.1</value>
@@ -167,22 +167,22 @@
     <value>6000</value>
   </data>
   <data name="MooTester_TestMLE" xml:space="preserve">
-    <value>&lt;color:purple|内存超出限制。&gt;</value>
+    <value>&lt;color:purple&gt;内存超出限制。&lt;/color&gt;</value>
   </data>
   <data name="MooTester_TestRE" xml:space="preserve">
-    <value>&lt;color:orange|程序崩溃。&gt;</value>
+    <value>&lt;color:orange&gt;程序崩溃。&lt;/color&gt;</value>
   </data>
   <data name="MooTester_TestSuccess" xml:space="preserve">
-    <value>&lt;color:green|正确。&gt;(得分*{0}*，用时*{1}ms*，内存*{2}byte(s)*) {{"{3}"}}</value>
+    <value>&lt;color:green&gt;正确。&lt;/color&gt;(得分*{0}*，用时*{1}ms*，内存*{2}byte(s)*) {{"{3}"}}</value>
   </data>
   <data name="MooTester_TestTLE" xml:space="preserve">
-    <value>&lt;color:darkred|超出时间限制。&gt;</value>
+    <value>&lt;color:darkred&gt;超出时间限制。&lt;/color&gt;</value>
   </data>
   <data name="MooTester_TestUndefinedError" xml:space="preserve">
-    <value>&lt;color:gray|天气不好，程序不开心。&gt;</value>
+    <value>&lt;color:gray&gt;天气不好，程序不开心。&lt;/color&gt;</value>
   </data>
   <data name="MooTester_TestWA" xml:space="preserve">
-    <value>&lt;color:red|答案错误。&gt;(得分*{0}*，用时*{1}ms*，内存*{2}byte(s)*) {{"{3}"}}</value>
+    <value>&lt;color:red&gt;答案错误。&lt;/color&gt;(得分*{0}*，用时*{1}ms*，内存*{2}byte(s)*) {{"{3}"}}</value>
   </data>
   <data name="MooTester_TranditionalJudger" xml:space="preserve">
     <value>D:\v-Judge_Kernel\Special_Judge.exe</value>
@@ -195,13 +195,13 @@
     <comment>5s</comment>
   </data>
   <data name="MooTester_TestCompareError" xml:space="preserve">
-    <value>&lt;color:red|比较器抽风了~&gt;</value>
+    <value>&lt;color:red&gt;比较器抽风了~&lt;/color&gt;</value>
   </data>
   <data name="MooTester_UnsupportedLanguage" xml:space="preserve">
-    <value>&lt;color:red|*不支持{0}语言*&gt;</value>
+    <value>&lt;color:red&gt;*不支持{0}语言*&lt;/color&gt;</value>
   </data>
   <data name="MooTester_UnsupportedLanguageOperation" xml:space="preserve">
-    <value>&lt;color:red|*{0}语言不支持{1}操作*&gt;</value>
+    <value>&lt;color:red&gt;*{0}语言不支持{1}操作*&lt;/color&gt;</value>
   </data>
   <data name="MooTester_TestAnswerOnlyMemory" xml:space="preserve">
     <value>104857600</value>
@@ -216,10 +216,10 @@
     <comment>5s</comment>
   </data>
   <data name="MooTester_CompileOLE" xml:space="preserve">
-    <value>&lt;color:red|*您程序的恶心让编译器不住地吐槽*&gt;</value>
+    <value>&lt;color:red&gt;*您程序的恶心让编译器不住地吐槽*&lt;/color&gt;</value>
   </data>
   <data name="MooTester_TestOLE" xml:space="preserve">
-    <value>&lt;color:cyan|程序吐槽过多。&gt;</value>
+    <value>&lt;color:cyan&gt;程序吐槽过多。&lt;/color&gt;</value>
   </data>
   <data name="ItsOnlyPreview" xml:space="preserve">
     <value>&lt;span style="font-size:larger;font-weight:bold;color:red;"&gt;请注意，这仅仅是预览，真正内容并未保存。&lt;/span&gt;</value>

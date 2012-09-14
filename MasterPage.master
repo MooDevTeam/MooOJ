@@ -10,6 +10,7 @@
     <link href="~/css/UserSign.css" rel="Stylesheet" type="text/css" />
     <link href="~/css/InfoBlock.css" rel="Stylesheet" type="text/css" />
     <link href="~/css/LinkBar.css" rel="Stylesheet" type="text/css" />
+    <link href="~/css/WikiEditor.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -22,6 +23,9 @@
     <![endif]-->
     <form runat="server">
     <asp:ScriptManager runat="server">
+        <Scripts>
+            <asp:ScriptReference Path="~/js/WikiEditor.js" />
+        </Scripts>
     </asp:ScriptManager>
     <ajax:NoBot ID="noBot" runat="server" ResponseMinimumDelaySeconds="2" CutoffWindowSeconds="1"
         CutoffMaximumInstances="100000" />

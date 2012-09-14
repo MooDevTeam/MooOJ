@@ -95,10 +95,4 @@ public partial class Solution_Update : System.Web.UI.Page
         }
         PageUtil.Redirect("更新成功", "~/Solution/?id=" + problemID);
     }
-    protected void btnPreview_Click(object sender, EventArgs e)
-    {
-        divPreview.InnerHtml = WikiParser.Parse(txtContent.Text);
-        btnSubmit.Enabled = true;
-        trPreview.Visible = true;
-    }
 }

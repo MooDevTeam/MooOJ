@@ -55,12 +55,6 @@ public partial class Update : System.Web.UI.Page
             }
         }
     }
-    protected void btnPreview_Click(object sender, EventArgs e)
-    {
-        btnSubmit.Enabled = true;
-        trPreview.Visible = true;
-        divPreview.InnerHtml = WikiParser.Parse(txtContent.Text);
-    }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         if (!Page.IsValid) return;

@@ -73,16 +73,6 @@ public partial class Post_Reply : System.Web.UI.Page
         }
     }
 
-    protected void btnPreview_Click(object sender, EventArgs e)
-    {
-        btnSubmit.Enabled = true;
-        trPreview.Visible = true;
-        using (MooDB db = new MooDB())
-        {
-            divPreview.InnerHtml = WikiParser.Parse(WikiParser.DoAt(db,txtContent.Text,null,null,false));
-        }
-    }
-
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         if (!Page.IsValid) return;
@@ -103,10 +93,26 @@ public partial class Post_Reply : System.Web.UI.Page
             }
 
             User currentUser = ((SiteUser)User.Identity).GetDBUser(db);
+
+            //Send Mails
+            SortedSet<User> userBeAt;
+            string parsed = WikiParser.ParseAt(db, txtContent.Text, out userBeAt);
+            foreach (User user in userBeAt)
+            {
+                db.Mails.AddObject(new Mail()
+                {
+                    Title = "我@了您哦~",
+                    Content = "我在帖子[url:" + post.Name + "|../Post/?id=" + post.ID + "]中*@*了您哦~快去看看！\r\n\r\n*原文如下*：\r\n" + parsed,
+                    From = currentUser,
+                    To = user,
+                    IsRead = false
+                });
+            }
+
             PostItem postItem = new PostItem()
             {
                 Post = post,
-                Content = WikiParser.DoAt(db,txtContent.Text,post,currentUser,true),
+                Content = txtContent.Text,
                 CreatedBy = currentUser
             };
             db.PostItems.AddObject(postItem);

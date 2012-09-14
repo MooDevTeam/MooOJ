@@ -27,23 +27,12 @@
                     Display="Dynamic" CssClass="validator">长度需在1~40位</asp:RegularExpressionValidator>
             </td>
         </tr>
-        <tr runat="server" id="trPreview" visible="false">
-            <th>
-                预览
-            </th>
-            <td>
-                <asp:Literal ID="litOnlyPreview" runat="server" Text='<%$Resources:Moo,ItsOnlyPreview %>' />
-                <div runat="server" id="divPreview">
-                </div>
-            </td>
-        </tr>
         <tr>
             <th>
                 描述
             </th>
             <td>
-                <asp:TextBox ID="txtDescription" runat="server" Width="100%" Rows="20" TextMode="MultiLine"></asp:TextBox>
-                <Moo:WikiSupported runat="server" />
+                <Moo:WikiEditor ID="txtDescription" runat="server" />
             </td>
         </tr>
         <tr>
@@ -97,8 +86,7 @@
         </tr>
         <tr>
             <td colspan="2" style="text-align: center;">
-                <asp:Button ID="btnPreview" runat="server" CausesValidation="false" Text="先预览" OnClick="btnPreview_Click" />
-                <asp:Button ID="btnSubmit" runat="server" Enabled="false" Text="后创建" OnClick="btnSubmit_Click" />
+                <asp:Button ID="btnSubmit" runat="server" Text="创建" OnClick="btnSubmit_Click" />
             </td>
         </tr>
     </table>

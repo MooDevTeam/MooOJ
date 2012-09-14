@@ -17,7 +17,6 @@
     <Moo:InfoBlock runat="server" Type="Alert" Visible='<%#!Permission.Check("contest.modify",false,false) %>'>
         <asp:Literal runat="server" Text="<%$Resources:Moo,NoEnoughPermission%>" />
     </Moo:InfoBlock>
-    
     <table class="detailTable">
         <tr>
             <th>
@@ -31,24 +30,12 @@
                     Display="Dynamic" CssClass="validator">长度需在1~40位</asp:RegularExpressionValidator>
             </td>
         </tr>
-        <tr runat="server" id="trPreview" visible="false">
-            <th>
-                预览
-            </th>
-            <td>
-            <asp:Literal ID="litOnlyPreview" runat="server" Text='<%$Resources:Moo,ItsOnlyPreview %>' />
-                <div runat="server" id="divPreview">
-                </div>
-            </td>
-        </tr>
         <tr>
             <th>
                 描述
             </th>
             <td>
-                <asp:TextBox ID="txtDescription" runat="server" Width="100%" Rows="20" TextMode="MultiLine"
-                    Text='<%#contest.Description %>'></asp:TextBox>
-                <Moo:WikiSupported runat="server" />
+                <Moo:WikiEditor ID="txtDescription" runat="server" Text='<%#contest.Description %>' />
             </td>
         </tr>
         <tr>
@@ -102,10 +89,8 @@
         </tr>
         <tr>
             <td colspan="2" style="text-align: center;">
-                <asp:Button ID="btnPreview" runat="server" CausesValidation="false" Text="先预览" OnClick="btnPreview_Click" />
-                <asp:Button ID="btnSubmit" runat="server" Enabled="false" Text="后修改" OnClick="btnSubmit_Click" />
+                <asp:Button ID="btnSubmit" runat="server" Text="修改" OnClick="btnSubmit_Click" />
             </td>
         </tr>
     </table>
-    
 </asp:Content>

@@ -14,6 +14,16 @@ namespace Moo.Text
     {
         public static string Parse(string text)
         {
+            using (MooDB db = new MooDB())
+            {
+                return Parse(db, text);
+            }
+        }
+
+        public static string Parse(MooDB db,string text)
+        {
+            SortedSet<User> beAt;
+            text = ParseAt(db, text, out beAt);
             return new WikiPlex.WikiEngine().Render(text);
         }
 
@@ -25,9 +35,9 @@ namespace Moo.Text
             }
         }
 
-        public static string DoAt(MooDB db, string text, Post post, User currentUser, bool sendMail)
+        public static string ParseAt(MooDB db, string text,out SortedSet<User> userBeAt)
         {
-            SortedSet<User> userBeAt = new SortedSet<User>(new UserComparer());
+            userBeAt = new SortedSet<User>(new UserComparer());
             StringBuilder sb = new StringBuilder(text);
             for (int i = 0; i < sb.Length; i++)
             {
@@ -50,23 +60,12 @@ namespace Moo.Text
                         sb.Remove(i, end - i);
                         sb.Insert(i, link);
                         i += link.Length;
-                        if (sendMail && !userBeAt.Contains(user))
+                        if (!userBeAt.Contains(user))
                         {
                             userBeAt.Add(user);
                         }
                     }
                 }
-            }
-            foreach (User user in userBeAt)
-            {
-                db.Mails.AddObject(new Mail()
-                {
-                    Title = "我@了您哦~",
-                    Content = "我在帖子[url:" + post.Name + "|../Post/?id=" + post.ID + "]中*@*了您哦~快去看看！\r\n\r\n*原文如下*：\r\n" + sb.ToString(),
-                    From = currentUser,
-                    To = user,
-                    IsRead = false
-                });
             }
             return sb.ToString();
         }

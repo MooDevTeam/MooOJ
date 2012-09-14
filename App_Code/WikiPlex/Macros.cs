@@ -41,6 +41,7 @@ namespace WikiPlex
             Register<ContentRightAlignmentMacro>();
             Register<IndentationMacro>();
             Register<ColorMacro>();
+            Register<MathMarco>();
         }
 
         /// <summary>

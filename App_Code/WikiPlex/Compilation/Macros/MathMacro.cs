@@ -2,16 +2,13 @@
 namespace WikiPlex.Compilation.Macros
 {
     /// <summary>
-    /// This macro will render color.
+    /// This macro will render math.
     /// </summary>
-    /// <example><code language="none">
-    /// [color:Red|It's red!]
-    /// </code></example>
-    public class ColorMacro : IMacro
+    public class MathMarco : IMacro
     {
         public string Id
         {
-            get { return "Color"; }
+            get { return "Math"; }
         }
 
         public IList<MacroRule> Rules
@@ -20,10 +17,11 @@ namespace WikiPlex.Compilation.Macros
             {
                 return new List<MacroRule>(){
                     new MacroRule(
-                       @"(?is)(<color:(?:[^;\r\n]*?)>).*?(</color>)",
+                       @"(?is)(<math>)(.*?)(</math>)",
                         new Dictionary<int,string>(){
-                            {1,ScopeName.ColorBegin},
-                            {2,ScopeName.ColorEnd}
+                            {1,ScopeName.Remove},
+                            {2,ScopeName.Math},
+                            {3,ScopeName.Remove}
                         })
                 };
             }
