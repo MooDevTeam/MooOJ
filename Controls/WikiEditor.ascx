@@ -36,6 +36,9 @@
                 <a href="javascript:asNoWiki('<%=txtWiki.ClientID %>');">NoWiki</a>
             </div>
             <div>
+                <a href="javascript:asLink('<%=txtWiki.ClientID %>');">链接</a>
+            </div>
+            <div>
                 <select id="selectColor" onchange="changeColor('<%=txtWiki.ClientID %>',this)">
                     <option selected="selected" value="">颜色</option>
                     <option value="red">红色</option>

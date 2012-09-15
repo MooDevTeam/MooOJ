@@ -241,6 +241,7 @@ namespace Moo.API
                                    where p.ID == problemID
                                    select p).SingleOrDefault<Problem>();
                 if (problem == null) throw new ArgumentException("无此题目");
+                if (problem.Type != "Tranditional") throw new ArgumentException("不是传统题");
 
                 if (problem.LockTestCase)
                 {
@@ -262,6 +263,51 @@ namespace Moo.API
                     TimeLimit = timeLimit,
                     Problem = problem,
                     Score = score
+                };
+
+                db.TestCases.AddObject(testCase);
+                db.SaveChanges();
+
+                return testCase.ID;
+            }
+        }
+
+        public int CreateSpecialJudgedTestCase(string sToken, int problemID, int judgerID, byte[] input, byte[] answer, int timeLimit, int memoryLimit)
+        {
+            Authenticate(sToken);
+            using (MooDB db = new MooDB())
+            {
+                Problem problem = (from p in db.Problems
+                                   where p.ID == problemID
+                                   select p).SingleOrDefault<Problem>();
+                if (problem == null) throw new ArgumentException("无此题目");
+                if (problem.Type != "SpecialJudged") throw new ArgumentException("不是自定义测评题");
+
+                if (problem.LockTestCase)
+                {
+                    Authorize("testcase.locked.create");
+                }
+                else
+                {
+                    Authorize("testcase.create");
+                }
+
+                UploadedFile judger = (from f in db.UploadedFiles
+                                     where f.ID == judgerID
+                                     select f).SingleOrDefault<UploadedFile>();
+                if (judger == null) throw new ArgumentException("无此文件");
+
+                User currentUser = CurrentUser.GetDBUser(db);
+
+                TestCase testCase = new SpecialJudgedTestCase()
+                {
+                    Answer=answer,
+                    Input=input,
+                    CreatedBy=currentUser,
+                    Judger=judger,
+                    MemoryLimit=memoryLimit,
+                    Problem=problem,
+                    TimeLimit=timeLimit,
                 };
 
                 db.TestCases.AddObject(testCase);

@@ -73,7 +73,7 @@
                 电子邮箱
             </th>
             <td>
-                <b><span style="color: Red;">注意</span>：您的头像将会根据这个电子邮箱，从<a href="https://gravatar.com/">Gavatar</a>获取，详见<a
+                <b><span style="color: Red;">注意</span>：您的头像将会根据这个电子邮箱，从<a href="https://gravatar.com/">Gravatar</a>获取，详见<a
                     runat="server" href="~/Help/?id=15">快速入门-用户页的使用与用户之间的比较</a>。</b><br />
                 <asp:TextBox ID="txtEmail" runat="server" Width="100%" Text='<%#user.Email %>'></asp:TextBox>
                 <asp:RegularExpressionValidator runat="server" ControlToValidate="txtEmail" ValidationExpression=".+@.+\..+"

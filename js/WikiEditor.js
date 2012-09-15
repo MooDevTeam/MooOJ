@@ -35,6 +35,9 @@ function asMath(clientID) {
 function asNoWiki(clientID) {
     decorateText(document.getElementById(clientID), "{\"", "\"}", "在此输入的内容不会被Wiki化");
 }
+function asLink(clientID) {
+    decorateText(document.getElementById(clientID), "[url:", "]", "在此输入链接URL");
+}
 function changeColor(clientID, selectElement) {
     var color = selectElement.options[selectElement.selectedIndex].value;
     var colorName = selectElement.options[selectElement.selectedIndex].text;

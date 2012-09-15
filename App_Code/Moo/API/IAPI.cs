@@ -25,6 +25,8 @@ namespace Moo.API
         int CreateProblem(string sToken, string name, string type, string content);
         [OperationContract]
         int CreateTranditionalTestCase(string sToken, int problemID, byte[] input, byte[] answer, int timeLimit, int memoryLimit, int score);
+        [OperationContract]
+        int CreateSpecialJudgedTestCase(string sToken, int problemID, int judgerID, byte[] input, byte[] answer, int timeLimit, int memoryLimit);
     }
     [DataContract]
     public class BriefUserInfo

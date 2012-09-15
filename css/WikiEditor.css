@@ -1,6 +1,10 @@
 ﻿.wikiEditorToolBar
 {
-    background: #000099;
+    background: #4444FF;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 .wikiEditorToolBar > div
 {
@@ -16,11 +20,15 @@
 }
 .wikiEditorToolBar > div > a:hover
 {
-    background: #3333FF;
+    background: #0000CC;
 }
 .wikiEditorToolBar > div > select
 {
     margin: 5px;
+}
+.wikiEditorToolBar > div > input
+{
+    margin-top: 5px;
 }
 .wikiEditorPreviewButton:hover
 {
