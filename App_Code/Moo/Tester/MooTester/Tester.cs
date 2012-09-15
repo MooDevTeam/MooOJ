@@ -35,7 +35,7 @@ namespace Moo.Tester.MooTester
                     Content = new TestIn()
                     {
                         CmpPath = Resources.Moo.MooTester_TranditionalJudger,
-                        ExecPath = execFile,
+                        ExecPath = Command.GetCommand(language,"execute").Replace("{Execute}",execFile),
                         Memory = testCase.MemoryLimit,
                         Time = testCase.TimeLimit,
                         Input = testCase.Input,
@@ -101,7 +101,7 @@ namespace Moo.Tester.MooTester
                     Content = new TestIn()
                     {
                         CmpPath = testCase.Judger.Path,
-                        ExecPath = execFile,
+                        ExecPath = Command.GetCommand(language,"execute").Replace("{Execute}",execFile),
                         Memory = testCase.MemoryLimit,
                         Time = testCase.TimeLimit,
                         Input = testCase.Input,
@@ -178,7 +178,7 @@ namespace Moo.Tester.MooTester
                         Time = testCase.TimeLimit,
                         Memory = testCase.MemoryLimit,
                         CmpPath = "",
-                        ExecPath = execFile,
+                        ExecPath = Command.GetCommand(language,"execute").Replace("{Execute}",execFile),
                         Input = testCase.TestData,
                         Output = new byte[0]
                     }

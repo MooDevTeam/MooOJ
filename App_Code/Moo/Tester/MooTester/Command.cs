@@ -17,7 +17,8 @@ namespace Moo.Tester.MooTester
                 {
                     {"src2exe","g++ -Wall -O2 -o {Execute} {E.exeE} {Source} {S.cppS}"},
                     {"src2obj","g++ -Wall -O2 -c -o {Execute} {E.oE} {Source} {S.cppS}"},
-                    {"obj2exe","g++ -Wall -O2 -o {Execute} {E.exeE} {Object}"}
+                    {"obj2exe","g++ -Wall -O2 -o {Execute} {E.exeE} {Object}"},
+                    {"execute","{Execute}"}
                 }
             },
             {
@@ -26,14 +27,24 @@ namespace Moo.Tester.MooTester
                 {
                     {"src2exe","gcc -Wall -O2 -o {Execute} {E.exeE} {Source} {S.cS}"},
                     {"src2obj","gcc -Wall -O2 -c -o {Execute} {E.oE} {Source} {S.cS}"},
-                    {"obj2exe","gcc -Wall -O2 -o {Execute} {E.exeE} {Object}"}
+                    {"obj2exe","gcc -Wall -O2 -o {Execute} {E.exeE} {Object}"},
+                    {"execute","{Execute}"}
                 }
             },
             {
                 "pascal",
                 new Dictionary<string,string>()
                 {
-                    {"src2exe","ppcrossx64 -o{Execute} {E.exeE} {Source} {S.pasS}"}
+                    {"src2exe","ppcrossx64 -o{Execute} {E.exeE} {Source} {S.pasS}"},
+                    {"execute","{Execute}"}
+                }
+            },
+            {
+                "java",
+                new Dictionary<string,string>()
+                {
+                    {"src2exe","javac {Source=Main} {S.javaS}"},
+                    {"execute","java Main"}
                 }
             }
         };

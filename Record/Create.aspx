@@ -40,6 +40,7 @@
                     <asp:ListItem Selected="true" Value="c++">C++</asp:ListItem>
                     <asp:ListItem Value="c">C</asp:ListItem>
                     <asp:ListItem Value="pascal">Pascal</asp:ListItem>
+                    <asp:ListItem Value="java">Java</asp:ListItem>
                 </asp:DropDownList>
             </td>
         </tr>
