@@ -173,7 +173,7 @@
     <value>&lt;color:orange&gt;程序崩溃。&lt;/color&gt;</value>
   </data>
   <data name="MooTester_TestSuccess" xml:space="preserve">
-    <value>&lt;color:green&gt;正确。&lt;/color&gt;(得分*{0}*，用时*{1}ms*，内存*{2}byte(s)*) {{"{3}"}}</value>
+    <value>&lt;color:green&gt;正确。&lt;/color&gt;</value>
   </data>
   <data name="MooTester_TestTLE" xml:space="preserve">
     <value>&lt;color:darkred&gt;超出时间限制。&lt;/color&gt;</value>
@@ -182,7 +182,7 @@
     <value>&lt;color:gray&gt;天气不好，程序不开心。&lt;/color&gt;</value>
   </data>
   <data name="MooTester_TestWA" xml:space="preserve">
-    <value>&lt;color:red&gt;答案错误。&lt;/color&gt;(得分*{0}*，用时*{1}ms*，内存*{2}byte(s)*) {{"{3}"}}</value>
+    <value>&lt;color:red&gt;答案错误。&lt;/color&gt;</value>
   </data>
   <data name="MooTester_TranditionalJudger" xml:space="preserve">
     <value>D:\v-Judge_Kernel\Special_Judge.exe</value>
@@ -223,5 +223,8 @@
   </data>
   <data name="ItsOnlyPreview" xml:space="preserve">
     <value>&lt;span style="font-size:larger;font-weight:bold;color:red;"&gt;请注意，这仅仅是预览，真正内容并未保存。&lt;/span&gt;</value>
+  </data>
+  <data name="MooTester_TestInfo" xml:space="preserve">
+    <value>(得分*{0}*，用时*{1}ms*，内存*{2}byte(s)*) {{"{3}"}}</value>
   </data>
 </root>

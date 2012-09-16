@@ -3,6 +3,7 @@
 using System;
 using System.Linq;
 using System.Web;
+using System.Text;
 using Moo.DB;
 
 public class Recalc : IHttpHandler
@@ -14,9 +15,11 @@ public class Recalc : IHttpHandler
         context.Response.ContentType = "text/html";
         using (MooDB db = new MooDB())
         {
-            RecalcProblems(db);
-            RecalcUsers(db);
-
+            //RecalcProblems(db);
+            //RecalcUsers(db);
+            (from t in db.TestCases.OfType<TranditionalTestCase>()
+             where t.ID == 1
+             select t).Single<TranditionalTestCase>().Input = Encoding.ASCII.GetBytes("18820 26832");
             Response.Write("Start Saving<br/>");
             Response.Flush();
             db.SaveChanges();
